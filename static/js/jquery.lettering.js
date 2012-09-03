@@ -10,6 +10,7 @@
 *
 * Date: Mon Sep 20 17:14:00 2010 -0600
 */
+
 (function($){
 	function injector(t, splitter, klass, after) {
 		var a = t.text().split(splitter), inject = '';

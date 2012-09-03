@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title></title>
+	<!-- Place favicon.ico and apple-touch-icon.png in the root of your domain and delete these references -->
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" media="all" href=""/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
+	
+	<!-- LESS framework stylesheet 
+	Should be compiled from style.less
+	I use http://wearekiss.com/simpless for auto-compiling on save
+	-->	
+	<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	
+	<!-- Bring in animate.css | http://daneden.me/animate/ -->	
+	<link rel="stylesheet" href="animate.css" type="text/css" media="screen" title="no title" charset="utf-8">
+			
+	<!-- Bring in jQuery first, lots of other stuff depends on it -->
+	<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>	
+	
+	<!-- And Lettering.js | https://github.com/davatron5000/Lettering.js -->		
+	<script src="js/jquery.lettering.js" type="text/javascript" charset="utf-8"></script>
+	
+	<!-- And smooth scrolling | from http://css-tricks.com/snippets/jquery/smooth-scrolling/ -->			
+	<script src="js/smooth_scrolling.js" type="text/javascript" charset="utf-8"></script>
+	
+	<!-- And Scrollorama | http://johnpolacek.github.com/scrollorama/ -->			
+	<script src="js/jquery.scrollorama.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	<!-- And Timeline | https://github.com/VeriteCo/Timeline-->
+	<script src="js/timeline-min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="timeline.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	
+	
+	<!-- Additional D3 libraries which we may or may not need
+	<script src="js/d3.time.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/d3.layout.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/d3.geom.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/d3.geo.js" type="text/javascript" charset="utf-8"></script>		
+	-->
+	<script src="museums.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="js/leaflet.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/wax.leaf.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="leaflet.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link href='http://fonts.googleapis.com/css?family=Squada+One' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js"></script>
+	
+	<script src="js/sStory.js" type="text/javascript" charset="utf-8"></script>	
+</head>
+<body>
+<div id="navbar">
+<div id="extrainfo">
+	<h2>Occupy Oakland</h2>
+	This is an example/experiment in creating a template/format for long-form stories that combine a variety of media, including photos from Flickr, audio from Soundcloud, video from Vimeo, and maps with Leaflet. 
+	
+	<br /><br />This example focuses on media I've collected on Occupy Oakland, but I would like to make it general enough to apply to any story. I've mocked up my ideal <a href="http://cloud.ejfox.com/G3Iq">backend for this type of site in balsamiq</a>, I'd love to hear your feedback. You can email me at ejfox@ejfox.com
+
+		
+</div>
+<ul id="navlist">
+	<li id="moreinfo"><span id="moreinfotext">More info</span> <span id="triangle">&#9654;</span></li>
+</ul>
+</div>
+<div id="container">
+
+	
+	<div id="section-1" class="section">
+		<div id="title">
+			<h1 class="animated fadeInDown">Occupy Oakland</h1>
+			<h2>The beginning</h2>
+		</div>
+		
+		<p class="animated bounceInLeft">
+		I moved to Oakland around the same time Occupy Oakland first established camp in the open plaza in front of City Hall, flanking the historic Oak tree. I fell in love with the spirit of the occupiers pretty quickly, but I was probably as predisposed to as anyone. What I didn't expect was how eagerly and viciously <a href="#section-3">the cops</a> rose to take the position of villian.
+		</p>
+	</div>
+	
+	<div id="section-2" class="section">
+		<h2>Around 5:30AM, October 25th</h2>
+		<p>I have no photos of Occupy Oakland before October 25th because I was optimistic, too caught up in the beauty of the camp to realize how wonderful and unique the occupation was. But when I woke up at 5:00 AM, I heard helicopters and immediately checked my Twitter. I saw the word "raid" and ran to put my boots on, yelling for my roommate. I grabbed a camera and we were out the door.
+		<br /><br />		
+			We found an already overwhelmed camp, cops in riot gear milling around.
+		<br /><br />
+			We walked around the plaza, there were barricades with riot cops behind them. <img src="http://farm8.staticflickr.com/7016/6494431393_e7782c68f1_m.jpg" /> We looked around for people, and met up with two other people who said they were also from New York. I had my camera out, taking pictures, but as we walked by a barricade a cop felt the need to walk towards me, raise his baton with one hand and grab my collar with the other. <br />Nice to meet you, OPD. 
+		</p>
+	</div>
+	
+	<div id="section-3" class="section">
+		<h2>The biggest gang in Oakland</h2>
+		<p><em>A recurring theme in the comments by those speaking against the injunction was the reference to the Oakland Police Department as “the largest gang in this city.”  One Fruitvale resident who expressed concerns about safety issues in the city said she would “not support the OPD doing anything until they clean up their own act.”</em>
+			<br /><a href="http://oaklandnorth.net/2011/02/23/city-officials-and-public-weigh-in-on-proposed-gang-injunction/">-Public Weighs in on proposed gang injunctions</a>
+
+	</p>
+	</div>
+	
+	<div id="section-4" class="section">
+		<h3>Wall St. Gambles / Economy Collapses / Hippies Go To Jail</h3>
+	</div>
+	
+	<div id="section-5" class="section">
+
+	</div>
+	
+	<div id="section-6" class="section">
+		<h2>Vimeo</h2>
+				<div class="video-container">
+		<iframe src="http://player.vimeo.com/video/36256273?byline=0&amp;portrait=0&amp;color=ffffff" width="250" height="141" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>		
+				</div>
+	</div>
+	
+	<div id="section-7" class="section">
+<!--		<h3>And another</h3> -->
+	</div>
+	
+	<div id="section-8" class="section">
+	   <h2>Map</h2>
+	   <div id="mapbox" style="width:100%; height: 100%;">
+	       
+	   </div>
+	</div>
+	
+
+	
+	<div id="section-9" class="section">
+		<h2>Soundcloud</h2>
+		<iframe width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F37934185&amp;auto_play=false&amp;show_artwork=false&amp;color=000000"></iframe>
+
+	</div>
+	
+<div id="section-10" class="section">
+	<p>
+	"It felt other-worldly, as if some military force had descended on my neighborhood ready for war. This was in sharp and clear contrast to the calm party &amp; community atmosphere that Occupy had began to waft over my newly-adopted neighborhood. I moved into my apartment right around the time Occupiers moved into the park a mere 2 blocks from where I lived. These were the first people I met here, my real neighbors, people who were helping each other by keeping books for everyone to read or food for everyone to eat. And here were these police determined to use their weapons on them, suiting up on a street I walk on every day. I had not been totally convinced by the attitude of Occupy Oakland before the raid, they seemed more determined to blast music and dance then change the world. But I knew as I watched this cop suit up, grabbing as many cans of tear gas or whatever he could, who was the force for good in my community and who wasn't."	
+	<br />
+	<span class="readmore">
+		<a href="http://cowbird.com/author/ej-fox/stories/#!/3729">Read more on Cowbird</a>
+	</span>
+	</p>
+
+</div>
+
+<div id="section-11" class="section">
+	<h2>Timeline</h2>
+	<div id="timeline"></div>
+	
+</div>
+
+<!--
+<div id="section-12" class="section">
+	<h3>Here's some other stuff!</h3>
+
+</div>
+-->
+
+
+<script type="text/javascript" charset="utf-8">
+	
+	$(document).ready(function(){
+		
+		$('#moreinfo').click(function(){		
+			if(!$(this).hasClass("open")){
+				$("#navbar").addClass("showextra");
+
+				$(this).addClass("open");
+				
+				$('#triangle').addClass("rotate");
+				$('#moreinfotext').text("Less info");
+			}
+			else {
+				$("#navbar").removeClass("showextra")
+				$(this).removeClass("open");
+				$('#triangle').removeClass("rotate");
+				$('#moreinfotext').text("More info");
+			}
+
+		});
+		
+		// Init timeline https://github.com/VeriteCo/Timeline
+	
+		timeline = new VMM.Timeline(); timeline.init("https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dExOOVg4b29FWG5nOURTLTlCbDhsTVE&output=html");
+		
+	
+		
+		// Split h1 into words 
+		// for more specific styling
+		$("#title h1").lettering('words');
+		
+		
+		// Initialize scrollorama for all elements with
+		// the class of "section"
+		var scrollorama = $.scrollorama({
+			blocks: '.section',
+			enablePin:false
+		});
+		
+		scrollorama.onBlockChange(function(){
+				var i=scrollorama.blockIndex;
+				console.log(i);
+				$('.navlink').removeClass("currentsection")
+				$("#navbar #navlink"+i).addClass("currentsection")
+				
+				
+		});
+
+		var sections = [];
+		
+		$('.section').each(function(i,d) {
+//			console.log("I,D",i,d)
+//			console.log("D",$(d).attr('id'));
+			
+			var sectionname = $('#'+$(d).attr('id')+" h2").text() || "Part "+(i+1);
+			
+			var section = $('<li class="navlink" id="navlink'+i+'"><img src="skip_forward.png"> <a href="#'+$(d).attr('id')+'">'+sectionname+'</a></li>');
+			
+			$('#navlist').append(section);
+			sections.push(section)
+		})
+		
+		console.log("Sections =>",sections)
+		
+		smoothScrolling();
+		
+		
+	});
+	
+</script>
+<!-- <script src="js/oo_map.js" type="text/javascript" charset="utf-8"></script> -->
+
+
+<script type="text/javascript">
+
+// Define a geojson data layer
+var geojsonLayer = new L.GeoJSON(data);
+var stamenLayer = new L.StamenTileLayer("toner");
+
+// Define the map to use from MapBox
+var url = 'http://api.tiles.mapbox.com/v3/mapbox.mapbox-streets.jsonp';
+
+// Get metadata about the map from MapBox
+wax.tilejson(url,function(tilejson) {
+
+
+
+    // Make a new Leaflet map in your container div
+    var map = new L.Map('mapbox', {
+        zoomControl: false,
+		scrollWheelZoom: false
+    })  // container's id="mapbox"
+
+
+    // Center the map
+    .setView(new L.LatLng(37.80548, -122.27193), 17)
+	
+    // Add MapBox Streets as a base layer
+    .addLayer(new wax.leaf.connector(tilejson))
+
+    // Add the geojson layer
+    .addLayer(stamenLayer);
+
+	map.on('click', onMapClick);
+
+	function onMapClick(e) {
+	    $('body').append("You clicked the map at " + e.latlng+"<br>");
+	}
+	
+	/*
+	var circleLocation = new L.LatLng(37.80548, -122.27193),
+	    circleOptions = {
+	        color: '#464D2E',
+	        fillColor: '#464D2E',
+	        fillOpacity: 0.2
+	    };
+
+	var circle = new L.Circle(circleLocation, 25, circleOptions);
+	map.addLayer(circle);
+	*/
+	
+	var fo_p1 = new L.LatLng(37.8044, -122.27123),
+	    fo_p2 = new L.LatLng(37.80594, -122.27179),
+	    fo_p3 = new L.LatLng(37.8049, -122.27247),
+	    fo_polygonPoints = [fo_p1, fo_p2, fo_p3];
+
+	var frankogawa = new L.Polygon(fo_polygonPoints, {
+		fill: "white",
+		color: "red",
+		weight: 8
+	});
+	map.addLayer(frankogawa);	
+	frankogawa.bindPopup("Frank Ogawa Plaza, where the OccupyOakland encampment is.");
+
+	var nt_p1 = new L.LatLng(37.80857, -122.27092),
+	    nt_p2 = new L.LatLng(37.80905, -122.27079),
+	    nt_p3 = new L.LatLng(37.80913, -122.27134),
+	    nt_p4 = new L.LatLng(37.80865, -122.27147),	
+	    nt_polygonPoints = [nt_p1, nt_p2, nt_p3, nt_p4];
+
+	var nineteen_telegraph = new L.Polygon(nt_polygonPoints, {
+		fill: "white",
+		color: "red",
+		weight: 8
+	});
+	map.addLayer(nineteen_telegraph);	
+	nineteen_telegraph.bindPopup("19th and Telegraph, where Sunday GAs are held");
+	
+	
+	
+
+    // Display the name property on click
+    geojsonLayer.on("featureparse", function (e) {
+        if (e.properties && e.properties.name){
+            e.layer.bindPopup(e.properties.name);
+        }
+    });
+
+    // Populate our geojson layer with data
+    geojsonLayer.addGeoJSON(data);
+});
+</script>
+
+
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+
+
+</body>
+</html>

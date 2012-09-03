@@ -18,39 +18,49 @@
 	Should be compiled from style.less
 	I use http://wearekiss.com/simpless for auto-compiling on save
 	-->	
-	<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
+	<!--
+	<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	-->
+	
 	
 	<!-- Bring in animate.css | http://daneden.me/animate/ -->	
-	<!--<link rel="stylesheet" href="animate.css" type="text/css" media="screen" title="no title" charset="utf-8"> -->
+	<link rel="stylesheet" href="animate.css" type="text/css" media="screen" title="no title" charset="utf-8">
 			
 	<!-- Bring in jQuery first, lots of other stuff depends on it -->
 	<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>	
-
-	<!-- And underscore | http://documentcloud.github.com/underscore/	
-	<script src="js/underscore-min.js" type="text/javascript" charset="utf-8"></script>	-->
-
-	<!-- And D3 | https://github.com/mbostock/d3/wiki/API-Reference -->
-	<script src="js/d3.v2.min.js" type="text/javascript" charset="utf-8"></script>
 	
-	<!-- And Lettering.js | https://github.com/davatron5000/Lettering.js 		
-	<script src="js/jquery.lettering.js" type="text/javascript" charset="utf-8"></script> -->
+	<!-- And Lettering.js | https://github.com/davatron5000/Lettering.js -->		
+	<script src="js/jquery.lettering.js" type="text/javascript" charset="utf-8"></script>
 	
-	<!-- And Scrollorama | http://johnpolacek.github.com/scrollorama/ 			
-	<script src="js/jquery.scrollorama.js" type="text/javascript" charset="utf-8"></script> -->
+	<!-- And smooth scrolling | from http://css-tricks.com/snippets/jquery/smooth-scrolling/ -->			
+	<script src="js/smooth_scrolling.js" type="text/javascript" charset="utf-8"></script>
 	
-	<!-- And Tabletop | https://github.com/jsoma/tabletop 				
-	<script src="js/tabletop.js" type="text/javascript" charset="utf-8"></script> -->
-
-	<!-- And the Open Sans Google Webfont | https://www.google.com/webfonts#UsePlace:use/Collection:Open+Sans-->
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,800,300' rel='stylesheet' type='text/css'>	
+	<!-- And Scrollorama | http://johnpolacek.github.com/scrollorama/ -->			
+	<script src="js/jquery.scrollorama.js" type="text/javascript" charset="utf-8"></script>
 	
-	<script src="js/ICanHaz.js" type="text/javascript" charset="utf-8"></script>
+	
+	<!-- And Timeline | https://github.com/VeriteCo/Timeline-->
+	<script src="js/timeline-min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="timeline.css" type="text/css" media="screen" title="no title" charset="utf-8"> 
+	
+	
+	<!-- Additional D3 libraries which we may or may not need
+	<script src="js/d3.time.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/d3.layout.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/d3.geom.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/d3.geo.js" type="text/javascript" charset="utf-8"></script>		
+	-->
+	<script src="museums.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="js/leaflet.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/wax.leaf.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="leaflet.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link href='http://fonts.googleapis.com/css?family=Squada+One' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js"></script>
 	
 	<script src="js/sStory.js" type="text/javascript" charset="utf-8"></script>
 	
-	
 </head>
-
 <body>
 <div id="nav">
 	
@@ -60,38 +70,8 @@
 	
 </div>
 
-<script id="image" type="text/html">
-<h2>{{ title }}</h2>
-<img src="{{ url }}" />
-</script>
-
-<script id="image2" type="text/html">
-<h2>{{ title }}</h2>
-<img src="{{ url }}" title="{{ caption }}"/>
-<div class="imagecaption">{{ caption }}</div>
-</script>
-
-<script id="image3" type="text/html">
-<h2>{{ title }}</h2> 
-<img src="{{ url }}" title="{{ caption }}"/>
-<div class="imagecaption longcaption">{{ text }}</div>
-</script>
-
-<script id="vimeo" type="text/html">
-<div class="video-container">
-<iframe src="{{ url }}" width="250" height="141" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>		
-</div>
-</script>
-
-<script id="soundcloud" type="text/html">
-<div class="soundcloud-container">
-		<iframe width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url={{ url }}&amp;auto_play=false&amp;show_artwork=false&amp;color=000000"></iframe>
-</div>
-</script>
-
-
 <script type="text/javascript" charset="utf-8">
-	
+
 var sections = [{
     title: "The beginning (Large image)"
     ,type: "image"
@@ -155,20 +135,13 @@ var sections = [{
     ,type: "timeline"
     ,url: "https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dExOOVg4b29FWG5nOURTLTlCbDhsTVE&output=html"
 }]
-	
-	
-	
-$(document).ready(function(){
-	sStory(sections);
-});
 
-	
+/* Add all of the sections to the specified container */
+//$('#container').sStory(sections)
+
+
+sStory(sections);
 </script>
-
-
-
-<!-- And smooth scrolling | from http://css-tricks.com/snippets/jquery/smooth-scrolling/ -->			
-<script src="js/smooth_scrolling.js" type="text/javascript" charset="utf-8"></script>
 
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </body>

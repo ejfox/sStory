@@ -1,0 +1,642 @@
+/*	Less Framework 4
+	http://lessframework.com
+	by Joni Korpi
+	License: http://opensource.org/licenses/mit-license.php	*/
+
+
+/*	Resets
+	------	*/
+
+/* apply a natural box layout model to all elements */
+/* from http://paulirish.com/2012/box-sizing-border-box-ftw/ */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+/* maxvoltar.com/archive/-webkit-font-smoothing */
+html { -webkit-font-smoothing: antialiased; }
+
+
+pre {
+	padding: 15px;
+	white-space: pre; /* CSS2 */
+	white-space: pre-wrap; /* CSS 2.1 */
+	white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+	word-wrap: break-word; /* IE */
+}
+
+/* hand cursor on clickable input elements */
+label, input[type=button], input[type=submit], button { cursor: pointer; }
+
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, 
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em, 
+img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr, 
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, 
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, hgroup, 
+menu, footer, header, nav, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+article, aside, canvas, figure, figure img, figcaption, hgroup,
+footer, header, nav, section, audio, video { display: block; }
+
+a img {border: 0;}
+
+/*	Typography presets
+	------------------	*/
+
+.gigantic {
+	font-size: 116px;
+	line-height: 120px;
+	letter-spacing: -2px;
+}
+
+.huge, h1 {
+	font-size: 72px;
+	line-height: 72px;
+	letter-spacing: -1px;
+}
+
+.large, h2 {
+	font-size: 44px;
+	line-height: 48px;
+}
+
+.bigger, h3 {
+	font-size: 28px;
+	line-height: 36px;
+}
+
+.big, h4 {
+	font-size: 24px;
+	line-height: 30px;
+}
+
+body {
+	font: 17px/24px Palatino, Constantia, "Palatino Linotype", serif;
+}
+
+.small, small {
+	font-size: 13px;
+	line-height: 18px;
+}
+
+.border-radius (@radius) {
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+
+/*	Column class / mixins 
+	---------------------	*/
+
+.1-column { width:  68px;   }
+.2-column { width: 160px;  }
+.3-column { width: 252px;  }
+.4-column { width: 344px;  }
+.5-column { width: 436px;  }
+.6-column { width: 528px;  }
+.7-column { width: 620px;  }
+.8-column { width: 712px;  }
+.9-column { width: 804px;  }
+.10-column {width: 896px; }
+
+
+/*	Color variables
+	------------------	*/
+/* Highlight color, when user selects text */
+@highlight: #DDE97E;
+
+/* Link color, hover/visited will be generated from this */
+@linkcolor: #6FC1E8;
+	
+
+/* Selection colours (easy to forget) */
+
+::selection 	 	{background: @highlight;}
+::-moz-selection 	{background: @highlight;}
+img::selection 		{background: transparent;}
+img::-moz-selection	{background: transparent;}
+body {-webkit-tap-highlight-color: @highlight;}
+
+
+/*		Default Layout: 992px. 
+		Gutters: 24px.
+		Outer margins: 48px.
+		Leftover space for scrollbars @1024px: 32px.
+-------------------------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8      9      10
+px      68    160    252    344    436    528    620    712    804    896    */
+
+body {
+	background: black;
+	color: white;
+	-webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
+}
+
+h1 {
+    padding-top: 8px;
+}
+.leaflet-popup-content-wrapper {
+    color: black;
+}
+@navbarheight: 40px;
+@extrainfoheight: 200px;
+#container {
+    margin-top: @navbarheight;
+}
+#moreinfo {
+    cursor: pointer;
+    background-color: #FF2B5D;
+    border-radius: 4px;
+    opacity: 0.6;
+    
+    
+    &:hover {
+        opacity: 1;
+        
+        -webkit-transition:opacity 3s ease ;       
+           -moz-transition:opacity 3s ease ;
+             -o-transition:opacity 3s ease ;
+                transition:opacity 3s ease ;
+    }
+}
+#extrainfo {
+    font-size: 18px;    
+    display: inline-block;
+    
+    a {
+        &:link, &:hover, &:visited {
+            font-weight: bold;
+            color: black !important;
+        }
+    }
+
+    overflow: auto;
+    font-family: Georgia, serif;
+    display: block;
+    color: black;
+    background-color: white;
+    padding: 24px;
+    height: @extrainfoheight;
+    margin-bottom: 24px;
+    
+    -webkit-column-count: 3;
+    -moz-column-count:    3;
+	
+	-webkit-column-gap: 48px;
+}   -moz-column-gap:    48px;
+
+.showextra {
+    margin-top: 0 !important;
+}
+#triangle {
+    display: inline-block;
+    -webkit-transition:all .8s linear ;       
+       -moz-transition:all .8s linear ;
+         -o-transition:all .8s linear ;
+            transition:all .8s linear ; 
+}
+.rotate {
+    -webkit-transform: rotate(-90deg);  
+       -moz-transform: rotate(-90deg);  
+        -ms-transform: rotate(-90deg);  
+         -o-transform: rotate(-90deg);  
+            transform: rotate(-90deg);
+                 zoom: 1;
+}
+#navbar {
+    font-family: sans-serif;
+    font-size: 12px;
+    z-index: 500000;
+    position: fixed;
+    margin-top: -@extrainfoheight - 70px;
+    padding: 8px 8px;
+    top: 0;
+    left: 0;
+    width: 100%;
+//    height: @navbarheight;
+    background-color: rgba(0,0,0,0.88);
+    overflow: auto;
+    border-bottom: 1px solid white;
+    -webkit-transition:margin-top .5s ease .25s;       
+       -moz-transition:margin-top .5s ease .25s;
+         -o-transition:margin-top .5s ease .25s;
+            transition:margin-top .5s ease .25s; 
+    a {
+        &:link, &:hover, &:visited {
+            color: white;
+            text-decoration: none;
+            text-transform: capitalize;
+        }
+    }
+    #navlist {
+        margin-top: 8px;
+    }
+    li {
+//        background: transparent url(skip_forward.png) no-repeat scroll center left;
+        display: inline-block;
+        margin-right: 18px;
+        padding: 0 5px;
+        
+        -webkit-transition:all .35s linear;       
+           -moz-transition:all .35s linear ;
+             -o-transition:all .35s linear ;
+                transition:all .35s linear ; 
+    }
+
+
+    
+    .currentsection {
+        color: black !important;
+        background-color: rgba(255,255,255,0.3);
+        border-radius: 5px;
+        
+        text-shadow:rgba(0, 0, 0, 0.5) 0px 1.5px 1px; 
+        
+        -webkit-box-shadow:inset 0 0 3px 1px rgba(0,0,0,0.6); /* Saf3.0+, Chrome */
+           -moz-box-shadow:inset 0 0 3px 1px rgba(0,0,0,0.6); /* FF3.5+ */
+                box-shadow:inset 0 0 3px 1px rgba(0,0,0,0.6); /* Opera 10.5, IE 9.0 */
+                
+    }
+}
+#navigation {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+#title {
+	padding-top: 25px;
+	padding-left: 160px;
+	padding-right: 160px;
+	text-align: center;
+	text-shadow: 0 1px 5px #000;
+	
+}
+.section {
+    padding-top: @navbarheight;
+}
+/*
+Elastic videos
+*/
+.video-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+}
+
+.video-container iframe,  
+.video-container object,  
+.video-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+#section-1 {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	height: 700px;
+	background: url('http://farm8.staticflickr.com/7012/6746224785_c7df7c2242_o.jpg') center center scroll;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	padding-top: 24px;
+	position: relative;
+	
+	
+	h2 {
+	    padding-top: 15px;
+	}
+	
+	p {
+	/*	background-color: black; */
+		background-color: rgba(0,0,0,0.92);
+		border-radius: 4px;
+/*		display: block; */
+		width: 252px;
+		padding: 18px;
+		margin-top: 100px;
+		a:link, a:hover, a:visited {
+			color: #6FC1E8;
+		}
+
+    	h3 {
+    		text-shadow: 0 3px 1px rgba(0,0,0,0.9);		
+    	}
+	}
+	
+	
+}
+#section-2 {
+	width: 100%;
+	margin-left: auto; margin-right: auto;
+/*	http://farm8.staticflickr.com/7021/6751046567_386c75712f_o.jpg */
+
+	height: 900px;
+	background: url('http://farm8.staticflickr.com/7152/6494446823_b82cc32f3d_o.jpg') center center scroll;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	p {
+		font-size: 14px;
+		line-height: 1.4em;
+		background-color: black;
+		border-radius: 4px;
+		display: block;
+		width: 280px;
+		padding: 24px 18px;
+		
+		position: absolute;
+		right: 0;
+		
+		img {
+			border: 2px solid rgba(255,255,255,0.5);
+			margin-top: 8px;
+			margin-bottom: 8px;
+			margin-right: auto;
+			margin-left: auto;
+			display: block;
+		}
+	}
+	h2 {
+//		color: black;
+		padding-top: 12px; padding-bottom: 12px;
+//		background-color: rgba(255,255,255,0.7);
+		text-align: center;
+	}
+}
+
+#section-3 {
+	border-top: 10px solid white;
+	border-bottom: 10px solid white;
+	
+	width: 100%;
+	height: 700px;
+	
+/*	http://farm8.staticflickr.com/7172/6750997693_d8893c1967_o.jpg */
+	background: url('http://farm8.staticflickr.com/7155/6494508513_f058c12ded_o.jpg') center center scroll;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	p {
+		margin-top: 60px;
+		width: 27%;
+		margin-left: 10%;
+		text-shadow: 0 2px 3px #000;
+		padding: 3%;
+		background-color: rgba(0,0,0,0.5)
+	}
+	h2 {
+		font-size: 72px;
+		text-shadow: 0 1px 5px #000;
+		
+		margin-top: 15px;
+		margin-left: 25px;
+	}
+}
+
+#section-4 {
+	width: 100%;
+	height: 600px;
+	
+	/* http://farm8.staticflickr.com/7026/6494529483_a2a50906a6_o.jpg */
+	
+	background: url('http://farm8.staticflickr.com/7144/6494527137_cba6ab1fb7_o.jpg') center left scroll;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	h3 {
+	    font-family: 'Squada One', Helvetica, sans-serif;
+	    font-size: 46px;
+	    font-variant: small-caps;
+		padding-top: 2%;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		text-shadow: 0 1px 5px #000;
+		
+	}
+}
+
+#section-5 {
+	width: 100%;
+	height: 600px;
+	
+	/* http://farm8.staticflickr.com/7026/6494529483_a2a50906a6_o.jpg */
+	border-top: 10px solid white;
+	background: url('http://farm8.staticflickr.com/7022/6494515489_3010ded15e_o.jpg') center center fixed;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+    
+    p {
+        .3-column;
+        margin-left: 3%;
+        margin-top: 3%;
+        text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+		font-weight: bold;
+    }
+	
+	h3 {
+		padding-top: 12px; padding-bottom: 12px;
+		background-color: rgba(0,0,0,0.7);
+		text-align: center;
+	}
+}
+
+#section-6 {
+    border-top: 6px solid white;
+	width: 100%;
+}
+#section-7 {
+	/* http://farm8.staticflickr.com/7152/6494446823_b82cc32f3d_o.jpg */
+	
+	width: 100%;
+	height: 800px;
+	
+	border-top: 10px solid white;
+	background: url('http://farm8.staticflickr.com/7175/6494517169_be0c87bac7_o.jpg') center center scroll;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+#section-8 {
+    width: 100%;
+    height: 800px;
+}
+#section-9 {
+    width: 100%;
+}
+#section-10 {
+    width: 100%;
+    
+    height: 800px;
+    
+    border-top: 10px solid white;
+	background: url('http://farm8.staticflickr.com/7151/6494519501_f9b0f67eed_o.jpg') center center scroll;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	h3 {
+		color: black;
+		padding-top: 2%;
+		margin-left: 6%;
+	}
+	
+	p {
+	    .4-column;
+	    padding: 18px;
+	    margin-left: 48px;
+	    background-color: rgba(0,0,0,0.85)
+	}
+}
+
+#section-11 {
+    width: 100%;
+    height: 600px;
+    border-top: 6px solid white;
+    border-bottom: 6px solid white;
+}
+#section-12 {
+    width: 100%;
+    
+    height: 200px;
+    
+    border-top: 10px solid white;
+	background: url('http://farm8.staticflickr.com/7151/6494519501_f9b0f67eed_o.jpg') center center scroll;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+a {
+	&:link{
+		color: @linkcolor;
+	}
+	&:hover {
+		@darklinkcolor: darken(@linkcolor, 17%);
+		color: @darklinkcolor;
+	 	-webkit-transition:  0.3s linear;
+	}
+	&:visited {
+		@darklinkcolor: darken(@linkcolor, 25%);
+		color: @darklinkcolor;
+	}
+}
+#content {
+	.5-column;
+}
+
+
+
+/*		Tablet Layout: 768px.
+		Gutters: 24px.
+		Outer margins: 28px.
+		Inherits styles from: Default Layout.
+-----------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8
+px      68    160    252    344    436    528    620    712    */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	
+	body {
+		width: 712px;
+		padding: 48px 28px 60px;
+	}
+
+}
+
+
+
+/*		Mobile Layout: 320px.
+		Gutters: 24px.
+		Outer margins: 34px.
+		Inherits styles from: Default Layout.
+---------------------------------------------
+cols    1     2      3
+px      68    160    252    */
+
+@media only screen and (max-width: 767px) {
+	
+	body {
+		font-size: 12px;
+		line-height: 1.3em;
+		width: 320px;
+	}
+	
+	h1 {
+		font-size: 34px;
+		line-height: 1.2em;
+	}
+	
+	#section-1 {
+		background: url('http://farm8.staticflickr.com/7012/6746224785_c7df7c2242_o.jpg') center right scroll;		
+	}
+	#section-2 {
+		p {
+			margin-top: 200px;
+		}
+		h3 {
+			font-size: 18px;
+		}
+		width: 100%;
+		height: 600px;
+	}
+	#section-11 {
+        display: none;
+    }
+	
+	
+}
+
+
+
+/*		Wide Mobile Layout: 480px.
+		Gutters: 24px.
+		Outer margins: 22px.
+		Inherits styles from: Default Layout, Mobile Layout.
+------------------------------------------------------------
+cols    1     2      3      4      5
+px      68    160    252    344    436    */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	
+	body {
+		width: 436px;
+		padding: 36px 22px 48px;
+	}
+	#section-1 {
+		background: url('http://farm8.staticflickr.com/7012/6746224785_c7df7c2242_o.jpg') center center scroll;		
+		
+
+	}
+}

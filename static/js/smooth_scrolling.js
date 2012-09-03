@@ -1,10 +1,11 @@
 var scrollableElement, scrolloffset, scrolltiming;
 
-scrolloffset = 0;
+smoothScrolling = function(scroll) {
+    
+    scrolloffset = scroll || 0;
 
-scrolltiming = 1000;
+    scrolltiming = 1000;
 
-$(document).ready(function() {
   var filterPath, locationPath, scrollElem;
   filterPath = function(string) {
     string.replace(/^\//, '').replace(/(index|default).[a-zA-Z]{3,4}$/, '').replace(/\/$/, '');
@@ -19,21 +20,23 @@ $(document).ready(function() {
       $target = $(this.hash);
       target = this.hash;
       if (target) {
+          console.log("Target",$target);
         targetOffset = $target.offset().top - scrolloffset;
-        return $(this).click(function(event) {
-          console.log("Click", scrollElem);
-          event.preventDefault();
-          return $(scrollElem).animate({
+        $(this).click(function(event) {
+//          console.log("Click", scrollElem);
+          $(scrollElem).animate({
             scrollTop: targetOffset,
-            ease: 'easeOut'
+            ease: 'easeOutQuart'
           }, scrolltiming, function() {
-            return location.hash = target;
+            location.hash = target;
           });
+          event.preventDefault();
+          return false;
         });
       }
     }
   });
-});
+};
 
 scrollableElement = function(els) {
   var $scrollElement, el, i, isScrollable, _i, _len;
