@@ -343,7 +343,8 @@ a:visited {
   display: none;
 }
 .soundcloud {
-  height: 200px;
+  height: 260px;
+  margin-bottom: 12px;
 }
 .soundcloud h2 {
   color: black;
@@ -354,8 +355,8 @@ a:visited {
   text-shadow: rgba(250, 246, 246, 0.92) 0px 2px 3px;
 }
 .timeline {
-  margin-top: 92px;
-  height: 648px;
+  margin-top: 12px;
+  height: 748px;
   margin-bottom: 92px;
 }
 .timeline h2 {
@@ -394,8 +395,11 @@ cols    1     2      3      4      5      6      7      8
 px      68    160    252    344    436    528    620    712    */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   body {
-    width: 712px;
+    width: 100%;
+  }
+  .section {
     padding: 32px 28px 60px;
+    width: 100%;
   }
 }
 /*		Mobile Layout: 320px.
@@ -407,8 +411,60 @@ cols    1     2      3
 px      68    160    252    */
 @media only screen and (max-width: 767px) {
   body {
-    width: 252px;
+    width: 100%;
+  }
+  .section {
     padding: 24px 34px 60px;
+    height: 436px;
+  }
+  .section .imagecaption {
+    line-height: 1.4em;
+  }
+  .section h2 {
+    font-size: 16px;
+    line-height: 1.3em;
+  }
+  .vimeo {
+    height: 252px;
+  }
+  .image h2 {
+    margin-top: 92px;
+  }
+  .image2 .imagecaption {
+    font-size: 0.65em;
+    width: 252px;
+    margin-top: 192px;
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+  }
+  .image3 .imagecaption {
+    font-size: 0.7em;
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+    height: 160px;
+    width: 80%;
+    overflow: auto;
+    line-height: 1.55em;
+  }
+  .image3 .imagecaption h3 {
+    font-size: 16px;
+    line-height: 1.3em;
+  }
+  .image3 .imagecaption p {
+    margin-top: 1em;
+  }
+  .soundcloud {
+    height: 260px;
+  }
+  .timeline {
+    font-size: 0.7em !important;
+    height: 600px;
+  }
+  .timeline p {
+    font-size: 14px !important;
+    line-height: 1.2em;
   }
 }
 /*		Wide Mobile Layout: 480px.
@@ -420,7 +476,9 @@ cols    1     2      3      4      5
 px      68    160    252    344    436    */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
   body {
-    width: 436px;
+    width: 100%;
+  }
+  .section {
     padding: 24px 22px 48px;
   }
 }
