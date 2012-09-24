@@ -2,7 +2,7 @@
 
 It is designed to make it easy to make beautiful photo-essays with other embedded media types like video, audio, or timelines. The effort should be spent building the story, not building the story's website, so I've done my best to make it as easy as possible to simply take image URLs and type some text, and get something great. 
 
-The images, videos, and embeds are fully responsive. They always stretch to be fullscreen, whether on an enormous display, or an iPhone. Simply provide your URLs, embeds, and text, and know that your story can be seen on any device. 
+The images, videos, and embeds are fully responsive. They always stretch to be fullscreen, whether on an enormous display, or an iPhone. Simply provide your URLs, embeds, and text, and know that your story can be seen on any device. You can [See a demo here](http://ejfox.github.com/sStory/)
 
 It allows you to create sections made of:
 
