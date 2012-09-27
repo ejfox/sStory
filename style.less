@@ -297,7 +297,8 @@ body {
 	-webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
 	margin-left: auto;
 	margin-right: auto;
-	
+	background-image: url(whitey.png);
+	background-repeat: repeat;
 }
 a {
 	&:link{
@@ -357,6 +358,10 @@ a {
 	width: 436px;
 	border-radius: 4px;
 }
+
+.image, .image2, .image3 {
+    border-top: 4px solid black;
+}
 .image h2 {
 	margin-top: 92px;
 }
@@ -407,7 +412,7 @@ a {
 }
 .timeline {
     margin-top: 12px;
-    height: 748px;
+    height: 672px;
     margin-bottom: 92px;
     h2 {
         color: black;
@@ -423,6 +428,7 @@ a {
 .vimeo {
     padding: 0;
     overflow: auto;
+    height: @sectionheight+32;
 }
 .video-caption {
 //    height: 200px;
@@ -432,17 +438,20 @@ a {
 //    margin-left: -218px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 8px;	
+    margin-bottom: 8px;
     z-index: 999999; // Is this enough?
     width: 436px;
   
     background-color: rgba(250,250,250,0.88);	
 	padding: 12px 22px;
+    border-radius: 4px;
 }
 /*
 Elastic videos
 */
 .video-container {
-  height: @sectionheight+300;    
+//  height: @sectionheight+300;    
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 30px;
