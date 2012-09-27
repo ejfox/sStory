@@ -286,6 +286,8 @@ strong {
 cols    1     2      3      4      5      6      7      8      9      10
 px      68    160    252    344    436    528    620    712    804    896    */
 
+@sectionheight: 812px;
+
 body {
 //	width: 896px;
 	width: 100%;
@@ -314,7 +316,8 @@ a {
 }
 
 .section {
-	height: 812px;
+	height: @sectionheight;
+	
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -417,10 +420,29 @@ a {
 		
     }
 }
+.vimeo {
+    padding: 0;
+    overflow: auto;
+}
+.video-caption {
+//    height: 200px;
+//    position: absolute;
+//    bottom: 0;
+//    left: 50%;
+//    margin-left: -218px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 999999; // Is this enough?
+    width: 436px;
+  
+    background-color: rgba(250,250,250,0.88);	
+	padding: 12px 22px;
+}
 /*
 Elastic videos
 */
-.vimeo {
+.video-container {
+  height: @sectionheight+300;    
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 30px;
@@ -430,6 +452,7 @@ Elastic videos
 .vimeo iframe,
 .vimeo object,
 .vimeo embed {
+//  z-index: -10;
   position: absolute;
   top: 0;
   left: 0;

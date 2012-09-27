@@ -84,8 +84,13 @@
 
 <script id="vimeo" type="text/html">
 <div class="video-container">
-<iframe src="{{ url }}" width="400" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>		
+<iframe src="{{ url }}" width="400" height="300" frameborder="0" wmode="transparent" webkitAllowFullScreen mozallowfullscreen allowFullScreen><param name="wmode" value="opaque"></iframe>		
 </div>
+{{#text}}
+<div class="video-caption">
+{{text}}
+</div>
+{{/text}}
 </script>
 
 <script id="soundcloud" type="text/html">
@@ -133,7 +138,22 @@ var examplesections = [{
 	title: "Part 4 (Embedded Vimeo video)"
 	,type: "vimeo"
 	,url: "http://player.vimeo.com/video/36256273?byline=0&portrait=0&color=ffffff"
-	,height: "500px"  
+	,height: "500px"
+    ,text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+},
+{
+	title: "Part 5 (Embedded Vimeo video)"
+	,type: "vimeo"
+	,url: "http://player.vimeo.com/video/36256273?byline=0&portrait=0&color=ffffff"
+	,height: "500px" 
+    ,text: "transitions can get complex, so lets make sure we have the basics down first!"	 
+},
+{
+	title: "Part 6 (Embedded Vimeo video)"
+	,type: "vimeo"
+	,url: "http://player.vimeo.com/video/36256273?byline=0&portrait=0&color=ffffff"
+	,height: "500px" 
+    ,text: "transitions can get complex, so lets make sure we have the basics down first!"	 
 },
 {
     title: "You can also include soundcloud embeds"
