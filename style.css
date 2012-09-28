@@ -409,6 +409,88 @@ Elastic videos
   width: 100%;
   height: 100%;
 }
+/* --- Builder stuff --- */
+#builder {
+  font-size: 12px;
+  line-height: 1.3em;
+  background-color: rgba(242, 242, 244, 0.92);
+  border-radius: 4px;
+  width: 344px;
+  height: 528px;
+  position: fixed;
+  right: 18px;
+  top: 18px;
+  z-index: 99999;
+  overflow-y: auto;
+  padding: 8px 12px;
+  -webkit-box-shadow: 0 3px 14px rgba(0, 0, 0, 0.72);
+  -moz-box-shadow: 0 3px 14px rgba(0, 0, 0, 0.72);
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.72);
+}
+#builder h2 {
+  font-size: 18px;
+  text-align: center;
+  padding: 8px;
+  margin-top: 0;
+  padding-top: 4px;
+}
+#builder h4 {
+  font-size: 14px;
+  line-height: 1.4em;
+  margin-right: 52px;
+}
+#builder li {
+  position: relative;
+  list-style-type: none;
+}
+#builder li h4,
+#builder li .sectiontype {
+  display: inline-block;
+  vertical-align: middle;
+}
+#builder li .sectiontype {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+}
+#builder li .summary-header {
+  background-color: #ffffff;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#d6d6d6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #d6d6d6);
+  background-image: -moz-linear-gradient(top, #ffffff, #d6d6d6);
+  background-image: -o-linear-gradient(top, #ffffff, #d6d6d6);
+  background-image: -ms-linear-gradient(top, #ffffff, #d6d6d6);
+  background-image: linear-gradient(top, #ffffff, #d6d6d6);
+  filter: progid:dximagetransform.microsoft.gradient(GradientType=0, StartColorStr='#ffffff', EndColorStr='#d6d6d6');
+  padding: 2px 4px;
+  border-radius: 2px;
+  margin-bottom: 0;
+}
+#builder li .summary-content {
+  height: 38px;
+  overflow-y: auto;
+  padding-top: 2px;
+}
+#builder li .summary-content h1,
+#builder li .summary-content h2,
+#builder li .summary-content h3,
+#builder li .summary-content h4,
+#builder li .summary-content h5,
+#builder li .summary-content h6 {
+  font-size: 12px;
+  font-weight: bold;
+}
+#builder li .image-url {
+  font-size: 10px;
+  opacity: 0.3;
+}
+#builder li .sectiontext {
+  background-color: white;
+  padding: 2px 24px;
+  margin: 4px 24px;
+  font-size: 10px;
+  line-height: 1.3em;
+}
 /*		Tablet Layout: 768px.
 		Gutters: 24px.
 		Outer margins: 28px.

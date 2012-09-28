@@ -8,11 +8,35 @@ makeTimeline = (d,i) ->
 	}
 	$(document).ready(->
 	    createStoryJS(timelineoptions)
-	)	
-
+	)
+		
+makeBuilder = (sections) ->
+    builder = d3.select("#section-summary ol")
+    
+    sectionli = builder.selectAll('.section-summary-item')
+    .data(sections)
+    .enter().append("li")
+        .attr("class", "section-summary-item")
+#        .text((d,i) -> i)
+            
+    summaryheader = sectionli.append("div").attr("class", "summary-header")        
+    summaryheader.append("h4").text((d,i) -> 
+        if d.title isnt undefined
+            d.title
+        else
+            "> No title given."
+    )    
+    summaryheader.append("div").attr("class", "sectiontype").text((d,i) -> d.type)
+       
+    summarycontent = sectionli.append("div").attr("class", "summary-content")
+    summarycontent.append("div").attr("class", "image-url").text((d,i) -> d.url)        
+#    summarycontent.append("div").attr("class", "sectiontext").text((d,i) -> d.caption)
+    
+    
 sStory = (sections) ->    
-    container = d3.select("#container")
 
+    makeBuilder(sections)
+    container = d3.select("#container")
     container.selectAll('.section')
     .data(sections)
     .enter().append("div")

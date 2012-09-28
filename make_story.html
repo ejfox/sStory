@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title></title>
+	<!-- Place favicon.ico and apple-touch-icon.png in the root of your domain and delete these references -->
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" media="all" href=""/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
+	
+	<!-- LESS framework stylesheet 
+	Should be compiled from style.less
+	I use http://wearekiss.com/simpless for auto-compiling on save
+	-->	
+	<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
+	
+	<!-- Bring in animate.css | http://daneden.me/animate/ -->	
+	<!--<link rel="stylesheet" href="animate.css" type="text/css" media="screen" title="no title" charset="utf-8"> -->
+			
+	<!-- Bring in jQuery first, lots of other stuff depends on it -->
+	<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>	
+
+	<!-- And underscore | http://documentcloud.github.com/underscore/	
+	<script src="js/underscore-min.js" type="text/javascript" charset="utf-8"></script>	-->
+
+	<!-- And D3 | https://github.com/mbostock/d3/wiki/API-Reference -->
+	<script src="js/d3.v2.min.js" type="text/javascript" charset="utf-8"></script>
+	
+	<!-- And Lettering.js | https://github.com/davatron5000/Lettering.js 		
+	<script src="js/jquery.lettering.js" type="text/javascript" charset="utf-8"></script> -->
+	
+	<!-- And Scrollorama | http://johnpolacek.github.com/scrollorama/ 			
+	<script src="js/jquery.scrollorama.js" type="text/javascript" charset="utf-8"></script> -->
+	
+	<!-- And Tabletop | https://github.com/jsoma/tabletop 				
+	<script src="js/tabletop.js" type="text/javascript" charset="utf-8"></script> -->
+
+	<!-- And the Open Sans Google Webfont | https://www.google.com/webfonts#UsePlace:use/Collection:Open+Sans-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,800,300' rel='stylesheet' type='text/css'>	
+	
+	<script src="js/ICanHaz.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	<script src="js/storyjs-embed.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="timeline.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	
+	<script src="js/sStory.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	
+</head>
+
+<body>
+<div id="builder">
+<h2>Create a story</h2>
+<div id="add-section">
+    
+</div>
+
+<div id="section-summary">
+    <ol>
+
+        
+    </ol>
+</div>
+</div>
+<div id="nav">
+	
+</div>
+
+<div id="container">
+	
+</div>
+
+<script id="image" type="text/html">
+<h2 class="{{ shade }}">{{{ title }}}</h2>
+<!-- <img src="{{ url }}"  style="height: {{ height }};" /> -->
+</script>
+
+<script id="image2" type="text/html">
+<h2 class="{{ shade }}">{{{ title }}}</h2>
+<!-- <img src="{{ url }}" title="{{ caption }}" style="height: {{ height }};" /> -->
+<div class="imagecaption"><p>{{{ caption }}}</p></div>
+</script>
+
+<script id="image3" type="text/html">
+<h2 class="{{ shade }}">{{ title }}</h2> 
+<!-- <img src="{{ url }}" title="{{ caption }}" style="height: {{ height }};" /> -->
+<div class="imagecaption longcaption"><p>{{{ caption }}}</p></div>
+</script>
+
+<script id="vimeo" type="text/html">
+<div class="video-container">
+<iframe src="{{ url }}" width="400" height="300" frameborder="0" wmode="transparent" webkitAllowFullScreen mozallowfullscreen allowFullScreen><param name="wmode" value="opaque"></iframe>		
+</div>
+{{#caption}}
+<div class="video-caption">
+{{caption}}
+</div>
+{{/caption}}
+</script>
+
+<script id="soundcloud" type="text/html">
+<div class="soundcloud-container">
+{{#title}}
+<h2 class="{{ shade }}">{{ title }}</h2> 
+{{/title}}
+		{{{ embed }}}
+</div>
+</script>
+
+<script id="summary" type="text/html">
+<li>
+    <div class="summary-header">
+        <h4>{{title}}</h4>
+        <div class="sectiontype">
+            {{type}}
+        </div>
+    </div>
+    <div class="summary-content">
+        <div class="image-url">
+            {{url}}
+        </div>
+        <div class="sectiontext">
+            {{caption}}
+        </div>
+    </div>
+</li>
+</script>
+
+
+<script type="text/javascript" charset="utf-8">
+	
+var examplesections = [{
+    title: "Large image + title"
+    ,type: "image"
+    ,url: "http://farm8.staticflickr.com/7059/7136538109_00346b63c9_k.jpg"
+    ,shade: "light"
+},
+{
+    title: "Large image + title + caption"
+    ,type: "image2"
+    ,url: "http://farm8.staticflickr.com/7038/6990421086_e92cafc3da_k.jpg"
+    ,shade: "dark"
+    ,caption: "You can place a short descriptive caption of the picture here. Think of it as a tweet."
+},
+{
+    type: "image2"
+    ,url: "http://farm9.staticflickr.com/8157/6990386240_5b5a7a15a7_k.jpg"
+    ,shade: "dark"
+    ,caption: "If you don't include a title, you can have an image with just a caption."
+},
+
+
+
+{
+    type: "image3"
+    ,url: "http://farm8.staticflickr.com/7043/6990444744_7f6e372a70_k.jpg"
+    ,shade: "light"
+    ,height: "500px"
+    ,caption: "<h3>Include longer stories accompanying photos</h3> <p>Just provide the HTML. You can use headers and <em>any styling</em> you could <span style='color: red;'>possibly</span> imagine. consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><br /><h3>Uno, dos</h3><p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
+},
+{
+	title: "Part 4 (Embedded Vimeo video)"
+	,type: "vimeo"
+	,url: "http://player.vimeo.com/video/36256273?byline=0&portrait=0&color=ffffff"
+	,height: "500px"
+    ,caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+},
+{
+	title: "Part 5 (Embedded Vimeo video)"
+	,type: "vimeo"
+	,url: "http://player.vimeo.com/video/36256273?byline=0&portrait=0&color=ffffff"
+	,height: "500px" 
+    ,caption: "transitions can get complex, so lets make sure we have the basics down first!"	 
+},
+{
+	title: "Part 6 (Embedded Vimeo video)"
+	,type: "vimeo"
+	,url: "http://player.vimeo.com/video/36256273?byline=0&portrait=0&color=ffffff"
+	,height: "500px" 
+    ,caption: "transitions can get complex, so lets make sure we have the basics down first!"	 
+},
+{
+    title: "You can also include soundcloud embeds"
+    ,type: "soundcloud"
+    ,embed: "<iframe width='100%' height='166' scrolling='no' frameborder='no' src='http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F37934185&amp;auto_play=false&amp;show_artwork=false&amp;color=000000'></iframe>"
+},
+{
+    title: "Map section (Leaflet map)"
+    ,type: "map"
+    ,locations: [
+	    {
+	        popup: "This is what comes up when you click on a polygon."        
+	        ,points: [[37.80857, -122.27092], 
+	                [37.80905, -122.27079], 
+	                [37.80913, -122.27134]]
+	        ,options: {
+	            color: "red",
+	            weight: 8
+	        }
+	    },
+	    {
+	        popup: "This is another polygon to click on"        
+	        ,points: [[37.80857, -122.27092], 
+	                [37.80905, -122.27079], 
+	                [37.80913, -122.27134],
+	                [37.80865, -122.27147]]
+	        ,options: {
+	            color: "red",
+	            weight: 8
+	        }
+	    }
+    ]
+},
+{
+    title: "Timeline section (Verite timeline)"
+    ,type: "timeline"
+    ,url: "https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dFVxOEk0aGRxbk9URE9yeDJKMXNIS3c&output=html"
+},
+{
+    title: "<a href='http://google.com'>You can make a link</a>"
+    ,type: "image"
+    ,url: "http://farm8.staticflickr.com/7112/7136431759_6cb409a7a8_k.jpg"
+    ,shade: "light"
+},
+]
+
+
+	
+	
+$(document).ready(function(){
+	sStory(examplesections);
+});
+
+	
+</script>
+</body>
+</html>
