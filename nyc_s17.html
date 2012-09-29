@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title></title>
+	<!-- Place favicon.ico and apple-touch-icon.png in the root of your domain and delete these references -->
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" media="all" href=""/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
+	
+	<!-- LESS framework stylesheet 
+	Should be compiled from style.less
+	I use http://wearekiss.com/simpless for auto-compiling on save
+	-->	
+	<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
+	
+	<!-- Bring in animate.css | http://daneden.me/animate/ -->	
+	<!--<link rel="stylesheet" href="animate.css" type="text/css" media="screen" title="no title" charset="utf-8"> -->
+			
+	<!-- Bring in jQuery first, lots of other stuff depends on it -->
+	<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>	
+
+	<!-- And underscore | http://documentcloud.github.com/underscore/	
+	<script src="js/underscore-min.js" type="text/javascript" charset="utf-8"></script>	-->
+
+	<!-- And D3 | https://github.com/mbostock/d3/wiki/API-Reference -->
+	<script src="js/d3.v2.min.js" type="text/javascript" charset="utf-8"></script>
+	
+	<!-- And Lettering.js | https://github.com/davatron5000/Lettering.js 		
+	<script src="js/jquery.lettering.js" type="text/javascript" charset="utf-8"></script> -->
+	
+	<!-- And Scrollorama | http://johnpolacek.github.com/scrollorama/ 			
+	<script src="js/jquery.scrollorama.js" type="text/javascript" charset="utf-8"></script> -->
+	
+	<!-- And Tabletop | https://github.com/jsoma/tabletop 				
+	<script src="js/tabletop.js" type="text/javascript" charset="utf-8"></script> -->
+
+	<!-- And the Open Sans Google Webfont | https://www.google.com/webfonts#UsePlace:use/Collection:Open+Sans-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,800,300' rel='stylesheet' type='text/css'>	
+	
+	<script src="js/ICanHaz.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	<script src="js/storyjs-embed.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="timeline.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	
+	<script src="js/sStory.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	
+</head>
+
+<body>
+<div id="nav">
+	
+</div>
+
+<div id="container">
+	
+</div>
+
+<script id="image" type="text/html">
+<h2 class="{{ shade }}">{{{ title }}}</h2>
+<!-- <img src="{{ url }}"  style="height: {{ height }};" /> -->
+</script>
+
+<script id="image2" type="text/html">
+<h2 class="{{ shade }}">{{{ title }}}</h2>
+<!-- <img src="{{ url }}" title="{{ caption }}" style="height: {{ height }};" /> -->
+<div class="imagecaption"><p>{{{ caption }}}</p></div>
+</script>
+
+<script id="image3" type="text/html">
+<h2 class="{{ shade }}">{{ title }}</h2> 
+<!-- <img src="{{ url }}" title="{{ caption }}" style="height: {{ height }};" /> -->
+<div class="imagecaption longcaption"><p>{{{ text }}}</p></div>
+</script>
+
+<script id="vimeo" type="text/html">
+<div class="video-container">
+<iframe src="{{ url }}" width="400" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>		
+</div>
+</script>
+
+<script id="soundcloud" type="text/html">
+<div class="soundcloud-container">
+{{#title}}
+<h2>{{ title }}</h2> 
+{{/title}}
+		{{{ embed }}}
+</div>
+</script>
+
+
+<script type="text/javascript" charset="utf-8">
+	
+var examplesections = [{
+    title: "Occupy Wall Street <br /> <em>1 Year Anniversary</em>"
+    ,type: "image"
+    ,url: "http://farm9.staticflickr.com/8042/8018537670_621a57bf38_b.jpg"
+    ,shade: "light"
+},
+{
+    type: "image2"
+    ,url: "http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg"
+    ,shade: "dark"
+    ,caption: "Everybody was relatively composed, but as usual, there were cameras everywhere. On both sides."
+},
+{
+    type: "image2"
+    ,url: "http://farm9.staticflickr.com/8182/8018533375_539d22a5fb_b.jpg"
+    ,shade: "dark"
+    ,caption: "Protestors retook Zucotti park and the atmosphere was electric. As one person put it, everyone was ecstatic either to re-live the first days, or to finally be there because they missed it the first time."
+},
+{
+    type: "image2"
+    ,url: "http://farm9.staticflickr.com/8305/8018534029_5d0ba3470d_b.jpg"
+    ,shade: "dark"
+    ,caption: "Men in suits were escorted by police across the street. No one paid them any mind."
+},
+{
+    type: "image2"
+    ,url: "http://farm9.staticflickr.com/8311/8018538532_2fa9aff47c_b.jpg"
+    ,shade: "dark"
+    ,caption: "I witnessed some intense arrests, this one in front of Merril Lynch. This young woman went limp and got manhandled and dragged first up the street, and then back down it before being loaded into a police van."
+},
+{
+	title: "Part 4 (Embedded Vimeo video)"
+	,type: "vimeo"
+	,url: "http://player.vimeo.com/video/50084091"
+}
+]
+	
+	
+$(document).ready(function(){
+	sStory(examplesections);
+});
+
+	
+</script>
+</body>
+</html>
