@@ -332,7 +332,7 @@ a {
     	text-align: center;
 
     	color: white;
-    	text-shadow:rgba(10, 16, 16, 0.9) 0px 2px 4px;
+    	text-shadow:rgba(10, 16, 16, 0.92) 0px 2px 4px;
     	
     	a:link, a:visited {
     	    color: white !important;
@@ -387,9 +387,12 @@ a {
 	}
 }
 .image3 {
-	h1,h2,h3,h4,h5 {
-		text-shadow:rgba(250, 246, 246, 0.92) 0px 2px 3px;		
+	.imagecaption {
+	    h1,h2,h3,h4,h5 {
+    		text-shadow:rgba(250, 246, 246, 0.92) 0px 2px 3px;		
+    	}
 	}
+	
 }
 .map {
     display: none;
@@ -480,13 +483,16 @@ Elastic videos
     width: 344px;
     height: 528px;
     position: fixed;
-    right: 18px;
+    left: 18px;
     top: 18px;
     z-index: 99999;
     overflow-y: auto;
     padding: 8px 12px;
     
     .drop-shadow(0, 3px, 14px, 0.72);
+    background-image: url(whitey.png);
+	background-repeat: repeat;
+//	background-attachment: fixed;
     
     
     h2 {
@@ -505,6 +511,7 @@ Elastic videos
     li {
         position: relative;
         list-style-type: none;
+        width: 324px;
         
         h4, .sectiontype {
             display: inline-block;
@@ -524,7 +531,9 @@ Elastic videos
             background-image: -ms-linear-gradient(top, rgb(255, 255, 255), rgb(214, 214, 214));
             background-image: linear-gradient(top, rgb(255, 255, 255), rgb(214, 214, 214));
             filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ffffff', EndColorStr='#d6d6d6');
-
+            
+            
+            
             padding: 2px 4px;
             border-radius: 2px;
 //            border-bottom: 1px solid black;

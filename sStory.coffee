@@ -31,8 +31,74 @@ makeBuilder = (sections) ->
     summarycontent = sectionli.append("div").attr("class", "summary-content")
     summarycontent.append("div").attr("class", "image-url").text((d,i) -> d.url)        
 #    summarycontent.append("div").attr("class", "sectiontext").text((d,i) -> d.caption)
+
+correctInputs = ->
+    switch $('#type').val() 
+        when "image"
+            $('#embed-wrapper').hide()        
+            $('#caption').hide()
+            $('#url-wrapper').show();
+        when "image2"
+            $('#embed-wrapper').hide()        
+            $('#caption').show()
+            $('#url-wrapper').show()
+            $('#caption').attr("rows", 2)
+        when "image3"
+            $('#embed-wrapper').hide()        
+            $('#caption').show()
+            $('#url-wrapper').show();
+            $('#caption').attr("rows", 5)
+        when "vimeo"
+            $('#embed-wrapper').hide()
+            $('#caption').show()
+            $('#url-wrapper').show();            
+        when "soundcloud"
+            $('#embed-wrapper').show()        
+            $('#caption').hide()
+            $('#url-wrapper').hide();
+        when "timeline"
+            $('#embed-wrapper').hide()        
+            $('#caption').hide()
+            $('#url-wrapper').show();                        
+            
+getJsonCode = ->
+    $('#json-code').val(sections.join("")).show()
     
+submitNewSection = ->
+    console.log "Submitttt"
+    sectionTitle = $("#add-section #title").val();
+    sectionUrl = $("#add-section #url").val();
+    sectionCaption = $("#add-section #caption").val();    
+    sectionType = $("#add-section #type").val();
+    sectionEmbed = $("#add-section #embed").val();
     
+    if sectionType is "image" or sectionType is "image2" or sectionType is "image3"
+        sections.push({
+            title: sectionTitle
+            type: sectionType
+            url: sectionUrl
+            caption: sectionCaption
+            })
+    else if sectionType is "vimeo"
+        sections.push({
+            title: sectionTitle
+            type: sectionType
+            url: sectionUrl
+            caption: sectionCaption
+        })
+    else if sectionType is "soundcloud"
+        sections.push({
+            title: sectionTitle
+            type: sectionType
+            embed: sectionEmbed
+        })
+
+    $("#container").html("");
+    $("#section-summary ol").html("");
+    sStory(sections)
+    makeBuilder(sections)
+
+            
 sStory = (sections) ->    
 
     makeBuilder(sections)

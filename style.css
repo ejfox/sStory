@@ -288,7 +288,7 @@ a:visited {
 .section h2 {
   text-align: center;
   color: white;
-  text-shadow: rgba(10, 16, 16, 0.9) 0px 2px 4px;
+  text-shadow: rgba(10, 16, 16, 0.92) 0px 2px 4px;
 }
 .section h2 a:link,
 .section h2 a:visited {
@@ -339,11 +339,11 @@ a:visited {
 .image3 .imagecaption p {
   margin-top: 1em;
 }
-.image3 h1,
-.image3 h2,
-.image3 h3,
-.image3 h4,
-.image3 h5 {
+.image3 .imagecaption h1,
+.image3 .imagecaption h2,
+.image3 .imagecaption h3,
+.image3 .imagecaption h4,
+.image3 .imagecaption h5 {
   text-shadow: rgba(250, 246, 246, 0.92) 0px 2px 3px;
 }
 .map {
@@ -418,7 +418,7 @@ Elastic videos
   width: 344px;
   height: 528px;
   position: fixed;
-  right: 18px;
+  left: 18px;
   top: 18px;
   z-index: 99999;
   overflow-y: auto;
@@ -426,6 +426,8 @@ Elastic videos
   -webkit-box-shadow: 0 3px 14px rgba(0, 0, 0, 0.72);
   -moz-box-shadow: 0 3px 14px rgba(0, 0, 0, 0.72);
   box-shadow: 0 3px 14px rgba(0, 0, 0, 0.72);
+  background-image: url(whitey.png);
+  background-repeat: repeat;
 }
 #builder h2 {
   font-size: 18px;
@@ -442,6 +444,7 @@ Elastic videos
 #builder li {
   position: relative;
   list-style-type: none;
+  width: 324px;
 }
 #builder li h4,
 #builder li .sectiontype {
