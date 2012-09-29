@@ -2,9 +2,9 @@
 
 Designed to make it easy to make beautiful photo-essays with other embedded media types like video, audio, or timelines.
 
-The images, videos, and embeds are fully responsive. They always stretch to be fullscreen, whether on an enormous display, or an iPhone. Simply provide your URLs, embeds, and text, and know that your story can be seen on any device. You can [see a demo here](http://ejfox.github.com/sStory/).
+The images, videos, and embeds are fully responsive. They always stretch to be fullscreen, whether on an enormous display, or an iPhone. Simply provide your URLs, embeds, and text, and know that your story can be seen on any device. You can [see a basic demo here](http://ejfox.github.com/sStory/) or an example story based on [OWS's 1 year anniversary in NYC](http://ejfox.github.com/sStory/nyc_s17.html).
 
-It allows you to create sections made of:
+sStory allows you to create sections made of:
 
 1. Large image 
 2. Large image with caption
@@ -80,7 +80,7 @@ Sections are passed to S-Story in an array of objects. For example:
 	}
     ]
     
-Creating the sStory is as simple as
+Once you've created the objecrs for each of your sections, creating the sStory is as simple as
     
     /* Add all of the sections to the specified container */
     $('#container').sStory(sections)
@@ -97,7 +97,7 @@ You simply need the URL of the image. For images with long captions (image3) you
 #### Vimeo
 If you go to your video and click share. Vimeo's sharing box will appear. Copy the embed code and paste it into your embed code section.
 
-![Vimeo howto](howto/howto-vimeo.png)
+![Vimeo howto](http://ejfox.github.com/sStory/howto/howto-vimeo.png)
 
 #### Soundcloud
 Go to your soundcloud track and click share. Soundcloud's sharing box will appear. You will need to get the src URL from the embed code and copy it over.
