@@ -61,8 +61,8 @@
 <h2>Create a story</h2>
 <div id="add-section">
 <label for="title">Title</label><input type="text" name="title" value="" id="title">
-<span id="url-wrapper"><label for="url">URL</label><input type="text" name="url" value="" id="url"></span>
-<span id="embed-wrapper" style="display: none;"><br /><label for="embed">Embed code</label><input type="text" name="embed" value="" id="embed"></span>
+<div id="url-wrapper"><label for="url">URL</label><input type="text" name="url" value="" id="url"></div>
+<div id="embed-wrapper" style="display: none;"><br /><label for="embed">Embed code</label><input type="text" name="embed" value="" id="embed"></div>
 <textarea name="Caption" id="caption" rows="5" style="width: 100%; display: none;">Caption</textarea>
 <br />
 Type: <select name="type" id="type" onchange="correctInputs()" size="1">
@@ -73,8 +73,8 @@ Type: <select name="type" id="type" onchange="correctInputs()" size="1">
     <option value="soundcloud">soundcloud</option>
     <option value="timeline">timeline</option>                
 </select>
-<button onclick="submitNewSection()">Submit</button>
-<button onclick="getJsonCode()">JSON</button>
+<button onclick="submitNewSection()" id="submit-button">Add</button>
+<button onclick="getJsonCode()" id="json-button">JSON</button>
 </div>
 
 <div id="section-summary">
@@ -82,7 +82,7 @@ Type: <select name="type" id="type" onchange="correctInputs()" size="1">
 
         
     </ol>
-<textarea id="json-code" style="display: none">
+<textarea id="json-code" style="width: 100%; display: none">
     
 </textarea>
 </div>
