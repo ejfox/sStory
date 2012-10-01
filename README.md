@@ -4,6 +4,8 @@ Designed to make it easy to make beautiful photo-essays with other embedded medi
 
 The images, videos, and embeds are fully responsive. They always stretch to be fullscreen, whether on an enormous display, or an iPhone. Simply provide your URLs, embeds, and text, and know that your story can be seen on any device. You can [see a basic demo here](http://ejfox.github.com/sStory/) or an example story based on [OWS's 1 year anniversary in NYC](http://ejfox.github.com/sStory/nyc_s17.html).
 
+sStory [also has a tool to aid in creating your JSON](http://ejfox.github.com/sStory/make_story.html) based on images / captions / embeds you provide. 
+
 sStory allows you to create sections made of:
 
 1. Large image 
@@ -89,7 +91,7 @@ Once you've created the objecrs for each of your sections, creating the sStory i
 
 ### How to add sections to sStory
 
-A tool to make it easy to create the JSON file to power your sStory is currently in the works. Adding content to it is relatively simple:
+You can use the [sStory make_story tool](http://ejfox.github.com/sStory/make_story.html) to easily create your sStory if you don't want to get your hands messy with JSON. 
 
 #### Images 
 You simply need the URL of the image. For images with long captions (image3) you can include any HTML that you like in the caption. 
