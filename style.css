@@ -259,7 +259,7 @@ body {
 
   margin-left: auto;
   margin-right: auto;
-  background-image: url(whitey.png);
+  background-image: url(images/whitey.png);
   background-repeat: repeat;
 }
 a:link {
@@ -336,15 +336,20 @@ a:visited {
   overflow: auto;
   line-height: 1.55em;
 }
-.image3 .imagecaption p {
-  margin-top: 1em;
-}
 .image3 .imagecaption h1,
 .image3 .imagecaption h2,
 .image3 .imagecaption h3,
 .image3 .imagecaption h4,
 .image3 .imagecaption h5 {
-  text-shadow: rgba(250, 246, 246, 0.92) 0px 2px 3px;
+  color: black;
+  text-shadow: rgba(250, 246, 246, 0.92) 0px 2px 2px;
+}
+.image3 .imagecaption ol,
+.image3 .imagecaption ul {
+  margin: 32px 8px;
+}
+.image3 .imagecaption p {
+  margin-top: 1em;
 }
 .map {
   display: none;
@@ -409,6 +414,30 @@ Elastic videos
   width: 100%;
   height: 100%;
 }
+#error-bar {
+  /*background-color: #ff9300;*/
+
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 147, 0, 0.7)), to(rgba(214, 34, 0, 0.8)));
+  background-image: -webkit-linear-gradient(top, rgba(255, 147, 0, 0.7), rgba(214, 34, 0, 0.8));
+  background-image: -moz-linear-gradient(top, rgba(255, 147, 0, 0.7), rgba(214, 34, 0, 0.8));
+  background-image: -o-linear-gradient(top, rgba(255, 147, 0, 0.7), rgba(214, 34, 0, 0.8));
+  background-image: -ms-linear-gradient(top, rgba(255, 147, 0, 0.7), rgba(214, 34, 0, 0.8));
+  background-image: linear-gradient(top, rgba(255, 147, 0, 0.7), rgba(214, 34, 0, 0.8));
+  filter: progid:dximagetransform.microsoft.gradient(GradientType=0, StartColorStr='#ff9300', EndColorStr='#d62200');
+  font-weight: bold;
+  color: black;
+  text-shadow: 0 1px 1px rgba(240, 240, 240, 0.6);
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  padding: 2px;
+  -webkit-transition: all 0.8s ease-out;
+  -moz-transition: all 0.8s ease-out;
+  -o-transition: all 0.8s ease-out;
+  transition: all 0.8s ease-out;
+}
 /* --- Builder stuff --- */
 #builder {
   font-size: 12px;
@@ -416,7 +445,7 @@ Elastic videos
   background-color: rgba(242, 242, 244, 0.92);
   border-radius: 4px;
   width: 344px;
-  height: 528px;
+  max-height: 528px;
   position: fixed;
   left: 18px;
   top: 18px;
@@ -426,14 +455,33 @@ Elastic videos
   -webkit-box-shadow: 0 3px 14px rgba(0, 0, 0, 0.72);
   -moz-box-shadow: 0 3px 14px rgba(0, 0, 0, 0.72);
   box-shadow: 0 3px 14px rgba(0, 0, 0, 0.72);
-  background-image: url(whitey.png);
-  background-repeat: repeat;
+  /*background-color: #ffffff;*/
+
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(rgba(214, 214, 214, 0.8)));
+  background-image: -webkit-linear-gradient(top, #ffffff, rgba(214, 214, 214, 0.8));
+  background-image: -moz-linear-gradient(top, #ffffff, rgba(214, 214, 214, 0.8));
+  background-image: -o-linear-gradient(top, #ffffff, rgba(214, 214, 214, 0.8));
+  background-image: -ms-linear-gradient(top, #ffffff, rgba(214, 214, 214, 0.8));
+  background-image: linear-gradient(top, #ffffff, rgba(214, 214, 214, 0.8));
+  filter: progid:dximagetransform.microsoft.gradient(GradientType=0, StartColorStr='#ffffff', EndColorStr='#d6d6d6');
+  border: 1px inset rgba(240, 240, 250, 0.2);
+  border-bottom: 1px inset rgba(10, 10, 10, 0.4);
+}
+#builder #add-section {
+  margin-bottom: 12px;
+}
+#builder #add-section table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 88%;
 }
 #builder h2 {
   font-size: 18px;
+  line-height: 1.3em;
   text-align: center;
-  padding: 8px;
-  margin-top: 0;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 8px;
   padding-top: 4px;
 }
 #builder h4 {
@@ -499,10 +547,25 @@ textarea,
 select {
   -webkit-appearance: none;
 }
+option {
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  padding-left: 30px;
+}
+input,
+textarea,
+select {
+  width: 100%;
+}
 input,
 textarea,
 select,
 button {
+  opacity: 0.6;
+  -webkit-transition: all 0.22s ease-out;
+  -moz-transition: all 0.22s ease-out;
+  -o-transition: all 0.22s ease-out;
+  transition: all 0.22s ease-out;
   border: 1px solid #555;
   padding: 4px 8px;
   font-size: 15px;
@@ -519,7 +582,21 @@ button {
   -webkit-border-radius: 0.5em;
   outline: none;
 }
+input:hover,
+textarea:hover,
+select:hover,
+button:hover {
+  opacity: 0.9;
+}
+input:active,
+textarea:active,
+select:active,
+button:active {
+  opacity: 1;
+  -webkit-box-shadow: 0px -2px 1px rgba(250, 250, 250, 0.65);
+}
 select {
+  width: 100%;
   background-color: #f6f6f6;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#cccccc));
   background-image: -webkit-linear-gradient(top, #f6f6f6, #cccccc);
@@ -576,12 +653,6 @@ input[type=radio] {
 input[type=radio] {
   -webkit-border-radius: 2em;
   /* Make radios round */
-
-}
-input[type=checkbox]:checked {
-  background: url("data:image/png,%89PNG[...]") no-repeat center center;
-  -webkit-background-size: 28px 28px;
-  /* shrink high resolution background */
 
 }
 /*		Tablet Layout: 768px.
@@ -663,6 +734,9 @@ px      68    160    252    */
   .timeline p {
     font-size: 14px !important;
     line-height: 1.2em;
+  }
+  #builder {
+    width: 252px;
   }
 }
 /*		Wide Mobile Layout: 480px.

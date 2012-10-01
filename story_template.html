@@ -57,54 +57,6 @@
 </head>
 
 <body>
-    
-<div id="error-bar" style="opacity: 0;">
-
-</div>
-<div id="builder">
-<div id="builder-toggle">
-    <button id="builer-toggle-button">Hide</button>
-</div>
-<div id="builder-content">
-<h2>Create a story</h2>
-<div id="add-section">
-    
-<table border="0" cellspacing="5" cellpadding="5">
-    <tr><th><label for="title">Title: </label></th><td><input type="text" name="title" value="" id="title"></td></tr>
-    <tr id="url-wrapper"><th><label for="url">URL: </label></th> <td><input type="text" name="url" value="" id="url"></td></tr>
-    <tr id="embed-wrapper" style="display: none;"><th><label for="embed">Embed code: </label></th> <td><input type="text" name="embed" value="" id="embed"></td></tr>
-    <tr id="caption" style="display: none;"><th>Caption: </th> <td><textarea name="Caption"  rows="5" style="width: 100%;"></textarea></td></tr>
-    <tr><th>Type:</th> 
-    <td>
-        <select name="type" id="type" onchange="correctInputs()" size="1">
-        <option value="image">Image</option>
-        <option value="image2">Image + Short Caption</option>
-        <option value="image3">Image + Long Caption</option>    
-        <option value="vimeo">Vimeo</option>
-        <option value="soundcloud">Soundcloud</option>
-        <option value="timeline">Timeline</option>                
-        </select>
-    </td>
-    </tr>
-    <tr><td></td><td><button onclick="submitNewSection()" id="submit-button">+ Add</button>
-        <button onclick="getJsonCode()" id="json-button">JSON</button>
-    </td></tr>
-</table>
-
-</div>
-
-<div id="section-summary">
-    <ol>
-
-        
-    </ol>
-<textarea id="json-code" style="width: 100%; display: none">
-    
-</textarea>
-</div>
-</div>
-</div>
-
 <div id="nav">
 	
 </div>
@@ -127,66 +79,34 @@
 <script id="image3" type="text/html">
 <h2 class="{{ shade }}">{{ title }}</h2> 
 <!-- <img src="{{ url }}" title="{{ caption }}" style="height: {{ height }};" /> -->
-<div class="imagecaption longcaption"><p>{{{ caption }}}</p></div>
+<div class="imagecaption longcaption"><p>{{{ text }}}</p></div>
 </script>
 
 <script id="vimeo" type="text/html">
 <div class="video-container">
-<iframe src="{{ url }}" width="400" height="300" frameborder="0" wmode="transparent" webkitAllowFullScreen mozallowfullscreen allowFullScreen><param name="wmode" value="opaque"></iframe>		
+<iframe src="{{ url }}" width="400" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>		
 </div>
-{{#caption}}
-<div class="video-caption">
-{{caption}}
-</div>
-{{/caption}}
 </script>
 
 <script id="soundcloud" type="text/html">
 <div class="soundcloud-container">
 {{#title}}
-<h2 class="{{ shade }}">{{ title }}</h2> 
+<h2>{{ title }}</h2> 
 {{/title}}
 		{{{ embed }}}
 </div>
-</script>
-
-<script id="summary" type="text/html">
-<li>
-    <div class="summary-header">
-        <h4>{{title}}</h4>
-        <div class="sectiontype">
-            {{type}}
-        </div>
-    </div>
-    <div class="summary-content">
-        <div class="image-url">
-            {{url}}
-        </div>
-        <div class="sectiontext">
-            {{caption}}
-        </div>
-    </div>
-</li>
 </script>
 
 
 <script type="text/javascript" charset="utf-8">
 	
 	
+// Place section code after the equal sign 
+ var sections = [{"title":"I learned a lot at Occupy Oakland","type":"image","url":"http://farm8.staticflickr.com/7141/6782751111_36cdfa3a49_b.jpg","caption":""},{"title":"I saw some beautiful things","type":"image2","url":"http://farm7.staticflickr.com/6102/6307734414_2c4e815e4a_o.jpg","caption":"Protestors stand atop trucks during the November 2nd. General Strike."},{"title":"And met some brave people","type":"image3","url":"http://farm8.staticflickr.com/7020/6786839487_73602f123a_o.jpg","caption":"<h4>There are a few things I learned from Occupy Oakland</h4>\n<p>I learned the importance of creating a community. I learned the faces of my neighbors, and it felt good to 'know' people in a city I'd just moved to. But besides that, I learned some basic things.</p>\n\n<ol><li>You can always get arrested. <strong>No matter what</strong>\n</li><li>You should probably carry a gas mask. \n</li><li>There's never a dull moment.\n</li></ol>\n<p>I learned to always be aware of my surroundings. To always watch where the police line was moving. They arrested first and asked questions later. A lot of people who had been arrested by OPD spoke of being in the wrong place at the wrong time.</p>"},{"title":"Occupy Oakland used a modified consensus model, which you can hear in action here:","type":"soundcloud","embed":"<iframe width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" src=\"http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F37934185&show_artwork=true\"></iframe>"}]
+	
+	
 $(document).ready(function(){
-//	sStory(examplesections);
-    sections = [];
-    
-    $('#builder-toggle button').on('click', function(){
-        $('#builder-content').toggle();
-        
-        if ($('#builder-toggle button').text() == "Hide") {
-            $(this).text("Show")
-        }
-        else {
-            $(this).text("Hide")            
-        }
-    })
+	sStory(sections);
 });
 
 	

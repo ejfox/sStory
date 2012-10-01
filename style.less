@@ -297,7 +297,7 @@ body {
 	-webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
 	margin-left: auto;
 	margin-right: auto;
-	background-image: url(whitey.png);
+	background-image: url(images/whitey.png);
 	background-repeat: repeat;
 }
 a {
@@ -374,22 +374,25 @@ a {
 	right: 48px;
 //	text-align: center;
 }
-.image3 .imagecaption {
-	position: absolute;
-	bottom: 92px;
-	right: 92px;
-	height: 344px;
-	overflow: auto;
-	line-height: 1.55em;
-	
-	p {
-		margin-top: 1em;
-	}
-}
 .image3 {
 	.imagecaption {
+	    position: absolute;
+    	bottom: 92px;
+    	right: 92px;
+    	height: 344px;
+    	overflow: auto;
+    	line-height: 1.55em;
+    	
 	    h1,h2,h3,h4,h5 {
-    		text-shadow:rgba(250, 246, 246, 0.92) 0px 2px 3px;		
+	        color: black;
+    		text-shadow:rgba(250, 246, 246, 0.92) 0px 2px 2px;		
+    	}
+    	ol, ul {
+    	    margin: 32px 8px;
+    	}
+
+    	p {
+    		margin-top: 1em;
     	}
 	}
 	
@@ -473,6 +476,31 @@ Elastic videos
 }
 
 
+#error-bar {
+    /*background-color: #ff9300;*/
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 147, 0, 0.70)), to(rgba(214, 34, 0, 0.80)));
+    background-image: -webkit-linear-gradient(top, rgba(255, 147, 0, 0.70), rgba(214, 34, 0, 0.80));
+    background-image: -moz-linear-gradient(top, rgba(255, 147, 0, 0.70), rgba(214, 34, 0, 0.80));
+    background-image: -o-linear-gradient(top, rgba(255, 147, 0, 0.70), rgba(214, 34, 0, 0.80));
+    background-image: -ms-linear-gradient(top, rgba(255, 147, 0, 0.70), rgba(214, 34, 0, 0.80));
+    background-image: linear-gradient(top, rgba(255, 147, 0, 0.70), rgba(214, 34, 0, 0.80));
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ff9300', EndColorStr='#d62200');
+
+    font-weight: bold;
+    color: black;
+    text-shadow: 0 1px 1px rgba(240,240,240,0.6);
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    padding: 2px;
+    
+    -webkit-transition:all .8s ease-out ;       
+       -moz-transition:all .8s ease-out ;
+         -o-transition:all .8s ease-out ;
+            transition:all .8s ease-out ; 
+}
 /* --- Builder stuff --- */
 
 #builder {
@@ -481,7 +509,8 @@ Elastic videos
     background-color: rgba(242,242,244,0.92);
     border-radius: 4px;
     width: 344px;
-    height: 528px;
+//    height: 528px;
+    max-height: 528px;
     position: fixed;
     left: 18px;
     top: 18px;
@@ -490,16 +519,39 @@ Elastic videos
     padding: 8px 12px;
     
     .drop-shadow(0, 3px, 14px, 0.72);
-    background-image: url(whitey.png);
-	background-repeat: repeat;
+//  background-image: url(images/whitey.png);
+//	background-repeat: repeat;
 //	background-attachment: fixed;
+
+    /*background-color: #ffffff;*/
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 1.00)), to(rgba(214, 214, 214, 0.80)));
+    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 1.00), rgba(214, 214, 214, 0.80));
+    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 1.00), rgba(214, 214, 214, 0.80));
+    background-image: -o-linear-gradient(top, rgba(255, 255, 255, 1.00), rgba(214, 214, 214, 0.80));
+    background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 1.00), rgba(214, 214, 214, 0.80));
+    background-image: linear-gradient(top, rgba(255, 255, 255, 1.00), rgba(214, 214, 214, 0.80));
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ffffff', EndColorStr='#d6d6d6');
     
+    border:        1px inset rgba(240,240,250,0.2);
+    border-bottom: 1px inset rgba(10,10,10,0.4);
+    
+    #add-section {
+        margin-bottom: 12px;
+        
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            width: 88%;
+        }
+    }
     
     h2 {
         font-size: 18px;
+        line-height: 1.3em;
         text-align: center;
-        padding: 8px;
-        margin-top: 0;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 8px;
         padding-top: 4px;
     }
     h4 {
@@ -571,13 +623,31 @@ Elastic videos
 input, textarea, select {
    -webkit-appearance: none;
  }
- 
+ option {
+     background-repeat:no-repeat;
+     background-position:bottom left;
+     padding-left:30px;
+ }
+ input, textarea, select {
+     width: 100%;
+ }
  input, textarea, select, button {
+    opacity: 0.6;
+    -webkit-transition:all .22s ease-out ;       
+       -moz-transition:all .22s ease-out ;
+         -o-transition:all .22s ease-out ;
+            transition:all .22s ease-out ; 
+    &:hover {
+        opacity: 0.9;
+    }
+    &:active {
+        opacity: 1;
+        -webkit-box-shadow: 0px -2px 1px rgba(250,250,250,0.65);        
+    }
     border: 1px solid #555;
     padding: 4px 8px;
     font-size: 15px;
 //    line-height: 1.2em;
-//    width: 80%;
 
     background-color: #ebebeb;
     background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(235, 235, 235)), to(rgb(226, 226, 226)));
@@ -597,6 +667,7 @@ input, textarea, select {
   }
   
   select {
+      width: 100%;
       background-color: #f6f6f6;
       background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(246, 246, 246)), to(rgb(204, 204, 204)));
       background-image: -webkit-linear-gradient(top, rgb(246, 246, 246), rgb(204, 204, 204));
@@ -666,11 +737,6 @@ input, textarea, select {
    input[type=radio] {
       -webkit-border-radius: 2em; /* Make radios round */
     }
-    
-    input[type=checkbox]:checked {
-       background: url("data:image/png,%89PNG[...]") no-repeat center center;
-       -webkit-background-size: 28px 28px; /* shrink high resolution background */
-     }
 
 /*		Tablet Layout: 768px.
 		Gutters: 24px.
@@ -767,7 +833,12 @@ px      68    160    252    */
         font-size: 0.7em !important;
         height: 600px;
     }
+
+    #builder {
+        width: 252px;
+    }
 }
+
 
 
 
