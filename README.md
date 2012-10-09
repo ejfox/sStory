@@ -1,6 +1,6 @@
 ### S-Story makes it easy to make full-browser-width magazine-style mini-sites. 
 
-Designed to make it easy to make beautiful photo-essays with other embedded media types like video, audio, or timelines.
+Designed to make it easy to make beautiful photo-essays with other embedded media types like video, audio, or timelines. [Watch an introductory video](https://vimeo.com/50500145).
 
 The images, videos, and embeds are fully responsive. They always stretch to be fullscreen, whether on an enormous display, or an iPhone. Simply provide your URLs, embeds, and text, and know that your story can be seen on any device. You can [see a basic demo here](http://ejfox.github.com/sStory/) or an example story based on [OWS's 1 year anniversary in NYC](http://ejfox.github.com/sStory/nyc_s17.html).
 
@@ -13,7 +13,9 @@ sStory allows you to create sections made of:
 3. Large image with paragraphs of text
 4. Embedded video from Vimeo
 5. Embedded audio from SoundCloud
-7. Embedded verite timeline
+6. Embedded verite timeline
+7. Plain text
+
 
 Coming soon:
 
@@ -21,32 +23,39 @@ Coming soon:
 
 Sections are passed to S-Story in an array of objects. For example:
 
-    var sections = [{
-        title: "The beginning (Large image)"
+    var sections = [
+    {
+    	title: "Text-only"
+    	,type: "text"
+    	,text: "Lorem ipsum dolor sit etc… use for long text, please."
+    }
+    ,{
+        title: "Large Image"
         ,type: "image"
         ,url: "http://large-image-url.com"
     },
     {
-        title: "Part 2 (Large image w/ caption)"
+        title: "Large Image with Caption"
         ,type: "image2"
         ,url: "http://large-image-url.com"
         ,caption: "Caption string goes here."
     },
     {
-        title: "Part 3 (Large image w/ paragraphs)"
+        title: "Large Image with Paragraphs"
         ,type: "image3"
         ,url: "http://large-image-url.com"
-        ,text: "<h3>Lorem ipsum dolor sit amet</h3> <p>consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
+        ,caption: "<h3>Lorem ipsum dolor sit amet</h3> <p>consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
     },
     {
-      title: "Part 4 (Embedded Vimeo video)"
+      title: "Embedded Vimeo Video"
       ,type: "vimeo"
-      ,url: "http://vimeo-url.com"
+      ,url: "http://player.vimeo.com/video/36256273?byline=0&portrait=0&color=ffffff"
+      ,caption: "Even videos can have captions, though not often."
     },
     {
         title: "Part 5 (Embedded Soundcloud audio)"
         ,type: "soundcloud"
-        ,url: "http://soundcloud-url.com"
+        ,embed: "<iframe width='100%' height='166' scrolling='no' frameborder='no' src='http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F37934185&amp;auto_play=false&amp;show_artwork=false&amp;color=000000'></iframe>"
     },
     {
         title: "Timeline section (Verite timeline)"
@@ -54,7 +63,7 @@ Sections are passed to S-Story in an array of objects. For example:
         ,url: "https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dExOOVg4b29FWG5nOURTLTlCbDhsTVE&output=html"
     },
 	{
-	    title: "TODO:Map section (Leaflet map)"
+	    title: "TODO: Map section (Leaflet map)"
 	    ,type: "map"
 	    ,locations: [
 	    {
@@ -91,7 +100,7 @@ Once you've created the objecrs for each of your sections, creating the sStory i
 
 ### How to add sections to sStory
 
-You can use the [sStory make_story tool](http://ejfox.github.com/sStory/make_story.html) to easily create your sStory if you don't want to get your hands messy with JSON. 
+You can use the [sStory make_story tool](http://ejfox.github.com/sStory/make_story.html) to easily create your sStory if you don't want to get your hands messy with JSON. [This video shows how to do that.](https://vimeo.com/50500145)
 
 #### Images 
 You simply need the URL of the image. For images with long captions (image3) you can include any HTML that you like in the caption. 
