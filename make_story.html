@@ -82,7 +82,8 @@
         <option value="image3">Image + Long Caption</option>    
         <option value="vimeo">Vimeo</option>
         <option value="soundcloud">Soundcloud</option>
-        <option value="timeline">Timeline</option>                
+        <option value="timeline">Timeline</option>
+        <option value="text">Text</option>                                  
         </select>
     </td>
     </tr>
@@ -149,6 +150,16 @@
 		{{{ embed }}}
 </div>
 </script>
+
+<script id="text" type="text/html">
+{{#title}}
+<h2>{{ title }}</h2> 
+{{/title}}
+<div class="text-container">
+{{{ text }}}
+</div>
+</script>
+
 
 <script id="summary" type="text/html">
 <li>

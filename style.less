@@ -297,8 +297,8 @@ body {
 	-webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
 	margin-left: auto;
 	margin-right: auto;
-	background-image: url(images/whitey.png);
-	background-repeat: repeat;
+//	background-image: url(images/whitey.png);
+//	background-repeat: repeat;
 }
 a {
 	&:link{
@@ -427,29 +427,45 @@ a {
         text-shadow: none;
         margin-bottom: 8px;
         
-        text-shadow:rgba(250, 246, 246, 0.92) 0px 2px 3px;		
-		
+        text-shadow:rgba(250, 246, 246, 0.92) 0px 2px 3px;				
     }
 }
+.text {
+    h1,h2,h3,h4,h5 {
+        color: black;
+        text-shadow: transparent 0 0 0;
+    }
+}
+.text-container {
+    margin-top:24px;
+    padding-bottom: 24px;
+    width: 52%;
+    line-height: 1.5em;
+    margin-left: auto; margin-right: auto;
+}
+
 .vimeo {
     padding: 0;
-    overflow: auto;
-    height: @sectionheight+32;
+//    overflow: auto;
+    height: @sectionheight - 105;
 }
 .video-caption {
-//    height: 200px;
-//    position: absolute;
-//    bottom: 0;
+    max-height: 344px;
+    overflow: auto;
+    position: absolute;
+    bottom: 48px;
+    right: 10px;
 //    left: 50%;
 //    margin-left: -218px;
-    margin-left: auto;
-    margin-right: auto;
+//    margin-left: auto;
+//    margin-right: auto;
     margin-top: 8px;	
     margin-bottom: 8px;
     z-index: 999999; // Is this enough?
     width: 436px;
   
-    background-color: rgba(250,250,250,0.88);	
+    background-color: rgba(10,10,14,0.78);	
+    color: white;
 	padding: 12px 22px;
     border-radius: 4px;
 }
@@ -457,11 +473,10 @@ a {
 Elastic videos
 */
 .video-container {
-//  height: @sectionheight+300;    
+  height: 100%;    
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 30px;
-  height: 0;
   overflow: hidden;
 }
 .vimeo iframe,

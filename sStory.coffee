@@ -61,7 +61,11 @@ correctInputs = ->
         when "timeline"
             $('#embed-wrapper').hide()        
             $('#caption').hide()
-            $('#url-wrapper').show();                        
+            $('#url-wrapper').show();       
+        when "text"
+            $('#embed-wrapper').hide()        
+            $('#caption').show()
+            $('#url-wrapper').hide();                         
             
 getJsonCode = ->
     $('#json-code').val(JSON.stringify(sections)).show()
@@ -84,7 +88,7 @@ submitNewSection = ->
     if section.title is ""
         $("#error-bar").html("Every section needs a title, could you add one?").css("opacity", 1)
         return false
-    else if section.url is ""
+    else if section.url is "" and section.type isnt "text"
         $("#error-bar").html("Looks like you forgot to add the URL.").css("opacity", 1)
         return false
     else if section.type is "image2" and section.caption is ""
@@ -92,6 +96,9 @@ submitNewSection = ->
         return false
     else if section.type is "image3" and section.caption is ""
         $("#error-bar").html("This section type needs a caption.").css("opacity", 1)
+        return false
+    else if section.type is "text" and section.caption is ""
+        $("#error-bar").html("I think you may have forgotten your text!").css("opacity", 1)
         return false
     
     if section.type is "image" or section.type is "image2" or section.type is "image3"
@@ -114,6 +121,12 @@ submitNewSection = ->
             type: section.type
             embed: section.embed
         })
+    else if section.type is "text"
+        sections.push({
+            title: section.title
+            type: section.type
+            text: section.caption
+        })    
 
     $("#container").html("");
     $("#section-summary ol").html("");
@@ -133,20 +146,17 @@ sStory = (sections) ->
 				)
         .html((d,i) ->
             switch d.type
+                when "text"
+                    html = ich.text(d, true)
                 when "image"
-#                    console.log "image"
                     html = ich.image(d, true)
                 when "image2"
-#                    console.log "image2"
                     html = ich.image2(d, true)
                 when "image3"
-#                    console.log "image3"
                     html = ich.image3(d, true)
                 when "vimeo"
-#                    console.log "vimeo"				
                     html = ich.vimeo(d, true)										
                 when "soundcloud"
-#                    console.log "soundcloud"
                     html = ich.soundcloud(d, true)                    
                 when "map"
                     console.log "map"

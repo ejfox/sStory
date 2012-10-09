@@ -66,6 +66,10 @@ correctInputs = function() {
       $('#embed-wrapper').hide();
       $('#caption').hide();
       return $('#url-wrapper').show();
+    case "text":
+      $('#embed-wrapper').hide();
+      $('#caption').show();
+      return $('#url-wrapper').hide();
   }
 };
 
@@ -86,7 +90,7 @@ submitNewSection = function() {
   if (section.title === "") {
     $("#error-bar").html("Every section needs a title, could you add one?").css("opacity", 1);
     return false;
-  } else if (section.url === "") {
+  } else if (section.url === "" && section.type !== "text") {
     $("#error-bar").html("Looks like you forgot to add the URL.").css("opacity", 1);
     return false;
   } else if (section.type === "image2" && section.caption === "") {
@@ -94,6 +98,9 @@ submitNewSection = function() {
     return false;
   } else if (section.type === "image3" && section.caption === "") {
     $("#error-bar").html("This section type needs a caption.").css("opacity", 1);
+    return false;
+  } else if (section.type === "text" && section.caption === "") {
+    $("#error-bar").html("I think you may have forgotten your text!").css("opacity", 1);
     return false;
   }
   if (section.type === "image" || section.type === "image2" || section.type === "image3") {
@@ -116,6 +123,12 @@ submitNewSection = function() {
       type: section.type,
       embed: section.embed
     });
+  } else if (section.type === "text") {
+    sections.push({
+      title: section.title,
+      type: section.type,
+      text: section.caption
+    });
   }
   $("#container").html("");
   $("#section-summary ol").html("");
@@ -132,6 +145,9 @@ sStory = function(sections) {
   }).html(function(d, i) {
     var html;
     switch (d.type) {
+      case "text":
+        html = ich.text(d, true);
+        break;
       case "image":
         html = ich.image(d, true);
         break;

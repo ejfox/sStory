@@ -259,8 +259,6 @@ body {
 
   margin-left: auto;
   margin-right: auto;
-  background-image: url(images/whitey.png);
-  background-repeat: repeat;
 }
 a:link {
   color: #10206d;
@@ -379,19 +377,38 @@ a:visited {
   margin-bottom: 8px;
   text-shadow: rgba(250, 246, 246, 0.92) 0px 2px 3px;
 }
-.vimeo {
-  padding: 0;
-  overflow: auto;
-  height: 844px;
+.text h1,
+.text h2,
+.text h3,
+.text h4,
+.text h5 {
+  color: black;
+  text-shadow: transparent 0 0 0;
 }
-.video-caption {
+.text-container {
+  margin-top: 24px;
+  padding-bottom: 24px;
+  width: 52%;
+  line-height: 1.5em;
   margin-left: auto;
   margin-right: auto;
+}
+.vimeo {
+  padding: 0;
+  height: 707px;
+}
+.video-caption {
+  max-height: 344px;
+  overflow: auto;
+  position: absolute;
+  bottom: 48px;
+  right: 10px;
   margin-top: 8px;
   margin-bottom: 8px;
   z-index: 999999;
   width: 436px;
-  background-color: rgba(250, 250, 250, 0.88);
+  background-color: rgba(10, 10, 14, 0.78);
+  color: white;
   padding: 12px 22px;
   border-radius: 4px;
 }
@@ -399,10 +416,10 @@ a:visited {
 Elastic videos
 */
 .video-container {
+  height: 100%;
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 30px;
-  height: 0;
   overflow: hidden;
 }
 .vimeo iframe,
