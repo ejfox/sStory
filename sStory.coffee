@@ -11,6 +11,16 @@ makeTimeline = (d,i) ->
 	$(document).ready(->
 	    createStoryJS(timelineoptions)
 	)
+	
+	
+makeOpenGraph = (sections) ->
+    for section in sections
+        if section.type is 'image' or section.type is 'image2' or section.type is 'image3'
+            $("head").prepend($('<meta />').attr("property", "og:title").attr("content", section.title))
+            $("head").prepend($('<meta />').attr("property", "og:image").attr("content", section.url))
+            return true
+        else
+            return false
 		
 makeBuilder = (sections) ->
     builder = d3.select("#section-summary ol")
@@ -134,8 +144,10 @@ submitNewSection = ->
     makeBuilder(sections)
 
             
-sStory = (sections) ->    
-
+sStory = (sections) ->
+    
+    
+    makeOpenGraph(sections)
     makeBuilder(sections)
     container = d3.select("#container")
     container.selectAll('.section')
