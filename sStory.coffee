@@ -10,8 +10,17 @@ makeTimeline = (d,i) ->
 	}
 	$(document).ready(->
 	    createStoryJS(timelineoptions)
-	)
+	)	
 	
+
+makeNavbar = (sections) ->    
+    for section in sections
+        if section.title isnt undefined
+            title = section.title.replace(/(<([^>]+)>)/ig,"");
+        else 
+            title = "No title"
+            
+        $("#nav").append($("<span class='nav-section'>"+title+"</span>"))
 	
 makeOpenGraph = (sections) ->
     for section in sections
@@ -149,6 +158,8 @@ sStory = (sections) ->
     
     makeOpenGraph(sections)
     makeBuilder(sections)
+    makeNavbar(sections)
+    
     container = d3.select("#container")
     container.selectAll('.section')
     .data(sections)
