@@ -13,14 +13,25 @@ makeTimeline = (d,i) ->
 	)	
 	
 
-makeNavbar = (sections) ->    
+makeNavbar = (sections) ->
+    sectioncount = 0
+    
     for section in sections
+        sectioncount++
+        
+        section.count = sectioncount
         if section.title isnt undefined
+            # Remove any HTML from the title
             title = section.title.replace(/(<([^>]+)>)/ig,"");
         else 
             title = "No title"
             
-        $("#nav").append($("<span class='nav-section'>"+title+"</span>"))
+        if section.type is "image" or section.type is "image2" or section.type is "image3"
+            section.type = "image"
+            
+        $("#nav").append($(ich.navbarsection(section)))
+            
+            
 	
 makeOpenGraph = (sections) ->
     for section in sections
@@ -164,10 +175,12 @@ sStory = (sections) ->
     container.selectAll('.section')
     .data(sections)
     .enter().append("div")
+        .attr("id", (d,i) -> "section-"+(i+1))
         .attr("class", (d,i) ->
 	 			return "section "+d.type+" "+d.type+i
 				)
         .html((d,i) ->
+            
             switch d.type
                 when "text"
                     html = ich.text(d, true)

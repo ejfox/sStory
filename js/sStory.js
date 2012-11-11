@@ -18,16 +18,22 @@ makeTimeline = function(d, i) {
 };
 
 makeNavbar = function(sections) {
-  var section, title, _i, _len, _results;
+  var section, sectioncount, title, _i, _len, _results;
+  sectioncount = 0;
   _results = [];
   for (_i = 0, _len = sections.length; _i < _len; _i++) {
     section = sections[_i];
+    sectioncount++;
+    section.count = sectioncount;
     if (section.title !== void 0) {
       title = section.title.replace(/(<([^>]+)>)/ig, "");
     } else {
       title = "No title";
     }
-    _results.push($("#nav").append($("<span class='nav-section'>" + title + "</span>")));
+    if (section.type === "image" || section.type === "image2" || section.type === "image3") {
+      section.type = "image";
+    }
+    _results.push($("#nav").append($(ich.navbarsection(section))));
   }
   return _results;
 };
@@ -171,7 +177,9 @@ sStory = function(sections) {
   makeBuilder(sections);
   makeNavbar(sections);
   container = d3.select("#container");
-  return container.selectAll('.section').data(sections).enter().append("div").attr("class", function(d, i) {
+  return container.selectAll('.section').data(sections).enter().append("div").attr("id", function(d, i) {
+    return "section-" + (i + 1);
+  }).attr("class", function(d, i) {
     return "section " + d.type + " " + d.type + i;
   }).html(function(d, i) {
     var html;

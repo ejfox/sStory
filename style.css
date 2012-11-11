@@ -377,6 +377,12 @@ a:visited {
   margin-bottom: 8px;
   text-shadow: rgba(250, 246, 246, 0.92) 0px 2px 3px;
 }
+.text {
+  height: auto;
+  -webkit-box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.55);
+}
 .text h1,
 .text h2,
 .text h3,
@@ -392,6 +398,10 @@ a:visited {
   line-height: 1.5em;
   margin-left: auto;
   margin-right: auto;
+  max-width: 620px;
+}
+.text-container p {
+  margin-top: 1em;
 }
 .vimeo {
   padding: 0;
@@ -457,24 +467,52 @@ Elastic videos
 }
 /* --- Navbar stuff --- */
 #nav {
-  width: 100%;
+  border-radius: 4px;
+  left: -194px;
+  width: 224px;
   font-size: 12px;
   line-height: 1.25em;
   position: fixed;
   top: 0;
-  left: 0;
   z-index: 99999;
-  background-color: rgba(250, 250, 250, 0.85);
+  background-color: rgba(20, 20, 20, 0.9);
   padding: 2px 1px;
+  opacity: 0.82;
+  -webkit-transition: opacity 0.3s ease-out 0.2s;
+  -moz-transition: opacity 0.3s ease-out 0.2s;
+  -o-transition: opacity 0.3s ease-out 0.2s;
+  transition: opacity 0.3s ease-out 0.2s;
+  -webkit-transition: all .16s linear ;
+  -moz-transition: all .16s linear ;
+  -o-transition: all .16s linear ;
+  transition: all .16s linear ;
+}
+#nav:hover {
+  opacity: 1;
+  left: -4px;
+  -webkit-transition: all 0.45s ease-out 1.2s;
+  -moz-transition: all 0.45s ease-out 1.2s;
+  -o-transition: all 0.45s ease-out 1.2s;
+  transition: all 0.45s ease-out 1.2s;
 }
 .nav-section {
-  display: inline-block;
+  min-height: 24px;
+  position: relative;
+  cursor: pointer;
+  display: block;
   color: black;
   background-color: #999;
   margin: 2px 2px;
   margin-right: 4px;
   padding: 2px 4px;
   border-radius: 2px;
+  padding-right: 24px;
+}
+.nav-section .type-icon {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  margin-top: -9px;
 }
 /* --- Builder stuff --- */
 #builder {
@@ -775,6 +813,17 @@ px      68    160    252    */
   }
   #builder {
     width: 252px;
+  }
+  .text-container {
+    margin-top: 18px;
+    padding-bottom: 18px;
+    width: 75%;
+    line-height: 1.4em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .text-container p {
+    margin-top: 1em;
   }
 }
 /*		Wide Mobile Layout: 480px.
