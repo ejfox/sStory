@@ -18,21 +18,18 @@ makeTimeline = function(d, i) {
 };
 
 makeNavbar = function(sections) {
-  var section, sectioncount, title, _i, _len, _results;
+  var nav_sections, section, sectioncount, title, _i, _len, _results;
   sectioncount = 0;
+  nav_sections = sections;
   _results = [];
-  for (_i = 0, _len = sections.length; _i < _len; _i++) {
-    section = sections[_i];
+  for (_i = 0, _len = nav_sections.length; _i < _len; _i++) {
+    section = nav_sections[_i];
     sectioncount++;
     section.count = sectioncount;
     if (section.title !== void 0) {
-      console.log("TITLE!", section.title.replace(/<(?:.|\n)*?>/gm, ''));
       section.title = section.title.replace(/<(?:.|\n)*?>/gm, '');
     } else {
       title = "No title";
-    }
-    if (section.type === "image" || section.type === "image2" || section.type === "image3") {
-      section.type = "image";
     }
     _results.push($("#nav").append($(ich.navbarsection(section))));
   }
@@ -210,6 +207,7 @@ sStory = function(sections) {
         html = "<h2>" + d.title + "</h2> ";
         html += "<div id='timeline" + i + "'></div>";
         makeTimeline(d, i);
+        console.log("timeline");
     }
     return html;
   }).style("background-image", function(d, i) {

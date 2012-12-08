@@ -15,20 +15,17 @@ makeTimeline = (d,i) ->
 
 makeNavbar = (sections) ->
     sectioncount = 0
+    nav_sections = sections
 
-    for section in sections
+    for section in nav_sections
         sectioncount++
 
         section.count = sectioncount
         if section.title isnt undefined
-            console.log "TITLE!", section.title.replace(/<(?:.|\n)*?>/gm, '');
             # Remove any HTML from the title
             section.title = section.title.replace(/<(?:.|\n)*?>/gm, '');
         else
             title = "No title"
-
-        if section.type is "image" or section.type is "image2" or section.type is "image3"
-            section.type = "image"
 
         $("#nav").append($(ich.navbarsection(section)))
 
@@ -168,8 +165,6 @@ submitNewSection = ->
 
 
 sStory = (sections) ->
-
-
     makeOpenGraph(sections)
     makeBuilder(sections)
     makeNavbar(sections)
@@ -183,7 +178,6 @@ sStory = (sections) ->
 	 			return "section "+d.type+" "+d.type+i
 				)
         .html((d,i) ->
-
             switch d.type
                 when "text"
                     html = ich.text(d, true)
@@ -203,7 +197,7 @@ sStory = (sections) ->
                     html = "<h2>"+d.title+"</h2> "
                     html += "<div id='timeline"+i+"'></div>"
                     makeTimeline(d,i)
-#                    console.log "timeline"
+                    console.log "timeline"
 
             return html
         )
