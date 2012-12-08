@@ -10,30 +10,33 @@ makeTimeline = (d,i) ->
 	}
 	$(document).ready(->
 	    createStoryJS(timelineoptions)
-	)	
-	
+	)
+
 
 makeNavbar = (sections) ->
     sectioncount = 0
-    
+
     for section in sections
         sectioncount++
-        
+
         section.count = sectioncount
         if section.title isnt undefined
+            console.log "TITLE!", section.title.replace(/<(?:.|\n)*?>/gm, '');
             # Remove any HTML from the title
-            title = section.title.replace(/(<([^>]+)>)/ig,"");
-        else 
+            section.title = section.title.replace(/<(?:.|\n)*?>/gm, '');
+        else
             title = "No title"
-            
+
         if section.type is "image" or section.type is "image2" or section.type is "image3"
             section.type = "image"
-            
+
         $("#nav").append($(ich.navbarsection(section)))
-            
-            
-	
+
+
+
 makeOpenGraph = (sections) ->
+    # Use the first image in the story for the opengraph image
+    # We also use it's title for the opengraph title
     for section in sections
         if section.type is 'image' or section.type is 'image2' or section.type is 'image3'
             $("head").prepend($('<meta />').attr("property", "og:title").attr("content", section.title))
@@ -41,80 +44,80 @@ makeOpenGraph = (sections) ->
             return true
         else
             return false
-		
+
 makeBuilder = (sections) ->
     builder = d3.select("#section-summary ol")
-    
+
     sectionli = builder.selectAll('.section-summary-item')
     .data(sections)
     .enter().append("li")
         .attr("class", "section-summary-item")
 #        .text((d,i) -> i)
-            
-    summaryheader = sectionli.append("div").attr("class", "summary-header")        
-    summaryheader.append("h4").text((d,i) -> 
+
+    summaryheader = sectionli.append("div").attr("class", "summary-header")
+    summaryheader.append("h4").text((d,i) ->
         if d.title isnt undefined
             d.title
         else
             "> No title given."
-    )    
+    )
     summaryheader.append("div").attr("class", "sectiontype").text((d,i) -> d.type)
-       
+
     summarycontent = sectionli.append("div").attr("class", "summary-content")
-    summarycontent.append("div").attr("class", "image-url").text((d,i) -> d.url)        
+    summarycontent.append("div").attr("class", "image-url").text((d,i) -> d.url)
 #    summarycontent.append("div").attr("class", "sectiontext").text((d,i) -> d.caption)
 
 correctInputs = ->
-    switch $('#type').val() 
+    switch $('#type').val()
         when "image"
-            $('#embed-wrapper').hide()        
+            $('#embed-wrapper').hide()
             $('#caption').hide()
             $('#url-wrapper').show();
         when "image2"
-            $('#embed-wrapper').hide()        
+            $('#embed-wrapper').hide()
             $('#caption').show()
             $('#url-wrapper').show()
             $('#caption').attr("rows", 2)
         when "image3"
-            $('#embed-wrapper').hide()        
+            $('#embed-wrapper').hide()
             $('#caption').show()
             $('#url-wrapper').show();
             $('#caption').attr("rows", 5)
         when "vimeo"
             $('#embed-wrapper').hide()
             $('#caption').show()
-            $('#url-wrapper').show();            
+            $('#url-wrapper').show();
         when "soundcloud"
-            $('#embed-wrapper').show()        
+            $('#embed-wrapper').show()
             $('#caption').hide()
             $('#url-wrapper').hide();
         when "timeline"
-            $('#embed-wrapper').hide()        
+            $('#embed-wrapper').hide()
             $('#caption').hide()
-            $('#url-wrapper').show();       
+            $('#url-wrapper').show();
         when "text"
-            $('#embed-wrapper').hide()        
+            $('#embed-wrapper').hide()
             $('#caption').show()
-            $('#url-wrapper').hide();                         
-            
+            $('#url-wrapper').hide();
+
 getJsonCode = ->
     $('#json-code').val(JSON.stringify(sections)).show()
-    
+
 submitNewSection = ->
     section = {}
-    
+
     $("#error-bar").html("").css("opacity", 0);
-    
+
     section.title = $("#add-section #title").val();
     section.url = $("#add-section #url").val();
-    section.caption = $("#add-section #caption textarea").val();    
+    section.caption = $("#add-section #caption textarea").val();
     section.type = $("#add-section #type").val();
     section.embed = $("#add-section #embed").val();
-    
+
     console.log "New #{section.type} section", section
-    
-    
-    
+
+
+
     if section.title is ""
         $("#error-bar").html("Every section needs a title, could you add one?").css("opacity", 1)
         return false
@@ -130,7 +133,7 @@ submitNewSection = ->
     else if section.type is "text" and section.caption is ""
         $("#error-bar").html("I think you may have forgotten your text!").css("opacity", 1)
         return false
-    
+
     if section.type is "image" or section.type is "image2" or section.type is "image3"
         sections.push({
             title: section.title
@@ -156,21 +159,21 @@ submitNewSection = ->
             title: section.title
             type: section.type
             text: section.caption
-        })    
+        })
 
     $("#container").html("");
     $("#section-summary ol").html("");
     sStory(sections)
     makeBuilder(sections)
 
-            
+
 sStory = (sections) ->
-    
-    
+
+
     makeOpenGraph(sections)
     makeBuilder(sections)
     makeNavbar(sections)
-    
+
     container = d3.select("#container")
     container.selectAll('.section')
     .data(sections)
@@ -180,7 +183,7 @@ sStory = (sections) ->
 	 			return "section "+d.type+" "+d.type+i
 				)
         .html((d,i) ->
-            
+
             switch d.type
                 when "text"
                     html = ich.text(d, true)
@@ -191,9 +194,9 @@ sStory = (sections) ->
                 when "image3"
                     html = ich.image3(d, true)
                 when "vimeo"
-                    html = ich.vimeo(d, true)										
+                    html = ich.vimeo(d, true)
                 when "soundcloud"
-                    html = ich.soundcloud(d, true)                    
+                    html = ich.soundcloud(d, true)
                 when "map"
                     console.log "map"
                 when "timeline"
@@ -201,7 +204,7 @@ sStory = (sections) ->
                     html += "<div id='timeline"+i+"'></div>"
                     makeTimeline(d,i)
 #                    console.log "timeline"
-              
+
             return html
         )
 				.style("background-image", (d,i) ->

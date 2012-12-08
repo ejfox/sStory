@@ -26,7 +26,8 @@ makeNavbar = function(sections) {
     sectioncount++;
     section.count = sectioncount;
     if (section.title !== void 0) {
-      title = section.title.replace(/(<([^>]+)>)/ig, "");
+      console.log("TITLE!", section.title.replace(/<(?:.|\n)*?>/gm, ''));
+      section.title = section.title.replace(/<(?:.|\n)*?>/gm, '');
     } else {
       title = "No title";
     }

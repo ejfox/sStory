@@ -54,7 +54,7 @@
   -webkit-border-radius: @radius;
   -moz-border-radius: @radius;
   border-radius: @radius;
-  -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box; 
+  -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
 }
 .border-radius(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
   -webkit-border-top-right-radius: @topright;
@@ -69,7 +69,7 @@
   border-bottom-right-radius: @bottomright;
   border-bottom-left-radius: @bottomleft;
   border-top-left-radius: @topleft;
-  -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box; 
+  -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
 }
 .opacity(@opacity: 0.5) {
   -moz-opacity: @opacity;
@@ -164,12 +164,12 @@ pre {
 label, input[type=button], input[type=submit], button { cursor: pointer; }
 
 
-html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, 
-p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em, 
-img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr, 
-dl, dt, dd, ol, ul, li, fieldset, form, label, legend, 
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em,
+img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figure, figcaption, hgroup, 
+article, aside, canvas, details, figure, figcaption, hgroup,
 menu, footer, header, nav, section, summary, time, mark, audio, video {
 	margin: 0;
 	padding: 0;
@@ -193,7 +193,7 @@ a img {border: 0;}
 
 /* Link color, hover/visited will be generated from this */
 @linkcolor: #10206d;
-	
+
 
 /* Selection colours (easy to forget) */
 
@@ -222,21 +222,21 @@ body {-webkit-tap-highlight-color: @highlight;}
 }
 
 .large, h2 {
-	color: darken(@fontcolor, 12%);	
+	color: darken(@fontcolor, 12%);
 	font-size: 44px;
 	line-height: 48px;
 	font-weight: 800;
 }
 
 .bigger, h3 {
-	color: darken(@fontcolor, 10%);	
+	color: darken(@fontcolor, 10%);
 	font-size: 28px;
 	line-height: 36px;
 	font-weight: 800;
 }
 
 .big, h4 {
-	color: darken(@fontcolor, 7%);		
+	color: darken(@fontcolor, 7%);
 	font-size: 24px;
 	line-height: 30px;
 	font-weight: 700;
@@ -261,7 +261,7 @@ strong {
   -webkit-border-radius: @radius;
 }
 
-/*	Column class / mixins 
+/*	Column class / mixins
 	---------------------	*/
 
 .1-column { width:  68px;   }
@@ -278,7 +278,7 @@ strong {
 
 
 
-/*		Default Layout: 992px. 
+/*		Default Layout: 992px.
 		Gutters: 24px.
 		Outer margins: 48px.
 		Leftover space for scrollbars @1024px: 32px.
@@ -318,7 +318,7 @@ a {
 
 .section {
 	height: @sectionheight;
-	
+
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -327,33 +327,33 @@ a {
 	background-position: center center;
 	position: relative;
 	padding: 32px 48px 84px;
-	
+
 	h2 {
     	text-align: center;
 
     	color: white;
     	text-shadow:rgba(10, 16, 16, 0.92) 0px 2px 4px;
-    	
+
     	a:link, a:visited {
     	    color: white !important;
     	    text-decoration: none;
     	    border-bottom: 3px solid rgba(240,240,240,0.75);
     	    opacity: 0.92;
-    	    
-    	    -webkit-transition:all .24s ease-out ;       
+
+    	    -webkit-transition:all .24s ease-out ;
     	       -moz-transition:all .24s ease-out ;
     	         -o-transition:all .24s ease-out ;
-    	            transition:all .24s ease-out ; 
+    	            transition:all .24s ease-out ;
     	}
     	a:hover {
     	    color: white;
     	    opacity: 1;
-    	    border-bottom: 3px solid rgba(250,250,250,1);    	    
+    	    border-bottom: 3px solid rgba(250,250,250,1);
     	}
     }
 }
 .imagecaption {
-	background-color: rgba(250,250,250,0.88);	
+	background-color: rgba(250,250,250,0.88);
 	padding: 12px 22px;
 	width: 436px;
 	border-radius: 4px;
@@ -382,10 +382,10 @@ a {
     	height: 344px;
     	overflow: auto;
     	line-height: 1.55em;
-    	
+
 	    h1,h2,h3,h4,h5 {
 	        color: black;
-    		text-shadow:rgba(250, 246, 246, 0.92) 0px 2px 2px;		
+    		text-shadow:rgba(250, 246, 246, 0.92) 0px 2px 2px;
     	}
     	ol, ul {
     	    margin: 32px 8px;
@@ -395,25 +395,25 @@ a {
     		margin-top: 1em;
     	}
 	}
-	
+
 }
 .map {
     display: none;
 }
 .soundcloud {
     height: 260px;
-    
+
     h2 {
         color: black;
         font-size: 1.3em;
         text-align: left;
         text-shadow: none;
         margin-bottom: 8px;
-        
-        text-shadow:rgba(250, 246, 246, 0.92) 0px 2px 3px;		
-		
+
+        text-shadow:rgba(250, 246, 246, 0.92) 0px 2px 3px;
+
     }
-    
+
     margin-bottom: 12px;
 }
 .timeline {
@@ -426,16 +426,16 @@ a {
         text-align: left;
         text-shadow: none;
         margin-bottom: 8px;
-        
-        text-shadow:rgba(250, 246, 246, 0.92) 0px 2px 3px;				
+
+        text-shadow:rgba(250, 246, 246, 0.92) 0px 2px 3px;
     }
 }
-.text {
-    
+.section.text {
+
     height: auto;
-    
-    .drop-shadow( 0, -6px,18px, 0.55);    
-    
+
+    .drop-shadow( 0, -6px,18px, 0.55);
+
     h1,h2,h3,h4,h5 {
         color: black;
         text-shadow: transparent 0 0 0;
@@ -447,9 +447,9 @@ a {
     width: 52%;
     line-height: 1.5em;
     margin-left: auto; margin-right: auto;
-    
+
     max-width: 620px;
-    
+
     p {
         margin-top: 1em;
     }
@@ -458,9 +458,12 @@ a {
 .vimeo {
     padding: 0;
 //    overflow: auto;
-    height: @sectionheight - 105;
+//    height: @sectionheight - 105;
+  height: auto;
 }
 .video-caption {
+    font-size: 0.8em;
+    line-height: 1.3em;
     max-height: 344px;
     overflow: auto;
     position: absolute;
@@ -470,12 +473,12 @@ a {
 //    margin-left: -218px;
 //    margin-left: auto;
 //    margin-right: auto;
-    margin-top: 8px;	
+    margin-top: 8px;
     margin-bottom: 8px;
     z-index: 999999; // Is this enough?
-    width: 436px;
-  
-    background-color: rgba(10,10,14,0.78);	
+    max-width: 30%;
+
+    background-color: rgba(10,10,14,0.78);
     color: white;
 	padding: 12px 22px;
     border-radius: 4px;
@@ -484,7 +487,7 @@ a {
 Elastic videos
 */
 .video-container {
-  height: 100%;    
+  height: 100%;
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 30px;
@@ -521,76 +524,89 @@ Elastic videos
     width: 100%;
     text-align: center;
     padding: 2px;
-    
-    -webkit-transition:all .8s ease-out ;       
+
+    -webkit-transition:all .8s ease-out ;
        -moz-transition:all .8s ease-out ;
          -o-transition:all .8s ease-out ;
-            transition:all .8s ease-out ; 
+            transition:all .8s ease-out ;
 }
 
 /* --- Navbar stuff --- */
 #nav {
-    
+
+    opacity: 0.65;
     border-radius: 4px;
-    left: -194px;
-    
+    left: -190px;
+    max-height: 100%;
+    overflow-y: auto;
+
     &:hover {
         opacity: 1;
-        left: -4px;
-        
-        -webkit-transition:all .45s ease-out 2.2s;       
+        //left: -4px;
+        left: 0;
+
+        -webkit-transition:all .45s ease-out 2.2s;
            -moz-transition:all .45s ease-out 2.2s;
              -o-transition:all .45s ease-out 2.2s;
-                transition:all .45s ease-out 2.2s; 
+                transition:all .45s ease-out 2.2s;
     }
-    
-    width: 224px;
-    font-size: 12px;
+
+    a:link {
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    max-width: 224px;
+    font-size: 11px;
     line-height: 1.25em;
-    
-    
+
+
     position: fixed;
     top: 0;
     z-index: 99999;
-    background-color: rgba(20,20,20,0.9);    
+    background-color: rgba(20,20,20,0.45);
     padding: 2px 1px;
-    
-    opacity: 0.82;
-    -webkit-transition:opacity .3s ease-out .2s;       
-       -moz-transition:opacity .3s ease-out .2s;
-         -o-transition:opacity .3s ease-out .2s;
-            transition:opacity .3s ease-out .2s;
-            
-    -webkit-transition:all .16s linear ;       
-       -moz-transition:all .16s linear ;
-         -o-transition:all .16s linear ;
-            transition:all .16s linear ; 
 
+    -webkit-transition:all .36s linear ;
+    -moz-transition:all .36s linear ;
+    -o-transition:all .36s linear ;
+    transition:all .36s linear ;
+
+    -webkit-transition:opacity .3s ease-out .2s;
+    -moz-transition:opacity .3s ease-out .2s;
+    -o-transition:opacity .3s ease-out .2s;
+    transition:opacity .3s ease-out .2s;
 }
 
 .nav-section {
     min-height: 24px;
     position: relative;
     cursor: pointer;
-//    display: inline-block;    
+//    display: inline-block;
     display: block;
-    color: black;
-    background-color: #999;
+    background-color: rgba(250,250,250,0.8);
 
     margin: 2px 2px;
     margin-right:4px;
-    padding: 4px 4px;    
+    padding: 4px 6px;
     border-radius: 2px;
-    
-    padding-right: 24px;
-    
+    padding-right: 32px;
+
+    color: #4c4c4c !important;
+
+    &:hover {
+      color: black !important;
+    }
+
     .type-icon {
         position: absolute;
-        right: 4px;
+        right: 6px;
         top: 50%;
-        
+
         margin-top: -9px;
     }
+
+
 }
 
 
@@ -613,7 +629,7 @@ Elastic videos
     z-index: 99999;
     overflow-y: auto;
     padding: 8px 12px;
-    
+
     .drop-shadow(0, 3px, 14px, 0.72);
 //  background-image: url(images/whitey.png);
 //	background-repeat: repeat;
@@ -627,20 +643,20 @@ Elastic videos
     background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 1.00), rgba(214, 214, 214, 0.80));
     background-image: linear-gradient(top, rgba(255, 255, 255, 1.00), rgba(214, 214, 214, 0.80));
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ffffff', EndColorStr='#d6d6d6');
-    
+
     border:        1px inset rgba(240,240,250,0.2);
     border-bottom: 1px inset rgba(10,10,10,0.4);
-    
+
     #add-section {
         margin-bottom: 12px;
-        
+
         table {
             margin-left: auto;
             margin-right: auto;
             width: 88%;
         }
     }
-    
+
     h2 {
         font-size: 18px;
         line-height: 1.3em;
@@ -655,12 +671,12 @@ Elastic videos
         line-height: 1.4em;
         margin-right: 52px;
     }
-    
+
     li {
         position: relative;
         list-style-type: none;
         width: 324px;
-        
+
         h4, .sectiontype {
             display: inline-block;
             vertical-align: middle;
@@ -679,33 +695,33 @@ Elastic videos
             background-image: -ms-linear-gradient(top, rgb(255, 255, 255), rgb(214, 214, 214));
             background-image: linear-gradient(top, rgb(255, 255, 255), rgb(214, 214, 214));
             filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ffffff', EndColorStr='#d6d6d6');
-            
-            
-            
+
+
+
             padding: 2px 4px;
             border-radius: 2px;
 //            border-bottom: 1px solid black;
             margin-bottom: 0;
-            
-            
+
+
         }
         .summary-content {
             height: 38px;
             overflow-y: auto;
             padding-top: 2px;
-            
+
             h1,h2,h3,h4,h5,h6 {
                 font-size: 12px;
                 font-weight: bold;
             }
-        
+
         }
-        
+
         .image-url {
             font-size: 10px;
             opacity: 0.3;
         }
-        
+
         .sectiontext {
             background-color: white;
             padding: 2px 24px;
@@ -729,16 +745,16 @@ input, textarea, select {
  }
  input, textarea, select, button {
     opacity: 0.6;
-    -webkit-transition:all .22s ease-out ;       
+    -webkit-transition:all .22s ease-out ;
        -moz-transition:all .22s ease-out ;
          -o-transition:all .22s ease-out ;
-            transition:all .22s ease-out ; 
+            transition:all .22s ease-out ;
     &:hover {
         opacity: 0.9;
     }
     &:active {
         opacity: 1;
-        -webkit-box-shadow: 0px -2px 1px rgba(250,250,250,0.65);        
+        -webkit-box-shadow: 0px -2px 1px rgba(250,250,250,0.65);
     }
     border: 1px solid #555;
     padding: 4px 8px;
@@ -758,10 +774,10 @@ input, textarea, select {
     -webkit-appearance: none;
     -webkit-box-shadow: 1px 1px 2px #fff;
     -webkit-border-radius: 0.5em;
-    
+
     outline: none;
   }
-  
+
   select {
       width: 100%;
       background-color: #f6f6f6;
@@ -774,7 +790,7 @@ input, textarea, select {
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#f6f6f6', EndColorStr='#cccccc');
 
   }
-  
+
   button {
       background-color: #ffffff;
       background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 255)), to(rgb(155, 154, 155)));
@@ -787,7 +803,7 @@ input, textarea, select {
       font-weight: bold;
       text-shadow: rgb(250,248,248) 0 1px 2px;
   }
-  
+
   #submit-button {
       background-color: #b9fc83;
       background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(185, 252, 131)), to(rgb(109, 152, 38)));
@@ -797,13 +813,13 @@ input, textarea, select {
       background-image: -ms-linear-gradient(top, rgb(185, 252, 131), rgb(109, 152, 38));
       background-image: linear-gradient(top, rgb(185, 252, 131), rgb(109, 152, 38));
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#b9fc83', EndColorStr='#6d9826');
-      
+
   }
-  
+
   #json-button {
       color: white;
       text-shadow: rgba(250,248,248,0.1) 0 1px 1px;
-      
+
       background-color: #797979;
       background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(121, 121, 121)), to(rgb(33, 33, 33)));
       background-image: -webkit-linear-gradient(top, rgb(121, 121, 121), rgb(33, 33, 33));
@@ -812,9 +828,9 @@ input, textarea, select {
       background-image: -ms-linear-gradient(top, rgb(121, 121, 121), rgb(33, 33, 33));
       background-image: linear-gradient(top, rgb(121, 121, 121), rgb(33, 33, 33));
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#797979', EndColorStr='#212121');
-      
+
   }
-  
+
   input[type=checkbox],
    input[type=radio] {
      display: inline-block;
@@ -827,7 +843,7 @@ input, textarea, select {
      -webkit-border-radius: 0.25em;
      vertical-align: text-top;
    }
-   
+
 
 
    input[type=radio] {
@@ -843,12 +859,12 @@ cols    1     2      3      4      5      6      7      8
 px      68    160    252    344    436    528    620    712    */
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-	
+
 	body {
         width: 100%;
 	}
 	.section {
-		padding: 32px 28px 60px;
+		//padding: 32px 28px 60px;
 		width: 100%;
 	}
 }
@@ -864,28 +880,53 @@ cols    1     2      3
 px      68    160    252    */
 
 @media only screen and (max-width: 767px) {
-	
+
 	body {
         width: 100%;
 	}
-	
+
 	.section {
-	    padding: 24px 34px 60px;
+	    //padding: 24px 34px 60px;
+      padding: 0;
 	    height: 436px;
+
 	    .imagecaption {
 	        line-height: 1.4em;
 	    }
-	    
+
 	    h2 {
-	        font-size: 16px;
+	        font-size: 22px;
 	        line-height: 1.3em;
-	    }		
+	    }
 	}
-	
+
 	.vimeo {
-	    height: 252px;
+      padding: 0 !important;
+	    //height: 300px;
 	}
-	
+  .video-caption {
+      font-size: 11px;
+      line-height: 1.25em;
+      max-height: 98px;
+      max-width: 45%;
+      overflow: auto;
+      position: absolute;
+
+      //right: 18px;
+      bottom: 42px;
+  //    left: 50%;
+  //    margin-left: -218px;
+  //    margin-left: auto;
+  //    margin-right: auto;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      z-index: 999999; // Is this enough?
+
+      background-color: rgba(10,10,14,0.78);
+      color: white;
+      padding: 8px 10px;
+      border-radius: 4px;
+  }
 	.image h2 {
     	margin-top: 92px;
     }
@@ -907,7 +948,7 @@ px      68    160    252    */
         width: 80%;
     	overflow: auto;
     	line-height: 1.55em;
-    	
+
     	h3 {
     	    font-size: 16px;
     	    line-height: 1.3em;
@@ -917,7 +958,7 @@ px      68    160    252    */
     		margin-top: 1em;
     	}
     }
-    
+
     .soundcloud {
         height: 260px;
     }
@@ -933,8 +974,12 @@ px      68    160    252    */
     #builder {
         width: 252px;
     }
-    
-    .text-container {
+
+    .text {
+      h2 {
+        padding-top: 24px;
+      }
+      .text-container {
         margin-top:18px;
         padding-bottom: 18px;
         width: 75%;
@@ -944,7 +989,9 @@ px      68    160    252    */
         p {
             margin-top: 1em;
         }
+      }
     }
+
 }
 
 
@@ -959,15 +1006,35 @@ cols    1     2      3      4      5
 px      68    160    252    344    436    */
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-	
+
 	body {
         width: 100%;
 	}
 	.section {
-	    padding: 24px 22px 48px;		
+	    padding: 24px 22px 48px;
 	}
-	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
