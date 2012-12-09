@@ -18,10 +18,9 @@ makeTimeline = function(d, i) {
 };
 
 makeNavbar = function(sections) {
-  var nav_sections, section, sectioncount, title, _i, _len, _results;
+  var nav_sections, section, sectioncount, title, _i, _len;
   sectioncount = 0;
   nav_sections = sections;
-  _results = [];
   for (_i = 0, _len = nav_sections.length; _i < _len; _i++) {
     section = nav_sections[_i];
     sectioncount++;
@@ -31,9 +30,35 @@ makeNavbar = function(sections) {
     } else {
       title = "No title";
     }
-    _results.push($("#nav").append($(ich.navbarsection(section))));
+    $("#nav").append($(ich.navbarsection(section)));
   }
-  return _results;
+  $("#nav-expand").on('click', function() {
+    console.log('clicked');
+    if ($("#nav").hasClass("nav-expanded")) {
+      return $("#nav").removeClass("nav-expanded");
+    } else {
+      return $("#nav").addClass("nav-expanded");
+    }
+  });
+  return $("#nav-expand").hoverIntent({
+    sensitivity: 2,
+    interval: 120,
+    timeout: 200,
+    over: function() {
+      if ($("#nav").hasClass("nav-expanded")) {
+        return $("#nav").removeClass("nav-expanded");
+      } else {
+        return $("#nav").addClass("nav-expanded");
+      }
+    }
+    /*out: ->
+        if $("#nav").hasClass("nav-expanded")
+            $("#nav").css("left", "-190px").removeClass("nav-expanded")
+        else
+            $("#nav").css("left", 0).addClass("nav-expanded")
+    */
+
+  });
 };
 
 makeOpenGraph = function(sections) {
@@ -170,12 +195,12 @@ submitNewSection = function() {
 };
 
 sStory = function(sections) {
-  var container;
+  var container, scrollorama;
   makeOpenGraph(sections);
   makeBuilder(sections);
   makeNavbar(sections);
   container = d3.select("#container");
-  return container.selectAll('.section').data(sections).enter().append("div").attr("id", function(d, i) {
+  container.selectAll('.section').data(sections).enter().append("div").attr("id", function(d, i) {
     return "section-" + (i + 1);
   }).attr("class", function(d, i) {
     return "section " + d.type + " " + d.type + i;
@@ -214,5 +239,17 @@ sStory = function(sections) {
     if (d.type === "image" || d.type === "image2" || d.type === "image3") {
       return "url('" + d.url + "')";
     }
+  });
+  scrollorama = $.scrollorama({
+    blocks: '.section',
+    enablePin: false
+  });
+  $("#nav a:first").addClass("current-section");
+  return scrollorama.onBlockChange(function() {
+    var i;
+    i = scrollorama.blockIndex;
+    console.log(i);
+    $("#nav a").removeClass("current-section");
+    return $("#nav-section-" + (i + 1)).addClass("current-section");
   });
 };

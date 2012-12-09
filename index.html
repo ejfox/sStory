@@ -25,6 +25,7 @@
 
 	<!-- Bring in jQuery first, lots of other stuff depends on it -->
 	<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.hoverintent.js" type="text/javascript" charset="utf-8"></script>
 
 	<!-- And underscore | http://documentcloud.github.com/underscore/
 	<script src="js/underscore-min.js" type="text/javascript" charset="utf-8"></script>	-->
@@ -51,6 +52,7 @@
 <div id="nav">
 
 </div>
+<div id="nav-expand">&nbsp;</div>
 
 <div id="container">
 
@@ -99,8 +101,12 @@
 </div>
 </script>
 
+
+
+
+
 <script id="navbarsection" type="text/html">
-<a class="nav-section" href="#section-{{count}}"><img src="images/type_icons/{{type}}.png" height="18px" width="18px" class="type-icon" /> {{ title }}</a>
+<a class="nav-section" href="#section-{{count}}" id="nav-section-{{count}}"><img src="images/type_icons/{{type}}.png" height="18px" width="18px" class="type-icon" /> {{ title }}</a>
 </script>
 
 <script type="text/javascript" charset="utf-8">
@@ -159,7 +165,13 @@ var examplesections = [{
 
 $(document).ready(function(){
 	sStory(examplesections);
+
+
 });
+
+
 </script>
+
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </body>
 </html>

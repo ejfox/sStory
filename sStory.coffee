@@ -29,6 +29,30 @@ makeNavbar = (sections) ->
 
         $("#nav").append($(ich.navbarsection(section)))
 
+    $("#nav-expand").on('click', () ->
+        console.log 'clicked'
+        if $("#nav").hasClass("nav-expanded")
+            $("#nav").removeClass("nav-expanded")
+        else
+            $("#nav").addClass("nav-expanded")
+    )
+    $("#nav-expand").hoverIntent({
+        sensitivity: 2
+        interval: 120
+        timeout: 200
+        over: ->
+            if $("#nav").hasClass("nav-expanded")
+                $("#nav").removeClass("nav-expanded")
+            else
+                $("#nav").addClass("nav-expanded")
+        ###out: ->
+            if $("#nav").hasClass("nav-expanded")
+                $("#nav").css("left", "-190px").removeClass("nav-expanded")
+            else
+                $("#nav").css("left", 0).addClass("nav-expanded")
+        ###
+        })
+
 
 
 makeOpenGraph = (sections) ->
@@ -205,3 +229,18 @@ sStory = (sections) ->
 				    if d.type is "image" or d.type is "image2" or d.type is "image3"
 					    return "url('"+d.url+"')"
 				)
+
+    scrollorama = $.scrollorama({
+        blocks: '.section',
+        enablePin: false
+    });
+
+    $("#nav a:first").addClass("current-section")
+
+    scrollorama.onBlockChange(() ->
+            i=scrollorama.blockIndex;
+            console.log(i);
+
+            $("#nav a").removeClass("current-section")
+            $("#nav-section-"+(i+1)).addClass("current-section")
+    );
