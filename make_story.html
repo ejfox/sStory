@@ -25,6 +25,7 @@
 			
 	<!-- Bring in jQuery first, lots of other stuff depends on it -->
 	<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>	
+	<script src="js/jquery.hoverintent.js" type="text/javascript" charset="utf-8"></script>
 
 	<!-- And underscore | http://documentcloud.github.com/underscore/	
 	<script src="js/underscore-min.js" type="text/javascript" charset="utf-8"></script>	-->
@@ -35,8 +36,8 @@
 	<!-- And Lettering.js | https://github.com/davatron5000/Lettering.js 		
 	<script src="js/jquery.lettering.js" type="text/javascript" charset="utf-8"></script> -->
 	
-	<!-- And Scrollorama | http://johnpolacek.github.com/scrollorama/ 			
-	<script src="js/jquery.scrollorama.js" type="text/javascript" charset="utf-8"></script> -->
+	<!-- And Scrollorama | http://johnpolacek.github.com/scrollorama/ 			-->
+	<script src="js/jquery.scrollorama.js" type="text/javascript" charset="utf-8"></script> 
 	
 	<!-- And Tabletop | https://github.com/jsoma/tabletop 				
 	<script src="js/tabletop.js" type="text/javascript" charset="utf-8"></script> -->
@@ -160,6 +161,9 @@
 </div>
 </script>
 
+<script id="navbarsection" type="text/html">
+<a class="nav-section" href="#section-{{count}}" id="nav-section-{{count}}"><img src="images/type_icons/{{type}}.png" height="18px" width="18px" class="type-icon" /> {{ title }}</a>
+</script>
 
 <script id="summary" type="text/html">
 <li>
