@@ -27,8 +27,8 @@
 	<script src="lib/js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="lib/js/jquery.hoverintent.js" type="text/javascript" charset="utf-8"></script>
 
-	<!-- And underscore | http://documentcloud.github.com/underscore/
-	<script src="js/underscore-min.js" type="text/javascript" charset="utf-8"></script>	-->
+	<!-- And underscore | http://documentcloud.github.com/underscore/ -->
+	<script src="lib/js/underscore-min.js" type="text/javascript" charset="utf-8"></script>
 
 	<!-- And D3 | https://github.com/mbostock/d3/wiki/API-Reference -->
 	<script src="lib/js/d3.v2.min.js" type="text/javascript" charset="utf-8"></script>
@@ -42,9 +42,7 @@
 	<link rel="stylesheet" href="lib/timeline.css" type="text/css" media="screen" title="no title" charset="utf-8">
 
 	<script src="lib/js/sStory.js" type="text/javascript" charset="utf-8"></script>
-
 	<script src="lib/js/jquery.scrollorama.js" type="text/javascript" charset="utf-8"></script>
-
 
 </head>
 
@@ -101,7 +99,19 @@
 </div>
 </script>
 
-
+<script id="gist" type="text/html">
+{{#title}}
+<h2>{{ title }}</h2>
+{{/title}}
+{{#files}}
+	<div class="gist-container">
+	<h4>{{filename}}</h4>
+	<pre>
+	{{content}}
+	</pre>
+	</div>
+{{/files}}
+</script>
 
 
 
@@ -160,6 +170,11 @@ var examplesections = [{
     ,"type": "text"
     ,"url": "http://farm8.staticflickr.com/7112/7136431759_6cb409a7a8_k.jpg"
     ,"text": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p> <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
+},
+{
+	"title": "Test gist sStory section"
+	,"type": "gist"
+	,"url": "4138619"
 }
 ]
 
@@ -168,8 +183,8 @@ $(document).ready(function(){
 
 
 });
-
-
 </script>
+
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </body>
 </html>

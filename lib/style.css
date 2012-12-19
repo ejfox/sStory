@@ -403,6 +403,25 @@ a:visited {
 .text-container p {
   margin-top: 1em;
 }
+.section.gist {
+  border-top: 4px solid black;
+  height: auto;
+  padding: 12px 18%;
+  font-size: 0.75em;
+  line-height: 1.4em;
+}
+.section.gist h2 {
+  color: black;
+  text-shadow: none;
+}
+.section.gist h4 {
+  border-bottom: 2px solid rgba(10, 10, 10, 0.2);
+  margin-bottom: 12px;
+  padding: 6px 0;
+}
+.section.gist .gist-container {
+  margin: 44px 4px;
+}
 .vimeo {
   padding: 0;
   height: auto;
@@ -781,6 +800,9 @@ px      68    160    252    */
 @media only screen and (max-width: 767px) {
   body {
     width: 100%;
+  }
+  #nav {
+    display: none;
   }
   .section {
     padding: 0;

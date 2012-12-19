@@ -187,6 +187,38 @@ submitNewSection = ->
     sStory(sections)
     makeBuilder(sections)
 
+getGistFiles = (d, i) ->
+    gistid = d.url
+
+    $.ajax({
+        url: "https://api.github.com/gists/"+gistid,
+        cache: false
+    }).done(( json ) ->
+        #console.log "gist json", json
+
+        gistfiles = json.files
+        files = []
+        filenames = _.keys(json.files)
+
+        _.each(filenames, (filename) ->
+            files.push(gistfiles[filename])
+        )
+        console.log "FILESSSS", files
+        d.files = files
+
+        _.each(files, (file) ->
+            console.log file
+
+            if file.language = "JavaScript"
+                file.language = "js"
+
+            fileHtml = $("<h4>"+file.filename+"</h4>"+"<pre class='"+file.language+"'>"+file.content+"</pre>")
+            fileContainer = $("<div class='gist-container'></div>").append(fileHtml)
+            $("#gist"+i).append(fileContainer)
+        )
+
+        DlHighlight.HELPERS.highlightByName("pre")
+    )
 
 sStory = (sections) ->
     makeOpenGraph(sections)
@@ -221,7 +253,13 @@ sStory = (sections) ->
                     html = "<h2>"+d.title+"</h2> "
                     html += "<div id='timeline"+i+"'></div>"
                     makeTimeline(d,i)
-                    console.log "timeline"
+                when "gist"
+                    html = "<h2>"+d.title+"</h2>"
+                    html += "<div id='gist"+i+"'> </div>"
+                    getGistFiles(d,i)
+
+                    #html = ich.gist(d, true)
+
 
             return html
         )
