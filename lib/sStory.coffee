@@ -217,7 +217,6 @@ getGistFiles = (d, i) ->
             $("#gist"+i).append(fileContainer)
         )
 
-        DlHighlight.HELPERS.highlightByName("pre")
     )
 
 sStory = (sections) ->
@@ -231,8 +230,11 @@ sStory = (sections) ->
     .enter().append("div")
         .attr("id", (d,i) -> "section-"+(i+1))
         .attr("class", (d,i) ->
-	 			return "section "+d.type+" "+d.type+i
-				)
+                    classString = "section "+d.type+" "+d.type+i
+                    if(d.bgFixed isnt null and d.bgFixed is true)
+                        classString += " bg-fixed"
+                    return classString
+    			)
         .html((d,i) ->
             switch d.type
                 when "text"

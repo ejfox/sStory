@@ -33,8 +33,7 @@
 	<!-- And D3 | https://github.com/mbostock/d3/wiki/API-Reference -->
 	<script src="lib/js/d3.v2.min.js" type="text/javascript" charset="utf-8"></script>
 
-	<!-- And the Open Sans Google Webfont | https://www.google.com/webfonts#UsePlace:use/Collection:Open+Sans-->
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,800,300' rel='stylesheet' type='text/css'>
+
 
 	<script src="lib/js/ICanHaz.js" type="text/javascript" charset="utf-8"></script>
 
@@ -43,6 +42,10 @@
 
 	<script src="lib/js/sStory.js" type="text/javascript" charset="utf-8"></script>
 	<script src="lib/js/jquery.scrollorama.js" type="text/javascript" charset="utf-8"></script>
+
+
+	<!-- And the Open Sans Google Webfont | https://www.google.com/webfonts#UsePlace:use/Collection:Open+Sans-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,800,300' rel='stylesheet' type='text/css'>
 
 </head>
 
@@ -91,10 +94,11 @@
 </script>
 
 <script id="text" type="text/html">
+<div class="text-container">
 {{#title}}
 <h2>{{ title }}</h2>
 {{/title}}
-<div class="text-container">
+
 {{{ text }}}
 </div>
 </script>
@@ -122,9 +126,16 @@
 <script type="text/javascript" charset="utf-8">
 
 var examplesections = [{
-    "title": "Making beautiful stories easy"
+    "title": "Making beautiful stories <strong>easy</strong>"
     ,"type": "image"
-	,"url": "http://farm8.staticflickr.com/7211/6990397296_1e3cb3b647_k.jpg"
+	,"url": "http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg"
+	,"bgFixed": true
+},
+{
+    "title": "This is my first text post"
+    ,"type": "text"
+    ,"url": "http://farm8.staticflickr.com/7112/7136431759_6cb409a7a8_k.jpg"
+    ,"text": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <b>Excepteur</b> sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <em>Ut enim ad minim veniam</em>, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim <strong>id est laborum</strong>XXXX. <aside><h4>This is what something in an aside looks like</h4> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</aside> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p> <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <aside><h4>Include images</h4><img src='http://farm8.staticflickr.com/7224/7136454201_52f63be956_z.jpg'><span class='caption'>Oakland police line up across 14th St.</span></aside>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
 },
 {
     "title": "Big images + Captions"
@@ -166,12 +177,6 @@ var examplesections = [{
     ,"url": "http://farm8.staticflickr.com/7112/7136431759_6cb409a7a8_k.jpg"
 },
 {
-    "title": "This is my first text post"
-    ,"type": "text"
-    ,"url": "http://farm8.staticflickr.com/7112/7136431759_6cb409a7a8_k.jpg"
-    ,"text": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p> <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
-},
-{
 	"title": "Test gist sStory section"
 	,"type": "gist"
 	,"url": "4138619"
@@ -180,6 +185,18 @@ var examplesections = [{
 
 $(document).ready(function(){
 	sStory(examplesections);
+
+	$("#section-1 h2").addClass("animated fadeInUp");
+
+
+	var scrollorama = $.scrollorama({
+		blocks: '.section',
+		enablePin: false
+	});
+
+	scrollorama.onBlockChange(function(){
+		var i=scrollorama.blockIndex;
+	});
 
 
 });
