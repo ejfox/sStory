@@ -259,8 +259,9 @@ sStory = (sections) ->
                     html = "<h2>"+d.title+"</h2>"
                     html += "<div id='gist"+i+"'> </div>"
                     getGistFiles(d,i)
+                when "slideshow"
+                    html = ich.slideshow(d, true)
 
-                    #html = ich.gist(d, true)
 
 
             return html

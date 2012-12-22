@@ -14,10 +14,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
 
-	<!-- LESS framework stylesheet
-	Should be compiled from style.less
-	I use http://wearekiss.com/simpless for auto-compiling on save
-	-->
 	<link rel="stylesheet" href="lib/style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
 
 	<!-- Bring in animate.css | http://daneden.me/animate/ -->
@@ -33,20 +29,25 @@
 	<!-- And D3 | https://github.com/mbostock/d3/wiki/API-Reference -->
 	<script src="lib/js/d3.v2.min.js" type="text/javascript" charset="utf-8"></script>
 
-
-
 	<script src="lib/js/ICanHaz.js" type="text/javascript" charset="utf-8"></script>
 
 	<script src="lib/js/storyjs-embed.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" href="lib/timeline.css" type="text/css" media="screen" title="no title" charset="utf-8">
 
-	<script src="lib/js/sStory.js" type="text/javascript" charset="utf-8"></script>
 	<script src="lib/js/jquery.scrollorama.js" type="text/javascript" charset="utf-8"></script>
 
+	<!-- bxSlider Javascript file -->
+	<script src="lib/js/jquery.bxslider.js"></script>
+	<!-- bxSlider CSS file -->
+	<link href="lib/jquery.bxslider.css" rel="stylesheet" />
 
 	<!-- And the Open Sans Google Webfont | https://www.google.com/webfonts#UsePlace:use/Collection:Open+Sans-->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,800,300' rel='stylesheet' type='text/css'>
 
+
+
+	<script src="lib/js/sStory.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="lib/style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
 </head>
 
 <body>
@@ -117,6 +118,18 @@
 {{/files}}
 </script>
 
+<script id="slideshow" type="text/html">
+{{#title}}
+<h2>{{ title }}</h2>
+{{/title}}
+
+<ul class="slider">
+{{#slides}}
+<li><img src="{{url}}" title="{{caption}}"/></li>
+{{/slides}}
+</ul>
+</script>
+
 
 
 <script id="navbarsection" type="text/html">
@@ -180,6 +193,25 @@ var examplesections = [{
 	"title": "Test gist sStory section"
 	,"type": "gist"
 	,"url": "4138619"
+},
+{
+	"title": "Now for a slideshow!"
+	,"type": "slideshow"
+	,"slides" : [
+		{
+			"url": "http://farm9.staticflickr.com/8305/8018534029_5d0ba3470d_b.jpg"
+			,"caption": "Test image 1"
+		},
+		{
+			"url": "http://farm9.staticflickr.com/8174/8018538728_68ddc70891_b.jpg"
+			,"caption": "Slideshows are so much fun!"
+		},
+		{
+			"url": "http://farm9.staticflickr.com/8311/8018538532_2fa9aff47c_b.jpg"
+			,"caption": "Another slideshow image"
+		}
+	]
+
 }
 ]
 
@@ -198,10 +230,21 @@ $(document).ready(function(){
 		var i=scrollorama.blockIndex;
 	});
 
+	$(".slider").bxSlider({
+		infiniteLoop: false,
+  		hideControlOnEnd: true,
+  		useCSS: true,
+  		easing: 'ease-out',
+  		captions: true,
+  		speed: 900
+	})
+
+
+
 
 });
 </script>
 
-<!-- <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script> -->
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </body>
 </html>
