@@ -30,7 +30,6 @@ makeNavbar = (sections) ->
         $("#nav").append($(ich.navbarsection(section)))
 
     $("#nav-expand").on('click', () ->
-        console.log 'clicked'
         if $("#nav").hasClass("nav-expanded")
             $("#nav").removeClass("nav-expanded")
         else
