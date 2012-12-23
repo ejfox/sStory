@@ -278,10 +278,24 @@ sStory = (sections) ->
 
     $("#nav a:first").addClass("current-section")
 
+    if $(document).width() > 800
+
+      scrollorama.animate('#header-1', {
+        duration: 300,
+        property: "margin-top",
+        start: 425,
+        end: 0,
+        easing: 'ease-in'
+        })
+
+
     scrollorama.onBlockChange(() ->
             i=scrollorama.blockIndex;
             console.log(i);
 
             $("#nav a").removeClass("current-section")
             $("#nav-section-"+(i+1)).addClass("current-section")
+
+            $(".section").removeClass("current-section")
+            $("#section-"+(i+1)).addClass("current-section")
     );

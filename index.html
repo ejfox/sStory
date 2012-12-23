@@ -41,10 +41,10 @@
 	<!-- bxSlider CSS file -->
 	<link href="lib/jquery.bxslider.css" rel="stylesheet" />
 
-	<!-- And the Open Sans Google Webfont | https://www.google.com/webfonts#UsePlace:use/Collection:Open+Sans-->
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,700italic,400,700,800,300' rel='stylesheet' type='text/css'>
+	<!-- And the Open Sans Google Webfont | https://www.google.com/webfonts#UsePlace:use/Collection:Open+Sans
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,700italic,400,700,800,300' rel='stylesheet' type='text/css'> -->
 
-
+	<link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic|PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
 
 	<script src="lib/js/sStory.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" href="lib/style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
@@ -61,16 +61,16 @@
 </div>
 
 <script id="image" type="text/html">
-<h2>{{{ title }}}</h2>
+<h2 id="header-{{count}}">{{{ title }}}</h2>
 </script>
 
 <script id="image2" type="text/html">
-<h2>{{{ title }}}</h2>
+<h2 id="header-{{count}}">{{{ title }}}</h2>
 <div class="imagecaption"><p>{{{ caption }}}</p></div>
 </script>
 
 <script id="image3" type="text/html">
-<h2>{{ title }}</h2>
+<h2 id="header-{{count}}">{{ title }}</h2>
 <div class="imagecaption longcaption"><p>{{{ caption }}}</p></div>
 </script>
 
@@ -133,7 +133,7 @@
 
 
 <script id="navbarsection" type="text/html">
-<a class="nav-section" href="#section-{{count}}" id="nav-section-{{count}}"><img src="lib/images/type_icons/{{type}}.png" height="18px" width="18px" class="type-icon" /> {{ title }}</a>
+<a class="nav-section" href="#section-{{count}}" id="nav-section-{{count}}"><img src="lib/images/type_icons/{{type}}.png" height="16px" width="16px" class="type-icon" /> {{ title }}</a>
 </script>
 
 <script type="text/javascript" charset="utf-8">
@@ -145,16 +145,34 @@ var examplesections = [{
 	,"bgFixed": true
 },
 {
-    "title": "This is my first text post"
+    "title": "About sStory"
     ,"type": "text"
     ,"url": "http://farm8.staticflickr.com/7112/7136431759_6cb409a7a8_k.jpg"
-    ,"text": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <b>Excepteur</b> sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <em>Ut enim ad minim veniam</em>, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim <strong>id est laborum</strong>XXXX. <aside><h4>This is what something in an aside looks like</h4> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</aside> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p> <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <aside><h4>Include images</h4><img src='http://farm8.staticflickr.com/7224/7136454201_52f63be956_z.jpg'><span class='caption'>Oakland police line up across 14th St.</span></aside>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
+    ,"text": "<p>This entire page is powered off of simple, hand-writeable JSON. Or you can use the <a href='make_story.html'>story maker tool</a>. The goal is to make responsive magazine feature style mini-sites as easily as possible. I've tried to support as many mediums as possible so they can be melded together into something cohesive and enjoyable. Let me know if there's anything missing, could be better, or any feedback at all at <strong>ejfox@ejfox.com</strong></p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <b>Excepteur</b> sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <em>Ut enim ad minim veniam</em>, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim <strong>aside 1 here</strong>. <aside><h4>This is what something in an aside looks like</h4> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</aside> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p> <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <strong>Photo aside here</strong> <aside><h4>Include images</h4><img src='http://farm8.staticflickr.com/7224/7136454201_52f63be956_z.jpg'><span class='caption'>Oakland police line up across 14th St.</span></aside>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
 },
 {
     "title": "Big images + Captions"
     ,"type": "image2"
     ,"url": "http://farm8.staticflickr.com/7038/6990421086_e92cafc3da_k.jpg"
     ,"caption": "You can place a short descriptive caption of the picture here. Think of it as a tweet."
+},
+{
+	"title": "Now with slideshows!!"
+	,"type": "slideshow"
+	,"slides" : [
+		{
+			"url": "http://farm9.staticflickr.com/8305/8018534029_5d0ba3470d_b.jpg"
+			,"caption": "Test image 1"
+		},
+		{
+			"url": "http://farm9.staticflickr.com/8174/8018538728_68ddc70891_b.jpg"
+			,"caption": "Test image 2"
+		},
+		{
+			"url": "http://farm9.staticflickr.com/8311/8018538532_2fa9aff47c_b.jpg"
+		}
+	]
+
 },
 {
     "type": "image2"
@@ -185,33 +203,9 @@ var examplesections = [{
     ,"url": "https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dFVxOEk0aGRxbk9URE9yeDJKMXNIS3c&output=html"
 },
 {
-    "title": "<a href='http://google.com'>You can make a link</a>"
-    ,"type": "image"
-    ,"url": "http://farm8.staticflickr.com/7112/7136431759_6cb409a7a8_k.jpg"
-},
-{
 	"title": "Test gist sStory section"
 	,"type": "gist"
 	,"url": "4138619"
-},
-{
-	"title": "Now for a slideshow!"
-	,"type": "slideshow"
-	,"slides" : [
-		{
-			"url": "http://farm9.staticflickr.com/8305/8018534029_5d0ba3470d_b.jpg"
-			,"caption": "Test image 1"
-		},
-		{
-			"url": "http://farm9.staticflickr.com/8174/8018538728_68ddc70891_b.jpg"
-			,"caption": "Slideshows are so much fun!"
-		},
-		{
-			"url": "http://farm9.staticflickr.com/8311/8018538532_2fa9aff47c_b.jpg"
-			,"caption": "Another slideshow image"
-		}
-	]
-
 }
 ]
 
@@ -221,13 +215,13 @@ $(document).ready(function(){
 	$("#section-1 h2").addClass("animated fadeInUp");
 
 
-	var scrollorama = $.scrollorama({
+	var tScrollorama = $.scrollorama({
 		blocks: '.section',
 		enablePin: false
 	});
 
-	scrollorama.onBlockChange(function(){
-		var i=scrollorama.blockIndex;
+	tScrollorama.onBlockChange(function(){
+		var i=tScrollorama.blockIndex;
 	});
 
 	$(".slider").bxSlider({
