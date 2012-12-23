@@ -91,7 +91,7 @@ Sections are passed to S-Story in an array of objects. For example:
     		{ "url": "http://farm9.staticflickr.com/8311/8018538532_2fa9aff47c_b.jpg" }
     	]
 
-    },
+    }
     ]
 
 Once you've created the objects for each of your sections, creating the sStory is as simple as
