@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title></title>
+	<!-- Place favicon.ico and apple-touch-icon.png in the root of your domain and delete these references -->
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" media="all" href=""/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
+
+	<link rel="stylesheet" href="lib/style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
+
+	<!-- Bring in animate.css | http://daneden.me/animate/ -->
+	<!--<link rel="stylesheet" href="animate.css" type="text/css" media="screen" title="no title" charset="utf-8"> -->
+
+	<!-- Bring in jQuery first, lots of other stuff depends on it -->
+	<script src="lib/js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/js/jquery.hoverintent.js" type="text/javascript" charset="utf-8"></script>
+
+	<!-- And underscore | http://documentcloud.github.com/underscore/ -->
+	<script src="lib/js/underscore-min.js" type="text/javascript" charset="utf-8"></script>
+
+	<!-- And D3 | https://github.com/mbostock/d3/wiki/API-Reference -->
+	<script src="lib/js/d3.v2.min.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="lib/js/ICanHaz.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="lib/js/storyjs-embed.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="lib/timeline.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+	<script src="lib/js/jquery.scrollorama.js" type="text/javascript" charset="utf-8"></script>
+
+	<!-- bxSlider Javascript file -->
+	<script src="lib/js/jquery.bxslider.js"></script>
+	<!-- bxSlider CSS file -->
+	<link href="lib/jquery.bxslider.css" rel="stylesheet" />
+
+	<!-- And the Open Sans Google Webfont | https://www.google.com/webfonts#UsePlace:use/Collection:Open+Sans
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,700italic,400,700,800,300' rel='stylesheet' type='text/css'> -->
+
+	<link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic|PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
+
+	<script src="lib/js/sStory.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="lib/style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
+</head>
+
+<body>
+<div id="nav">
+
+</div>
+<div id="nav-expand">&nbsp;</div>
+
+<div id="container">
+
+</div>
+
+
+<script id="image" type="text/html">
+<h2>{{{ title }}}</h2>
+</script>
+
+<script id="image2" type="text/html">
+<h2>{{{ title }}}</h2>
+<div class="imagecaption"><p>{{{ caption }}}</p></div>
+</script>
+
+<script id="image3" type="text/html">
+<h2>{{ title }}</h2>
+<div class="imagecaption longcaption"><p>{{{ caption }}}</p></div>
+</script>
+
+<script id="vimeo" type="text/html">
+<div class="video-container">
+<iframe src="{{ url }}" width="400" height="300" frameborder="0" wmode="transparent" webkitAllowFullScreen mozallowfullscreen allowFullScreen><param name="wmode" value="opaque"></iframe>
+</div>
+{{#caption}}
+<div class="video-caption">
+{{caption}}
+</div>
+{{/caption}}
+</script>
+
+<script id="soundcloud" type="text/html">
+<div class="soundcloud-container">
+{{#title}}
+<h2>{{ title }}</h2>
+{{/title}}
+		{{{ embed }}}
+</div>
+</script>
+
+<script id="text" type="text/html">
+<div class="text-container">
+{{#title}}
+<h2>{{ title }}</h2>
+{{/title}}
+
+{{{ text }}}
+</div>
+</script>
+
+<script id="gist" type="text/html">
+{{#title}}
+<h2>{{ title }}</h2>
+{{/title}}
+{{#files}}
+	<div class="gist-container">
+	<h4>{{filename}}</h4>
+	<pre>
+	{{content}}
+	</pre>
+	</div>
+{{/files}}
+</script>
+
+<script id="slideshow" type="text/html">
+{{#title}}
+<h2>{{ title }}</h2>
+{{/title}}
+
+<ul class="slider">
+{{#slides}}
+<li><img src="{{url}}" title="{{caption}}"/></li>
+{{/slides}}
+</ul>
+</script>
+
+<script id="navbarsection" type="text/html">
+<a class="nav-section" href="#section-{{count}}" id="nav-section-{{count}}"><img src="lib/images/type_icons/{{type}}.png" height="18px" width="18px" class="type-icon" /> {{ title }}</a>
+</script>
+
+<script type="text/javascript" charset="utf-8">
+
+
+// Place section code after the equal sign
+ var sections = [{"title":"The year I turned 19 I moved to Oakland","type":"image","url":"http://farm1.staticflickr.com/6/8050335_3a9c0e7063_o.jpg","caption":"","bgFixed": true, "count":1},{"title":"I had a job in SF and needed a place to live","type":"image2","url":"http://farm5.staticflickr.com/4080/4821608426_a3b4d999b8_b.jpg","caption":"I fell in love with the view from BART on the ride over, and moreso when I sat around the park in front of City Hall. But more than anything I needed a place to stay and unlike San Francisco, Oakland would have me. <a href=\"http://www.flickr.com/photos/digitalsight/4821608426/\">Photo by Michael MM</a>","count":2},{"title":"I moved in right around the time Occupy Oakland established camp","type":"image2","url":"http://farm2.staticflickr.com/1047/573630167_6f1daf6273_b.jpg","caption":"The park with the big Oak tree in front of city hall that I'd sat in when I was considering what would be my first apartment in Oakland quickly filled with my neighbors. I was overjoyed. <a href=\"http://www.flickr.com/photos/oso/573630167/\">Photo by oso</a>","count":3},{"title":" ","type":"image2","url":"http://farm7.staticflickr.com/6219/6285017099_b0c4e8e42e_b.jpg","caption":"<a href=\"http://www.flickr.com/photos/43005015@N06/6285017099/in/photostream/\">Photo by rawEarth</a>", "bgFixed": true, "count":4},{"title":" It wasn't long before Oakland was showing me the most beautiful things I've ever seen","type":"image2","url":"http://farm7.staticflickr.com/6057/6309543839_8561391068_o.jpg","caption":"My mom was visiting me for the first time in November. As we took the elevator up from the BART we emerged looking onto Broadway, where an enormous banner with \"DEATH TO CAPITALISM\" was strung up across the street. \"This is Oakland!\" I said. We both beamed. <a href=\"http://www.flickr.com/photos/alxndr/6309543839/\">Photo by alxndr</a>","count":5},{"title":"But I also met the biggest gang in Oakland","type":"image2","url":"http://farm8.staticflickr.com/7002/6782746241_e88618ed25_o.jpg","caption":"<a href=\"http://www.flickr.com/photos/ghalog/6782746241/in/photostream/\">Photo by glennshootspeople</a>","count":6},{"title":"And some people brave enough to stand up to them","type":"image2","url":"http://farm8.staticflickr.com/7023/6782708531_0441770e62_o.jpg","caption":"<a href=\"http://www.flickr.com/photos/ghalog/6782708531/in/photostream/\">Photo by glennshootspeople</a>","count":7},{"title":"I moved back to NY to be with family","type":"image2","url":"http://farm9.staticflickr.com/8051/8103386768_b68f901d7f_o.jpg","caption":"<a href=\"http://www.flickr.com/photos/specialkrb/8103386768/in/photostream/\">Photo by specialKRB</a>","count":8},{"title":"But I can't get Oakland out of my head","type":"image2","url":"http://farm5.staticflickr.com/4136/4848462523_8127c3a6e2_o.jpg","caption":"<a href=\"http://www.flickr.com/photos/eeetthaannn/4848462523/in/photostream/\">Photo by eeetthaannn</a>","count":9}]
+
+
+$(document).ready(function(){
+	sStory(sections);
+});
+
+
+</script>
+</body>
+</html>
