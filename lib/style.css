@@ -295,7 +295,6 @@ a:visited {
   text-align: center;
   color: white;
   text-shadow: rgba(10, 16, 16, 0.92) 0px 2px 4px;
-  opacity: 0.4 ;
 }
 .section h2 a:link,
 .section h2 a:visited {
@@ -312,6 +311,11 @@ a:visited {
   color: white;
   opacity: 1;
   border-bottom: 3px solid #fafafa;
+}
+@media only screen and (min-width: 768px) {
+  h2 {
+    opacity: 0.4;
+  }
 }
 .current-section h2,
 .current-section h4 {
@@ -360,8 +364,24 @@ a:visited {
 #section-1.image h2,
 #section-1.image2 h2,
 #section-1.image3 h2 {
-  font-size: 3.8em;
-  margin-top: 32%;
+  font-size: 2em;
+  margin-top: 25%;
+}
+@media only screen and (min-width: 767px) and (max-width: 1199px) {
+  #section-1.image h2,
+  #section-1.image2 h2,
+  #section-1.image3 h2 {
+    font-size: 3.8em;
+    margin-top: 32%;
+  }
+}
+@media only screen and (min-width: 1120px) {
+  #section-1.image h2,
+  #section-1.image2 h2,
+  #section-1.image3 h2 {
+    font-size: 5em;
+    margin-top: 18%;
+  }
 }
 .image2 .imagecaption {
   font-size: 0.8em;
@@ -629,17 +649,13 @@ Elastic videos
   top: 0;
   z-index: 1000;
   padding: 2px 1px;
-  -webkit-transition: all 0.16s ease-in;
-  -moz-transition: all 0.16s ease-in;
-  -o-transition: all 0.16s ease-in;
-  transition: all 0.16s ease-in;
+  -webkit-transition: all 0.46s cubic-bezier(0.4, -0.74, 0.34, 1.26);
+  -moz-transition: all 0.46s cubic-bezier(0.4, -0.74, 0.34, 1.26);
+  -o-transition: all 0.46s cubic-bezier(0.4, -0.74, 0.34, 1.26);
+  transition: all 0.46s cubic-bezier(0.4, -0.74, 0.34, 1.26);
 }
 #nav.nav-expanded {
   left: 10px;
-  -webkit-transition: all 0.36s ease-out;
-  -moz-transition: all 0.36s ease-out;
-  -o-transition: all 0.36s ease-out;
-  transition: all 0.36s ease-out;
 }
 #nav:hover {
   opacity: 1;
@@ -960,9 +976,6 @@ px      68    160    252    */
   body {
     width: 100%;
   }
-  #nav {
-    display: none;
-  }
   .section {
     padding-top: 24px;
     height: 436px;
@@ -1045,7 +1058,7 @@ px      68    160    252    */
   .text .text-container {
     margin-top: 18px;
     padding-bottom: 18px;
-    width: 75%;
+    width: 100%;
     line-height: 1.4em;
     margin-left: auto;
     margin-right: auto;

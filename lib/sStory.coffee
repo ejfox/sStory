@@ -277,8 +277,8 @@ sStory = (sections) ->
 
     $("#nav a:first").addClass("current-section")
 
+    ###
     if $(document).width() > 800
-
       scrollorama.animate('#header-1', {
         duration: 300,
         property: "margin-top",
@@ -286,7 +286,7 @@ sStory = (sections) ->
         end: 0,
         easing: 'ease-in'
         })
-
+    ###
 
     scrollorama.onBlockChange(() ->
             i=scrollorama.blockIndex;
