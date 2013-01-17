@@ -18,40 +18,40 @@
 	Should be compiled from style.less
 	I use http://wearekiss.com/simpless for auto-compiling on save
 	-->
-	<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
+	<link rel="stylesheet" href="lib/style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
 
 	<!-- Bring in animate.css | http://daneden.me/animate/ -->
 	<!--<link rel="stylesheet" href="animate.css" type="text/css" media="screen" title="no title" charset="utf-8"> -->
 
 	<!-- Bring in jQuery first, lots of other stuff depends on it -->
-	<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/js/jquery.hoverintent.js" type="text/javascript" charset="utf-8"></script>
 
-	<!-- And underscore | http://documentcloud.github.com/underscore/
-	<script src="js/underscore-min.js" type="text/javascript" charset="utf-8"></script>	-->
+	<!-- And underscore | http://documentcloud.github.com/underscore/ -->
+	<script src="lib/js/underscore-min.js" type="text/javascript" charset="utf-8"></script>
 
 	<!-- And D3 | https://github.com/mbostock/d3/wiki/API-Reference -->
-	<script src="js/d3.v2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/js/d3.v2.min.js" type="text/javascript" charset="utf-8"></script>
 
-	<!-- And Lettering.js | https://github.com/davatron5000/Lettering.js
-	<script src="js/jquery.lettering.js" type="text/javascript" charset="utf-8"></script> -->
+	<script src="lib/js/ICanHaz.js" type="text/javascript" charset="utf-8"></script>
 
-	<!-- And Scrollorama | http://johnpolacek.github.com/scrollorama/
-	<script src="js/jquery.scrollorama.js" type="text/javascript" charset="utf-8"></script> -->
+	<script src="lib/js/storyjs-embed.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="lib/timeline.css" type="text/css" media="screen" title="no title" charset="utf-8">
 
-	<!-- And Tabletop | https://github.com/jsoma/tabletop
-	<script src="js/tabletop.js" type="text/javascript" charset="utf-8"></script> -->
+	<script src="lib/js/jquery.scrollorama.js" type="text/javascript" charset="utf-8"></script>
 
-	<!-- And the Open Sans Google Webfont | https://www.google.com/webfonts#UsePlace:use/Collection:Open+Sans-->
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,800,300' rel='stylesheet' type='text/css'>
+	<!-- bxSlider Javascript file -->
+	<script src="lib/js/jquery.bxslider.js"></script>
+	<!-- bxSlider CSS file -->
+	<link href="lib/jquery.bxslider.css" rel="stylesheet" />
 
-	<script src="js/ICanHaz.js" type="text/javascript" charset="utf-8"></script>
+	<!-- And the Open Sans Google Webfont | https://www.google.com/webfonts#UsePlace:use/Collection:Open+Sans
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,700italic,400,700,800,300' rel='stylesheet' type='text/css'> -->
 
+	<link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic|PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
 
-	<script src="js/storyjs-embed.js" type="text/javascript" charset="utf-8"></script>
-	<link rel="stylesheet" href="timeline.css" type="text/css" media="screen" title="no title" charset="utf-8">
-
-	<script src="js/sStory.js" type="text/javascript" charset="utf-8"></script>
-
+	<script src="lib/js/sStory.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="lib/style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
 
 
 </head>
@@ -146,7 +146,7 @@
 
 
 // Place section code after the equal sign
- var sections = [{"title":"THIS IS A BIRD SON","type":"image","url":"http://24.media.tumblr.com/tumblr_mbqjlnVd5W1qz758ro1_1280.jpg","caption":""},{"title":"CAWW CAWW MOTHER FUCKER","type":"image3","url":"http://24.media.tumblr.com/tumblr_mbqjm62i5L1qz758ro1_1280.jpg","caption":"<h2>This is a long paragraph</h2>\n<p>Does this work? Does it convert right? What is the <strong>problem</strong>?</p>\n<ul>\n<li>ONE</li>\n<li>TWO</li>\n<li>THREE</li>\n</ul>"}]
+// var sections = PUT_YOUR_JSON_HERE
 
 
 $(document).ready(function(){
