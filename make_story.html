@@ -19,12 +19,14 @@
 	<!-- Bring in animate.css | http://daneden.me/animate/ -->
 	<!--<link rel="stylesheet" href="animate.css" type="text/css" media="screen" title="no title" charset="utf-8"> -->
 
-	<!-- Bring in jQuery first, lots of other stuff depends on it -->
 	<script src="lib/js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="lib/js/jquery.hoverintent.js" type="text/javascript" charset="utf-8"></script>
 
 	<!-- And underscore | http://documentcloud.github.com/underscore/ -->
 	<script src="lib/js/underscore-min.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="lib/js/backbone.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="lib/js/jquery.hoverintent.js" type="text/javascript" charset="utf-8"></script>
 
 	<!-- And D3 | https://github.com/mbostock/d3/wiki/API-Reference -->
 	<script src="lib/js/d3.v2.min.js" type="text/javascript" charset="utf-8"></script>
@@ -112,19 +114,16 @@
 </div>
 
 <script id="image" type="text/html">
-<h2 class="{{ shade }}">{{{ title }}}</h2>
-<!-- <img src="{{ url }}"  style="height: {{ height }};" /> -->
+<h2 id="header-{{count}}">{{{ title }}}</h2>
 </script>
 
 <script id="image2" type="text/html">
-<h2 class="{{ shade }}">{{{ title }}}</h2>
-<!-- <img src="{{ url }}" title="{{ caption }}" style="height: {{ height }};" /> -->
+<h2 id="header-{{count}}">{{{ title }}}</h2>
 <div class="imagecaption"><p>{{{ caption }}}</p></div>
 </script>
 
 <script id="image3" type="text/html">
-<h2 class="{{ shade }}">{{ title }}</h2>
-<!-- <img src="{{ url }}" title="{{ caption }}" style="height: {{ height }};" /> -->
+<h2 id="header-{{count}}">{{ title }}</h2>
 <div class="imagecaption longcaption"><p>{{{ caption }}}</p></div>
 </script>
 
@@ -142,20 +141,48 @@
 <script id="soundcloud" type="text/html">
 <div class="soundcloud-container">
 {{#title}}
-<h2 class="{{ shade }}">{{ title }}</h2>
+<h2>{{ title }}</h2>
 {{/title}}
 		{{{ embed }}}
 </div>
 </script>
 
 <script id="text" type="text/html">
+<div class="text-container">
 {{#title}}
 <h2>{{ title }}</h2>
 {{/title}}
-<div class="text-container">
+
 {{{ text }}}
 </div>
 </script>
+
+<script id="gist" type="text/html">
+{{#title}}
+<h2>{{ title }}</h2>
+{{/title}}
+{{#files}}
+	<div class="gist-container">
+	<h4>{{filename}}</h4>
+	<pre>
+	{{content}}
+	</pre>
+	</div>
+{{/files}}
+</script>
+
+<script id="slideshow" type="text/html">
+{{#title}}
+<h2>{{ title }}</h2>
+{{/title}}
+
+<ul class="slider">
+{{#slides}}
+<li><img src="{{url}}" title="{{caption}}"/></li>
+{{/slides}}
+</ul>
+</script>
+
 
 <script id="navbarsection" type="text/html">
 <a class="nav-section" href="#section-{{count}}" id="nav-section-{{count}}"><img src="lib/images/type_icons/{{type}}.png" height="18px" width="18px" class="type-icon" /> {{ title }}</a>
@@ -198,6 +225,8 @@ $(document).ready(function(){
             $(this).text("Hide")
         }
     })
+	
+	initStoryMaker();
 });
 
 

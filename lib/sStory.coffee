@@ -87,104 +87,7 @@ makeBuilder = (sections) ->
     summarycontent.append("div").attr("class", "image-url").text((d,i) -> d.url)
 #    summarycontent.append("div").attr("class", "sectiontext").text((d,i) -> d.caption)
 
-correctInputs = ->
-    switch $('#type').val()
-        when "image"
-            $('#embed-wrapper').hide()
-            $('#caption').hide()
-            $('#url-wrapper').show();
-        when "image2"
-            $('#embed-wrapper').hide()
-            $('#caption').show()
-            $('#url-wrapper').show()
-            $('#caption').attr("rows", 2)
-        when "image3"
-            $('#embed-wrapper').hide()
-            $('#caption').show()
-            $('#url-wrapper').show();
-            $('#caption').attr("rows", 5)
-        when "vimeo"
-            $('#embed-wrapper').hide()
-            $('#caption').show()
-            $('#url-wrapper').show();
-        when "soundcloud"
-            $('#embed-wrapper').show()
-            $('#caption').hide()
-            $('#url-wrapper').hide();
-        when "timeline"
-            $('#embed-wrapper').hide()
-            $('#caption').hide()
-            $('#url-wrapper').show();
-        when "text"
-            $('#embed-wrapper').hide()
-            $('#caption').show()
-            $('#url-wrapper').hide();
 
-getJsonCode = ->
-    $('#json-code').val(JSON.stringify(sections)).show()
-
-submitNewSection = ->
-    section = {}
-
-    $("#error-bar").html("").css("opacity", 0);
-
-    section.title = $("#add-section #title").val();
-    section.url = $("#add-section #url").val();
-    section.caption = $("#add-section #caption textarea").val();
-    section.type = $("#add-section #type").val();
-    section.embed = $("#add-section #embed").val();
-
-    console.log "New #{section.type} section", section
-
-
-
-    if section.title is ""
-        $("#error-bar").html("Every section needs a title, could you add one?").css("opacity", 1)
-        return false
-    else if section.url is "" and section.type isnt "text"
-        $("#error-bar").html("Looks like you forgot to add the URL.").css("opacity", 1)
-        return false
-    else if section.type is "image2" and section.caption is ""
-        $("#error-bar").html("This section type needs a caption.").css("opacity", 1)
-        return false
-    else if section.type is "image3" and section.caption is ""
-        $("#error-bar").html("This section type needs a caption.").css("opacity", 1)
-        return false
-    else if section.type is "text" and section.caption is ""
-        $("#error-bar").html("I think you may have forgotten your text!").css("opacity", 1)
-        return false
-
-    if section.type is "image" or section.type is "image2" or section.type is "image3"
-        sections.push({
-            title: section.title
-            type: section.type
-            url: section.url
-            caption: section.caption
-            })
-    else if section.type is "vimeo"
-        sections.push({
-            title: section.title
-            type: section.type
-            url: section.url
-            caption: section.caption
-        })
-    else if section.type is "soundcloud"
-        sections.push({
-            title: section.title
-            type: section.type
-            embed: section.embed
-        })
-    else if section.type is "text"
-        sections.push({
-            title: section.title
-            type: section.type
-            text: section.caption
-        })
-
-    $("#container").html("");
-    $("#section-summary ol").html("");
-    sStory(sections)
-    makeBuilder(sections)
 
 getGistFiles = (d, i) ->
     gistid = d.url
@@ -298,3 +201,184 @@ sStory = (sections) ->
             $(".section").removeClass("current-section")
             $("#section-"+(i+1)).addClass("current-section")
     );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Story maker stuff
+
+
+initStoryMaker = ->
+    
+    
+###    
+    sStoryModel = Backbone.Model.extend({
+            "title": "No title!"
+    })
+    
+    sStoryCollection = Backbone.Collection.extend({
+            model: sStoryModel
+    })
+    
+    sStoryView = Backbone.View.extend({
+            el: "#container"
+            
+            initialize: -> 
+                this.collection = new sStoryCollection()
+                this.collection.bind('add', this.appendItem)
+                this.render()
+            
+            render: -> 
+                
+                self = this
+                
+                sectionObjects = this.options.sections
+
+                fullHtml = ""
+                
+                _.each sectionObjects, (section) ->
+                    console.log("SECTION URL", section.url)
+                    if section.type is "image" or section.type is "image2" or section.type is "image3"
+                        sectionStyles = 'background-image: url("'+section.url+'"); '
+                    
+                    
+                    
+                    console.log "SECTION!", section
+                    sectionType = section.type
+                                            
+                    ichHTML = ich[sectionType](section, true);
+                    fullHtml += "<div class='section "+sectionType+"' style='"+sectionStyles+"'>"+ichHTML+"</div>"
+                
+                $(this.el).html(fullHtml)
+                return this.el;
+    
+    })
+    
+    storyView = new sStoryView({
+            "sections" :
+                "section1" :
+                    "title": "Hi!"
+                    "url": "http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg"
+                    "type": "image"
+    })
+###    
+    
+    
+	
+correctInputs = ->
+    switch $('#type').val()
+        when "image"
+            $('#embed-wrapper').hide()
+            $('#caption').hide()
+            $('#url-wrapper').show();
+        when "image2"
+            $('#embed-wrapper').hide()
+            $('#caption').show()
+            $('#url-wrapper').show()
+            $('#caption').attr("rows", 2)
+        when "image3"
+            $('#embed-wrapper').hide()
+            $('#caption').show()
+            $('#url-wrapper').show();
+            $('#caption').attr("rows", 5)
+        when "vimeo"
+            $('#embed-wrapper').hide()
+            $('#caption').show()
+            $('#url-wrapper').show();
+        when "soundcloud"
+            $('#embed-wrapper').show()
+            $('#caption').hide()
+            $('#url-wrapper').hide();
+        when "timeline"
+            $('#embed-wrapper').hide()
+            $('#caption').hide()
+            $('#url-wrapper').show();
+        when "text"
+            $('#embed-wrapper').hide()
+            $('#caption').show()
+            $('#url-wrapper').hide();
+
+getJsonCode = ->
+    $('#json-code').val(JSON.stringify(sections)).show()
+
+submitNewSection = ->
+    section = {}
+
+    $("#error-bar").html("").css("opacity", 0);
+
+    section.title = $("#add-section #title").val();
+    section.url = $("#add-section #url").val();
+    section.caption = $("#add-section #caption textarea").val();
+    section.type = $("#add-section #type").val();
+    section.embed = $("#add-section #embed").val();
+
+    console.log "New #{section.type} section", section
+
+
+
+    if section.title is ""
+        $("#error-bar").html("Every section needs a title, could you add one?").css("opacity", 1)
+        return false
+    else if section.url is "" and section.type isnt "text"
+        $("#error-bar").html("Looks like you forgot to add the URL.").css("opacity", 1)
+        return false
+    else if section.type is "image2" and section.caption is ""
+        $("#error-bar").html("This section type needs a caption.").css("opacity", 1)
+        return false
+    else if section.type is "image3" and section.caption is ""
+        $("#error-bar").html("This section type needs a caption.").css("opacity", 1)
+        return false
+    else if section.type is "text" and section.caption is ""
+        $("#error-bar").html("I think you may have forgotten your text!").css("opacity", 1)
+        return false
+
+    if section.type is "image" or section.type is "image2" or section.type is "image3"
+        sections.push({
+            title: section.title
+            type: section.type
+            url: section.url
+            caption: section.caption
+            })
+    else if section.type is "vimeo"
+        sections.push({
+            title: section.title
+            type: section.type
+            url: section.url
+            caption: section.caption
+        })
+    else if section.type is "soundcloud"
+        sections.push({
+            title: section.title
+            type: section.type
+            embed: section.embed
+        })
+    else if section.type is "text"
+        sections.push({
+            title: section.title
+            type: section.type
+            text: section.caption
+        })
+
+    $("#container").html("");
+    $("#section-summary ol").html("");
+    sStory(sections)
+    makeBuilder(sections)

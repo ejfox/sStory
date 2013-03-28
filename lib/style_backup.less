@@ -135,6 +135,149 @@
   transform: translate(@x, @y);
 }
 
+/*	Less Framework 4
+	http://lessframework.com
+	by Joni Korpi
+	License: http://opensource.org/licenses/mit-license.php	*/
+
+
+/*	Resets
+	------	*/
+
+/* apply a natural box layout model to all elements */
+/* from http://paulirish.com/2012/box-sizing-border-box-ftw/ */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+/* maxvoltar.com/archive/-webkit-font-smoothing */
+html { -webkit-font-smoothing: antialiased; }
+
+
+pre {
+	padding: 15px;
+	white-space: pre; /* CSS2 */
+	white-space: pre-wrap; /* CSS 2.1 */
+	white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+	word-wrap: break-word; /* IE */
+}
+
+/* hand cursor on clickable input elements */
+label, input[type=button], input[type=submit], button { cursor: pointer; }
+
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em,
+img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, hgroup,
+menu, footer, header, nav, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+article, aside, canvas, figure, figure img, figcaption, hgroup,
+footer, header, nav, section, audio, video { display: block; }
+
+a img {border: 0;}
+
+
+
+/*	Color variables
+	------------------	*/
+
+@fontcolor: #454545;
+@bgcolor: #f7f7f7;
+/* Highlight color, when user selects text */
+@highlight: #b5bfcb;
+
+/* Link color, hover/visited will be generated from this */
+@linkcolor: #10206d;
+
+
+/* Selection colours (easy to forget) */
+
+::selection 	 	{background: @highlight;}
+::-moz-selection 	{background: @highlight;}
+img::selection 		{background: transparent;}
+img::-moz-selection	{background: transparent;}
+body {-webkit-tap-highlight-color: @highlight;}
+
+/*	Typography presets
+	------------------	*/
+
+.gigantic {
+	font-size: 116px;
+	line-height: 120px;
+	letter-spacing: -2px;
+}
+
+.huge, h1 {
+	color: darken(@fontcolor, 35%);
+	font-size: 72px;
+	line-height: 78px;
+	letter-spacing: -1px;
+	font-weight: 800;
+	margin-bottom: 12px;
+}
+
+.large, h2 {
+	color: darken(@fontcolor, 12%);
+	font-size: 44px;
+	line-height: 48px;
+	font-weight: 800;
+}
+
+.bigger, h3 {
+	color: darken(@fontcolor, 10%);
+	font-size: 28px;
+	line-height: 36px;
+	font-weight: 800;
+}
+
+.big, h4 {
+	color: darken(@fontcolor, 7%);
+	font-size: 24px;
+	line-height: 30px;
+	font-weight: 700;
+}
+
+body {
+	//font: 17px/24px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: 17px/24px 'Lora', Georgia, serif;
+	font-weight: 400 !important;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'PT Sans Narrow', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.small, small {
+	font-size: 13px;
+	line-height: 18px;
+}
+
+.border-radius (@radius) {
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+
+/*	Column class / mixins
+	---------------------	*/
+
+.1-column { width:  68px;   }
+.2-column { width: 160px;  }
+.3-column { width: 252px;  }
+.4-column { width: 344px;  }
+.5-column { width: 436px;  }
+.6-column { width: 528px;  }
+.7-column { width: 620px;  }
+.8-column { width: 712px;  }
+.9-column { width: 804px;  }
+.10-column {width: 896px; }
+
+
+
 
 /*		Default Layout: 992px.
 		Gutters: 24px.
@@ -146,18 +289,35 @@ px      68    160    252    344    436    528    620    712    804    896    */
 
 @sectionheight: 812px;
 
-#sstory-container {
+body {
 //	width: 896px;
 	width: 100%;
 //	padding: 32px 48px 84px;
+	background: @bgcolor;
+	color: @fontcolor;
 	-webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
 	margin-left: auto;
 	margin-right: auto;
 //	background-image: url(images/whitey.png);
 //	background-repeat: repeat;
 }
+a {
+	&:link{
+		color: @linkcolor;
+	 	.transition(0.24s, ease-in-out)
 
-#sstory-container .section {
+	}
+	&:hover {
+		@darklinkcolor: darken(@linkcolor, 15%);
+		color: @darklinkcolor;
+	}
+	&:visited {
+		@darklinkcolor: darken(@linkcolor, 18%);
+		color: @darklinkcolor;
+	}
+}
+
+.section {
 	height: @sectionheight;
 
   &.bg-fixed {
@@ -312,7 +472,7 @@ h2 {
 	}
 
 }
-#sstory-container .map {
+.map {
     display: none;
 }
 .soundcloud {
@@ -331,7 +491,7 @@ h2 {
 
     margin-bottom: 12px;
 }
-#sstory-container .timeline {
+.timeline {
     margin-top: 12px;
     height: 672px;
     margin-bottom: 92px;
@@ -345,7 +505,7 @@ h2 {
         text-shadow:rgba(250, 246, 246, 0.92) 0px 2px 3px;
     }
 }
-#sstory-container .section.text {
+.section.text {
 
     font-weight: 300;
     font-size: 1.2em;
@@ -391,7 +551,7 @@ h2 {
       text-align: left;
     }
 }
-#sstory-container .text-container {
+.text-container {
     margin-top:24px;
     padding-bottom: 24px;
     width: 52%;
@@ -451,7 +611,7 @@ h2 {
     }
 }
 
-#sstory-container .section.gist {
+.section.gist {
   .drop-shadow( 0, -6px,10px, 0.1);
 
   border-top: 4px solid white;
@@ -476,13 +636,13 @@ h2 {
     margin: 44px 4px;
   }
 }
-#sstory-container .vimeo {
+.vimeo {
     padding: 0;
 //    overflow: auto;
 //    height: @sectionheight - 105;
   height: auto;
 }
-#sstory-container .video-caption {
+.video-caption {
     font-size: 0.8em;
     line-height: 1.3em;
     max-height: 344px;
@@ -507,7 +667,7 @@ h2 {
 /*
 Elastic videos
 */
-#sstory-container .video-container {
+.video-container {
   height: 100%;
   position: relative;
   padding-bottom: 56.25%;
@@ -542,7 +702,7 @@ Elastic videos
 }
 
 
-#sstory-container #error-bar {
+#error-bar {
     /*background-color: #ff9300;*/
     background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 147, 0, 0.70)), to(rgba(214, 34, 0, 0.80)));
     background-image: -webkit-linear-gradient(top, rgba(255, 147, 0, 0.70), rgba(214, 34, 0, 0.80));
@@ -569,7 +729,7 @@ Elastic videos
 }
 
 /* --- Navbar stuff --- */
-#sstory-container #nav {
+#nav {
     font-family: 'PT Sans Narrow', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     opacity: 0.75;
     border-radius: 4px;
@@ -633,7 +793,7 @@ Elastic videos
 
 }
 
-#sstory-container #nav-expand {
+#nav-expand {
   height: 100%;
   width: 10px;
   z-index: 1001;
@@ -659,7 +819,7 @@ Elastic videos
 
     }
   }
-#sstory-container .nav-section {
+.nav-section {
     min-height: 24px;
     position: relative;
     cursor: pointer;
