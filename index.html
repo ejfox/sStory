@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>sStory v1</title>
+  <!-- <link rel="stylesheet" href="/coffeescript-meet-backbonejs/style.css"> -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://underscorejs.org/underscore.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="handlebars.js" type="text/javascript" charset="utf-8"></script>  
+  <script src="jquery.sortable.js" type="text/javascript" charset="utf-8"></script>
+  
+  <script src="sstory.js"></script>
+  
+  <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+  <header>
+    <h1>sStory</h1>
+  </header>
+  
+  <div id="story-editor">
+    <div id="content-editor">
+      <select name="new-section-type" id="new-section-type" size="1">     
+      </select>
+      
+      <div id="editor-inputs">
+        
+      </div>
+      
+      <button id="add-section">Add section</button>     
+    </div>
+    
+    <ul id="section-list">
+      
+    </ul>
+  </div>
+  
+  <div id="content">
+    
+  </div>
+  
+  
+</body>
+</html>
+
+
+<!-- Editor templates -->
+
+<script id="editor-template-photoUrl" class="editor-template" type="text/x-handlebars-template">
+  <input type="text" id="editor-section-photoUrl" placeholder="Photo URL"></input>  
+</script>
+
+<script id="editor-template-title" class="editor-template" type="text/x-handlebars-template">
+  <input type="text" id="editor-section-title" placeholder="Title"></input>  
+</script>
+
+<script id="editor-template-caption" class="editor-template" type="text/x-handlebars-template">
+  <input type="text" id="editor-section-caption" placeholder="Caption"></input>  
+</script>
+
+<script id="editor-template-embedCode" class="editor-template" type="text/x-handlebars-template">
+  <input type="text" id="editor-section-embedCode" placeholder="Embed Code"></input>  
+</script>
+
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
