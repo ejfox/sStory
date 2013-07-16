@@ -16,7 +16,7 @@ class sStory
     _.each(@story_list, (section, i) ->
         # Append the contents of each section to the page
         sectionHtml = templates["section-template-"+section.type](section)
-        sectionContent = $("<div class='"+section.type+"'></div>").html(sectionHtml)
+        sectionContent = $("<div id='"+i+"' class='"+section.type+"'></div>").html(sectionHtml)
         $content.append(sectionContent)
     )
     return @story_list
@@ -33,13 +33,13 @@ class sStoryEditor
     @sectionTypes =
       photo:
         photoBigText:
-          inputs: ['photoUrl', 'title']
+          inputs: ['title', 'photoUrl']
           mustHave: ['photoUrl']
         photoCaption:
-          inputs: ['photoUrl', 'caption', 'title']
+          inputs: ['title', 'photoUrl', 'caption']
           mustHave: ['photoUrl', 'caption']
       video:
-        videoYouTube:
+        videoYoutube:
           inputs: ['embedCode', 'caption']
           mustHave: ['embedCode']
         videoVimeo:
@@ -47,7 +47,7 @@ class sStoryEditor
           mustHave: ['embedCode']
       sound:
         soundSoundcloud:
-          inputs: ['embedCode', 'title']
+          inputs: ['title', 'embedCode']
           mustHave: ['embedCode']
       location:
         locationSinglePlace:
@@ -133,20 +133,56 @@ class sStoryEditor
         $editor.append($template)
     )
     
-    
-    
-    
   renderSectionList: ->
     # Render a re-arrangeable list of each section for the editor
     $content = $('#section-list')
     
-    $content.html("")    
+    $content.html("")
+    
+    that = this    
     _.each(@story_list, (section, i) ->
         # Append the contents of each section to the page
-        sectionContent = section.type + " "
+        
+        sectionIcon = ""
+        sectionMainType = ""
+        console.log section.type
+        
+        switch section.type
+          when "photoBigText"
+            sectionMainType = "photo"
+          when "photoCaption"
+            sectionMainType = "photo"            
+          
+          when "videoYoutube"
+            sectionMainType = "video"
+          when "videoVimeo"
+            sectionMainType = "video"
+            
+          when "soundSoundcloud"
+            sectionMainType = "sound"
+          
+          when "locationSinglePlace"
+            sectionMainType = "location"
+          
+        switch sectionMainType
+          when "photo"
+            sectionIcon = "<i class=\"icon-camera\"></i>"
+          when "video"
+            sectionIcon = "<i class=\"icon-video\"></i>"
+          when "sound"
+            sectionIcon = "<i class=\"icon-volume-up\"></i>"
+          when "location"
+            sectionIcon = "<i class=\"icon-location-circled\"></i>"
+        
+        deleteIcon = "<i class=\"icon-cancel-squared delete-section\"></i>"
+        sectionContent = deleteIcon + sectionIcon + " "
         if section.title isnt undefined
           sectionContent += section.title
-        $content.append($("<li>"+sectionContent+"</li>"))
+        $content.append($("<li id='"+i+"'>"+sectionContent+"</li>"))
+        
+        $("i.delete-section").on("click", ->
+            that.deleteSection($(this).parent().attr('id'))
+        )
     )
 
     $sortable = $content.sortable()
@@ -156,6 +192,8 @@ class sStoryEditor
         sortableSet = true
     );
     
+  deleteSection: (section) ->
+    console.log("Delete "+section)
     
   addSection: (section) ->
     # Add a new section to @story_list
@@ -211,6 +249,6 @@ $(document).ready(->
   d3.select("#add-section")
     .on("click", ->
       storyEditor.addSection()
-      $("#editor-inputs input").val("")
+      $("#editor-inputs input").val(" ")
     )
 )

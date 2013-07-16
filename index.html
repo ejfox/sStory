@@ -13,6 +13,10 @@
   <script src="sstory.js"></script>
   
   <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  
+  <link rel="stylesheet" href="css/trib.css">
+  <link rel="stylesheet" href="css/animation.css"><!--[if IE 7]>
+  <link rel="stylesheet" href="css/trib-ie7.css"><![endif]-->
 </head>
 <body>
   <header>
@@ -66,7 +70,7 @@
 {{caption}}
 </script>
 
-<script id="section-template-videoYouTube" class="section-template" type="text/x-handlebars-template">
+<script id="section-template-videoYoutube" class="section-template" type="text/x-handlebars-template">
 {{#if caption}}
   {{caption}}
 {{/if}}
@@ -104,23 +108,33 @@
 
 <!-- Editor templates -->
 <script id="editor-template-photoUrl" class="editor-template" type="text/x-handlebars-template">
-  <input type="text" id="editor-section-photoUrl" placeholder="Photo URL"></input>  
+<p>
+  <i class="icon-infinity"></i> <input type="text" id="editor-section-photoUrl" placeholder="Photo URL"></input>  
+</p>
 </script>
 
 <script id="editor-template-title" class="editor-template" type="text/x-handlebars-template">
-  <input type="text" id="editor-section-title" placeholder="Title"></input>  
+<p>
+   <i class="icon-dot-3"></i> <input type="text" id="editor-section-title" placeholder="Title"></input>  
+</p>
 </script>
 
 <script id="editor-template-caption" class="editor-template" type="text/x-handlebars-template">
-  <input type="text" id="editor-section-caption" placeholder="Caption"></input>  
+<p>
+  <i class="icon-quote"></i> <input type="text" id="editor-section-caption" placeholder="Caption"></input>  
+</p>
 </script>
 
 <script id="editor-template-embedCode" class="editor-template" type="text/x-handlebars-template">
-  <input type="text" id="editor-section-embedCode" placeholder="Embed Code"></input>  
+<p>
+  <i class="icon-code"></i> <input type="text" id="editor-section-embedCode" placeholder="Embed Code"></input>  
+</p>
 </script>
 
 <script id="editor-template-address" class="editor-template" type="text/x-handlebars-template">
-  <input type="text" id="editor-section-address" placeholder="Address"></input>  
+<p>
+  <i class="icon-address"></i> <input type="text" id="editor-section-address" placeholder="Address"></input>  
+</p>
 </script>
 
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>

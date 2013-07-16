@@ -25,7 +25,7 @@ sStory = (function() {
       var sectionContent, sectionHtml;
 
       sectionHtml = templates["section-template-" + section.type](section);
-      sectionContent = $("<div class='" + section.type + "'></div>").html(sectionHtml);
+      sectionContent = $("<div id='" + i + "' class='" + section.type + "'></div>").html(sectionHtml);
       return $content.append(sectionContent);
     });
     return this.story_list;
@@ -46,16 +46,16 @@ sStoryEditor = (function() {
     this.sectionTypes = {
       photo: {
         photoBigText: {
-          inputs: ['photoUrl', 'title'],
+          inputs: ['title', 'photoUrl'],
           mustHave: ['photoUrl']
         },
         photoCaption: {
-          inputs: ['photoUrl', 'caption', 'title'],
+          inputs: ['title', 'photoUrl', 'caption'],
           mustHave: ['photoUrl', 'caption']
         }
       },
       video: {
-        videoYouTube: {
+        videoYoutube: {
           inputs: ['embedCode', 'caption'],
           mustHave: ['embedCode']
         },
@@ -66,7 +66,7 @@ sStoryEditor = (function() {
       },
       sound: {
         soundSoundcloud: {
-          inputs: ['embedCode', 'title'],
+          inputs: ['title', 'embedCode'],
           mustHave: ['embedCode']
         }
       },
@@ -151,18 +151,58 @@ sStoryEditor = (function() {
   };
 
   sStoryEditor.prototype.renderSectionList = function() {
-    var $content, $sortable;
+    var $content, $sortable, that;
 
     $content = $('#section-list');
     $content.html("");
+    that = this;
     _.each(this.story_list, function(section, i) {
-      var sectionContent;
+      var deleteIcon, sectionContent, sectionIcon, sectionMainType;
 
-      sectionContent = section.type + " ";
+      sectionIcon = "";
+      sectionMainType = "";
+      console.log(section.type);
+      switch (section.type) {
+        case "photoBigText":
+          sectionMainType = "photo";
+          break;
+        case "photoCaption":
+          sectionMainType = "photo";
+          break;
+        case "videoYoutube":
+          sectionMainType = "video";
+          break;
+        case "videoVimeo":
+          sectionMainType = "video";
+          break;
+        case "soundSoundcloud":
+          sectionMainType = "sound";
+          break;
+        case "locationSinglePlace":
+          sectionMainType = "location";
+      }
+      switch (sectionMainType) {
+        case "photo":
+          sectionIcon = "<i class=\"icon-camera\"></i>";
+          break;
+        case "video":
+          sectionIcon = "<i class=\"icon-video\"></i>";
+          break;
+        case "sound":
+          sectionIcon = "<i class=\"icon-volume-up\"></i>";
+          break;
+        case "location":
+          sectionIcon = "<i class=\"icon-location-circled\"></i>";
+      }
+      deleteIcon = "<i class=\"icon-cancel-squared delete-section\"></i>";
+      sectionContent = deleteIcon + sectionIcon + " ";
       if (section.title !== void 0) {
         sectionContent += section.title;
       }
-      return $content.append($("<li>" + sectionContent + "</li>"));
+      $content.append($("<li id='" + i + "'>" + sectionContent + "</li>"));
+      return $("i.delete-section").on("click", function() {
+        return that.deleteSection($(this).parent().attr('id'));
+      });
     });
     $sortable = $content.sortable();
     return $sortable.bind('sortupdate', function() {
@@ -171,6 +211,10 @@ sStoryEditor = (function() {
       console.log("re-sort!", $(this));
       return sortableSet = true;
     });
+  };
+
+  sStoryEditor.prototype.deleteSection = function(section) {
+    return console.log("Delete " + section);
   };
 
   sStoryEditor.prototype.addSection = function(section) {
@@ -214,6 +258,6 @@ $(document).ready(function() {
   storyEditor = new sStoryEditor(story);
   return d3.select("#add-section").on("click", function() {
     storyEditor.addSection();
-    return $("#editor-inputs input").val("");
+    return $("#editor-inputs input").val(" ");
   });
 });
