@@ -15,7 +15,16 @@
   background-color: #ccc;
 }
 .must-have {
-  border: 2px solid #f00;
+  border: 1px solid #f00;
+}
+#section-list {
+  margin: 0;
+  padding: 0;
+}
+#section-list li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 .photoBigText img {
   max-width: 200px;
