@@ -10,15 +10,23 @@ sStory = (function() {
   }
 
   sStory.prototype.render = function() {
-    var $content;
+    var $content, templates;
 
     $content = $('#content');
     $content.html("");
-    _.each(this.story_list, function(section, i) {
-      var sectionContent;
+    templates = {};
+    $(".section-template").each(function() {
+      var templateSource;
 
-      sectionContent = JSON.stringify(section);
-      return $content.append($("<h2>" + sectionContent + "</h2>"));
+      templateSource = $(this).html();
+      return templates[$(this).attr('id')] = Handlebars.compile(templateSource);
+    });
+    _.each(this.story_list, function(section, i) {
+      var sectionContent, sectionHtml;
+
+      sectionHtml = templates["section-template-" + section.type](section);
+      sectionContent = $("<div class='" + section.type + "'></div>").html(sectionHtml);
+      return $content.append(sectionContent);
     });
     return this.story_list;
   };
@@ -38,50 +46,84 @@ sStoryEditor = (function() {
     this.sectionTypes = {
       photo: {
         photoBigText: {
-          inputs: ['url', 'title']
+          inputs: ['photoUrl', 'title'],
+          mustHave: ['photoUrl']
         },
         photoCaption: {
-          inputs: ['url', 'caption', 'title']
+          inputs: ['photoUrl', 'caption', 'title'],
+          mustHave: ['photoUrl', 'caption']
         }
       },
       video: {
         videoYouTube: {
-          inputs: ['embedCode', 'caption']
+          inputs: ['embedCode', 'caption'],
+          mustHave: ['embedCode']
         },
         videoVimeo: {
-          inputs: ['embedCode', 'caption']
+          inputs: ['embedCode', 'caption'],
+          mustHave: ['embedCode']
         }
       },
       sound: {
         soundSoundcloud: {
-          inputs: ['embedCode', 'title']
+          inputs: ['embedCode', 'title'],
+          mustHave: ['embedCode']
         }
       },
       location: {
         locationSinglePlace: {
-          inputs: ['address', 'caption', 'photo']
+          inputs: ['address', 'caption', 'photoUrl'],
+          mustHave: ['address', 'caption']
         }
       }
     };
-    this.renderList();
+    this.renderSectionList();
     this.renderSectionTypeSelector();
   }
 
+  sStoryEditor.prototype.renderSectionSubTypeSelector = function(section) {
+    var $select, subsections, that;
+
+    if (section === void 0) {
+      section = "photo";
+    }
+    subsections = this.sectionTypes[section];
+    $select = $("#sub-section-type");
+    $select.html("");
+    _.each(_.keys(subsections), function(sectionType) {
+      var $option;
+
+      $option = $('<option value="' + sectionType + '">' + sectionType + '</option>');
+      return $select.append($option);
+    });
+    that = this;
+    return $select.on("change", function() {
+      return that.renderSectionEditor();
+    });
+  };
+
   sStoryEditor.prototype.renderSectionTypeSelector = function() {
-    var $select;
+    var $select, that;
 
     $select = $("#new-section-type");
+    $select.html("");
     _.each(_.keys(this.sectionTypes), function(sectionType) {
       var $option;
 
       $option = $('<option value="' + sectionType + '">' + sectionType + '</option>');
       return $select.append($option);
     });
+    that = this;
+    $select.on("change", function() {
+      that.renderSectionSubTypeSelector($(this).val());
+      return that.renderSectionEditor();
+    });
+    this.renderSectionSubTypeSelector();
     return this.renderSectionEditor();
   };
 
   sStoryEditor.prototype.renderSectionEditor = function() {
-    var $editor, templates;
+    var $editor, newSectionSubType, newSectionType, templates, that;
 
     templates = {};
     $(".editor-template").each(function() {
@@ -90,11 +132,25 @@ sStoryEditor = (function() {
       templateSource = $(this).html();
       return templates[$(this).attr('id')] = Handlebars.compile(templateSource);
     });
-    console.log("templates!!", templates);
-    return $editor = $("#editor-inputs");
+    newSectionType = $("#new-section-type").val();
+    newSectionSubType = $("#sub-section-type").val();
+    $editor = $("#editor-inputs");
+    $editor.html("");
+    that = this;
+    return _.each(this.sectionTypes[newSectionType][newSectionSubType].inputs, function(input) {
+      var $template, mustHave, sectionData;
+
+      sectionData = that.sectionTypes[newSectionType][newSectionSubType];
+      mustHave = $.inArray(input, sectionData.mustHave) > -1;
+      $template = $(templates['editor-template-' + input]());
+      if (mustHave) {
+        $template.addClass("must-have");
+      }
+      return $editor.append($template);
+    });
   };
 
-  sStoryEditor.prototype.renderList = function() {
+  sStoryEditor.prototype.renderSectionList = function() {
     var $content, $sortable;
 
     $content = $('#section-list');
@@ -102,7 +158,10 @@ sStoryEditor = (function() {
     _.each(this.story_list, function(section, i) {
       var sectionContent;
 
-      sectionContent = JSON.stringify(section);
+      sectionContent = section.type + " ";
+      if (section.title !== void 0) {
+        sectionContent += section.title;
+      }
       return $content.append($("<li>" + sectionContent + "</li>"));
     });
     $sortable = $content.sortable();
@@ -115,16 +174,20 @@ sStoryEditor = (function() {
   };
 
   sStoryEditor.prototype.addSection = function(section) {
-    var newSectionNum, sectionCount;
+    var newSection, newSectionNum, sectionCount;
 
     sectionCount = d3.max(_.keys(this.story.list()));
     console.log("count:", sectionCount);
     newSectionNum = (+sectionCount) + 1;
-    this.story_list[newSectionNum] = {
-      title: "Section " + (newSectionNum + 1),
-      type: "photo1"
-    };
-    this.renderList();
+    newSection = {};
+    $("#editor-inputs input").each(function(el) {
+      if ($(this).val() !== "") {
+        return newSection[$(this).attr('id').split("-")[2]] = $(this).val();
+      }
+    });
+    newSection.type = $("#sub-section-type").val();
+    this.story_list[newSectionNum] = newSection;
+    this.renderSectionList();
     return this.story.render();
   };
 
@@ -137,18 +200,20 @@ $(document).ready(function() {
 
   story_list = {
     0: {
-      title: "Section1",
-      type: "photo1"
+      photoUrl: "http://farm8.staticflickr.com/7043/6990444744_7db8937884_b.jpg",
+      type: "photoBigText"
     },
     1: {
-      title: "Section2",
-      type: "photo2"
+      photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg",
+      caption: "Livestreamers!",
+      type: "photoBigText"
     }
   };
   story = new sStory(story_list);
   story.render();
   storyEditor = new sStoryEditor(story);
   return d3.select("#add-section").on("click", function() {
-    return storyEditor.addSection();
+    storyEditor.addSection();
+    return $("#editor-inputs input").val("");
   });
 });

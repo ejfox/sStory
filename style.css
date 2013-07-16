@@ -14,3 +14,9 @@
   width: 100%;
   background-color: #ccc;
 }
+.must-have {
+  border: 2px solid #f00;
+}
+.photoBigText img {
+  max-width: 200px;
+}

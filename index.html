@@ -24,6 +24,9 @@
       <select name="new-section-type" id="new-section-type" size="1">     
       </select>
       
+      <select name="sub-section-type" id="sub-section-type" size="1">     
+      </select>
+      
       <div id="editor-inputs">
         
       </div>
@@ -45,8 +48,61 @@
 </html>
 
 
-<!-- Editor templates -->
+<!-- Section templates -->
+<script id="section-template-photoBigText" class="section-template" type="text/x-handlebars-template">
+{{#if title}}
+  {{title}}
+{{/if}}
 
+<img src="{{photoUrl}}" />
+</script>
+
+<script id="section-template-photoCaption" class="section-template" type="text/x-handlebars-template">
+{{#if title}}
+  {{title}}
+{{/if}}
+
+{{photoUrl}}
+{{caption}}
+</script>
+
+<script id="section-template-videoYouTube" class="section-template" type="text/x-handlebars-template">
+{{#if caption}}
+  {{caption}}
+{{/if}}
+
+{{embedCode}}
+</script>
+
+<script id="section-template-videoVimeo" class="section-template" type="text/x-handlebars-template">
+{{#if caption}}
+  {{caption}}
+{{/if}}
+
+{{embedCode}}
+</script>
+
+<script id="section-template-soundSoundcloud" class="section-template" type="text/x-handlebars-template">
+{{#if title}}
+  {{title}}
+{{/if}}
+
+{{embedCode}}
+</script>
+
+<script id="section-template-locationSinglePlace" class="section-template" type="text/x-handlebars-template">
+{{#if photoUrl}}
+  {{photoUrl}}
+{{/if}}
+
+{{address}}
+{{caption}}
+</script>
+
+
+
+
+<!-- Editor templates -->
 <script id="editor-template-photoUrl" class="editor-template" type="text/x-handlebars-template">
   <input type="text" id="editor-section-photoUrl" placeholder="Photo URL"></input>  
 </script>
@@ -61,6 +117,10 @@
 
 <script id="editor-template-embedCode" class="editor-template" type="text/x-handlebars-template">
   <input type="text" id="editor-section-embedCode" placeholder="Embed Code"></input>  
+</script>
+
+<script id="editor-template-address" class="editor-template" type="text/x-handlebars-template">
+  <input type="text" id="editor-section-address" placeholder="Address"></input>  
 </script>
 
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>

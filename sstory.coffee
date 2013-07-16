@@ -6,15 +6,23 @@ class sStory
   render: ->
     $content = $('#content')
     $content.html("")
+    
+    templates = {}
+    $(".section-template").each(->
+        templateSource = $(this).html()
+        templates[$(this).attr('id')] = Handlebars.compile(templateSource)
+    )
+    
     _.each(@story_list, (section, i) ->
         # Append the contents of each section to the page
-        sectionContent = JSON.stringify(section)        
-        $content.append($("<h2>"+sectionContent+"</h2>"))
+        sectionHtml = templates["section-template-"+section.type](section)
+        sectionContent = $("<div class='"+section.type+"'></div>").html(sectionHtml)
+        $content.append(sectionContent)
     )
     return @story_list
     
   list: ->
-    # Return the story list object
+    # Return the master story list object, the heart of everything
     @story_list
     
 class sStoryEditor
@@ -25,55 +33,119 @@ class sStoryEditor
     @sectionTypes =
       photo:
         photoBigText:
-          inputs: ['url', 'title']
+          inputs: ['photoUrl', 'title']
+          mustHave: ['photoUrl']
         photoCaption:
-          inputs: ['url', 'caption', 'title']
+          inputs: ['photoUrl', 'caption', 'title']
+          mustHave: ['photoUrl', 'caption']
       video:
         videoYouTube:
           inputs: ['embedCode', 'caption']
+          mustHave: ['embedCode']
         videoVimeo:
           inputs: ['embedCode', 'caption']
+          mustHave: ['embedCode']
       sound:
         soundSoundcloud:
           inputs: ['embedCode', 'title']
+          mustHave: ['embedCode']
       location:
         locationSinglePlace:
-          inputs: ['address', 'caption', 'photo']
+          inputs: ['address', 'caption', 'photoUrl']
+          mustHave: ['address', 'caption']
     
-    @renderList()
+    @renderSectionList()
     @renderSectionTypeSelector()
     
-          
+  renderSectionSubTypeSelector: (section) ->
+    # Each section type has a subtype, for example
+    # photo has the subtypes 'photoBigText' and 'photoCaption'
+    # so we render a selector for each of these subtypes
+ 
+    if section is undefined
+      section = "photo"
+      
+    subsections = @sectionTypes[section]
+    $select = $("#sub-section-type")
+    
+    $select.html("")
+    
+    _.each(_.keys(subsections), (sectionType) -> 
+      $option = $('<option value="'+sectionType+'">'+sectionType+'</option>')
+      $select.append($option)
+    )
+    
+    that = this
+    $select.on("change", ->
+      that.renderSectionEditor()
+    )
+    
+  
   renderSectionTypeSelector: ->
+    # Each section type has a type, like 'photo', 'video', 'audio'
+    # we want to render a selector for each of these types
+    
     $select = $("#new-section-type")
+    $select.html("")
 
     _.each(_.keys(@sectionTypes), (sectionType) ->
       $option = $('<option value="'+sectionType+'">'+sectionType+'</option>')
       $select.append($option)
     )
-    
+  
+    that = this
+    $select.on("change", ->
+      that.renderSectionSubTypeSelector($(this).val())
+      that.renderSectionEditor()
+    )
+
+    @renderSectionSubTypeSelector()
     @renderSectionEditor()
     
   renderSectionEditor: ->
+    # Depending on what type of section the user wants to add
+    # we show a different set of inputs which are grabbed
+    # from their Handlebars templates
+    
     templates = {}
     $(".editor-template").each(->
         templateSource = $(this).html()
         templates[$(this).attr('id')] = Handlebars.compile(templateSource)
     )
-    console.log("templates!!", templates)
+    
+    newSectionType = $("#new-section-type").val()
+    newSectionSubType = $("#sub-section-type").val()    
+    
     $editor = $("#editor-inputs")
+
+    $editor.html("")
+    that = this
+    _.each(@sectionTypes[newSectionType][newSectionSubType].inputs, (input) ->
+        sectionData = that.sectionTypes[newSectionType][newSectionSubType]
+
+        mustHave = $.inArray(input, sectionData.mustHave) > -1
+        
+        $template = $(templates['editor-template-'+input]())
+        
+        if mustHave
+          $template.addClass("must-have")
+        
+        $editor.append($template)
+    )
     
     
     
     
-    
-  renderList: ->
+  renderSectionList: ->
+    # Render a re-arrangeable list of each section for the editor
     $content = $('#section-list')
     
     $content.html("")    
     _.each(@story_list, (section, i) ->
         # Append the contents of each section to the page
-        sectionContent = JSON.stringify(section)        
+        sectionContent = section.type + " "
+        if section.title isnt undefined
+          sectionContent += section.title
         $content.append($("<li>"+sectionContent+"</li>"))
     )
 
@@ -86,17 +158,27 @@ class sStoryEditor
     
     
   addSection: (section) ->
+    # Add a new section to @story_list
+    
     sectionCount = d3.max(_.keys(@story.list())); # Figure how many sections there are
     console.log("count:", sectionCount)
     
     # Create the new section     
     newSectionNum = (+sectionCount)+1
-    @story_list[newSectionNum] =
-      title: "Section "+(newSectionNum+1)
-      type: "photo1"
+    
+    newSection = {}
+    
+    $("#editor-inputs input").each((el) ->
+        if $(this).val() isnt ""
+          newSection[$(this).attr('id').split("-")[2]] = $(this).val()
+    )
+    
+    newSection.type = $("#sub-section-type").val() 
+    
+    @story_list[newSectionNum] = newSection
       
     # Update the page
-    @renderList()
+    @renderSectionList()
     @story.render()
 
 
@@ -113,11 +195,12 @@ $(document).ready(->
   
   story_list = 
         0: 
-          title: "Section1"
-          type: "photo1",
+          photoUrl: "http://farm8.staticflickr.com/7043/6990444744_7db8937884_b.jpg"
+          type: "photoBigText",
         1:
-          title: "Section2"
-          type: "photo2"
+          photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg"
+          caption: "Livestreamers!"
+          type: "photoBigText"
   
   story = new sStory(story_list)
 
@@ -128,5 +211,6 @@ $(document).ready(->
   d3.select("#add-section")
     .on("click", ->
       storyEditor.addSection()
+      $("#editor-inputs input").val("")
     )
 )
