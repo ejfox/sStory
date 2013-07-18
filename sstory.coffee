@@ -4,6 +4,7 @@ class sStory
       throw "No story_list defined"
     
   render: ->
+    console.log("re-render")
     $content = $('#content')
     $content.html("")
     
@@ -14,6 +15,7 @@ class sStory
     )
     
     _.each(@story_list, (section, i) ->
+        #console.log "section =>", section
         # Append the contents of each section to the page
         sectionHtml = templates["section-template-"+section.type](section)
         sectionContent = $("<div id='"+i+"' class='"+section.type+"'></div>").html(sectionHtml)
@@ -21,13 +23,13 @@ class sStory
     )
     return @story_list
     
-  list: ->
+  story_list: ->
     # Return the master story list object, the heart of everything
     @story_list
     
 class sStoryEditor
   constructor: (@story) ->
-    @story_list = @story.list()
+    #@story_list = @story.list()
     #console.log("@story_list", @story.list())
     
     @sectionTypes =
@@ -139,13 +141,14 @@ class sStoryEditor
     
     $content.html("")
     
-    that = this    
-    _.each(@story_list, (section, i) ->
-        # Append the contents of each section to the page
-        
+    that = this
+    
+    #console.log("@story", @story)
+    _.each(@story.story_list, (section, i) ->
+        # Append the contents of each section to the page        
         sectionIcon = ""
         sectionMainType = ""
-        console.log section.type
+        #console.log section.type
         
         switch section.type
           when "photoBigText"
@@ -192,13 +195,28 @@ class sStoryEditor
         sortableSet = true
     );
     
-  deleteSection: (section) ->
-    console.log("Delete "+section)
+  deleteSection: (delSection) ->
+    console.log("Delete "+delSection)
+    
+    newlist = _.reject(@story.story_list, (section, k) ->
+        console.log("k>", k, "delSection>", delSection)
+        if k is parseFloat(delSection)
+          return true
+        else
+          false
+    )
+    
+    @story.story_list = newlist
+    console.log('@story', @story)
+
+    # Update the page
+    @renderSectionList()
+    @story.render()
     
   addSection: (section) ->
-    # Add a new section to @story_list
+    # Add a new section to @story.list()
     
-    sectionCount = d3.max(_.keys(@story.list())); # Figure how many sections there are
+    sectionCount = d3.max(_.keys(@story.story_list)); # Figure how many sections there are
     console.log("count:", sectionCount)
     
     # Create the new section     
@@ -213,7 +231,8 @@ class sStoryEditor
     
     newSection.type = $("#sub-section-type").val() 
     
-    @story_list[newSectionNum] = newSection
+    @story.story_list[newSectionNum] = newSection
+    console.log("=>", @story)
       
     # Update the page
     @renderSectionList()
@@ -231,14 +250,16 @@ class sStoryEditor
     
 $(document).ready(->
   
-  story_list = 
-        0: 
+  story_list = [
+        {
           photoUrl: "http://farm8.staticflickr.com/7043/6990444744_7db8937884_b.jpg"
-          type: "photoBigText",
-        1:
+          type: "photoBigText"}
+        ,{
           photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg"
-          caption: "Livestreamers!"
+          title: "Livestreamers!"
           type: "photoBigText"
+        }
+  ]
   
   story = new sStory(story_list)
 

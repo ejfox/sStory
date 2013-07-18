@@ -12,6 +12,7 @@ sStory = (function() {
   sStory.prototype.render = function() {
     var $content, templates;
 
+    console.log("re-render");
     $content = $('#content');
     $content.html("");
     templates = {};
@@ -31,7 +32,7 @@ sStory = (function() {
     return this.story_list;
   };
 
-  sStory.prototype.list = function() {
+  sStory.prototype.story_list = function() {
     return this.story_list;
   };
 
@@ -42,7 +43,6 @@ sStory = (function() {
 sStoryEditor = (function() {
   function sStoryEditor(story) {
     this.story = story;
-    this.story_list = this.story.list();
     this.sectionTypes = {
       photo: {
         photoBigText: {
@@ -156,12 +156,11 @@ sStoryEditor = (function() {
     $content = $('#section-list');
     $content.html("");
     that = this;
-    _.each(this.story_list, function(section, i) {
+    _.each(this.story.story_list, function(section, i) {
       var deleteIcon, sectionContent, sectionIcon, sectionMainType;
 
       sectionIcon = "";
       sectionMainType = "";
-      console.log(section.type);
       switch (section.type) {
         case "photoBigText":
           sectionMainType = "photo";
@@ -213,14 +212,28 @@ sStoryEditor = (function() {
     });
   };
 
-  sStoryEditor.prototype.deleteSection = function(section) {
-    return console.log("Delete " + section);
+  sStoryEditor.prototype.deleteSection = function(delSection) {
+    var newlist;
+
+    console.log("Delete " + delSection);
+    newlist = _.reject(this.story.story_list, function(section, k) {
+      console.log("k>", k, "delSection>", delSection);
+      if (k === parseFloat(delSection)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    this.story.story_list = newlist;
+    console.log('@story', this.story);
+    this.renderSectionList();
+    return this.story.render();
   };
 
   sStoryEditor.prototype.addSection = function(section) {
     var newSection, newSectionNum, sectionCount;
 
-    sectionCount = d3.max(_.keys(this.story.list()));
+    sectionCount = d3.max(_.keys(this.story.story_list));
     console.log("count:", sectionCount);
     newSectionNum = (+sectionCount) + 1;
     newSection = {};
@@ -230,7 +243,8 @@ sStoryEditor = (function() {
       }
     });
     newSection.type = $("#sub-section-type").val();
-    this.story_list[newSectionNum] = newSection;
+    this.story.story_list[newSectionNum] = newSection;
+    console.log("=>", this.story);
     this.renderSectionList();
     return this.story.render();
   };
@@ -242,17 +256,16 @@ sStoryEditor = (function() {
 $(document).ready(function() {
   var story, storyEditor, story_list;
 
-  story_list = {
-    0: {
+  story_list = [
+    {
       photoUrl: "http://farm8.staticflickr.com/7043/6990444744_7db8937884_b.jpg",
       type: "photoBigText"
-    },
-    1: {
+    }, {
       photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg",
-      caption: "Livestreamers!",
+      title: "Livestreamers!",
       type: "photoBigText"
     }
-  };
+  ];
   story = new sStory(story_list);
   story.render();
   storyEditor = new sStoryEditor(story);
