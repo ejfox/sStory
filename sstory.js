@@ -29,6 +29,7 @@ sStory = (function() {
       sectionContent = $("<div id='" + i + "' class='" + section.type + "'></div>").html(sectionHtml);
       return $content.append(sectionContent);
     });
+    $content.append(JSON.stringify(this.story_list));
     return this.story_list;
   };
 
@@ -77,49 +78,22 @@ sStoryEditor = (function() {
         }
       }
     };
+    this.giveSectionsID();
     this.renderSectionList();
     this.renderSectionTypeSelector();
   }
 
-  sStoryEditor.prototype.renderSectionSubTypeSelector = function(section) {
-    var $select, subsections, that;
+  sStoryEditor.prototype.giveSectionsID = function() {
+    var newStory;
 
-    if (section === void 0) {
-      section = "photo";
-    }
-    subsections = this.sectionTypes[section];
-    $select = $("#sub-section-type");
-    $select.html("");
-    _.each(_.keys(subsections), function(sectionType) {
-      var $option;
-
-      $option = $('<option value="' + sectionType + '">' + sectionType + '</option>');
-      return $select.append($option);
+    newStory = [];
+    _.each(this.story.story_list, function(section) {
+      if (section.id === void 0) {
+        section.id = _.uniqueId("s");
+      }
+      return newStory.push(section);
     });
-    that = this;
-    return $select.on("change", function() {
-      return that.renderSectionEditor();
-    });
-  };
-
-  sStoryEditor.prototype.renderSectionTypeSelector = function() {
-    var $select, that;
-
-    $select = $("#new-section-type");
-    $select.html("");
-    _.each(_.keys(this.sectionTypes), function(sectionType) {
-      var $option;
-
-      $option = $('<option value="' + sectionType + '">' + sectionType + '</option>');
-      return $select.append($option);
-    });
-    that = this;
-    $select.on("change", function() {
-      that.renderSectionSubTypeSelector($(this).val());
-      return that.renderSectionEditor();
-    });
-    this.renderSectionSubTypeSelector();
-    return this.renderSectionEditor();
+    return this.story.story_list = newStory;
   };
 
   sStoryEditor.prototype.renderSectionEditor = function() {
@@ -198,18 +172,84 @@ sStoryEditor = (function() {
       if (section.title !== void 0) {
         sectionContent += section.title;
       }
-      $content.append($("<li id='" + i + "'>" + sectionContent + "</li>"));
+      $content.append($("<li id='" + i + "' data-id='" + section.id + "'>" + sectionContent + "</li>"));
       return $("i.delete-section").on("click", function() {
-        return that.deleteSection($(this).parent().attr('id'));
+        return that.deleteSection($(this).parent().attr('data-id'));
       });
     });
     $sortable = $content.sortable();
+    that = this;
     return $sortable.bind('sortupdate', function() {
-      var sortableSet;
+      var sortableSet, sortedList;
 
-      console.log("re-sort!", $(this));
+      sortedList = [];
+      $(this).children().each(function() {
+        return sortedList.push($(this).attr("data-id"));
+      });
+      that.reorderStoryList(sortedList);
       return sortableSet = true;
     });
+  };
+
+  sStoryEditor.prototype.reorderStoryList = function(sortedList) {
+    var newStoryList, oldList;
+
+    console.log("sL", sortedList);
+    oldList = this.story.story_list;
+    newStoryList = [];
+    _.each(sortedList, function(listItemID) {
+      var section;
+
+      section = _.find(oldList, function(section) {
+        return section.id === listItemID;
+      });
+      return newStoryList.push(section);
+    });
+    console.log("new sL", newStoryList);
+    this.story.story_list = newStoryList;
+    this.renderSectionList();
+    return this.story.render();
+  };
+
+  sStoryEditor.prototype.renderSectionSubTypeSelector = function(section) {
+    var $select, subsections, that;
+
+    if (section === void 0) {
+      section = "photo";
+    }
+    subsections = this.sectionTypes[section];
+    $select = $("#sub-section-type");
+    $select.html("");
+    _.each(_.keys(subsections), function(sectionType) {
+      var $option;
+
+      $option = $('<option value="' + sectionType + '">' + sectionType + '</option>');
+      return $select.append($option);
+    });
+    that = this;
+    return $select.on("change", function() {
+      return that.renderSectionEditor();
+    });
+  };
+
+  sStoryEditor.prototype.renderSectionTypeSelector = function() {
+    var $select, that;
+
+    $select = $("#new-section-type");
+    $select.html("");
+    _.each(_.keys(this.sectionTypes), function(sectionType) {
+      var $option;
+
+      $option = $('<option value="' + sectionType + '">' + sectionType + '</option>');
+      return $select.append($option);
+    });
+    that = this;
+    $select.on("change", function() {
+      that.renderSectionSubTypeSelector($(this).val());
+      return that.renderSectionEditor();
+    });
+    this.renderSectionSubTypeSelector();
+    return this.renderSectionEditor();
   };
 
   sStoryEditor.prototype.deleteSection = function(delSection) {
@@ -218,7 +258,7 @@ sStoryEditor = (function() {
     console.log("Delete " + delSection);
     newlist = _.reject(this.story.story_list, function(section, k) {
       console.log("k>", k, "delSection>", delSection);
-      if (k === parseFloat(delSection)) {
+      if (section.id === delSection) {
         return true;
       } else {
         return false;
@@ -245,6 +285,7 @@ sStoryEditor = (function() {
     newSection.type = $("#sub-section-type").val();
     this.story.story_list[newSectionNum] = newSection;
     console.log("=>", this.story);
+    this.giveSectionsID();
     this.renderSectionList();
     return this.story.render();
   };
@@ -263,6 +304,18 @@ $(document).ready(function() {
     }, {
       photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg",
       title: "Livestreamers!",
+      type: "photoBigText"
+    }, {
+      photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg",
+      title: "booom-ba-booom",
+      type: "photoBigText"
+    }, {
+      photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg",
+      title: "another!!",
+      type: "photoBigText"
+    }, {
+      photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg",
+      title: "and another!!!",
       type: "photoBigText"
     }
   ];

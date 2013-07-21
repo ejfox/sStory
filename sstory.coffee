@@ -21,6 +21,7 @@ class sStory
         sectionContent = $("<div id='"+i+"' class='"+section.type+"'></div>").html(sectionHtml)
         $content.append(sectionContent)
     )
+    $content.append(JSON.stringify(@story_list))
     return @story_list
     
   story_list: ->
@@ -28,10 +29,7 @@ class sStory
     @story_list
     
 class sStoryEditor
-  constructor: (@story) ->
-    #@story_list = @story.list()
-    #console.log("@story_list", @story.list())
-    
+  constructor: (@story) ->    
     @sectionTypes =
       photo:
         photoBigText:
@@ -56,53 +54,19 @@ class sStoryEditor
           inputs: ['address', 'caption', 'photoUrl']
           mustHave: ['address', 'caption']
     
+    @giveSectionsID()
     @renderSectionList()
     @renderSectionTypeSelector()
-    
-  renderSectionSubTypeSelector: (section) ->
-    # Each section type has a subtype, for example
-    # photo has the subtypes 'photoBigText' and 'photoCaption'
-    # so we render a selector for each of these subtypes
- 
-    if section is undefined
-      section = "photo"
-      
-    subsections = @sectionTypes[section]
-    $select = $("#sub-section-type")
-    
-    $select.html("")
-    
-    _.each(_.keys(subsections), (sectionType) -> 
-      $option = $('<option value="'+sectionType+'">'+sectionType+'</option>')
-      $select.append($option)
-    )
-    
-    that = this
-    $select.on("change", ->
-      that.renderSectionEditor()
-    )
-    
   
-  renderSectionTypeSelector: ->
-    # Each section type has a type, like 'photo', 'video', 'audio'
-    # we want to render a selector for each of these types
-    
-    $select = $("#new-section-type")
-    $select.html("")
+  giveSectionsID: () ->
+    newStory = []
 
-    _.each(_.keys(@sectionTypes), (sectionType) ->
-      $option = $('<option value="'+sectionType+'">'+sectionType+'</option>')
-      $select.append($option)
+    _.each(@story.story_list, (section) ->
+        if section.id is undefined
+          section.id = _.uniqueId("s")
+        newStory.push(section)
     )
-  
-    that = this
-    $select.on("change", ->
-      that.renderSectionSubTypeSelector($(this).val())
-      that.renderSectionEditor()
-    )
-
-    @renderSectionSubTypeSelector()
-    @renderSectionEditor()
+    @story.story_list = newStory
     
   renderSectionEditor: ->
     # Depending on what type of section the user wants to add
@@ -181,26 +145,99 @@ class sStoryEditor
         sectionContent = deleteIcon + sectionIcon + " "
         if section.title isnt undefined
           sectionContent += section.title
-        $content.append($("<li id='"+i+"'>"+sectionContent+"</li>"))
+        $content.append($("<li id='"+i+"' data-id='"+section.id+"'>"+sectionContent+"</li>"))
         
         $("i.delete-section").on("click", ->
-            that.deleteSection($(this).parent().attr('id'))
+            that.deleteSection($(this).parent().attr('data-id'))
         )
     )
 
     $sortable = $content.sortable()
     
-    $sortable.bind('sortupdate', ->
-        console.log("re-sort!", $(this))
+    that = this
+    
+    $sortable.bind('sortupdate', ->        
+        sortedList = []
+        $(this).children().each(() ->          
+
+            sortedList.push($(this).attr("data-id"))
+        )
+
+        that.reorderStoryList(sortedList)
         sortableSet = true
     );
+    
+  reorderStoryList: (sortedList) ->
+    console.log "sL", sortedList
+    oldList = @story.story_list
+    
+    newStoryList = []
+    _.each(sortedList, (listItemID) ->
+      section = _.find(oldList, (section) ->
+          return section.id is listItemID
+      )
+      
+      newStoryList.push(section)      
+    )
+    console.log "new sL", newStoryList
+    @story.story_list = newStoryList
+    
+    # Update the page
+    @renderSectionList()
+    @story.render()
+    
+    
+  renderSectionSubTypeSelector: (section) ->
+    # Each section type has a subtype, for example
+    # photo has the subtypes 'photoBigText' and 'photoCaption'
+    # so we render a selector for each of these subtypes
+ 
+    if section is undefined
+      section = "photo"
+      
+    subsections = @sectionTypes[section]
+    $select = $("#sub-section-type")
+    
+    $select.html("")
+    
+    _.each(_.keys(subsections), (sectionType) -> 
+      $option = $('<option value="'+sectionType+'">'+sectionType+'</option>')
+      $select.append($option)
+    )
+    
+    that = this
+    $select.on("change", ->
+      that.renderSectionEditor()
+    )
+    
+  
+  renderSectionTypeSelector: ->
+    # Each section type has a type, like 'photo', 'video', 'audio'
+    # we want to render a selector for each of these types
+    
+    $select = $("#new-section-type")
+    $select.html("")
+
+    _.each(_.keys(@sectionTypes), (sectionType) ->
+      $option = $('<option value="'+sectionType+'">'+sectionType+'</option>')
+      $select.append($option)
+    )
+  
+    that = this
+    $select.on("change", ->
+      that.renderSectionSubTypeSelector($(this).val())
+      that.renderSectionEditor()
+    )
+
+    @renderSectionSubTypeSelector()
+    @renderSectionEditor()
     
   deleteSection: (delSection) ->
     console.log("Delete "+delSection)
     
     newlist = _.reject(@story.story_list, (section, k) ->
         console.log("k>", k, "delSection>", delSection)
-        if k is parseFloat(delSection)
+        if section.id is delSection
           return true
         else
           false
@@ -233,7 +270,10 @@ class sStoryEditor
     
     @story.story_list[newSectionNum] = newSection
     console.log("=>", @story)
-      
+    
+    # Give the new section an ID 
+    @giveSectionsID()
+    
     # Update the page
     @renderSectionList()
     @story.render()
@@ -257,6 +297,21 @@ $(document).ready(->
         ,{
           photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg"
           title: "Livestreamers!"
+          type: "photoBigText"
+        }
+        ,{
+          photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg"
+          title: "booom-ba-booom"
+          type: "photoBigText"
+        }
+        ,{
+          photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg"
+          title: "another!!"
+          type: "photoBigText"
+        }
+        ,{
+          photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg"
+          title: "and another!!!"
           type: "photoBigText"
         }
   ]
