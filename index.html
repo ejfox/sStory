@@ -54,20 +54,22 @@
 
 <!-- Section templates -->
 <script id="section-template-photoBigText" class="section-template" type="text/x-handlebars-template">
+<div class="photo-background" style="background-image: url({{photoUrl}})">
 {{#if title}}
-  {{title}}
+  <h2>{{title}}</h2>
 {{/if}}
 
-<img src="{{photoUrl}}" />
+</div>
 </script>
 
 <script id="section-template-photoCaption" class="section-template" type="text/x-handlebars-template">
+<div class="photo-background" style="background-image: url({{photoUrl}})">
 {{#if title}}
-  {{title}}
+  <h2>{{title}}</h2>
 {{/if}}
 
-{{photoUrl}}
 {{caption}}
+</div>
 </script>
 
 <script id="section-template-videoYoutube" class="section-template" type="text/x-handlebars-template">
@@ -75,7 +77,9 @@
   {{caption}}
 {{/if}}
 
-{{embedCode}}
+<div class="video-container">
+{{{embedCode}}}
+</div>
 </script>
 
 <script id="section-template-videoVimeo" class="section-template" type="text/x-handlebars-template">
@@ -83,7 +87,9 @@
   {{caption}}
 {{/if}}
 
-{{embedCode}}
+<div class="video-container">
+{{{embedCode}}}
+</div>
 </script>
 
 <script id="section-template-soundSoundcloud" class="section-template" type="text/x-handlebars-template">
@@ -91,7 +97,7 @@
   {{title}}
 {{/if}}
 
-{{embedCode}}
+{{{embedCode}}}
 </script>
 
 <script id="section-template-locationSinglePlace" class="section-template" type="text/x-handlebars-template">

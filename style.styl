@@ -1,10 +1,33 @@
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+body
+  padding 0
+  margin 0
+  width 100%
+  
+#content
+  width 100%
+  height 100%
+  
+  
+////////////////////
+// Editor styles  //
+////////////////////  
+
 #story-editor
+  background-color rgba(white, 0.85)
   position fixed
+  top 0
   right 0
   width 30%
   height auto
   border 1px solid black
   padding 1em
+  
+  .delete-section
+    opacity 0.35
+    &:hover
+      opacity: 0.8
   
   
 .sortable-dragging
@@ -27,9 +50,64 @@
     padding 0
     margin 0
   
+
+////////////////////
+// Section styles //
+////////////////////
+
+sectionHeight = 800px
+
+#content section
+  width 100%
+  border-bottom 1px solid black
+  //min-height sectionHeight
   
+//// photos
+.photoBigText, .photoCaption
+  height auto
+  width 100%
+  
+  h2
+    margin-top 0
+    padding-top 1em
+    text-align center
+    color white
+  
+  .photo-background
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height 100%
+    min-height sectionHeight
+    margin 0
+    padding 0
+    
 
-
+// photoBigText
 .photoBigText
   img
     max-width 200px
+
+// photoCaption
+//.photoCaption
+
+//// videos
+
+.videoYoutube, .videoVimeo
+  // Responsive YouTube embed from http://avexdesigns.com/responsive-youtube-embed/
+  .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      padding-top: 30px; height: 0; overflow: hidden;
+  }
+ 
+  .video-container iframe,
+  .video-container object,
+  .video-container embed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+  }

@@ -26,10 +26,9 @@ sStory = (function() {
       var sectionContent, sectionHtml;
 
       sectionHtml = templates["section-template-" + section.type](section);
-      sectionContent = $("<div id='" + i + "' class='" + section.type + "'></div>").html(sectionHtml);
+      sectionContent = $("<section id='" + i + "' class='" + section.type + "'></section>").html(sectionHtml);
       return $content.append(sectionContent);
     });
-    $content.append(JSON.stringify(this.story_list));
     return this.story_list;
   };
 
@@ -177,6 +176,7 @@ sStoryEditor = (function() {
         return that.deleteSection($(this).parent().attr('data-id'));
       });
     });
+    $content.sortable("destroy");
     $sortable = $content.sortable();
     that = this;
     return $sortable.bind('sortupdate', function() {
@@ -194,7 +194,6 @@ sStoryEditor = (function() {
   sStoryEditor.prototype.reorderStoryList = function(sortedList) {
     var newStoryList, oldList;
 
-    console.log("sL", sortedList);
     oldList = this.story.story_list;
     newStoryList = [];
     _.each(sortedList, function(listItemID) {
@@ -205,8 +204,11 @@ sStoryEditor = (function() {
       });
       return newStoryList.push(section);
     });
-    console.log("new sL", newStoryList);
     this.story.story_list = newStoryList;
+    return this.updatePage();
+  };
+
+  sStoryEditor.prototype.updatePage = function() {
     this.renderSectionList();
     return this.story.render();
   };
@@ -266,8 +268,7 @@ sStoryEditor = (function() {
     });
     this.story.story_list = newlist;
     console.log('@story', this.story);
-    this.renderSectionList();
-    return this.story.render();
+    return this.updatePage();
   };
 
   sStoryEditor.prototype.addSection = function(section) {
@@ -286,8 +287,7 @@ sStoryEditor = (function() {
     this.story.story_list[newSectionNum] = newSection;
     console.log("=>", this.story);
     this.giveSectionsID();
-    this.renderSectionList();
-    return this.story.render();
+    return this.updatePage();
   };
 
   return sStoryEditor;
@@ -299,24 +299,14 @@ $(document).ready(function() {
 
   story_list = [
     {
-      photoUrl: "http://farm8.staticflickr.com/7043/6990444744_7db8937884_b.jpg",
-      type: "photoBigText"
+      embedCode: '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F99067369"></iframe>',
+      type: "soundSoundcloud"
     }, {
-      photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg",
-      title: "Livestreamers!",
-      type: "photoBigText"
+      embedCode: '<iframe width="560" height="315" src="http://www.youtube.com/embed/Y2yaNhK4PCE?rel=0" frameborder="0" allowfullscreen></iframe>',
+      type: "videoYoutube"
     }, {
-      photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg",
-      title: "booom-ba-booom",
-      type: "photoBigText"
-    }, {
-      photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg",
-      title: "another!!",
-      type: "photoBigText"
-    }, {
-      photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg",
-      title: "and another!!!",
-      type: "photoBigText"
+      embedCode: '<iframe src="http://player.vimeo.com/video/70638980" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/70638980">CoGe - Master Mixer 2013-07-16 at 19.36.39</a> from <a href="http://vimeo.com/pseudoplacebo">EJ Fox</a> on <a href="https://vimeo.com">Vimeo</a>.</p>',
+      type: "videoVimeo"
     }
   ];
   story = new sStory(story_list);

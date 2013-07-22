@@ -18,10 +18,10 @@ class sStory
         #console.log "section =>", section
         # Append the contents of each section to the page
         sectionHtml = templates["section-template-"+section.type](section)
-        sectionContent = $("<div id='"+i+"' class='"+section.type+"'></div>").html(sectionHtml)
+        sectionContent = $("<section id='"+i+"' class='"+section.type+"'></section>").html(sectionHtml)
         $content.append(sectionContent)
     )
-    $content.append(JSON.stringify(@story_list))
+    # $content.append(JSON.stringify(@story_list))
     return @story_list
     
   story_list: ->
@@ -151,8 +151,15 @@ class sStoryEditor
             that.deleteSection($(this).parent().attr('data-id'))
         )
     )
-
+    
+    # @TODO Figure out why there are multiple sorting events happening
+    # I think we are adding a new binding every time we refresh the list
+    # it needs to be destroyed before we re-make it, or check if it's made
+    # and only make it if it isn't
+    
+    $content.sortable("destroy")
     $sortable = $content.sortable()
+    
     
     that = this
     
@@ -168,7 +175,8 @@ class sStoryEditor
     );
     
   reorderStoryList: (sortedList) ->
-    console.log "sL", sortedList
+    # Given an order-specific array of IDs like ["s1", "s2", "s3"]
+    # re-arrange the story_list objects
     oldList = @story.story_list
     
     newStoryList = []
@@ -179,10 +187,12 @@ class sStoryEditor
       
       newStoryList.push(section)      
     )
-    console.log "new sL", newStoryList
     @story.story_list = newStoryList
     
-    # Update the page
+    @updatePage()
+    
+  updatePage: ->
+    # Update the pagee    
     @renderSectionList()
     @story.render()
     
@@ -233,6 +243,8 @@ class sStoryEditor
     @renderSectionEditor()
     
   deleteSection: (delSection) ->
+    # Given a section's number in the story_list array
+    # Delete it!
     console.log("Delete "+delSection)
     
     newlist = _.reject(@story.story_list, (section, k) ->
@@ -246,9 +258,7 @@ class sStoryEditor
     @story.story_list = newlist
     console.log('@story', @story)
 
-    # Update the page
-    @renderSectionList()
-    @story.render()
+    @updatePage()
     
   addSection: (section) ->
     # Add a new section to @story.list()
@@ -262,6 +272,7 @@ class sStoryEditor
     newSection = {}
     
     $("#editor-inputs input").each((el) ->
+        # For every input that isn't blank, add it to the section
         if $(this).val() isnt ""
           newSection[$(this).attr('id').split("-")[2]] = $(this).val()
     )
@@ -274,9 +285,7 @@ class sStoryEditor
     # Give the new section an ID 
     @giveSectionsID()
     
-    # Update the page
-    @renderSectionList()
-    @story.render()
+    @updatePage()
 
 
 
@@ -292,27 +301,15 @@ $(document).ready(->
   
   story_list = [
         {
-          photoUrl: "http://farm8.staticflickr.com/7043/6990444744_7db8937884_b.jpg"
-          type: "photoBigText"}
+          embedCode: '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F99067369"></iframe>'
+          type: "soundSoundcloud"}
         ,{
-          photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg"
-          title: "Livestreamers!"
-          type: "photoBigText"
+          embedCode: '<iframe width="560" height="315" src="http://www.youtube.com/embed/Y2yaNhK4PCE?rel=0" frameborder="0" allowfullscreen></iframe>'
+          type: "videoYoutube"
         }
         ,{
-          photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg"
-          title: "booom-ba-booom"
-          type: "photoBigText"
-        }
-        ,{
-          photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg"
-          title: "another!!"
-          type: "photoBigText"
-        }
-        ,{
-          photoUrl: "http://farm8.staticflickr.com/7112/7136431759_889039ace4_b.jpg"
-          title: "and another!!!"
-          type: "photoBigText"
+          embedCode: '<iframe src="http://player.vimeo.com/video/70638980" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/70638980">CoGe - Master Mixer 2013-07-16 at 19.36.39</a> from <a href="http://vimeo.com/pseudoplacebo">EJ Fox</a> on <a href="https://vimeo.com">Vimeo</a>.</p>',
+          type: "videoVimeo"
         }
   ]
   
