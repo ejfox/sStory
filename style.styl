@@ -17,6 +17,29 @@ h1,h2,h3,h4,h5,h6
   width 100%
   height 100%
   
+header
+  height auto
+  width 100%
+  position fixed
+  top 0
+  z-index 9999
+  background-color rgba(white, 0.9)
+  padding 0
+  box-shadow(0 0.05em 0.4em 0px rgba(#000, 0.5))
+  
+  
+  h1
+    font-size 1em
+    padding 0
+    margin 0.2em
+    
+input
+  padding 0.4em
+  width 100%
+  border 1px solid transparent
+  border-bottom 1px solid #CCC
+  
+  
   
 ////////////////////
 // Editor styles  //
@@ -29,9 +52,15 @@ h1,h2,h3,h4,h5,h6
   right 0
   width 30%
   height auto
-  border 1px solid black
   padding 1em
+  //padding-top 2em
+  max-width 300px
   z-index 99999
+  border-radius 3px
+  
+  h3 
+    margin 0.8em 0
+    margin-bottom 0.3em
   
   .delete-section
     opacity 0.35
@@ -48,7 +77,9 @@ h1,h2,h3,h4,h5,h6
   background-color #CCC
   
 .must-have
-  border 1px solid red
+  input
+    border 1px solid transparent
+    border-bottom 1px solid red
   
 #section-list
   font-size 0.8em
@@ -89,8 +120,8 @@ sectionHeight = 800px
     text-shadow 0 0.06em 2px rgba(black, 0.45)
     
   .caption
-    font-size 0.9em
-    padding 0.4em
+    //font-size 0.9em
+    padding 0.5em 1em
     max-width 40%
     background-color rgba(white, 0.8)
     position absolute
@@ -126,6 +157,12 @@ sectionHeight = 800px
       padding-bottom: 56.25%;
       padding-top: 30px; height: 0; overflow: hidden;
   }
+  
+  .caption
+    z-index 99999
+    position absolute
+    top 0
+    right 0
  
   .video-container iframe,
   .video-container object,
@@ -136,3 +173,10 @@ sectionHeight = 800px
       width: 100%;
       height: 100%;
   }
+  
+  
+//// locations
+.locationSinglePlace
+  .single-location-map
+    min-height 700px
+    

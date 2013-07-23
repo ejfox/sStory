@@ -34,6 +34,7 @@ sStory = (function() {
     $(window).on('resize', function() {
       return that.handleWindowResize();
     });
+    this.renderMaps();
     return this.story_list;
   };
 
@@ -68,9 +69,51 @@ sStory = (function() {
 
     this.verticalCenterPhotoTitles();
     windowHeight = $(window).height();
-    return $(".photoBigText .photo-background").css({
-      height: windowHeight
+    $(".photoBigText .photo-background").css({
+      minHeight: windowHeight
     });
+    return $(".photoCaption .photo-background").css({
+      minHeight: windowHeight
+    });
+  };
+
+  sStory.prototype.renderMaps = function() {
+    var that;
+
+    that = this;
+    return $(".single-location-map").each(function() {
+      var address, layer, map, mapId;
+
+      mapId = _.uniqueId("map_");
+      address = $(this).attr("data-address");
+      $(this).attr("id", mapId);
+      map = L.map(mapId, {
+        scrollWheelZoom: false
+      }).setView([51.505, -0.09], 13);
+      that.geocodeLocationRequest(address, "centerMap");
+      layer = new L.StamenTileLayer("toner-lite");
+      return map.addLayer(layer);
+    });
+  };
+
+  sStory.prototype.geocodeLocationRequest = function(location, callback) {
+    var addr, baseUrl, url;
+
+    console.log("Location", location);
+    baseUrl = "http://open.mapquestapi.com/nominatim/v1/search.php?format=json&json_callback=" + callback;
+    addr = "&q=" + location;
+    url = encodeURI(baseUrl + addr + "&addressdetails=1&limit=1");
+    console.log("URL>", url);
+    return $.ajax({
+      url: url,
+      type: "GET",
+      dataType: "script",
+      cache: true
+    });
+  };
+
+  sStory.prototype.centerMap = function(geocodeJSON) {
+    return console.log("Geocode JSON->", geocodeJSON);
   };
 
   return sStory;
@@ -93,11 +136,11 @@ sStoryEditor = (function() {
       },
       video: {
         videoYoutube: {
-          inputs: ['embedCode', 'caption'],
+          inputs: ['embedCode'],
           mustHave: ['embedCode']
         },
         videoVimeo: {
-          inputs: ['embedCode', 'caption'],
+          inputs: ['embedCode'],
           mustHave: ['embedCode']
         }
       },
@@ -247,7 +290,8 @@ sStoryEditor = (function() {
 
   sStoryEditor.prototype.updatePage = function() {
     this.renderSectionList();
-    return this.story.render();
+    this.story.render();
+    return this.story.handleWindowResize();
   };
 
   sStoryEditor.prototype.renderSectionSubTypeSelector = function(section) {
@@ -336,6 +380,10 @@ $(document).ready(function() {
 
   story_list = [
     {
+      type: 'locationSinglePlace',
+      address: "1039 Jefferson St. Oakland CA",
+      caption: "An address!!"
+    }, {
       photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg',
       type: 'photoBigText',
       title: 'Making beautiful stories easy'

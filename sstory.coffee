@@ -31,6 +31,8 @@ class sStory
       that.handleWindowResize()
     )
     
+    @renderMaps()
+    
     return @story_list
     
   story_list: ->
@@ -60,8 +62,49 @@ class sStory
     
     windowHeight = $(window).height()
     $(".photoBigText .photo-background").css({
-        height: windowHeight
+        minHeight: windowHeight
     })
+    $(".photoCaption .photo-background").css({
+        minHeight: windowHeight
+    })
+    
+  renderMaps: ->
+    that = this
+    $(".single-location-map").each(->
+      mapId = _.uniqueId("map_")
+      address = $(this).attr("data-address")
+      $(this).attr("id", mapId)
+      
+      map = L.map(mapId, {
+          scrollWheelZoom: false          
+      }).setView([51.505, -0.09], 13)
+      
+      that.geocodeLocationRequest(address, "centerMap")
+      
+      layer = new L.StamenTileLayer("toner-lite");
+      map.addLayer(layer);
+      
+    )
+    
+  geocodeLocationRequest: (location, callback) ->
+  	console.log("Location", location)
+  	baseUrl = "http://open.mapquestapi.com/nominatim/v1/search.php?format=json&json_callback="+callback
+  	addr = "&q="+location
+
+  	url = encodeURI(baseUrl + addr + "&addressdetails=1&limit=1")
+
+  	console.log "URL>", url
+
+  	$.ajax({
+  		url: url
+  		type: "GET"
+  		dataType: "script"
+  		cache: true
+  	})
+    
+  centerMap: (geocodeJSON)->
+    console.log("Geocode JSON->", geocodeJSON)
+      
 
 
   
@@ -78,10 +121,10 @@ class sStoryEditor
           mustHave: ['photoUrl', 'caption']
       video:
         videoYoutube:
-          inputs: ['embedCode', 'caption']
+          inputs: ['embedCode']
           mustHave: ['embedCode']
         videoVimeo:
-          inputs: ['embedCode', 'caption']
+          inputs: ['embedCode']
           mustHave: ['embedCode']
       sound:
         soundSoundcloud:
@@ -233,6 +276,7 @@ class sStoryEditor
     # Update the pagee    
     @renderSectionList()
     @story.render()
+    @story.handleWindowResize()
     
     
   renderSectionSubTypeSelector: (section) ->
@@ -336,6 +380,11 @@ $(document).ready(->
   
   story_list = [
         {
+          type: 'locationSinglePlace'
+          address: "1039 Jefferson St. Oakland CA"
+          caption: "An address!!"
+        }
+        ,{
           photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
           type: 'photoBigText'
           title: 'Making beautiful stories easy'
