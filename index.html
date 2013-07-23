@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="css/trib.css">
   <link rel="stylesheet" href="css/animation.css"><!--[if IE 7]>
   <link rel="stylesheet" href="css/trib-ie7.css"><![endif]-->
+  
+<link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700|Quattrocento+Sans:700,700italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <header>
@@ -58,7 +60,6 @@
 {{#if title}}
   <h2>{{title}}</h2>
 {{/if}}
-
 </div>
 </script>
 
@@ -68,13 +69,17 @@
   <h2>{{title}}</h2>
 {{/if}}
 
+<aside class="caption">
 {{caption}}
+</aside>
 </div>
 </script>
 
 <script id="section-template-videoYoutube" class="section-template" type="text/x-handlebars-template">
 {{#if caption}}
+<aside class="caption">
   {{caption}}
+</aside>
 {{/if}}
 
 <div class="video-container">

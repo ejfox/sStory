@@ -10,7 +10,7 @@ sStory = (function() {
   }
 
   sStory.prototype.render = function() {
-    var $content, templates;
+    var $content, templates, that;
 
     console.log("re-render");
     $content = $('#content');
@@ -29,11 +29,48 @@ sStory = (function() {
       sectionContent = $("<section id='" + i + "' class='" + section.type + "'></section>").html(sectionHtml);
       return $content.append(sectionContent);
     });
+    this.handleWindowResize();
+    that = this;
+    $(window).on('resize', function() {
+      return that.handleWindowResize();
+    });
     return this.story_list;
   };
 
   sStory.prototype.story_list = function() {
     return this.story_list;
+  };
+
+  sStory.prototype.verticalCenterElement = function(el, parEl) {
+    var elHeight, pageHeight;
+
+    elHeight = el.innerHeight() / 2;
+    pageHeight = parEl.innerHeight() / 2;
+    return $(el).css({
+      paddingTop: pageHeight - elHeight
+    });
+  };
+
+  sStory.prototype.verticalCenterPhotoTitles = function() {
+    var that;
+
+    that = this;
+    $(".photoBigText h2").each(function() {
+      return that.verticalCenterElement($(this), $(this).parent());
+    });
+    return $(".photoCaption h2").each(function() {
+      return that.verticalCenterElement($(this), $(this).parent());
+    });
+  };
+
+  sStory.prototype.handleWindowResize = function() {
+    var windowHeight;
+
+    this.verticalCenterPhotoTitles();
+    windowHeight = $(window).height();
+    return $(".photoBigText .photo-background").css({
+      height: windowHeight
+    });
   };
 
   return sStory;
@@ -66,7 +103,7 @@ sStoryEditor = (function() {
       },
       sound: {
         soundSoundcloud: {
-          inputs: ['title', 'embedCode'],
+          inputs: ['embedCode'],
           mustHave: ['embedCode']
         }
       },
@@ -299,10 +336,19 @@ $(document).ready(function() {
 
   story_list = [
     {
+      photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg',
+      type: 'photoBigText',
+      title: 'Making beautiful stories easy'
+    }, {
+      photoUrl: 'http://farm8.staticflickr.com/7038/6990421086_e92cafc3da_k.jpg',
+      type: 'photoCaption',
+      caption: 'You can place a short descriptive caption of the picture here. Think of it as a tweet.',
+      title: 'Big images + captions'
+    }, {
       embedCode: '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F99067369"></iframe>',
       type: "soundSoundcloud"
     }, {
-      embedCode: '<iframe width="560" height="315" src="http://www.youtube.com/embed/Y2yaNhK4PCE?rel=0" frameborder="0" allowfullscreen></iframe>',
+      embedCode: '<iframe width="560" height="315" src="http://www.youtube.com/embed/Y2yaNhK4PCE" frameborder="0" allowfullscreen></iframe>',
       type: "videoYoutube"
     }, {
       embedCode: '<iframe src="http://player.vimeo.com/video/70638980" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/70638980">CoGe - Master Mixer 2013-07-16 at 19.36.39</a> from <a href="http://vimeo.com/pseudoplacebo">EJ Fox</a> on <a href="https://vimeo.com">Vimeo</a>.</p>',

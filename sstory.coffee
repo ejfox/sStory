@@ -22,11 +22,49 @@ class sStory
         $content.append(sectionContent)
     )
     # $content.append(JSON.stringify(@story_list))
+    
+    
+    
+    @handleWindowResize()
+    that = this
+    $(window).on('resize', ->
+      that.handleWindowResize()
+    )
+    
     return @story_list
     
   story_list: ->
     # Return the master story list object, the heart of everything
     @story_list
+    
+  verticalCenterElement: (el, parEl)->
+    elHeight = el.innerHeight() / 2
+    pageHeight = parEl.innerHeight() / 2
+
+    $(el).css({
+        paddingTop: (pageHeight - elHeight)
+    })
+    
+  verticalCenterPhotoTitles: ->
+    that = this
+    $(".photoBigText h2").each(->
+      that.verticalCenterElement( $(this), $(this).parent() )
+    )
+    
+    $(".photoCaption h2").each(->
+      that.verticalCenterElement( $(this), $(this).parent() )
+    )
+    
+  handleWindowResize: ->
+    @verticalCenterPhotoTitles()
+    
+    windowHeight = $(window).height()
+    $(".photoBigText .photo-background").css({
+        height: windowHeight
+    })
+
+
+  
     
 class sStoryEditor
   constructor: (@story) ->    
@@ -47,7 +85,7 @@ class sStoryEditor
           mustHave: ['embedCode']
       sound:
         soundSoundcloud:
-          inputs: ['title', 'embedCode']
+          inputs: ['embedCode']
           mustHave: ['embedCode']
       location:
         locationSinglePlace:
@@ -273,7 +311,7 @@ class sStoryEditor
     
     $("#editor-inputs input").each((el) ->
         # For every input that isn't blank, add it to the section
-        if $(this).val() isnt ""
+        if $(this).val() isnt ""          
           newSection[$(this).attr('id').split("-")[2]] = $(this).val()
     )
     
@@ -292,19 +330,27 @@ class sStoryEditor
 
 
 
-
-
-
 # This should eventually be in the main page's HTML not here
     
 $(document).ready(->
   
   story_list = [
         {
+          photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
+          type: 'photoBigText'
+          title: 'Making beautiful stories easy'
+        }
+        ,{
+          photoUrl: 'http://farm8.staticflickr.com/7038/6990421086_e92cafc3da_k.jpg'
+          type: 'photoCaption'
+          caption: 'You can place a short descriptive caption of the picture here. Think of it as a tweet.'
+          title: 'Big images + captions'
+        }
+        ,{
           embedCode: '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F99067369"></iframe>'
           type: "soundSoundcloud"}
         ,{
-          embedCode: '<iframe width="560" height="315" src="http://www.youtube.com/embed/Y2yaNhK4PCE?rel=0" frameborder="0" allowfullscreen></iframe>'
+          embedCode: '<iframe width="560" height="315" src="http://www.youtube.com/embed/Y2yaNhK4PCE" frameborder="0" allowfullscreen></iframe>'
           type: "videoYoutube"
         }
         ,{
