@@ -22,6 +22,7 @@ Include jQuery, Underscore, D3, Handlebars, Sortable, and Leaflet which sStory d
 ```
 
 ### Create your story list
+The story_list is the heart of every sStory, and it is essentially an array of objects, one for each section. It is order-specific, so the first section specified will be at the top of the page, 
 
 ```
 $(document).ready(function(){

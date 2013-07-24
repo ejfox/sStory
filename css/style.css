@@ -124,7 +124,7 @@ input {
 .photoBigText .caption,
 .photoCaption .caption {
   padding: 0.5em 1em;
-  max-width: 40%;
+  max-width: 42%;
   background-color: rgba(255,255,255,0.8);
   position: absolute;
   bottom: 0;
@@ -177,5 +177,15 @@ input {
 }
 .locationSinglePlace .leaflet-popup img {
   width: 320px;
-  border: 1px solid #000;
+  border: 1px solid #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0.2em 0.4em 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0 0.2em 0.4em 0px rgba(0,0,0,0.25);
+  -ms-box-shadow: 0 0.2em 0.4em 0px rgba(0,0,0,0.25);
+  -o-box-shadow: 0 0.2em 0.4em 0px rgba(0,0,0,0.25);
+  box-shadow: 0 0.2em 0.4em 0px rgba(0,0,0,0.25);
 }
