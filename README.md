@@ -1,7 +1,13 @@
 # sStory
 sStory is designed to make it easy to tell beautiful stories on the web with a variety of media. It is meant to take care of the presentation and technical aspects of telling a story through the web, so that creators can focus on narratives and gathering material. 
 
-sStory is an open-source self-hosted solution so that creators can feel comfortable publishing their work online without trusting someone else's servers or avoiding dodgy terms of service. It is also designed to be heavily customizable and extendable, so you can fit it into your pre-existing systems. 
+sStory is an open-source self-hosted solution so that creators, journalists, and newsrooms can publish their work online without trusting someone else's servers or avoiding dodgy terms of service.
+
+* Easily stitch together sections made of photos, videos, sounds, maps and more
+* Extendable, made to fit into pre-existing systems
+* Supports YouTube, Vimeo, SoundCloud for embedding media
+* Your story's structure is stored in hand-editable JSON
+* A focus on beautiful presentation and interactions
 
 ## Getting Started
 
@@ -22,7 +28,9 @@ Include jQuery, Underscore, D3, Handlebars, Sortable, and Leaflet which sStory d
 ```
 
 ### Create your story list
-The story_list is the heart of every sStory, and it is essentially an array of objects, one for each section. It is order-specific, so the first section specified will be at the top of the page, 
+The story_list is the heart of every sStory, and it is essentially an array of objects, one for each section. It is order-specific, with the first item appearing at the top of the page. 
+
+Simply create a new sStory and feed it the story_list array, and then render. 
 
 ```
 $(document).ready(function(){
@@ -31,7 +39,7 @@ $(document).ready(function(){
         {
           type: 'locationSinglePlace'
           ,address: "1600 Pennsylvania Ave NW  Washington, DC"
-          ,caption: "An address!!"
+          ,caption: "An address!"
         }
         ,{
           photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
@@ -84,11 +92,30 @@ You can add video sections with embedded videos from YouTube or Vimeo. You will 
 ```
 
 **videoVimeo:** Vimeo videos can be added the same way YouTube videos are added. Simply add the embed code to sStory. You can find Vimeo's embed code by clicking on the _share_ button that appears in the top-right of videos.
+
 ```
 {
   type: 'videoVimeo'  
   embedCode: '<iframe src="http://player.vimeo.com/video/35912908?badge=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/35912908">FACETURE</a> from <a href="http://vimeo.com/user9669590">Phil Cuttance</a> on <a href="https://vimeo.com">Vimeo</a>.</p>'
 }
 ```
+
 ### Sound
+**soundSoundcloud:** Audio from soundcloud can be embedded as well. You can find the embed code by clicking on the _share_ button in the bottom of each Soundcloud player. It is the iframe code labeled _Widget Code_. 
+
+```
+{
+  type: 'soundSoundcloud'  
+  embedCode: '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F99067369"></iframe>'
+}
+```
+
 ### Location
+**locationSinglePlace:** A single location with an address and a caption. A leaflet map is generated with a marker and a popup with the provided caption. An optional photoUrl can be provided to add an image to the popup. 
+```
+{
+  type: 'locationSinglePlace'
+  ,address: "1600 Pennsylvania Ave NW  Washington, DC"
+  ,caption: "An address!"
+}
+```
