@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>sStory v1</title>
-  <!-- <link rel="stylesheet" href="/coffeescript-meet-backbonejs/style.css"> -->
+
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="http://underscorejs.org/underscore.js"></script>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -11,14 +11,15 @@
   <script src="jquery.sortable.js" type="text/javascript" charset="utf-8"></script>
   <script src="sstory.js"></script>
     
-  <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="leaflet.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  
   
   <link rel="stylesheet" href="css/trib.css">
   <link rel="stylesheet" href="css/animation.css"><!--[if IE 7]>
   <link rel="stylesheet" href="css/trib-ie7.css"><![endif]-->
-  <link rel="stylesheet" href="leaflet.css" type="text/css" media="screen" title="no title" charset="utf-8">
   
-<link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700|Quattrocento+Sans:700,700italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700|Quattrocento+Sans:700,700italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <header>
@@ -109,13 +110,9 @@
 </script>
 
 <script id="section-template-locationSinglePlace" class="section-template" type="text/x-handlebars-template">
-<div class="single-location-map" data-address="{{address}}" data-caption="{{caption}}">
-{{#if photoUrl}}
-  {{photoUrl}}
-{{/if}}
+<div class="single-location-map" data-address="{{address}}" data-caption="{{caption}} {{#if photoUrl}}<p><img src='{{photoUrl}}' /></p> {{/if}}" >
 
-{{address}}
-{{caption}}
+Loading map of {{address}}
 </div>
 </script>
 

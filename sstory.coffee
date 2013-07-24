@@ -35,9 +35,9 @@ class sStory
     
     return @story_list
     
-  story_list: ->
+  #story_list: ->
     # Return the master story list object, the heart of everything
-    @story_list
+    #@story_list
     
   verticalCenterElement: (el, parEl)->
     elHeight = el.innerHeight() / 2
@@ -73,22 +73,45 @@ class sStory
     $(".single-location-map").each(->
       mapId = _.uniqueId("map_")
       address = $(this).attr("data-address")
-      $(this).attr("id", mapId)
+      caption = $(this).attr("data-caption")
       
-      map = L.map(mapId, {
-          scrollWheelZoom: false          
-      }).setView([51.505, -0.09], 13)
+      latLon = []
+      $(this).attr("id", mapId)      
       
-      that.geocodeLocationRequest(address, "centerMap")
+      geoCode = that.geocodeLocationRequest(address)
       
-      layer = new L.StamenTileLayer("toner-lite");
-      map.addLayer(layer);
-      
+      geoCode.done( (result) ->
+        console.log("geoCode result", result)
+        result = result[0]
+        latLon = [result.lat, result.lon]
+        
+        map = L.map(mapId, {
+            scrollWheelZoom: false          
+        }).setView(latLon, 14)
+              
+        layer = new L.StamenTileLayer("toner-lite");
+        map.addLayer(layer);
+        
+        circle = L.circle(latLon, 120, {
+            color: 'red'
+            fillColor: 'red'
+            fillOpacity: 0.5
+            closeOnClick: false
+        })
+        .bindPopup(caption, {
+            maxWidth: 600
+            maxHeight: 600
+            closeButton: false  
+        })
+        .addTo(map)
+        .openPopup();
+        
+      )      
     )
     
-  geocodeLocationRequest: (location, callback) ->
+  geocodeLocationRequest: (location) ->
   	console.log("Location", location)
-  	baseUrl = "http://open.mapquestapi.com/nominatim/v1/search.php?format=json&json_callback="+callback
+  	baseUrl = "http://open.mapquestapi.com/nominatim/v1/search.php?format=json"
   	addr = "&q="+location
 
   	url = encodeURI(baseUrl + addr + "&addressdetails=1&limit=1")
@@ -98,7 +121,7 @@ class sStory
   	$.ajax({
   		url: url
   		type: "GET"
-  		dataType: "script"
+  		dataType: "json"
   		cache: true
   	})
     
@@ -383,6 +406,7 @@ $(document).ready(->
           type: 'locationSinglePlace'
           address: "1039 Jefferson St. Oakland CA"
           caption: "An address!!"
+          photoUrl: "http://31.media.tumblr.com/9c8bd8923c097095b5a4b3026baf3fe5/tumblr_mq8xv5e2wv1qcn8pro1_1280.jpg"
         }
         ,{
           photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'

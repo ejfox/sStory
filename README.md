@@ -1,128 +1,93 @@
-### S-Story makes it easy to make full-browser-width magazine-style mini-sites.
+# sStory
+sStory is designed to make it easy to tell beautiful stories on the web with a variety of media. It is meant to take care of the presentation and technical aspects of telling a story through the web, so that creators can focus on narratives and gathering material. 
 
-Designed to make it easy to make beautiful photo-essays with other embedded media types like video, audio, or timelines. [Watch an introductory video](https://vimeo.com/50500145).
+sStory is an open-source self-hosted solution so that creators can feel comfortable publishing their work online without trusting someone else's servers or avoiding dodgy terms of service. It is also designed to be heavily customizable and extendable, so you can fit it into your pre-existing systems. 
 
-The images, videos, and embeds are fully responsive. They always stretch to be fullscreen, whether on an enormous display, or an iPhone. Simply provide your URLs, embeds, and text, and your story can be seen on any device. You can [find a basic demo here](http://ejfox.github.com/sStory/).
+## Getting Started
 
-sStory [also has a tool to aid in creating your JSON](http://ejfox.github.com/sStory/make_story.html) based on images / captions / embeds you provide.
 
-I want to make this tool as usable as possible for journalists, storytellers, and creators. So feel free to file issues, pull requests, or just send me an email (ejfox@ejfox.com) and let me know what I can improve.
+### Include dependencies
+Include jQuery, Underscore, D3, Handlebars, Sortable, and Leaflet which sStory depend on. After that, pull in sStory and it's stylesheet. 
 
-### Examples
-+ An example story based on [OWS's 1 year anniversary in NYC](http://ejfox.github.com/sStory/nyc_s17.html).
+```
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://underscorejs.org/underscore.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="handlebars.js" type="text/javascript" charset="utf-8"></script>  
+<script src="jquery.sortable.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="leaflet.css" type="text/css" media="screen" charset="utf-8">
 
-### Section types
-sStory allows you to create sections made of:
+<script src="sstory.js"></script>
+<link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8">
+```
 
-1. Large image
-2. Large image with caption
-3. Large image with paragraphs of text
-4. Embedded video from Vimeo
-5. Embedded audio from SoundCloud
-6. Embedded verite timeline
-7. Plain text
-8. Gist
-9. Slideshows
+### Create your story list
 
-Coming soon:
+```
+$(document).ready(function(){
+  
+  story_list = [
+        {
+          type: 'locationSinglePlace'
+          ,address: "1600 Pennsylvania Ave NW  Washington, DC"
+          ,caption: "An address!!"
+        }
+        ,{
+          photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
+          type: 'photoBigText'
+          title: 'Making beautiful stories easy'
+        }
+  ]
+  
+  story = new sStory(story_list)
 
-+ Embedded leaflet maps
+  story.render()
 
-### How to use sStory
+})
+```
 
-Sections are passed to S-Story in an array of objects. For example:
+## Section Types
+### Photo
+Photo sections stretch to fill the entire browser window (images will be cropped and display differently on devices with different aspect ratios). They **must have** a photo URL. They can **optionally** have a title or caption. 
 
-    var sections = [
-    {
-    	title: "Text-only"
-    	,type: "text"
-    	,text: "Lorem ipsum dolor sit etc… use for long text, please."
-    }
-    ,{
-        title: "Large Image"
-        ,type: "image"
-        ,url: "http://large-image-url.com"
-    },
-    {
-        title: "Large Image with Caption"
-        ,type: "image2"
-        ,url: "http://large-image-url.com"
-        ,caption: "Caption string goes here."
-    },
-    {
-        title: "Large Image with Paragraphs"
-        ,type: "image3"
-        ,url: "http://large-image-url.com"
-        ,caption: "<h3>Lorem ipsum dolor sit amet</h3> <p>consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
-    },
-    {
-      title: "Embedded Vimeo Video"
-      ,type: "vimeo"
-      ,url: "http://player.vimeo.com/video/36256273?byline=0&portrait=0&color=ffffff"
-      ,caption: "Even videos can have captions, though not often."
-    },
-    {
-        title: "Part 5 (Embedded Soundcloud audio)"
-        ,type: "soundcloud"
-        ,embed: "<iframe width='100%' height='166' scrolling='no' frameborder='no' src='http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F37934185&amp;auto_play=false&amp;show_artwork=false&amp;color=000000'></iframe>"
-    },
-    {
-        title: "Timeline section (Verite timeline)"
-        ,type: "timeline"
-        ,url: "https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dExOOVg4b29FWG5nOURTLTlCbDhsTVE&output=html"
-    },
-	{
-        "title": "Test gist sStory section"
-        ,"type": "gist"
-        ,"url": "4138619"
-    },
-    {
-    	"title": "Example slideshow"
-    	,"type": "slideshow"
-    	,"slides" : [
-    		{
-    			"url": "http://farm9.staticflickr.com/8305/8018534029_5d0ba3470d_b.jpg"
-    			,"caption": "Test image 1"
-    		},
-    		{
-    			"url": "http://farm9.staticflickr.com/8174/8018538728_68ddc70891_b.jpg"
-    			,"caption": "Test image 2"
-    		},
-    		{ "url": "http://farm9.staticflickr.com/8311/8018538532_2fa9aff47c_b.jpg" }
-    	]
+There are two types of photo section.
 
-    }
-    ]
+**photoBigText:** Which is for photos with no title, or photos with just a title.
+```
+{
+  type: 'photoBigText'  
+  photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
+  title: 'Making beautiful stories easy'
+}
+```
 
-Once you've created the objects for each of your sections, creating the sStory is as simple as
+**photoCaption:** Which is for photos with a caption, or with a caption and a title.
+```
+{
+  type: 'photoCaption'  
+  photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
+  title: 'Making beautiful stories easy'
+}
+```
 
-    /* Add all of the sections to the specified container */
-    $(document).ready(function(){
-    	sStory(sections);
-    }
+### Video
+You can add video sections with embedded videos from YouTube or Vimeo. You will give the entire embed code to sStory. 
 
-You can use the [sStory make_story tool](http://ejfox.github.com/sStory/make_story.html) to easily create your sStory if you don't want to get your hands messy with JSON. [This video shows how to do that.](https://vimeo.com/50500145)
+**videoYoutube:** Add videos from YouTube by using their embed code. You can find it in the _share_ tab beneath each video by clicking the _embed_ button. You don't need to change any of the options. You will be given some code for an iFrame embed.
 
----
+```
+{
+  type: 'videoYoutube'  
+  embedCode: '<iframe width="420" height="315" src="//www.youtube.com/embed/dQw4w9WgXcQ?rel=0" frameborder="0" allowfullscreen></iframe>'
+}
+```
 
-#### Images
-You simply need the URL of the image. For images with long captions (image3) you can include any HTML that you like in the caption.
-
-#### Vimeo
-If you go to your video and click share. Vimeo's sharing box will appear. Copy the embed code and paste it into your embed code section.
-
-![Vimeo howto](http://ejfox.github.com/sStory/howto/howto-vimeo.png)
-
-#### Soundcloud
-Go to your soundcloud track and click share. Soundcloud's sharing box will appear. You will need to get the src URL from the embed code and copy it over.
-
-So if your embed code looks like ```<iframe width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F58373178&show_artwork=true"></iframe>```
-
-Your URL would be ```http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F58373178&show_artwork=true```
-    
-
-#### Timeline
-From your google spreadsheet, which is formatted to the [correct specifications](https://docs.google.com/a/digitalartwork.net/previewtemplate?id=0AppSVxABhnltdEhzQjQ4MlpOaldjTmZLclQxQWFTOUE&mode=public), go to **File > Publish to Web** - in the window that pops up, you want to copy and paste the URL at the bottom of the window.
-
-#### Gist
-Use the unique sequence of numbers that makes up your gist id. sStory will automatically display all of the files contained in that gist. 
+**videoVimeo:** Vimeo videos can be added the same way YouTube videos are added. Simply add the embed code to sStory. You can find Vimeo's embed code by clicking on the _share_ button that appears in the top-right of videos.
+```
+{
+  type: 'videoVimeo'  
+  embedCode: '<iframe src="http://player.vimeo.com/video/35912908?badge=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/35912908">FACETURE</a> from <a href="http://vimeo.com/user9669590">Phil Cuttance</a> on <a href="https://vimeo.com">Vimeo</a>.</p>'
+}
+```
+### Sound
+### Location

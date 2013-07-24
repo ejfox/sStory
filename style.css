@@ -175,3 +175,7 @@ input {
 .locationSinglePlace .single-location-map {
   min-height: 700px;
 }
+.locationSinglePlace .leaflet-popup img {
+  width: 320px;
+  border: 1px solid #000;
+}
