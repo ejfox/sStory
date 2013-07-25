@@ -120,3 +120,68 @@ You can add video sections with embedded videos from YouTube or Vimeo. You will 
   caption: "An address!"
 }
 ```
+
+## Adding new section types
+Sections in sStory are made of 4 simple things: the **section template** which is the handlebars template for how the section appears on the page, any new **editor input template** if needed, and the **section specification** which details for sStory what inputs a section has, and which are mandatory. 
+
+#### Section Template
+The section template is currently defined in the story HTML, but should be moved to a separate file with the rest of the section templates. 
+
+Check this example of photoBigText's section template.
+
+```
+<script id="section-template-photoBigText" class="section-template" type="text/x-handlebars-template">
+<div class="photo-background" style="background-image: url({{photoUrl}})">
+{{#if title}}
+  <h2>{{title}}</h2>
+{{/if}}
+</div>
+</script>
+```
+
+#### Editor Input Template
+Every section type takes different inputs, but they share many. The inputs currently included are **photoUrl**, **title**, **caption**, **embedCode**, **address**. If your new section type only uses these, you need not worry about an editor input template. If you were adding a new "person" section type, you might want to give it a "Full Name" input.
+
+Check these input templates for **photoUrl** and **title** used by the **photoBigText** section template.
+```
+<script id="editor-template-photoUrl" class="editor-template" type="text/x-handlebars-template">
+<p>
+  <i class="icon-infinity"></i> <input type="text" id="editor-section-photoUrl" placeholder="Photo URL"></input>  
+</p>
+</script>
+
+<script id="editor-template-title" class="editor-template" type="text/x-handlebars-template">
+<p>
+   <i class="icon-dot-3"></i> <input type="text" id="editor-section-title" placeholder="Title"></input>  
+</p>
+</script>
+```
+
+#### Section Specification
+Section specifications can be found in the sStoryEditor constructor. There are 4 categories, containing objects for each section type. The *inputs* array contains every input the section could possibly have. The *mustHave* array contains the inputs the section must have to display. 
+
+```
+@sectionTypes =
+  photo:
+    photoBigText:
+      inputs: ['title', 'photoUrl']
+      mustHave: ['photoUrl']
+    photoCaption:
+      inputs: ['title', 'photoUrl', 'caption']
+      mustHave: ['photoUrl', 'caption']
+  video:
+    videoYoutube:
+      inputs: ['embedCode']
+      mustHave: ['embedCode']
+    videoVimeo:
+      inputs: ['embedCode']
+      mustHave: ['embedCode']
+  sound:
+    soundSoundcloud:
+      inputs: ['embedCode']
+      mustHave: ['embedCode']
+  location:
+    locationSinglePlace:
+      inputs: ['address', 'caption', 'photoUrl']
+      mustHave: ['address', 'caption']
+```

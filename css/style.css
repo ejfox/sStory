@@ -9,6 +9,7 @@ body {
   padding: 0;
   margin: 0;
   width: 100%;
+  background-color: #f0f0f0;
 }
 h1,
 h2,
@@ -40,7 +41,12 @@ header {
 header h1 {
   font-size: 1em;
   padding: 0;
-  margin: 0.2em;
+  margin: 0.2em 0.5em;
+  display: inline-block;
+  vertical-align: middle;
+}
+header #nav-section-list {
+  display: inline-block;
 }
 input {
   padding: 0.4em;
@@ -76,9 +82,38 @@ input {
 }
 #story-editor #save {
   display: block;
-  margin-top: 1.4em;
+  margin: 2em 0;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+#story-editor label {
+  font-size: 0.8em;
+}
+#story-editor #content-editor {
+  background-color: #f6f6f6;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  padding: 0.5em 0.25em;
+  -webkit-box-shadow: 0 0 0.6em 0px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0 0 0.6em 0px rgba(0,0,0,0.15);
+  -ms-box-shadow: 0 0 0.6em 0px rgba(0,0,0,0.15);
+  -o-box-shadow: 0 0 0.6em 0px rgba(0,0,0,0.15);
+  box-shadow: 0 0 0.6em 0px rgba(0,0,0,0.15);
+}
+#story-editor #content-editor h4 {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+#story-editor #content-editor #editor-dropdowns {
+  text-align: center;
+}
+#story-editor #content-editor #editor-dropdowns #new-section-type {
+  text-transform: capitalize;
 }
 .sortable-dragging {
   opacity: 0.8;

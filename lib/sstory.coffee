@@ -39,6 +39,9 @@ class sStory
     
     return @story_list
     
+  makeNavSectionList: ->
+    
+    
   #story_list: ->
     # Return the master story list object, the heart of everything
     #@story_list
@@ -129,7 +132,10 @@ class sStory
   
     
 class sStoryEditor
-  constructor: (@story) ->    
+  constructor: (@story) -> 
+    
+    $("#story-editor").show()
+       
     @sectionTypes =
       photo:
         photoBigText:
@@ -202,6 +208,11 @@ class sStoryEditor
     $("#story-editor #save").on("click", -> that.exportStoryList())
     
     document.getElementById('story_file').addEventListener('change',( -> that.importStoryList(event, that) ), false)
+  
+    $("#add-section").on("click", ->
+        that.addSection()
+        $("#editor-inputs input").val(" ")
+    )
     
   renderSectionList: ->
     # Render a re-arrangeable list of each section for the editor
@@ -369,7 +380,10 @@ class sStoryEditor
     # Add a new section to @story.list()
     
     sectionCount = d3.max(_.keys(@story.story_list)); # Figure how many sections there are
-    console.log("count:", sectionCount)
+    #console.log("count:", sectionCount)
+    
+    if sectionCount is undefined
+      sectionCount = 0
     
     # Create the new section     
     newSectionNum = (+sectionCount)+1
@@ -423,27 +437,7 @@ class sStoryEditor
     
   makeTitlesEditable: ->
     console.log "make all the titles contentEditable and add some bindings"
-
-
-
-
-
-
-# This should eventually be in the main page's HTML not here
     
-$(document).ready(->
-  
-  story_list = []
-  
-  story = new sStory(story_list)
+  updateSectionTitle: (sectionID, newtitle) ->
+    console.log sectionID, newtitle
 
-  story.render()
-
-  storyEditor = new sStoryEditor(story)
-  
-  d3.select("#add-section")
-    .on("click", ->
-      storyEditor.addSection()
-      $("#editor-inputs input").val(" ")
-    )
-)
