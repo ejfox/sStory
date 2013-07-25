@@ -1,10 +1,14 @@
 class sStory
-  constructor: (@story_list) ->    
+  constructor: (@story_list) ->   
+    typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
+     
     if @story_list is undefined
       throw "No story_list defined"
+      
+    if !typeIsArray(@story_list)
+      throw "The story_list is not an array"
     
   render: ->
-    console.log("re-render")
     $content = $('#content')
     $content.html("")
     
@@ -81,7 +85,7 @@ class sStory
       geoCode = that.geocodeLocationRequest(address)
       
       geoCode.done( (result) ->
-        console.log("geoCode result", result)
+        #console.log("geoCode result", result)
         result = result[0]
         latLon = [result.lat, result.lon]
         
@@ -110,13 +114,11 @@ class sStory
     )
     
   geocodeLocationRequest: (location) ->
-  	console.log("Location", location)
+  	#console.log("Location", location)
   	baseUrl = "http://open.mapquestapi.com/nominatim/v1/search.php?format=json"
   	addr = "&q="+location
 
   	url = encodeURI(baseUrl + addr + "&addressdetails=1&limit=1")
-
-  	console.log "URL>", url
 
   	$.ajax({
   		url: url
@@ -124,12 +126,6 @@ class sStory
   		dataType: "json"
   		cache: true
   	})
-    
-  centerMap: (geocodeJSON)->
-    console.log("Geocode JSON->", geocodeJSON)
-      
-
-
   
     
 class sStoryEditor
@@ -202,6 +198,10 @@ class sStoryEditor
         
         $editor.append($template)
     )
+    
+    $("#story-editor #save").on("click", -> that.exportStoryList())
+    
+    document.getElementById('story_file').addEventListener('change',( -> that.importStoryList(event, that) ), false)
     
   renderSectionList: ->
     # Render a re-arrangeable list of each section for the editor
@@ -391,6 +391,38 @@ class sStoryEditor
     @giveSectionsID()
     
     @updatePage()
+    
+  exportStoryList: ->
+    # Save the story list as a JSON file
+    blob = new Blob([JSON.stringify(@story.story_list)], {type: "application/json;charset=utf-8"});
+    saveAs(blob, "sstory.json");
+    
+  importStoryList: (evt, that) ->
+
+    files = evt.target.files
+    fileJson = []
+    
+    reader = new FileReader();
+    
+    reader.onload = ((thefile) ->
+      (e) ->
+        fileJson = JSON.parse(e.target.result)
+        
+        that.story.story_list = fileJson
+        that.story.render()
+        that.giveSectionsID()
+        that.renderSectionList()
+        
+        $("#story-editor #story_file").hide()
+        
+    )(files[0])
+        
+    reader.readAsBinaryString(files[0])
+    
+    
+    
+  makeTitlesEditable: ->
+    console.log "make all the titles contentEditable and add some bindings"
 
 
 
@@ -401,36 +433,7 @@ class sStoryEditor
     
 $(document).ready(->
   
-  story_list = [
-        {
-          type: 'locationSinglePlace'
-          address: "1039 Jefferson St. Oakland CA"
-          caption: "An address!!"
-          photoUrl: "http://31.media.tumblr.com/9c8bd8923c097095b5a4b3026baf3fe5/tumblr_mq8xv5e2wv1qcn8pro1_1280.jpg"
-        }
-        ,{
-          photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
-          type: 'photoBigText'
-          title: 'Making beautiful stories easy'
-        }
-        ,{
-          photoUrl: 'http://farm8.staticflickr.com/7038/6990421086_e92cafc3da_k.jpg'
-          type: 'photoCaption'
-          caption: 'You can place a short descriptive caption of the picture here. Think of it as a tweet.'
-          title: 'Big images + captions'
-        }
-        ,{
-          embedCode: '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F99067369"></iframe>'
-          type: "soundSoundcloud"}
-        ,{
-          embedCode: '<iframe width="560" height="315" src="http://www.youtube.com/embed/Y2yaNhK4PCE" frameborder="0" allowfullscreen></iframe>'
-          type: "videoYoutube"
-        }
-        ,{
-          embedCode: '<iframe src="http://player.vimeo.com/video/70638980" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/70638980">CoGe - Master Mixer 2013-07-16 at 19.36.39</a> from <a href="http://vimeo.com/pseudoplacebo">EJ Fox</a> on <a href="https://vimeo.com">Vimeo</a>.</p>',
-          type: "videoVimeo"
-        }
-  ]
+  story_list = []
   
   story = new sStory(story_list)
 

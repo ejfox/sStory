@@ -21,6 +21,7 @@ Include jQuery, Underscore, D3, Handlebars, Sortable, and Leaflet which sStory d
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="handlebars.js" type="text/javascript" charset="utf-8"></script>  
 <script src="jquery.sortable.js" type="text/javascript" charset="utf-8"></script>
+<script src="lib/leaflet.js" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" href="leaflet.css" type="text/css" media="screen" charset="utf-8">
 
 <script src="sstory.js"></script>
@@ -35,7 +36,7 @@ Simply create a new sStory and feed it the story_list array, and then render.
 ```
 $(document).ready(function(){
   
-  story_list = [
+  var story_list = [
         {
           type: 'locationSinglePlace'
           ,address: "1600 Pennsylvania Ave NW  Washington, DC"
@@ -48,7 +49,7 @@ $(document).ready(function(){
         }
   ]
   
-  story = new sStory(story_list)
+  var story = new sStory(story_list)
 
   story.render()
 
@@ -115,7 +116,7 @@ You can add video sections with embedded videos from YouTube or Vimeo. You will 
 ```
 {
   type: 'locationSinglePlace'
-  ,address: "1600 Pennsylvania Ave NW  Washington, DC"
-  ,caption: "An address!"
+  address: "1600 Pennsylvania Ave NW  Washington, DC"
+  caption: "An address!"
 }
 ```

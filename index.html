@@ -9,6 +9,8 @@
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script src="lib/handlebars.js" type="text/javascript" charset="utf-8"></script>  
   <script src="lib/jquery.sortable.js" type="text/javascript" charset="utf-8"></script>
+  <script src="lib/FileSaver.min.js" type="text/javascript" charset="utf-8"></script>
+  
   <script src="lib/sstory.js"></script>
     
   <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8">
@@ -45,6 +47,12 @@
     <ul id="section-list">
       
     </ul>
+    
+    <input type="file" id="story_file" name="story_file[]" />
+    
+    <button id="save">
+      Save
+    </button>
   </div>
   
   <div id="content">
