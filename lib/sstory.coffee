@@ -31,16 +31,22 @@ class sStory
     
     @handleWindowResize()
     that = this
-    $(window).on('resize', ->
-      that.handleWindowResize()
-    )
+    $(window).on('resize', -> that.handleWindowResize() )
     
     @renderMaps()
+    @renderTimelines()
+    @makeNavSectionList()
     
     return @story_list
     
   makeNavSectionList: ->
+    $navlist = $("#nav-section-list")
+    $navlist.html("")
     
+    _.each(@story_list, (section, i) ->
+      #console.log section  
+      $navlist.append(i + 1)      
+    )
     
   #story_list: ->
     # Return the master story list object, the heart of everything
@@ -75,15 +81,33 @@ class sStory
         minHeight: windowHeight
     })
     
+  renderTimelines: ->
+    that = this
+    $(".verite-timeline").each(->
+      timelineId = _.uniqueId("timeline_")
+      $(this).attr("id", timelineId)
+      spreadsheetAddr = $(this).attr("data-spreadsheet-address")
+      
+      createStoryJS({
+           type:       'timeline'
+           width:      '100%'
+           height:     '600'
+           source:     spreadsheetAddr
+           embed_id:   timelineId
+       });
+      
+    )
+    
   renderMaps: ->
     that = this
     $(".single-location-map").each(->
       mapId = _.uniqueId("map_")
+      $(this).attr("id", mapId)
+      
       address = $(this).attr("data-address")
       caption = $(this).attr("data-caption")
       
       latLon = []
-      $(this).attr("id", mapId)      
       
       geoCode = that.geocodeLocationRequest(address)
       
@@ -159,6 +183,10 @@ class sStoryEditor
         locationSinglePlace:
           inputs: ['address', 'caption', 'photoUrl']
           mustHave: ['address', 'caption']
+      timeline:
+        timelineVerite:
+          inputs: ['title', 'googleSpreadsheet']
+          mustHave: ['googleSpreadsheet']
     
     @giveSectionsID()
     @renderSectionList()
@@ -245,6 +273,9 @@ class sStoryEditor
           
           when "locationSinglePlace"
             sectionMainType = "location"
+            
+          when "timelineVerite"
+            sectionMainType = "timeline"
           
         switch sectionMainType
           when "photo"
@@ -255,12 +286,21 @@ class sStoryEditor
             sectionIcon = "<i class=\"icon-volume-up\"></i>"
           when "location"
             sectionIcon = "<i class=\"icon-location-circled\"></i>"
+          when "timeline"
+            sectionIcon = "<i class=\"icon-calendar\"></i>"
         
         deleteIcon = "<i class=\"icon-cancel-squared delete-section\"></i>"
         sectionContent = deleteIcon + sectionIcon + " "
+        
+        $listItem = $("<li></li>")
+          .attr("id", i)
+          .attr("data-id", section.id)
+          .html(sectionContent)
+        
         if section.title isnt undefined
-          sectionContent += section.title
-        $content.append($("<li id='"+i+"' data-id='"+section.id+"'>"+sectionContent+"</li>"))
+          $listItem.attr("title", section.title)
+        
+        $content.append($listItem)
         
         $("i.delete-section").on("click", ->
             that.deleteSection($(this).parent().attr('data-id'))
@@ -431,9 +471,7 @@ class sStoryEditor
         
     )(files[0])
         
-    reader.readAsBinaryString(files[0])
-    
-    
+    reader.readAsBinaryString(files[0])    
     
   makeTitlesEditable: ->
     console.log "make all the titles contentEditable and add some bindings"

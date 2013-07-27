@@ -128,7 +128,7 @@ input {
   border-bottom: 1px solid #f00;
 }
 #section-list {
-  font-size: 0.8em;
+  font-size: 1.2em;
   margin: 0;
   margin-top: 1em;
   padding: 0;
@@ -140,7 +140,6 @@ input {
 }
 #content section {
   width: 100%;
-  border-bottom: 1px solid #000;
 }
 .photoBigText,
 .photoCaption {
@@ -230,4 +229,17 @@ input {
   -ms-box-shadow: 0 0.2em 0.4em 0px rgba(0,0,0,0.25);
   -o-box-shadow: 0 0.2em 0.4em 0px rgba(0,0,0,0.25);
   box-shadow: 0 0.2em 0.4em 0px rgba(0,0,0,0.25);
+}
+.leaflet-top {
+  top: 3em !important;
+}
+.timelineVerite {
+  height: 600px;
+}
+.timelineVerite h2.timeline-title {
+  background-color: #fff;
+  margin: 0;
+  padding: 0.8em;
+  text-align: center;
+  border-bottom: 1px solid #efefef;
 }

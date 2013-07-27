@@ -10,16 +10,18 @@
   <script src="lib/handlebars.js" type="text/javascript" charset="utf-8"></script>  
   <script src="lib/jquery.sortable.js" type="text/javascript" charset="utf-8"></script>
   <script src="lib/FileSaver.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="lib/storyjs-embed.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="lib/css/timeline.css" type="text/css" media="screen" title="no title" charset="utf-8">
   
   <script src="lib/sstory.js"></script>
     
-  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8">
-  <link rel="stylesheet" href="css/leaflet.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="lib/css/style.css" type="text/css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="lib/css/leaflet.css" type="text/css" media="screen" title="no title" charset="utf-8">
   
   
-  <link rel="stylesheet" href="css/trib.css">
-  <link rel="stylesheet" href="css/animation.css"><!--[if IE 7]>
-  <link rel="stylesheet" href="css/trib-ie7.css"><![endif]-->
+  <link rel="stylesheet" href="lib/css/trib.css">
+  <link rel="stylesheet" href="lib/css/animation.css"><!--[if IE 7]>
+  <link rel="stylesheet" href="lib/css/trib-ie7.css"><![endif]-->
   
   <link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700|Quattrocento+Sans:700,700italic' rel='stylesheet' type='text/css'>
 </head>
@@ -72,13 +74,13 @@
     
 $(document).ready(function(){
   
-  var story_list = [{"type":"locationSinglePlace","address":"1039 Jefferson St. Oakland CA","caption":"An address!!","photoUrl":"http://31.media.tumblr.com/9c8bd8923c097095b5a4b3026baf3fe5/tumblr_mq8xv5e2wv1qcn8pro1_1280.jpg","id":"s2"},{"photoUrl":"http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg","type":"photoBigText","title":"Making beautiful stories easy","id":"s3"},{"photoUrl":"http://farm8.staticflickr.com/7038/6990421086_e92cafc3da_k.jpg","type":"photoCaption","caption":"You can place a short descriptive caption of the picture here. Think of it as a tweet.","title":"Big images + captions","id":"s4"},{"embedCode":"<iframe width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" src=\"https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F99067369\"></iframe>","type":"soundSoundcloud","id":"s5"},{"embedCode":"<iframe width=\"560\" height=\"315\" src=\"http://www.youtube.com/embed/Y2yaNhK4PCE\" frameborder=\"0\" allowfullscreen></iframe>","type":"videoYoutube","id":"s6"},{"embedCode":"<iframe src=\"http://player.vimeo.com/video/70638980\" width=\"500\" height=\"281\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href=\"http://vimeo.com/70638980\">CoGe - Master Mixer 2013-07-16 at 19.36.39</a> from <a href=\"http://vimeo.com/pseudoplacebo\">EJ Fox</a> on <a href=\"https://vimeo.com\">Vimeo</a>.</p>","type":"videoVimeo","id":"s7"}]
+  var story_list = [{"type":"locationSinglePlace","address":"1039 Jefferson St. Oakland CA","caption":"An address!!","photoUrl":"http://31.media.tumblr.com/9c8bd8923c097095b5a4b3026baf3fe5/tumblr_mq8xv5e2wv1qcn8pro1_1280.jpg","id":"s2"},{"photoUrl":"http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg","type":"photoBigText","title":"Making beautiful stories easy","id":"s3"},{"photoUrl":"http://farm8.staticflickr.com/7038/6990421086_e92cafc3da_k.jpg","type":"photoCaption","caption":"You can place a short descriptive caption of the picture here. Think of it as a tweet.","title":"Big images + captions","id":"s4"},{"embedCode":"<iframe width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" src=\"https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F99067369\"></iframe>","type":"soundSoundcloud","id":"s5"},{"title": "Hello, timeline!", "googleSpreadsheet":"https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dFVxOEk0aGRxbk9URE9yeDJKMXNIS3c&output=html","type":"timelineVerite","id":"s4"}]
   
   var story = new sStory(story_list)
 
   story.render()
 
-  //var storyEditor = new sStoryEditor(story)
+  var storyEditor = new sStoryEditor(story)
 })
 </script>
   
@@ -144,6 +146,16 @@ Loading map of {{address}}
 </div>
 </script>
 
+<script id="section-template-timelineVerite" class="section-template" type="text/x-handlebars-template">
+{{#if title}}
+<h2 class="timeline-title">{{title}}</h2>
+{{/if}}
+
+<div class="verite-timeline" data-spreadsheet-address="{{googleSpreadsheet}}">
+
+</div>
+</script>
+
 
 
 
@@ -175,6 +187,12 @@ Loading map of {{address}}
 <script id="editor-template-address" class="editor-template" type="text/x-handlebars-template">
 <p>
   <i class="icon-address"></i> <input type="text" id="editor-section-address" placeholder="Address"></input>  
+</p>
+</script>
+
+<script id="editor-template-googleSpreadsheet" class="editor-template" type="text/x-handlebars-template">
+<p>
+  <i class="icon-code"></i> <input type="text" id="editor-section-googleSpreadsheet" placeholder="Google Spreadsheet Publish URL"></input>  
 </p>
 </script>
 
