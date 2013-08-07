@@ -1,5 +1,7 @@
 class sStory
-  constructor: (@story_list) ->   
+  constructor: (@story_list) ->  
+    # Make sure that sStory is being started
+    # with a story_list, and that it is an array 
     typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
      
     if @story_list is undefined
@@ -9,15 +11,21 @@ class sStory
       throw "The story_list is not an array"
     
   render: ->
+    # Render the sStory
+    
+    # Every time we render, we clear out the content
     $content = $('#content')
     $content.html("")
     
+    # Gather all the section templates on the page by their class
     templates = {}
     $(".section-template").each(->
         templateSource = $(this).html()
         templates[$(this).attr('id')] = Handlebars.compile(templateSource)
     )
     
+    # Go through each section in the story_list and render it to HTML
+    # depending on which section type it is
     _.each(@story_list, (section, i) ->
         #console.log "section =>", section
         # Append the contents of each section to the page
@@ -25,9 +33,7 @@ class sStory
         sectionContent = $("<section id='"+i+"' class='"+section.type+"'></section>").html(sectionHtml)
         $content.append(sectionContent)
     )
-    # $content.append(JSON.stringify(@story_list))
-    
-    
+    #$content.append(JSON.stringify(@story_list))
     
     @handleWindowResize()
     that = this
@@ -40,19 +46,20 @@ class sStory
     return @story_list
     
   makeNavSectionList: ->
+    # Make the navigation which appears at the top of the page
     $navlist = $("#nav-section-list")
     $navlist.html("")
     
     _.each(@story_list, (section, i) ->
       #console.log section  
-      $navlist.append(i + 1)      
+      $link = $("<a></a>").attr("href", "#"+i).html(i + 1)
+      $listItem = $("<li></li>").html($link)
+      $navlist.append($listItem)      
     )
     
-  #story_list: ->
-    # Return the master story list object, the heart of everything
-    #@story_list
-    
   verticalCenterElement: (el, parEl)->
+    # Vertical center an element within another
+    # used for vertically centering titles
     elHeight = el.innerHeight() / 2
     pageHeight = parEl.innerHeight() / 2
 
@@ -82,23 +89,27 @@ class sStory
     })
     
   renderTimelines: ->
+    # Render all the verite timeline sections in the story
     that = this
     $(".verite-timeline").each(->
       timelineId = _.uniqueId("timeline_")
       $(this).attr("id", timelineId)
       spreadsheetAddr = $(this).attr("data-spreadsheet-address")
       
-      createStoryJS({
-           type:       'timeline'
-           width:      '100%'
-           height:     '600'
-           source:     spreadsheetAddr
-           embed_id:   timelineId
-       });
+      $(document).ready(->      
+        createStoryJS({
+             type:       'timeline'
+             width:      '100%'
+             height:     '700'
+             source:     spreadsheetAddr
+             embed_id:   timelineId
+         });
+      )
       
     )
     
   renderMaps: ->
+    # Render all the leaflet map sections in the story
     that = this
     $(".single-location-map").each(->
       mapId = _.uniqueId("map_")
@@ -141,6 +152,8 @@ class sStory
     )
     
   geocodeLocationRequest: (location) ->
+    # Make a request to geocode a location
+    # returns the jQuery AJAX call to avoid callback craziness
   	#console.log("Location", location)
   	baseUrl = "http://open.mapquestapi.com/nominatim/v1/search.php?format=json"
   	addr = "&q="+location
@@ -158,8 +171,11 @@ class sStory
 class sStoryEditor
   constructor: (@story) -> 
     
+    # Show the editor which is normally hidden
     $("#story-editor").show()
        
+       
+    # Define each section type, it's inputs, and mustHaves   
     @sectionTypes =
       photo:
         photoBigText:
@@ -187,12 +203,17 @@ class sStoryEditor
         timelineVerite:
           inputs: ['title', 'googleSpreadsheet']
           mustHave: ['googleSpreadsheet']
+        timelineStorify:
+          inputs: ['embedCode']
+          mustHave: ['embedCode']
     
     @giveSectionsID()
     @renderSectionList()
     @renderSectionTypeSelector()
   
   giveSectionsID: () ->
+    # Go through each secion in story_list
+    # and give it a unique ID from underscore
     newStory = []
 
     _.each(@story.story_list, (section) ->
@@ -240,6 +261,10 @@ class sStoryEditor
     $("#add-section").on("click", ->
         that.addSection()
         $("#editor-inputs input").val(" ")
+    )
+    
+    $("#importJsonToggle").on("click", ->
+        $("#story_file").toggle()
     )
     
   renderSectionList: ->
@@ -330,9 +355,11 @@ class sStoryEditor
     );
     
   reorderStoryList: (sortedList) ->
-    # Given an order-specific array of IDs like ["s1", "s2", "s3"]
+    # Given an order-specific array of IDs like ["s1", "s3", "s2"]
     # re-arrange the story_list objects
     oldList = @story.story_list
+    
+    console.log "oldList", oldList, "sortedList", sortedList
     
     newStoryList = []
     _.each(sortedList, (listItemID) ->
@@ -419,7 +446,8 @@ class sStoryEditor
   addSection: (section) ->
     # Add a new section to @story.list()
     
-    sectionCount = d3.max(_.keys(@story.story_list)); # Figure how many sections there are
+    # Figure how many sections there are
+    sectionCount = d3.max(_.keys(@story.story_list)); 
     #console.log("count:", sectionCount)
     
     if sectionCount is undefined
@@ -452,6 +480,7 @@ class sStoryEditor
     saveAs(blob, "sstory.json");
     
   importStoryList: (evt, that) ->
+    # Open a JSON file and use it to make the story_list
 
     files = evt.target.files
     fileJson = []

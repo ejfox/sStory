@@ -1,6 +1,10 @@
 @import 'mixins'
 
-* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+* { 
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+  box-sizing: border-box
+}
 
 body
   font-family: 'Oxygen', 'Helvetica Neue', Helvetica, Arial, sans-serif
@@ -19,6 +23,7 @@ h1,h2,h3,h4,h5,h6
   height 100%
   
 header
+  display none
   height auto
   width 100%
   position fixed
@@ -36,7 +41,16 @@ header
     vertical-align middle
     
   #nav-section-list
+  
+    margin 0
+    padding 0.25em 
     display inline-block
+    vertical-align middle
+    
+    li
+      display inline-block
+      margin-right 0.5em
+      
     
     
   
@@ -69,27 +83,50 @@ input
   h3 
     margin 0.8em 0
     margin-bottom 0.3em
+    
+  h4
+    margin 0.5em 0
+    padding 0
+    
+  button
+    border 1px solid grey
+    background-color rgba(white, 0.8)
+    border-radius 0.2em
+    
   
   .delete-section
-    opacity 0.35
+    opacity 0.25
     &:hover
-      opacity: 0.8
+      opacity: 0.5
       
   #save
     display block
+    margin-top 2em
+    /*
     margin 2em 0
     width 100%
     margin-left auto
     margin-right auto
+    */
     
   label
     font-size 0.8em
     
   #content-editor
-    background-color #F6F6F6
+    //background-color #F6F6F6
+    background-color: #fbfafc;
+    background-image: -webkit-gradient(radial, 50% 50%,0,50% 50%,200, from(rgb(246, 246, 246)), to(rgb(251, 250, 252)));
+    background-image: -webkit-radial-gradient(50% 50%, rgb(251, 250, 252), rgb(246, 246, 246));
+    background-image: -moz-radial-gradient(50% 50%, rgb(251, 250, 252), rgb(246, 246, 246));
+    background-image: -o-radial-gradient(50% 50%, rgb(251, 250, 252), rgb(246, 246, 246));
+    background-image: -ms-radial-gradient(50% 50%, rgb(251, 250, 252), rgb(246, 246, 246));
+    background-image: radial-gradient(50% 50%, rgb(251, 250, 252), rgb(246, 246, 246));
+    border 1px solid #E2E2E2
+
+    
     border-radius 3px
     padding 0.5em 0.25em
-    box-shadow(0 0 0.6em 0px rgba(#000, 0.15))
+    //box-shadow(0 0 0.6em 0px rgba(#000, 0.11))
     
     h4
       margin 0
@@ -106,11 +143,23 @@ input
   
 .sortable-dragging
   opacity 0.8
+  border-radius 0.2em
+  background-color rgba(#999,0.5)
 
 .sortable-placeholder
   height 1em
   width 100%
-  background-color #CCC
+  background-color: #d6d6d6;
+  border-radius 0.2em
+  background-color: #aaaaaa;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(170, 170, 170)), to(rgb(214, 214, 214)));
+  background-image: -webkit-linear-gradient(top, rgb(170, 170, 170), rgb(214, 214, 214));
+  background-image: -moz-linear-gradient(top, rgb(170, 170, 170), rgb(214, 214, 214));
+  background-image: -o-linear-gradient(top, rgb(170, 170, 170), rgb(214, 214, 214));
+  background-image: -ms-linear-gradient(top, rgb(170, 170, 170), rgb(214, 214, 214));
+  background-image: linear-gradient(top, rgb(170, 170, 170), rgb(214, 214, 214));
+  
+  
   
 .must-have
   input
@@ -120,13 +169,14 @@ input
 #section-list
   font-size 1.2em
   margin 0
-  margin-top 1em
+  //margin-top 1em
   padding 0
   
   li
     list-style-type none
     padding 0
     margin 0
+    
   
 
 ////////////////////
@@ -214,6 +264,8 @@ sectionHeight = 800px
   
 //// locations
 .locationSinglePlace
+  text-align center
+  
   .single-location-map
     min-height 700px
   

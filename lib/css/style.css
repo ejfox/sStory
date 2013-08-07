@@ -25,6 +25,7 @@ h6 {
   height: 100%;
 }
 header {
+  display: none;
   height: auto;
   width: 100%;
   position: fixed;
@@ -46,7 +47,14 @@ header h1 {
   vertical-align: middle;
 }
 header #nav-section-list {
+  margin: 0;
+  padding: 0.25em;
   display: inline-block;
+  vertical-align: middle;
+}
+header #nav-section-list li {
+  display: inline-block;
+  margin-right: 0.5em;
 }
 input {
   padding: 0.4em;
@@ -74,35 +82,53 @@ input {
   margin: 0.8em 0;
   margin-bottom: 0.3em;
 }
+#story-editor h4 {
+  margin: 0.5em 0;
+  padding: 0;
+}
+#story-editor button {
+  border: 1px solid #808080;
+  background-color: rgba(255,255,255,0.8);
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  -ms-border-radius: 0.2em;
+  -o-border-radius: 0.2em;
+  border-radius: 0.2em;
+}
 #story-editor .delete-section {
-  opacity: 0.35;
+  opacity: 0.25;
 }
 #story-editor .delete-section:hover {
-  opacity: 0.8;
+  opacity: 0.5;
 }
 #story-editor #save {
   display: block;
-  margin: 2em 0;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 2em;
+/*
+    margin 2em 0
+    width 100%
+    margin-left auto
+    margin-right auto
+    */
 }
 #story-editor label {
   font-size: 0.8em;
 }
 #story-editor #content-editor {
-  background-color: #f6f6f6;
+  background-color: #fbfafc;
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 200, from(#f6f6f6), to(#fbfafc));
+  background-image: -webkit-radial-gradient(50% 50%, #fbfafc, #f6f6f6);
+  background-image: -moz-radial-gradient(50% 50%, #fbfafc, #f6f6f6);
+  background-image: -o-radial-gradient(50% 50%, #fbfafc, #f6f6f6);
+  background-image: -ms-radial-gradient(50% 50%, #fbfafc, #f6f6f6);
+  background-image: radial-gradient(50% 50%, #fbfafc, #f6f6f6);
+  border: 1px solid #e2e2e2;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
   padding: 0.5em 0.25em;
-  -webkit-box-shadow: 0 0 0.6em 0px rgba(0,0,0,0.15);
-  -moz-box-shadow: 0 0 0.6em 0px rgba(0,0,0,0.15);
-  -ms-box-shadow: 0 0 0.6em 0px rgba(0,0,0,0.15);
-  -o-box-shadow: 0 0 0.6em 0px rgba(0,0,0,0.15);
-  box-shadow: 0 0 0.6em 0px rgba(0,0,0,0.15);
 }
 #story-editor #content-editor h4 {
   margin: 0;
@@ -117,11 +143,29 @@ input {
 }
 .sortable-dragging {
   opacity: 0.8;
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  -ms-border-radius: 0.2em;
+  -o-border-radius: 0.2em;
+  border-radius: 0.2em;
+  background-color: rgba(153,153,153,0.5);
 }
 .sortable-placeholder {
   height: 1em;
   width: 100%;
-  background-color: #ccc;
+  background-color: #d6d6d6;
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  -ms-border-radius: 0.2em;
+  -o-border-radius: 0.2em;
+  border-radius: 0.2em;
+  background-color: #aaa;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#aaa), to(#d6d6d6));
+  background-image: -webkit-linear-gradient(top, #aaa, #d6d6d6);
+  background-image: -moz-linear-gradient(top, #aaa, #d6d6d6);
+  background-image: -o-linear-gradient(top, #aaa, #d6d6d6);
+  background-image: -ms-linear-gradient(top, #aaa, #d6d6d6);
+  background-image: linear-gradient(top, #aaa, #d6d6d6);
 }
 .must-have input {
   border: 1px solid transparent;
@@ -130,7 +174,6 @@ input {
 #section-list {
   font-size: 1.2em;
   margin: 0;
-  margin-top: 1em;
   padding: 0;
 }
 #section-list li {
@@ -212,6 +255,9 @@ input {
   left: 0;
   width: 100%;
   height: 100%;
+}
+.locationSinglePlace {
+  text-align: center;
 }
 .locationSinglePlace .single-location-map {
   min-height: 700px;

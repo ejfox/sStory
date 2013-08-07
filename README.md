@@ -12,8 +12,10 @@ sStory is an open-source self-hosted solution so that creators, journalists, and
 ## Getting Started
 
 
-### Include dependencies
-Include jQuery, Underscore, D3, Handlebars, Sortable, and Leaflet which sStory depend on. After that, pull in sStory and it's stylesheet. 
+### Include dependencies and set up
+**template.html** in the main directory sets all of this up for you so you don't have to worry about it. 
+
+You will need to include jQuery, Underscore, D3, Handlebars, Sortable, and Leaflet which sStory depend on. After that, pull in sStory and it's stylesheet. 
 
 ```
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -26,6 +28,13 @@ Include jQuery, Underscore, D3, Handlebars, Sortable, and Leaflet which sStory d
 
 <script src="sstory.js"></script>
 <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8">
+```
+
+You will also need a DOM element with the id of **#content** which sStory will use to fill the story.
+```
+<body>
+<div id="#content"></div>
+</body>
 ```
 
 ### Create your story list
@@ -120,6 +129,9 @@ You can add video sections with embedded videos from YouTube or Vimeo. You will 
   caption: "An address!"
 }
 ```
+
+### Timeline
+***timelineVerite:** Include a [Timeline JS](http://timeline.verite.co/) timeline simply by specifying a google spreadsheet's publish URL. 
 
 ## Adding new section types
 Sections in sStory are made of 4 simple things: the **section template** which is the handlebars template for how the section appears on the page, any new **editor input template** if needed, and the **section specification** which details for sStory what inputs a section has, and which are mandatory. 
