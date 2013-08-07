@@ -130,8 +130,24 @@ You can add video sections with embedded videos from YouTube or Vimeo. You will 
 }
 ```
 
-### Timeline
-***timelineVerite:** Include a [Timeline JS](http://timeline.verite.co/) timeline simply by specifying a google spreadsheet's publish URL. 
+### Timeline -- COMING SOON
+**timelineVerite:** Include a [Timeline JS](http://timeline.verite.co/) timeline simply by specifying a google spreadsheet's publish URL. 
+```
+{
+  type: 'timelineVerite'
+  googleSpreadsheet: "https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dFVxOEk0aGRxbk9URE9yeDJKMXNIS3c&output=html"
+  title: "Antisec Timeline"
+}
+```
+**timelineStorify:** Include an embedded storify by copying in the embed code from the *Distribute* tab at the top of a storify page.
+
+```
+{
+  type: 'timelineStorify'
+  embedCode: '<script src="//storify.com/ejfox/occupy-oakland-may-1st-general-strike.js" type="text/javascript" language="javascript"></script><noscript>[<a href="//storify.com/ejfox/occupy-oakland-may-1st-general-strike" target="_blank">View the story "Occupy Oakland - May 1st General Strike" on Storify</a>]</noscript>'
+}
+```
+
 
 ## Adding new section types
 Sections in sStory are made of 4 simple things: the **section template** which is the handlebars template for how the section appears on the page, any new **editor input template** if needed, and the **section specification** which details for sStory what inputs a section has, and which are mandatory. 
