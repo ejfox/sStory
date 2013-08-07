@@ -35,6 +35,9 @@ class sStory
     )
     #$content.append(JSON.stringify(@story_list))
     
+    # If the first section is a photo, make it fixed
+    $("#0 .photo-background").css("background-position", "fixed")
+    
     @handleWindowResize()
     that = this
     $(window).on('resize', -> that.handleWindowResize() )
@@ -183,7 +186,11 @@ class sStoryEditor
           mustHave: ['photoUrl']
         photoCaption:
           inputs: ['title', 'photoUrl', 'caption']
-          mustHave: ['photoUrl', 'caption']
+          mustHave: ['photoUrl', 'caption']          
+      text:
+        textHtml: 
+          inputs: ['title', 'textHtml']
+          mustHave: ['title', 'textHtml']          
       video:
         videoYoutube:
           inputs: ['embedCode']

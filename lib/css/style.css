@@ -86,6 +86,10 @@ input {
   margin: 0.5em 0;
   padding: 0;
 }
+#story-editor #add-section {
+  display: block;
+  width: 100%;
+}
 #story-editor button {
   border: 1px solid #808080;
   background-color: rgba(255,255,255,0.8);
@@ -288,4 +292,13 @@ input {
   padding: 0.8em;
   text-align: center;
   border-bottom: 1px solid #efefef;
+}
+.textHtml {
+  height: auto;
+  min-height: 500px;
+}
+.textHtml .text-content {
+  width: 60%;
+  margin: 2em 3em;
+  padding: 1.6em;
 }
