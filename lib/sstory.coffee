@@ -36,7 +36,7 @@ class sStory
     #$content.append(JSON.stringify(@story_list))
     
     # If the first section is a photo, make it fixed
-    $("#0 .photo-background").css("background-position", "fixed")
+    #$("#0 .photo-background").css("background-position", "fixed")
     
     @handleWindowResize()
     that = this
@@ -224,8 +224,22 @@ class sStoryEditor
     newStory = []
 
     _.each(@story.story_list, (section) ->
-        if section.id is undefined
-          section.id = _.uniqueId("s")
+        #if section.id is undefined
+        
+        
+        # From http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
+        s4 = ->
+          Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+
+        guid = ->
+          s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        
+        
+        section.id = guid()
+        console.log(section.id)
+        
         newStory.push(section)
     )
     @story.story_list = newStory
@@ -322,7 +336,7 @@ class sStoryEditor
             sectionIcon = "<i class=\"icon-calendar\"></i>"
         
         deleteIcon = "<i class=\"icon-cancel-squared delete-section\"></i>"
-        sectionContent = deleteIcon + sectionIcon + " "
+        sectionContent = deleteIcon + sectionIcon + " " + section.id
         
         $listItem = $("<li></li>")
           .attr("id", i)
@@ -366,16 +380,16 @@ class sStoryEditor
     # re-arrange the story_list objects
     oldList = @story.story_list
     
-    console.log "oldList", oldList, "sortedList", sortedList
+    #console.log "oldList", oldList, "sortedList", sortedList
     
     newStoryList = []
     _.each(sortedList, (listItemID) ->
       section = _.find(oldList, (section) ->
           return section.id is listItemID
-      )
-      
+      )      
       newStoryList.push(section)      
     )
+    
     @story.story_list = newStoryList
     
     @updatePage()
@@ -435,10 +449,10 @@ class sStoryEditor
   deleteSection: (delSection) ->
     # Given a section's number in the story_list array
     # Delete it!
-    console.log("Delete "+delSection)
+    #console.log("Delete "+delSection)
     
     newlist = _.reject(@story.story_list, (section, k) ->
-        console.log("k>", k, "delSection>", delSection)
+        #console.log("k>", k, "delSection>", delSection)
         if section.id is delSection
           return true
         else
@@ -446,7 +460,7 @@ class sStoryEditor
     )
     
     @story.story_list = newlist
-    console.log('@story', @story)
+    #console.log('@story', @story)
 
     @updatePage()
     
@@ -454,14 +468,14 @@ class sStoryEditor
     # Add a new section to @story.list()
     
     # Figure how many sections there are
-    sectionCount = d3.max(_.keys(@story.story_list)); 
+    sectionCount = +d3.max(_.keys(@story.story_list)); 
     #console.log("count:", sectionCount)
     
     if sectionCount is undefined
       sectionCount = 0
     
     # Create the new section     
-    newSectionNum = (+sectionCount)+1
+    newSectionNum = sectionCount+1
     
     newSection = {}
     
@@ -474,7 +488,7 @@ class sStoryEditor
     newSection.type = $("#sub-section-type").val() 
     
     @story.story_list[newSectionNum] = newSection
-    console.log("=>", @story)
+    #console.log("=>", @story)
     
     # Give the new section an ID 
     @giveSectionsID()
