@@ -10,6 +10,7 @@ I want to make this tool as usable as possible for journalists, storytellers, an
 
 ### Examples
 + An example story based on [OWS's 1 year anniversary in NYC](http://ejfox.github.com/sStory/nyc_s17.html).
++ <http://local.wfpl.org/kycir/hooten/>
 
 ### Section types
 sStory allows you to create sections made of:
@@ -119,10 +120,10 @@ Go to your soundcloud track and click share. Soundcloud's sharing box will appea
 So if your embed code looks like ```<iframe width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F58373178&show_artwork=true"></iframe>```
 
 Your URL would be ```http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F58373178&show_artwork=true```
-    
+
 
 #### Timeline
 From your google spreadsheet, which is formatted to the [correct specifications](https://docs.google.com/a/digitalartwork.net/previewtemplate?id=0AppSVxABhnltdEhzQjQ4MlpOaldjTmZLclQxQWFTOUE&mode=public), go to **File > Publish to Web** - in the window that pops up, you want to copy and paste the URL at the bottom of the window.
 
 #### Gist
-Use the unique sequence of numbers that makes up your gist id. sStory will automatically display all of the files contained in that gist. 
+Use the unique sequence of numbers that makes up your gist id. sStory will automatically display all of the files contained in that gist.
