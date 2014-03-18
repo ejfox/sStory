@@ -70,13 +70,15 @@ input
 #story-editor
   background-color rgba(white, 0.85)
   position fixed
-  top 0
-  right 0
-  width 30%
+  bottom 0
+  left 0
+  width 100%
   height auto
+  max-height 35%
+  overflow auto
   padding 1em
   //padding-top 2em
-  max-width 300px
+  //max-width 300px
   z-index 99999
   border-radius 3px
   
@@ -115,6 +117,14 @@ input
     
   label
     font-size 0.8em
+    
+  h3,h4
+    display none//inline-block
+    
+  #section-list, #content-editor
+    display inline-block
+    width 48%
+    vertical-align top
     
   #content-editor
     //background-color #F6F6F6

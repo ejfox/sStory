@@ -65,12 +65,13 @@ input {
 #story-editor {
   background-color: rgba(255,255,255,0.85);
   position: fixed;
-  top: 0;
-  right: 0;
-  width: 30%;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   height: auto;
+  max-height: 35%;
+  overflow: auto;
   padding: 1em;
-  max-width: 300px;
   z-index: 99999;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -117,6 +118,16 @@ input {
 }
 #story-editor label {
   font-size: 0.8em;
+}
+#story-editor h3,
+#story-editor h4 {
+  display: none;
+}
+#story-editor #section-list,
+#story-editor #content-editor {
+  display: inline-block;
+  width: 48%;
+  vertical-align: top;
 }
 #story-editor #content-editor {
   background-color: #fbfafc;
