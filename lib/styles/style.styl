@@ -1,0 +1,312 @@
+/*	Resets   */
+/* apply a natural box layout model to all elements */
+/* from http://paulirish.com/2012/box-sizing-border-box-ftw/ */
+*
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+  box-sizing: border-box
+
+/* maxvoltar.com/archive/-webkit-font-smoothing */
+html
+  -webkit-font-smoothing: antialiased
+
+
+/* basic fluidity http://fluidity.sexy/ */
+img,canvas,iframe,video,svg
+  max-width: 100%
+
+pre
+	padding: 15px
+	white-space: pre
+	word-wrap: break-word
+
+/* hand cursor on clickable input elements */
+label, input[type=button], input[type=submit], button { cursor: pointer }
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em,
+img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, hgroup,
+menu, footer, header, nav, section, summary, time, mark, audio, video
+	margin: 0
+	padding: 0
+	border: 0
+
+
+/*
+article, aside, canvas, figure, figure img, figcaption, hgroup, footer, header, nav, section, audio, video
+  display block
+*/
+
+
+a img
+  border: 0
+
+/*	Color variables
+	------------------	*/
+
+$fontcolor = #333333
+$bgcolor = #e6e6e6
+
+/* Highlight color, when user selects text */
+$highlight = #FFF9A2
+
+/* Link color, hover/visited will be generated from this */
+$linkcolor = #112582
+
+/* Selection colours (easy to forget) */
+
+::selection 	 	{background: $highlight}
+::-moz-selection 	{background: $highlight}
+img::selection 		{background: transparent}
+img::-moz-selection	{background: transparent}
+body {-webkit-tap-highlight-color: $highlight}
+
+em { background: rgba($highlight, 0.5) }
+
+
+/*	Typography presets
+	------------------	*/
+body
+  font-size 100%
+  font-size 1.2em
+  line-height 1.3em
+
+.huge, h1
+	font-size: 3.75em
+	line-height: 1.1em
+	letter-spacing: -1px
+	margin-bottom: 18px
+
+.large, h2
+	font-size: 2.75em
+	line-height: 2em
+	line-height: 1.5em
+	margin-bottom: 8px
+
+.bigger, h3
+  font-size: 1.75em
+  line-height: 1.5em
+  margin: 8px 0
+
+.big, h4
+  font-size: 1.5em
+  line-height: 1.5em
+  margin: 8px 0
+
+.small, small
+  opacity: 0.8
+  font-size: 0.7em
+  line-height: 1.2em
+
+
+// Font sizes for mobile
+@media only screen and (max-width: 767px)
+	.huge, h1
+    	font-size: 2.5em
+    	line-height: 1.1em
+    	margin-bottom: 12px
+
+    .large, h2
+    	font-size: 2em
+    	line-height: 1.3em
+    	font-weight: 800
+    	line-height: 1.4em
+    	margin-bottom: 6px
+
+    .bigger, h3
+    	font-size: 1.75em
+    	line-height: 1.2em
+    	font-weight: 800
+      margin: 6px 0
+
+    .big, h4
+    	font-size: 1.4em
+    	line-height: 1.5em
+    	font-weight: 700
+      margin: 8px 0
+
+body
+  font: normal 100% 'Helvetica Neue', Helvetica, Arial, sans-serif
+  line-height: 1.45em
+  font-size: 1.3em
+  max-width: 896px
+  //width: 65%
+  padding: 32px 48px 84px
+  background: $bgcolor
+  color: $fontcolor
+  -webkit-text-size-adjust: 100% /* Stops Mobile Safari from auto-adjusting font-sizes */
+  margin-left: auto
+  margin-right: auto
+
+p
+  margin: 0.6em 0
+
+a
+	&:link
+		color: $linkcolor
+
+	&:hover
+    color: $linkcolor
+
+	&:visited
+    color: $linkcolor
+
+section
+  margin: 12px 0
+
+  &:last-child
+    margin-bottom: 0
+
+
+
+
+
+
+
+
+/* Tablet Layout */
+
+@media only screen and (min-width: 768px) and (max-width: 991px)
+	body
+		max-width: 712px
+		width: 80%
+		padding: 32px 28px 60px
+		font-size: 1.1em
+
+
+
+
+
+
+
+
+
+/*		Mobile Layout */
+
+@media only screen and (max-width: 767px)
+  body
+		padding: 8px
+    margin 0
+    max-width 100%
+    width 100%
+		font-size: 0.9em
+		line-height: 1.5em
+
+
+
+
+
+
+
+
+
+/*
+        Styling forms / inputs
+
+------------------------------------------------------------ */
+label
+    color: black
+
+input, textarea, select
+   -webkit-appearance: none
+
+th
+    text-align: right
+
+button
+    border: 1px solid rgba(0,0,0,0.6)
+    padding: 0.5em 0.8em
+    margin: 4px 8px
+    font-size: 15px
+    font-weight: bold
+    line-height: 1.2em
+    -webkit-appearance: none
+    -webkit-box-shadow: 1px 1px 1px #fff
+    -webkit-border-radius: 0.5em
+    outline: none
+
+    &:hover
+        transition: all 0.3s ease-out
+        opacity: 1
+        border: 1px solid rgba(0,0,0,0.8)
+
+    &:active
+        opacity: 0.9
+        border: 1px solid black
+
+.small-button
+    padding: 2px 4px
+    font-size: 10px
+
+input, textarea, select
+    border: 2px solid rgba(0,0,0,0.2)
+    padding: 0.5em
+    margin: 4px 8px
+    font-size: 15px
+    line-height: 1.2em
+    width: 13em
+    -webkit-appearance: none
+    -webkit-box-shadow: 1px 1px 1px #fff
+    -webkit-border-radius: 0.5em
+    outline: none
+
+    &:hover
+        border: 2px solid rgba(0,0,0,0.4)
+
+    &:active, &:focus
+        border: 2px solid rgba(0,0,0,0.5)
+
+
+
+@media only screen and (max-width: 767px)
+  input, textarea, select
+    width: 8em
+
+
+
+input[type=text]
+    color: #5A5A5A
+
+    &:active, &:focus
+        color: black
+        background-image: none !important
+        background-color: white
+
+
+input[type=checkbox], input[type=radio]
+   display: inline-block
+   font-size: 15px
+   line-height: 1em
+   margin: 0 0.25em 0 0
+   padding: 0
+   width: 1.25em
+   height: 1.25em
+   -webkit-border-radius: 0.25em
+   vertical-align: text-top
+
+input[type=radio]
+    -webkit-border-radius: 2em /* Make radios round */
+
+input[type=submit]
+    opacity: 0.95
+    border: 3px solid rgba(0,0,0,0.55)
+    padding: 0.5em
+    margin: 4px 8px
+    font-size: 15px
+    font-weight: bold
+    line-height: 1.2em
+    -webkit-appearance: none
+    -webkit-box-shadow: 1px 1px 1px #fff
+    -webkit-border-radius: 0.5em
+    outline: none
+
+    &:hover
+      opacity: 1
+      border: 3px solid rgba(0,0,0,0.8)
+
+    &:active
+      opacity: 0.9
+      border: 3px solid black

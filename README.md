@@ -1,19 +1,22 @@
 # sStory
-sStory is designed to make it easy to tell beautiful stories on the web with a variety of media. It is meant to take care of the presentation and technical aspects of telling a story through the web, so that creators can focus on narratives and gathering material.
+sStory is designed to make it easy to tell beautiful stories on the web with a variety of media. It will take care of the presentation and technical aspects of telling a story through the web so that creators can focus on the narrative and gathering great material.
 
-sStory is an open-source self-hosted solution so that creators, journalists, and newsrooms can publish their work online without trusting someone else's servers or terms of service.
+sStory is an open-source self-hosted solution so that creators, journalists, and newsrooms can publish their work online without trusting someone else's server or terms of service. It is also meant to be customized and extended, Pull Requests and ideas welcome!
+
 
 * Easily stitch together sections made of photos, videos, sounds, maps and more
-* Extendable, made to fit into pre-existing systems
-* Supports YouTube, Vimeo, SoundCloud for embedding media
+* Focused on beautiful presentation and interactions
+* Extendable, made to fit into pre-existing systems and CMS
+* Supports YouTube, Vimeo, SoundCloud, and more for embedding media
 * Your story's structure is stored in hand-editable JSON
-* A focus on beautiful presentation and interactions
 
 ## Getting Started
 
 
 ### Include dependencies and set up
-**template.html** in the main directory sets all of this up for you so you don't have to worry about it.
+**template.html** in the main directory is an example of an HTML file with all of this set up already. If you are using sStory in it's own standalone website, you can do this and skip to [creating the story_list](#create-your-story-list).
+
+#### Custom Installation
 
 You will need to include jQuery, Underscore, D3, Handlebars, Sortable, and Leaflet which sStory depend on. After that, pull in sStory and it's stylesheet.
 
@@ -30,7 +33,7 @@ You will need to include jQuery, Underscore, D3, Handlebars, Sortable, and Leafl
 <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8">
 ```
 
-You will also need a DOM element with the id of **#content** which sStory will use to fill the story.
+You will also need a DOM element with the id of **#content** which sStory will fill with the content of the story. 
 ```
 <body>
 <div id="#content"></div>
@@ -40,7 +43,7 @@ You will also need a DOM element with the id of **#content** which sStory will u
 ### Create your story list
 The story_list is the heart of every sStory, and it is essentially an array of objects, one for each section. It is order-specific, with the first item appearing at the top of the page.
 
-Simply create a new sStory and feed it the story_list array, and then render.
+Once the document has loaded, simply create a new sStory and feed it the story_list array, and then render.
 
 ```
 $(document).ready(function(){
@@ -53,8 +56,8 @@ $(document).ready(function(){
         }
         ,{
           photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
-          type: 'photoBigText'
-          title: 'Making beautiful stories easy'
+          ,type: 'photoBigText'
+          ,title: 'Making beautiful stories easy'
         }
   ]
 
@@ -75,8 +78,8 @@ There are two types of photo section.
 ```
 {
   type: 'photoBigText'
-  photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
-  title: 'Making beautiful stories easy'
+  ,photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
+  ,title: 'Making beautiful stories easy'
 }
 ```
 
@@ -84,7 +87,7 @@ There are two types of photo section.
 ```
 {
   type: 'photoCaption'
-  photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
+  ,photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
   title: 'Making beautiful stories easy'
 }
 ```
@@ -97,7 +100,7 @@ You can add video sections with embedded videos from YouTube or Vimeo. You will 
 ```
 {
   type: 'videoYoutube'
-  embedCode: '<iframe width="420" height="315" src="//www.youtube.com/embed/dQw4w9WgXcQ?rel=0" frameborder="0" allowfullscreen></iframe>'
+  ,embedCode: '<iframe width="420" height="315" src="//www.youtube.com/embed/dQw4w9WgXcQ?rel=0" frameborder="0" allowfullscreen></iframe>'
 }
 ```
 
@@ -106,7 +109,7 @@ You can add video sections with embedded videos from YouTube or Vimeo. You will 
 ```
 {
   type: 'videoVimeo'
-  embedCode: '<iframe src="http://player.vimeo.com/video/35912908?badge=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/35912908">FACETURE</a> from <a href="http://vimeo.com/user9669590">Phil Cuttance</a> on <a href="https://vimeo.com">Vimeo</a>.</p>'
+  ,embedCode: '<iframe src="http://player.vimeo.com/video/35912908?badge=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/35912908">FACETURE</a> from <a href="http://vimeo.com/user9669590">Phil Cuttance</a> on <a href="https://vimeo.com">Vimeo</a>.</p>'
 }
 ```
 
@@ -116,7 +119,7 @@ You can add video sections with embedded videos from YouTube or Vimeo. You will 
 ```
 {
   type: 'soundSoundcloud'
-  embedCode: '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F99067369"></iframe>'
+  ,embedCode: '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F99067369"></iframe>'
 }
 ```
 
@@ -125,12 +128,45 @@ You can add video sections with embedded videos from YouTube or Vimeo. You will 
 ```
 {
   type: 'locationSinglePlace'
-  address: "1600 Pennsylvania Ave NW  Washington, DC"
-  caption: "An address!"
+  ,address: "1600 Pennsylvania Ave NW  Washington, DC"
+  ,caption: "An address!"
 }
 ```
 
-### Timeline -- COMING SOON
+**locationTimeline:** A list of locations with an address, a date/time, and a caption. A leaflet map is generated with a marker and pop-up for each item. An optional photoUrl can be provided to add an image to the popup. Navigation will be provided to move forward and backward between items.
+
+```
+{
+  type: 'locationTimeline'
+  list: [
+  	{
+  		address: "1600 Pennsylvania Ave NW  Washington, DC"
+  		,caption: "An address!"
+  		,time: "1-1-1792"
+	}
+	,{
+  		address: "2 15th St. NW Washington, D.C."
+  		,caption: "An address!"
+  		,time: "1-1-1848"
+	}
+	,{
+  		address: "2 Lincoln Memorial Cir NW, Washington, DC"
+  		,caption: "An address!"
+  		,time: "1-1-1868"
+	}
+  ]
+}
+```
+
+### Code
+**codeGist:** Include a [Gist](http://gist.github.com), which can be multiple files and display their source code on the page.
+
+**codeTributary:** Embed a live Tributary example.
+
+**codeBlocks:** Embed a live [bl.ocks.org](http://bl.ocks.org/) example.
+
+
+### Timeline
 **timelineVerite:** Include a [Timeline JS](http://timeline.verite.co/) timeline simply by specifying a google spreadsheet's publish URL.
 ```
 {

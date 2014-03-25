@@ -1,220 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>sStory v1</title>
+	<meta charset="utf-8"/>
+	<title>Vulpes Boilerplate</title>
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script src="http://underscorejs.org/underscore.js"></script>
-  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-  <script src="lib/handlebars.js" type="text/javascript" charset="utf-8"></script>  
-  <script src="lib/jquery.sortable.js" type="text/javascript" charset="utf-8"></script>
-  <script src="lib/FileSaver.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="lib/storyjs-embed.js" type="text/javascript" charset="utf-8"></script>
-  <link rel="stylesheet" href="lib/css/timeline.css" type="text/css" media="screen" title="no title" charset="utf-8">
-  
-  <script src="lib/sstory.js"></script>
-    
-  <link rel="stylesheet" href="lib/css/style.css" type="text/css" media="screen" charset="utf-8">
-  <link rel="stylesheet" href="lib/css/leaflet.css" type="text/css" media="screen" title="no title" charset="utf-8">
-  
-  
-  <link rel="stylesheet" href="lib/css/trib.css">
-  <link rel="stylesheet" href="lib/css/animation.css"><!--[if IE 7]>
-  <link rel="stylesheet" href="lib/css/trib-ie7.css"><![endif]-->
-  
-  <link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700|Quattrocento+Sans:700,700italic' rel='stylesheet' type='text/css'>
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" media="all" href=""/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
+
+  <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
+
+  <!-- Bring in jQuery first, lots of other stuff depends on it -->
+  <script src="js/jquery.js?v1.11.0" type="text/javascript" charset="utf-8"></script>
+
+  <!-- And Underscore | http://underscorejs.org/ -->
+  <script src="js/underscore-min.js?1.6.0" type="text/javascript" charset="utf-8"></script>
+
+  <!-- And D3 | https://github.com/mbostock/d3/wiki/API-Reference -->
+  <script src="js/d3.min.js?v3" type="text/javascript" charset="utf-8"></script>
 </head>
+
 <body>
-  <header>
-    <h1>sStory</h1>
-    
-    <ul id="nav-section-list">
-      
-    </ul>
-  </header>
-  
-  <div id="story-editor" style="display: none;">
-    <h3>Story Editor</h3>
-    <div id="content-editor">
-      <h4>New Section</h4>
-      
-      <div id="editor-dropdowns">
-        <select name="new-section-type" id="new-section-type" size="1"></select>      
-        <select name="sub-section-type" id="sub-section-type" size="1"></select>
-      </div>
-      
-      <div id="editor-inputs">
-        
-      </div>
-      
-      <button id="add-section"><i class="icon-plus"></i>Add section</button>     
-    </div>
-    <h4>Sections</h4>
-    <ul id="section-list">
-      
-    </ul>
-        
-    <button id="save" style="background-color: #ecc8c9;">
-      Save to JSON file
-    </button>
-    
-    <label id="importJsonToggle"><button style="background-color: #d4e8bb ;">Import JSON file</button></label>
-    <input type="file" id="story_file" name="story_file[]" style="display: none"/>
-    
-  </div>
-  
-  <div id="content">
-    
-  </div>
-  
-<script src="lib/leaflet.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.1"></script>
+<div id="content">
 
-<script type="text/javascript" charset="utf-8">
-    
-$(document).ready(function(){
-  
-  var story_list = [{"photoUrl":"http://farm8.staticflickr.com/7038/6990421086_e92cafc3da_k.jpg","type":"photoCaption","caption":"You can place a short descriptive caption of the picture here. Think of it as a tweet.","title":"Big images + captions"},{"type":"locationSinglePlace","address":"1039 Jefferson St. Oakland CA","caption":"An address!!","photoUrl":"http://31.media.tumblr.com/9c8bd8923c097095b5a4b3026baf3fe5/tumblr_mq8xv5e2wv1qcn8pro1_1280.jpg"},{"photoUrl":"http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg","type":"photoBigText","title":"Making beautiful stories easy"},{"embedCode":"<iframe width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" src=\"https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F99067369\"></iframe>","type":"soundSoundcloud"}]
-  
-  var story = new sStory(story_list)
-
-  story.render()
-
-  var storyEditor = new sStoryEditor(story)
-})
-</script>
-  
-</body>
-</html>
-
-
-<!-- Section templates -->
-<script id="section-template-photoBigText" class="section-template" type="text/x-handlebars-template">
-<div class="photo-background" style="background-image: url({{photoUrl}});">
-{{#if title}}
-  <h2>{{title}}</h2>
-{{/if}}
-</div>
-</script>
-
-<script id="section-template-photoCaption" class="section-template" type="text/x-handlebars-template">
-<div class="photo-background" style="background-image: url({{photoUrl}})">
-{{#if title}}
-  <h2>{{title}}</h2>
-{{/if}}
-
-<aside class="caption">
-{{caption}}
-</aside>
-</div>
-</script>
-
-<script id="section-template-videoYoutube" class="section-template" type="text/x-handlebars-template">
-{{#if caption}}
-<aside class="caption">
-  {{caption}}
-</aside>
-{{/if}}
-
-<div class="video-container">
-{{{embedCode}}}
-</div>
-</script>
-
-<script id="section-template-videoVimeo" class="section-template" type="text/x-handlebars-template">
-{{#if caption}}
-  {{caption}}
-{{/if}}
-
-<div class="video-container">
-{{{embedCode}}}
-</div>
-</script>
-
-<script id="section-template-soundSoundcloud" class="section-template" type="text/x-handlebars-template">
-{{#if title}}
-  {{title}}
-{{/if}}
-
-{{{embedCode}}}
-</script>
-
-<script id="section-template-locationSinglePlace" class="section-template" type="text/x-handlebars-template">
-<div class="single-location-map" data-address="{{address}}" data-caption="{{caption}} {{#if photoUrl}}<p><img src='{{photoUrl}}' /></p> {{/if}}" >
-
-Loading map of {{address}}
-</div>
-</script>
-
-<script id="section-template-timelineVerite" class="section-template" type="text/x-handlebars-template">
-{{#if title}}
-<h2 class="timeline-title">{{title}}</h2>
-{{/if}}
-
-<div class="verite-timeline" data-spreadsheet-address="{{googleSpreadsheet}}">
 
 </div>
-</script>
-
-<script id="section-template-timelineStorify" class="section-template" type="text/x-handlebars-template">
-{{{embedCode}}}
-</script>
-
-<script id="section-template-textHtml" class="section-template" type="text/x-handlebars-template">
-{{#if title}}
-  <h2>{{title}}</h2>
-{{/if}}
-
-<article class="text-content">
-{{{textHtml}}}
-</article>
-</script>
-
-
-
-
-<!-- Editor input templates -->
-<script id="editor-template-photoUrl" class="editor-template" type="text/x-handlebars-template">
-<p>
-  <i class="icon-infinity"></i> <input type="text" id="editor-section-photoUrl" placeholder="Photo URL"></input>  
-</p>
-</script>
-
-<script id="editor-template-title" class="editor-template" type="text/x-handlebars-template">
-<p>
-   <i class="icon-dot-3"></i> <input type="text" id="editor-section-title" placeholder="Title"></input>  
-</p>
-</script>
-
-<script id="editor-template-caption" class="editor-template" type="text/x-handlebars-template">
-<p>
-  <i class="icon-quote"></i> <input type="text" id="editor-section-caption" placeholder="Caption"></input>  
-</p>
-</script>
-
-<script id="editor-template-textHtml" class="editor-template" type="text/x-handlebars-template">
-<p>
-  <i class="icon-quote"></i> <input type="text" id="editor-section-textHtml" placeholder="Text (can include HTML)"></input>  
-</p>
-</script>
-
-<script id="editor-template-embedCode" class="editor-template" type="text/x-handlebars-template">
-<p>
-  <i class="icon-code"></i> <input type="text" id="editor-section-embedCode" placeholder="Embed Code"></input>  
-</p>
-</script>
-
-<script id="editor-template-address" class="editor-template" type="text/x-handlebars-template">
-<p>
-  <i class="icon-address"></i> <input type="text" id="editor-section-address" placeholder="Address"></input>  
-</p>
-</script>
-
-<script id="editor-template-googleSpreadsheet" class="editor-template" type="text/x-handlebars-template">
-<p>
-  <i class="icon-code"></i> <input type="text" id="editor-section-googleSpreadsheet" placeholder="Google Spreadsheet Publish URL"></input>  
-</p>
-</script>
 
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+
+</body>
+</html>
