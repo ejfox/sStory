@@ -13,25 +13,50 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
 
-  <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
+  <link rel="stylesheet" href="lib/styles/style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
 
   <!-- Bring in jQuery first, lots of other stuff depends on it -->
-  <script src="js/jquery.js?v1.11.0" type="text/javascript" charset="utf-8"></script>
+  <script src="lib/js/jquery.js?v1.11.0" type="text/javascript" charset="utf-8"></script>
 
   <!-- And Underscore | http://underscorejs.org/ -->
-  <script src="js/underscore-min.js?1.6.0" type="text/javascript" charset="utf-8"></script>
+  <script src="lib/js/underscore-min.js?1.6.0" type="text/javascript" charset="utf-8"></script>
 
   <!-- And D3 | https://github.com/mbostock/d3/wiki/API-Reference -->
-  <script src="js/d3.min.js?v3" type="text/javascript" charset="utf-8"></script>
+  <script src="lib/js/d3.min.js?v3" type="text/javascript" charset="utf-8"></script>
+
+  <script src="lib/js/sstory.js" type="text/javascript" charset="utf-8"></script>
+
 </head>
 
 <body>
+
 <div id="content">
-
-
 </div>
 
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+
+  var story_list = [
+        {
+          type: 'locationSinglePlace'
+          ,address: "1600 Pennsylvania Ave NW  Washington, DC"
+          ,caption: "An address!"
+        }
+        ,{
+          photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
+          ,type: 'photoBigText'
+          ,title: 'Making beautiful stories easy'
+        }
+  ]
+
+  var story = new sStory(story_list)
+
+  story.render()
+
+})
+</script>
 
 </body>
 </html>
