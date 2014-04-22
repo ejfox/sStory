@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8"/>
-	<title>Vulpes Boilerplate</title>
+	<title>sStory</title>
 
 	<link rel="shortcut icon" href="/favicon.ico">
 
@@ -26,6 +26,10 @@
 
   <script src="lib/js/sstory.js" type="text/javascript" charset="utf-8"></script>
 
+  <link rel="stylesheet" href="lib/styles/leaflet.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  <script src="lib/js/leaflet.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.4"></script>
+
 </head>
 
 <body>
@@ -37,19 +41,55 @@
 
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function(){
-
   var story_list = [
-        {
-          type: 'locationSinglePlace'
-          ,address: "1600 Pennsylvania Ave NW  Washington, DC"
-          ,caption: "An address!"
-        }
-        ,{
-          photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
-          ,type: 'photoBigText'
-          ,title: 'Making beautiful stories easy'
-        }
+    {
+      photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
+      ,type: 'photoBigText'
+      ,title: 'Making beautiful stories easy'
+    }
+    ,{
+      type: 'photoCaption'
+      ,photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
+      ,title: 'Making beautiful stories easy'
+      ,caption: '<h3>Hello world!</h3><p>Lorem ipsum <em>dolor sit</em> amet. Include styled <span style="color: red">HTML</span>!'
+    }
+    ,{
+      type: 'videoYoutube'
+      ,embedCode: '<iframe width="640" height="480" src="//www.youtube.com/embed/dQw4w9WgXcQ?rel=0" frameborder="0" allowfullscreen></iframe>'
+    }
+    ,{
+      type: 'videoVimeo'
+      ,embedCode: '<iframe src="http://player.vimeo.com/video/35912908?badge=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/35912908">FACETURE</a> from <a href="http://vimeo.com/user9669590">Phil Cuttance</a> on <a href="https://vimeo.com">Vimeo</a>.</p>'
+    }
+    ,{
+      type: 'soundSoundcloud'
+      ,embedCode: '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/125682501&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_artwork=true"></iframe>'
+    }
+    ,{
+      type: 'codeTributary'
+      ,url: 'http://tributary.io/tributary/2958568/'
+    }
+    ,{
+      type: 'locationSinglePlace'
+      ,address: "1600 Pennsylvania Ave NW  Washington, DC"
+      ,caption: "An address!"
+    }
+    ,{
+      type: 'timelineVerite'
+      ,embedCode: "<iframe src='http://cdn.knightlab.com/libs/timeline/latest/embed/index.html?source=0ApAkxBfw1JT4dFVxOEk0aGRxbk9URE9yeDJKMXNIS3c&font=Bevan-PotanoSans&maptype=toner&lang=en&start_at_slide=1&height=650' width='100%' height='650' frameborder='0'></iframe>"
+    }
   ]
+
+  /* TODO:
+
+
+
+  ,{
+    type: 'codeGist'
+    ,url: 'http://gist.github.com/ejfox/4260347'
+  }
+
+  */
 
   var story = new sStory(story_list)
 

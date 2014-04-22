@@ -12,34 +12,109 @@ class sStory
 
   render: ->
     # Render the sStory
+    targetID = "#content"
 
-    ###
-    $targetContainer = $("#content")
-    $targetContainer.html(JSON.stringify(@story_list))
-    ###
-
-    targetContainer = d3.select("#content")
+    targetContainer = d3.select(targetID)
 
     sections = targetContainer.selectAll("section")
       .data(@story_list)
     .enter().append("section")
       .attr('class', (d) -> d.type)
-      .text("boop")
 
-    targetContainer.selectAll('.photoBigText')
+    ## Photo Sections ##
+
+    # photoBigText
+    photoBigText = targetContainer.selectAll('.photoBigText')
+    .attr('class', 'photoBigText photo')
     .style "background-image", (d) ->
       "url("+d.photoUrl+")"
     .append("h2")
+      .text (d) ->
+        d.title
+
+    # photoCaption
+    photoCaption = targetContainer.selectAll('.photoCaption')
+    .attr('class', 'photoCaption photo')
+    .style "background-image", (d) -> "url("+d.photoUrl+")"
+
+    photoCaption.append("h2")
     .text (d) ->
       d.title
 
+    photoCaption.append("aside")
+    .attr("class", "caption")
+    .html (d) ->
+      d.caption
 
+    ## Video Sections ##
+
+    #videoYoutube
+    videoYoutube = targetContainer.selectAll(".videoYoutube")
+    .append("div")
+    .attr("class", "video-container")
+      .html (d) -> d.embedCode
+
+    #videoVimeo
+    videoVimeo = targetContainer.selectAll(".videoVimeo")
+    .append("div")
+    .attr("class", "video-container")
+      .html (d) -> d.embedCode
+
+    ## Sound Section ##
+
+    #soundSoundcloud
+    soundSoundcloud = targetContainer.selectAll(".soundSoundcloud")
+    .html (d) -> d.embedCode
+
+    ## Location Sections ##
+
+    #locationSinglePlace
+    locationSinglePlace = targetContainer.selectAll(".locationSinglePlace")
+    .append("div")
+    .attr("class", "map")
+    .attr "data-address", (d) ->
+      d.address
+    .attr "data-caption", (d) ->
+      d.caption
+    .style "height", @windowHeight
+
+    ## Code Sections ##
+
+    #codeGist
+    codeGist = targetContainer.selectAll(".codeGist")
+    .html (d) ->
+      gistHtml = ""
+      id = d.url.split('/')[4]
+      $.get "https://api.github.com/gists/"+id, (d) ->
+        console.log "JSON", d
+        _.each(d.files, (d) ->
+            gistHtml += "<h3>"+d.filename+"</h3>"
+            gistHtml += "<div class='content'>"+d.content+"</div>"
+        )
+
+      return gistHtml
+
+    #codeTributary
+    codeTributary = targetContainer.selectAll(".codeTributary")
+    .append("iframe")
+    .attr("src", (d) -> d.url )
+
+
+    #timelineVerite
+    timelineVerite = targetContainer.selectAll(".timelineVerite")
+    .append("div")
+    .attr("class", "timeline-container")
+      .html (d) -> d.embedCode
 
     @handleWindowResize()
     that = this
     $(window).on('resize', -> that.handleWindowResize() )
 
+    @renderMaps()
     @makeNavSectionList()
+
+    @windowHeight = $(window).height()
+    $('.photo').css('height', @windowHeight)
     return @story_list
 
   makeNavSectionList: ->
@@ -70,6 +145,10 @@ class sStory
       that.verticalCenterElement( $(this), $(this).parent() )
     )
 
+    $(".photoCaption h2").each(->
+      that.verticalCenterElement( $(this), $(this).parent() )
+    )
+
   handleWindowResize: ->
     @verticalCenterPhotoTitles()
 
@@ -80,4 +159,63 @@ class sStory
     $(".photoCaption .photo-background").css({
         minHeight: windowHeight
     })
+
+  renderMaps: ->
+    # Render all the leaflet map sections in the story
+    that = this
+    $(".map").each(->
+      mapId = _.uniqueId("map_")
+      $(this).attr("id", mapId)
+      address = $(this).attr("data-address")
+      caption = $(this).attr("data-caption")
+      latLon = []
+
+      geoCode = that.geocodeLocationRequest(address)
+      geoCode.done( (result) ->
+        #console.log("geoCode result", result)
+        result = result[0]
+        latLon = [result.lat, result.lon]
+
+        map = L.map(mapId, {
+            scrollWheelZoom: false
+        }).setView(latLon, 14)
+
+        layer = new L.StamenTileLayer("toner-lite");
+        map.addLayer(layer);
+
+
+        circle = L.circle(latLon, 120, {
+            color: 'red'
+            fillColor: 'red'
+            fillOpacity: 0.8
+            closeOnClick: false
+        })
+        .bindPopup(caption, {
+            maxWidth: 600
+            maxHeight: 600
+            closeButton: false
+        })
+        .addTo(map)
+        .openPopup();
+        
+
+      )
+    )
+
+  geocodeLocationRequest: (location) ->
+    # Make a request to geocode a location
+    # returns the jQuery AJAX call to avoid callback craziness
+  	#console.log("Location", location)
+  	baseUrl = "http://open.mapquestapi.com/nominatim/v1/search.php?format=json"
+  	addr = "&q="+location
+
+  	url = encodeURI(baseUrl + addr + "&addressdetails=1&limit=1")
+
+  	$.ajax({
+  		url: url
+  		type: "GET"
+  		dataType: "json"
+  		cache: true
+  	})
+
 

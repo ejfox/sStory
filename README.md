@@ -14,21 +14,23 @@ sStory is an open-source self-hosted solution so that creators, journalists, and
 
 
 ### Include dependencies and set up
-**template.html** in the main directory is an example of an HTML file with all of this set up already. If you are using sStory in it's own standalone website, you can do this and skip to [creating the story_list](#create-your-story-list).
+**template.html** in the main directory is an example of an HTML file with all of the dependencies if you are a beginner. 
+
+If you are using sStory in it's own standalone website, you can do this and skip to [creating the story_list](#create-your-story-list).
 
 #### Custom Installation
 
 You will need to include jQuery, Underscore, D3, Handlebars, Sortable, and Leaflet which sStory depend on. After that, pull in sStory and it's stylesheet.
 
 ```
+<!-- External libraries for sStory -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://underscorejs.org/underscore.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="handlebars.js" type="text/javascript" charset="utf-8"></script>
-<script src="jquery.sortable.js" type="text/javascript" charset="utf-8"></script>
 <script src="lib/leaflet.js" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" href="leaflet.css" type="text/css" media="screen" charset="utf-8">
 
+<!-- sStory -->
 <script src="sstory.js"></script>
 <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8">
 ```
@@ -68,6 +70,9 @@ $(document).ready(function(){
 })
 ```
 
+![Here's what that example story looks like](basic_story.png)
+
+
 ## Section Types
 ### Photo
 Photo sections stretch to fill the entire browser window (images will be cropped and display differently on devices with different aspect ratios). They **must have** a photo URL. They can **optionally** have a title or caption.
@@ -88,7 +93,9 @@ There are two types of photo section.
 {
   type: 'photoCaption'
   ,photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
-  title: 'Making beautiful stories easy'
+  ,title: 'Making beautiful stories easy'
+  ,caption: '<h3>Hello world!</h3><p>Lorem ipsum <em>dolor sit</em> amet. Include styled <span style="color: red">HTML</span>!'
+
 }
 ```
 
@@ -161,18 +168,28 @@ You can add video sections with embedded videos from YouTube or Vimeo. You will 
 ### Code
 **codeGist:** Include a [Gist](http://gist.github.com), which can be multiple files and display their source code on the page.
 
+```
+{
+  type: 'codeGist'
+  ,url: 'http://gist.github.com/ejfox/4260347'
+}
+```
+
 **codeTributary:** Embed a live Tributary example.
 
-**codeBlocks:** Embed a live [bl.ocks.org](http://bl.ocks.org/) example.
-
+```
+{
+  type: 'codeTributary'
+  ,url: 'http://tributary.io/tributary/2958568/'
+}
+```
 
 ### Timeline
-**timelineVerite:** Include a [Timeline JS](http://timeline.verite.co/) timeline simply by specifying a google spreadsheet's publish URL.
+**timelineVerite:** Include a [Timeline JS](http://timeline.verite.co/) timeline embed, which you can find at step 4 of [TimelineJS walkthrough here](http://timeline.knightlab.com/).
 ```
 {
   type: 'timelineVerite'
-  googleSpreadsheet: "https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dFVxOEk0aGRxbk9URE9yeDJKMXNIS3c&output=html"
-  title: "Antisec Timeline"
+  ,embedCode: "<iframe src='http://cdn.knightlab.com/libs/timeline/latest/embed/index.html?source=0ApAkxBfw1JT4dFVxOEk0aGRxbk9URE9yeDJKMXNIS3c&font=Bevan-PotanoSans&maptype=toner&lang=en&start_at_slide=1&height=650' width='100%' height='650' frameborder='0'></iframe>"
 }
 ```
 **timelineStorify:** Include an embedded storify by copying in the embed code from the *Distribute* tab at the top of a storify page.
@@ -185,67 +202,5 @@ You can add video sections with embedded videos from YouTube or Vimeo. You will 
 ```
 
 
-## Adding new section types
-Sections in sStory are made of 4 simple things: the **section template** which is the handlebars template for how the section appears on the page, any new **editor input template** if needed, and the **section specification** which details for sStory what inputs a section has, and which are mandatory.
+## FAQ
 
-#### Section Template
-The section template is currently defined in the story HTML, but should be moved to a separate file with the rest of the section templates.
-
-Check this example of photoBigText's section template.
-
-```
-<script id="section-template-photoBigText" class="section-template" type="text/x-handlebars-template">
-<div class="photo-background" style="background-image: url({{photoUrl}})">
-{{#if title}}
-  <h2>{{title}}</h2>
-{{/if}}
-</div>
-</script>
-```
-
-#### Editor Input Template
-Every section type takes different inputs, but they share many. The inputs currently included are **photoUrl**, **title**, **caption**, **embedCode**, **address**. If your new section type only uses these, you need not worry about an editor input template. If you were adding a new "person" section type, you might want to give it a "Full Name" input.
-
-Check these input templates for **photoUrl** and **title** used by the **photoBigText** section template.
-```
-<script id="editor-template-photoUrl" class="editor-template" type="text/x-handlebars-template">
-<p>
-  <i class="icon-infinity"></i> <input type="text" id="editor-section-photoUrl" placeholder="Photo URL"></input>
-</p>
-</script>
-
-<script id="editor-template-title" class="editor-template" type="text/x-handlebars-template">
-<p>
-   <i class="icon-dot-3"></i> <input type="text" id="editor-section-title" placeholder="Title"></input>
-</p>
-</script>
-```
-
-#### Section Specification
-Section specifications can be found in the sStoryEditor constructor. There are 4 categories, containing objects for each section type. The *inputs* array contains every input the section could possibly have. The *mustHave* array contains the inputs the section must have to display.
-
-```
-@sectionTypes =
-  photo:
-    photoBigText:
-      inputs: ['title', 'photoUrl']
-      mustHave: ['photoUrl']
-    photoCaption:
-      inputs: ['title', 'photoUrl', 'caption']
-      mustHave: ['photoUrl', 'caption']
-  video:
-    videoYoutube:
-      inputs: ['embedCode']
-      mustHave: ['embedCode']
-    videoVimeo:
-      inputs: ['embedCode']
-      mustHave: ['embedCode']
-  sound:
-    soundSoundcloud:
-      inputs: ['embedCode']
-      mustHave: ['embedCode']
-  location:
-    locationSinglePlace:
-      inputs: ['address', 'caption', 'photoUrl']
-      mustHave: ['address', 'caption']
-```
