@@ -70,7 +70,7 @@ $(document).ready(function(){
 })
 ```
 
-![Here's what that example story looks like](basic_story.png)
+![Here's what that example story looks like](https://github.com/ejfox/sStory/raw/tabula-rasa/documentation/basic_story.png)
 
 
 ## Section Types
@@ -98,6 +98,14 @@ There are two types of photo section.
 
 }
 ```
+
+**photoMulti:** is for including multiple photos in a single section, and doesn't support captions or titles.
+```
+  {
+    type: 'photoMulti'
+    ,photoUrlArray: ['http://37.media.tumblr.com/76cd2f0e146ac4d6251bd9ff28eb8307/tumblr_ms91cgSwmX1qcn8pro1_1280.jpg', 'http://24.media.tumblr.com/9a5c41e468022c91dfd201053d1a099b/tumblr_ms91cgSwmX1qcn8pro2_1280.jpg', 'http://24.media.tumblr.com/5aeb959fd9c416f18e80d27b84384f1b/tumblr_ms91cgSwmX1qcn8pro3_1280.jpg']
+  }
+```    
 
 ### Video
 You can add video sections with embedded videos from YouTube or Vimeo. You will give the entire embed code to sStory.

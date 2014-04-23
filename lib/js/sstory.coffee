@@ -46,6 +46,18 @@ class sStory
     .html (d) ->
       d.caption
 
+    #photoMulti
+    photoMulti = targetContainer.selectAll('.photoMulti')
+    .attr('data-layout', '12312')
+
+    photoMulti.selectAll('img')
+    .data(photoMulti[0][0].__data__.photoUrlArray)
+    .enter()
+    .append('img')
+    .attr('src', (d) ->
+      d
+    )
+
     ## Video Sections ##
 
     #videoYoutube
@@ -76,6 +88,8 @@ class sStory
       d.address
     .attr "data-caption", (d) ->
       d.caption
+    .attr "data-zoom", (d) ->
+      d.zoom
     .style "height", @windowHeight
 
     ## Code Sections ##
@@ -112,6 +126,7 @@ class sStory
 
     @renderMaps()
     @makeNavSectionList()
+    @renderPhotosets()
 
     @windowHeight = $(window).height()
     $('.photo').css('height', @windowHeight)
@@ -160,6 +175,12 @@ class sStory
         minHeight: windowHeight
     })
 
+  renderPhotosets: ->
+    multiPhotoPadding = $('.photoMulti').first().css('padding')
+    $('.photoMulti').photosetGrid({
+      gutter: multiPhotoPadding+'px'
+    });
+
   renderMaps: ->
     # Render all the leaflet map sections in the story
     that = this
@@ -168,6 +189,11 @@ class sStory
       $(this).attr("id", mapId)
       address = $(this).attr("data-address")
       caption = $(this).attr("data-caption")
+      zoom = $(this).attr("data-zoom")
+
+      if zoom is undefined or zoom is ""
+        zoom = 14
+
       latLon = []
 
       geoCode = that.geocodeLocationRequest(address)
@@ -178,7 +204,7 @@ class sStory
 
         map = L.map(mapId, {
             scrollWheelZoom: false
-        }).setView(latLon, 14)
+        }).setView(latLon, zoom)
 
         layer = new L.StamenTileLayer("toner-lite");
         map.addLayer(layer);

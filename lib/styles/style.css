@@ -262,6 +262,10 @@ section:last-child {
   right: 1em;
   background-color: rgba(250,250,250,0.85);
 }
+.photoMulti {
+  padding: 12px;
+  background-color: #fff;
+}
 .videoYoutube,
 .videoVimeo {
   min-height: 0;
