@@ -1,3 +1,18 @@
+transition()
+  -webkit-transition arguments
+  -moz-transition arguments
+  -ms-transition arguments
+  -o-transition arguments
+  transition arguments
+ 
+transform()
+  -webkit-transform arguments
+  -moz-transform arguments
+  -ms-transform arguments
+  -o-transform arguments
+  transform arguments
+
+
 /*	Resets   */
 /* apply a natural box layout model to all elements */
 /* from http://paulirish.com/2012/box-sizing-border-box-ftw/ */
@@ -68,7 +83,7 @@ body
   line-height 1.3em
 
 .huge, h1
-	font-size: 3.75em
+	font-size: 3.2em
 	line-height: 1.1em
 	letter-spacing: -1px
 	margin-bottom: 18px
@@ -88,12 +103,6 @@ body
   font-size: 1.5em
   line-height: 1.5em
   margin: 8px 0
-
-.small, small
-  opacity: 0.8
-  font-size: 0.7em
-  line-height: 1.2em
-
 
 // Font sizes for mobile
 @media only screen and (max-width: 767px)
@@ -132,6 +141,114 @@ body
   margin-left auto
   margin-right auto
 
+#header
+  $navMargin = 2em
+  z-index 100
+  position fixed
+  height auto
+  text-align center
+  width 100%
+  //padding 1.2em
+  //top $navMargin
+  //left $navMargin
+  //right $navMargin
+  top 0
+  -webkit-perspective 1100px
+  -moz-perspective 1100px
+  perspective 1100px
+  -webkit-perspective-origin 50% 0
+  -moz-perspective-origin 50% 0
+  perspective-origin 50% 0
+  transition all 0.5s ease-in
+
+
+  h1
+    cursor pointer
+    margin 0
+    padding 0
+    margin-top 8px
+
+  #header-content
+    //width 920px
+    width 100%
+    height 100px
+    margin-left auto
+    margin-right auto
+    //position absolute
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transition all 0.65s ease-in-out, width 0.2s ease-out
+    padding 0
+
+
+    &.small
+      font-size 0.8em
+      width 920px
+      height 100px
+      margin-left auto
+      margin-right auto
+
+      h1
+        margin-top 20px
+
+    #header-front
+      background-color rgba(250,250,250,0.75)
+      width 100%
+      height 100%
+      position absolute
+      display block
+      transform rotateY( 0deg ) translateZ( 50px )
+      padding 0
+
+    #navigation
+      background-color rgba(230,230,230,0.9)
+      width 100%
+      height 100%
+      position absolute
+      display block
+      transform rotateX( -180deg ) translateZ( 50px )
+      padding 0
+
+      li
+        height 100%
+        width 72px
+        border 1px solid black
+        display inline-block
+        margin 0
+
+
+    #header-bottom
+      background-color rgba(125,125,125,1)
+      width 100%
+      height 100%
+      position absolute
+      display block
+      transform rotateX( -90deg ) translateZ( 50px )
+      padding 0
+
+      #progress
+        margin 0
+        background-color red
+        height 100%
+
+    #header-front, #navigation, #header, #header-content, #header-bottom
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden;
+
+    &.show-front
+      transform: translateZ( 50px ) rotateY( 0deg )
+
+    &.show-bottom
+      transform: translateZ( 50px ) rotateX( 180deg )
+
+      a
+        display inline-block 
+
 p
   margin 0.6em 0
 
@@ -148,6 +265,9 @@ a
 section
   min-height 768px
   padding 0.8em
+
+  &:first-child
+    margin-top: 110px
 
   &:last-child
     margin-bottom: 0

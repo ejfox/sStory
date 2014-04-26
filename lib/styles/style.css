@@ -140,7 +140,7 @@ body {
 }
 .huge,
 h1 {
-  font-size: 3.75em;
+  font-size: 3.2em;
   line-height: 1.1em;
   letter-spacing: -1px;
   margin-bottom: 18px;
@@ -163,12 +163,6 @@ h4 {
   font-size: 1.5em;
   line-height: 1.5em;
   margin: 8px 0;
-}
-.small,
-small {
-  opacity: 0.8;
-  font-size: 0.7em;
-  line-height: 1.2em;
 }
 @media only screen and (max-width: 767px) {
   .huge,
@@ -216,6 +210,136 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+#header {
+  z-index: 100;
+  position: fixed;
+  height: auto;
+  text-align: center;
+  width: 100%;
+  top: 0;
+  -webkit-perspective: 1100px;
+  -moz-perspective: 1100px;
+  perspective: 1100px;
+  -webkit-perspective-origin: 50% 0;
+  -moz-perspective-origin: 50% 0;
+  perspective-origin: 50% 0;
+  -webkit-transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in;
+  -ms-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+}
+#header h1 {
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  margin-top: 8px;
+}
+#header #header-content {
+  width: 100%;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: all 0.65s ease-in-out, width 0.2s ease-out;
+  -moz-transition: all 0.65s ease-in-out, width 0.2s ease-out;
+  -ms-transition: all 0.65s ease-in-out, width 0.2s ease-out;
+  -o-transition: all 0.65s ease-in-out, width 0.2s ease-out;
+  transition: all 0.65s ease-in-out, width 0.2s ease-out;
+  padding: 0;
+}
+#header #header-content.small {
+  font-size: 0.8em;
+  width: 920px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#header #header-content.small h1 {
+  margin-top: 20px;
+}
+#header #header-content #header-front {
+  background-color: rgba(250,250,250,0.75);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: block;
+  -webkit-transform: rotateY(0deg) translateZ(50px);
+  -moz-transform: rotateY(0deg) translateZ(50px);
+  -ms-transform: rotateY(0deg) translateZ(50px);
+  -o-transform: rotateY(0deg) translateZ(50px);
+  transform: rotateY(0deg) translateZ(50px);
+  padding: 0;
+}
+#header #header-content #navigation {
+  background-color: rgba(230,230,230,0.9);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: block;
+  -webkit-transform: rotateX(-180deg) translateZ(50px);
+  -moz-transform: rotateX(-180deg) translateZ(50px);
+  -ms-transform: rotateX(-180deg) translateZ(50px);
+  -o-transform: rotateX(-180deg) translateZ(50px);
+  transform: rotateX(-180deg) translateZ(50px);
+  padding: 0;
+}
+#header #header-content #navigation li {
+  height: 100%;
+  width: 72px;
+  border: 1px solid #000;
+  display: inline-block;
+  margin: 0;
+}
+#header #header-content #header-bottom {
+  background-color: #7d7d7d;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: block;
+  -webkit-transform: rotateX(-90deg) translateZ(50px);
+  -moz-transform: rotateX(-90deg) translateZ(50px);
+  -ms-transform: rotateX(-90deg) translateZ(50px);
+  -o-transform: rotateX(-90deg) translateZ(50px);
+  transform: rotateX(-90deg) translateZ(50px);
+  padding: 0;
+}
+#header #header-content #header-bottom #progress {
+  margin: 0;
+  background-color: #f00;
+  height: 100%;
+}
+#header #header-content #header-front,
+#header #header-content #navigation,
+#header #header-content #header,
+#header #header-content #header-content,
+#header #header-content #header-bottom {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+#header #header-content.show-front {
+  -webkit-transform: translateZ(50px) rotateY(0deg);
+  -moz-transform: translateZ(50px) rotateY(0deg);
+  -ms-transform: translateZ(50px) rotateY(0deg);
+  -o-transform: translateZ(50px) rotateY(0deg);
+  transform: translateZ(50px) rotateY(0deg);
+}
+#header #header-content.show-bottom {
+  -webkit-transform: translateZ(50px) rotateX(180deg);
+  -moz-transform: translateZ(50px) rotateX(180deg);
+  -ms-transform: translateZ(50px) rotateX(180deg);
+  -o-transform: translateZ(50px) rotateX(180deg);
+  transform: translateZ(50px) rotateX(180deg);
+}
+#header #header-content.show-bottom a {
+  display: inline-block;
+}
 p {
   margin: 0.6em 0;
 }
@@ -231,6 +355,9 @@ a:visited {
 section {
   min-height: 768px;
   padding: 0.8em;
+}
+section:first-child {
+  margin-top: 110px;
 }
 section:last-child {
   margin-bottom: 0;
@@ -360,6 +487,10 @@ button {
   outline: none;
 }
 button:hover {
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
   opacity: 1;
   border: 1px solid rgba(0,0,0,0.8);
@@ -618,6 +749,10 @@ input[type=submit]:active {
   -webkit-transition: opacity 0.2s linear;
   -moz-transition: opacity 0.2s linear;
   -o-transition: opacity 0.2s linear;
+  -webkit-transition: opacity 0.2s linear;
+  -moz-transition: opacity 0.2s linear;
+  -ms-transition: opacity 0.2s linear;
+  -o-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear;
 }
 .leaflet-fade-anim .leaflet-tile-loaded,
@@ -628,6 +763,10 @@ input[type=submit]:active {
   -webkit-transition: -webkit-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
   -moz-transition: -moz-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
   -o-transition: -o-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
+  -webkit-transition: transform 0.25s cubic-bezier(0, 0, 0.25, 1);
+  -moz-transition: transform 0.25s cubic-bezier(0, 0, 0.25, 1);
+  -ms-transition: transform 0.25s cubic-bezier(0, 0, 0.25, 1);
+  -o-transition: transform 0.25s cubic-bezier(0, 0, 0.25, 1);
   transition: transform 0.25s cubic-bezier(0, 0, 0.25, 1);
 }
 .leaflet-zoom-anim .leaflet-zoom-hide {
@@ -638,6 +777,10 @@ input[type=submit]:active {
 .leaflet-touching .leaflet-zoom-animated {
   -webkit-transition: none;
   -moz-transition: none;
+  -o-transition: none;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
   -o-transition: none;
   transition: none;
 }
@@ -830,6 +973,10 @@ input[type=submit]:active {
   height: 17px;
   padding: 1px;
   margin: -10px auto 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);

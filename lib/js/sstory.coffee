@@ -134,7 +134,7 @@ class sStory
 
   makeNavSectionList: ->
     # Make the navigation which appears at the top of the page
-    $navlist = $("#nav-section-list")
+    $navlist = $("#navigation")
     $navlist.html("")
 
     _.each @story_list, (section, i) ->
@@ -143,6 +143,39 @@ class sStory
       $listItem = $("<li></li>").html($link)
       $navlist.append($listItem)
 
+    $header = $('#header-content')
+
+    $('#header-front h1').click ->
+      $header.removeClass('show-front')
+      $header.addClass('show-bottom')
+
+
+    $('#navigation').click ->
+      $header.removeClass('show-bottom')
+      $header.addClass('show-front')
+
+    $(window).on 'scroll', ->
+      scrollTop = $(window).scrollTop()
+      bodyHeight = $('body').height()
+      
+      if scrollTop > 500
+        position = ( (scrollTop + $(window).height()) / bodyHeight ) * 100
+      else
+        position = ( scrollTop / bodyHeight ) * 100
+
+      if position > $(window).height()
+        position = 100
+
+      $('#progress').css('width', position+'%')
+      
+      if scrollTop >= 110 
+        $header.addClass('small')
+        $header.css('margin-top', '1em')
+      else
+        $header.removeClass('small')
+        $header.css('margin-top', 0)
+    
+ 
 
   verticalCenterElement: (el, parEl)->
     # Vertical center an element within another
