@@ -20,6 +20,7 @@ class sStory
       .data(@story_list)
     .enter().append("section")
       .attr('class', (d) -> d.type)
+      .attr('id', (d,i) -> 'section'+(i+1))
 
     ## Photo Sections ##
 
@@ -139,8 +140,8 @@ class sStory
 
     _.each @story_list, (section, i) ->
       #console.log section
-      $link = $("<a></a>").attr("href", "#"+i).html(i + 1)
-      $listItem = $("<li></li>").html($link)
+      $link = $("<a></a>").attr("href", "#section"+(i+1)).html(i + 1)
+      $listItem = $("<li id='"+i+"'></li>").html($link)
       $navlist.append($listItem)
 
     $header = $('#header-content')
@@ -149,33 +150,53 @@ class sStory
       $header.removeClass('show-front')
       $header.addClass('show-bottom')
 
+    $('#navigation').click (event) ->
+      $evtTgt = $(event.target)
+      if $evtTgt.prop('tagName') is 'A'
+        console.log 'link', event.target, $evtTgt.prop('tagName')
+        targetID = $evtTgt.prop('hash')
+        $target = $(targetID)
+        console.log '$target', $target, targetID, $evtTgt
 
-    $('#navigation').click ->
-      $header.removeClass('show-bottom')
-      $header.addClass('show-front')
+        $('html,body').animate(
+          {
+            scrollTop: $target.offset().top
+          }, 
+          1000
+        )
+        event.preventDefault()
 
-    $(window).on 'scroll', ->
-      scrollTop = $(window).scrollTop()
-      bodyHeight = $('body').height()
-      
-      if scrollTop > 500
-        position = ( (scrollTop + $(window).height()) / bodyHeight ) * 100
       else
-        position = ( scrollTop / bodyHeight ) * 100
+        $header.removeClass('show-bottom')
+        $header.addClass('show-front')
 
-      if position > $(window).height()
-        position = 100
+    $(window).on 'scroll', -> 
+      handleScroll()
 
-      $('#progress').css('width', position+'%')
+
       
-      if scrollTop >= 110 
-        $header.addClass('small')
-        $header.css('margin-top', '1em')
-      else
-        $header.removeClass('small')
-        $header.css('margin-top', 0)
+  handleScroll = ->
+    $header = $('#header-content')
+
+    scrollTop = $(window).scrollTop()
+    bodyHeight = $('body').height()
     
- 
+    if scrollTop > 500
+      position = ( (scrollTop + $(window).height()) / bodyHeight ) * 100
+    else
+      position = ( scrollTop / bodyHeight ) * 100
+
+    if position > 100
+      position = 100
+
+    $('#progress').css('width', position+'%')
+    
+    if scrollTop >= 110 
+      $header.addClass('small')
+      $header.css('margin-top', '1em')
+    else
+      $header.removeClass('small')
+      $header.css('margin-top', 0)
 
   verticalCenterElement: (el, parEl)->
     # Vertical center an element within another
