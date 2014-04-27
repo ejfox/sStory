@@ -16,7 +16,7 @@ sStory is an open-source self-hosted solution so that creators, journalists, and
 ### Include dependencies and set up
 **template.html** in the main directory is an example of an HTML file with all of the dependencies if you are a beginner. 
 
-If you are using sStory in it's own standalone website, you can do this and skip to [creating the story_list](#create-your-story-list).
+If you are using sStory in it's own standalone website, you can rename and modify **template.html** and skip to [creating the story_list](#create-your-story-list).
 
 #### Custom Installation
 

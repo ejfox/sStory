@@ -114,10 +114,11 @@ class sStory
     .append("iframe")
     .attr("src", (d) -> d.url )
 
-    #text
+    ## Text ##
     text = targetContainer.selectAll(".text")
     .html((d) -> d.html)
 
+    ## Timeline Sections ##
 
     #timelineVerite
     timelineVerite = targetContainer.selectAll(".timelineVerite")
