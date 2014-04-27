@@ -299,13 +299,21 @@ body {
   padding: 0;
 }
 #header #header-content #navigation li {
-  height: 100%;
+  line-height: 1.1em;
+  height: 80px;
   width: 72px;
   background-color: #fff;
   display: inline-block;
   margin: 0;
-  margin-left: 2px;
-  margin-right: 2px;
+  margin-top: 10px;
+  margin-left: 0.1em;
+  margin-right: 0.1em;
+}
+#header #header-content #navigation li a:link,
+#header #header-content #navigation li a:hover,
+#header #header-content #navigation li a:visited {
+  color: #000;
+  text-decoration: none;
 }
 #header #header-content #header-bottom {
   background-color: #191919;

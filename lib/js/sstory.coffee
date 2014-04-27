@@ -114,6 +114,10 @@ class sStory
     .append("iframe")
     .attr("src", (d) -> d.url )
 
+    #text
+    text = targetContainer.selectAll(".text")
+    .html((d) -> d.html)
+
 
     #timelineVerite
     timelineVerite = targetContainer.selectAll(".timelineVerite")
@@ -143,6 +147,8 @@ class sStory
       $link = $("<a></a>").attr("href", "#section"+(i+1)).html(i + 1)
       $listItem = $("<li id='"+i+"'></li>").html($link)
       $navlist.append($listItem)
+
+    $navlist.find('li').fitText(0.1)
 
     $header = $('#header-content')
 
