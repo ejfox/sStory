@@ -153,20 +153,13 @@ body
   //left $navMargin
   //right $navMargin
   top 0
-  -webkit-perspective 1100px
-  -moz-perspective 1100px
-  perspective 1100px
+  -webkit-perspective 900px
+  -moz-perspective    900px
+  perspective         900px
   -webkit-perspective-origin 50% 0
   -moz-perspective-origin 50% 0
   perspective-origin 50% 0
   transition all 0.5s ease-in
-
-
-  h1
-    cursor pointer
-    margin 0
-    padding 0
-    margin-top 8px
 
   #header-content
     //width 920px
@@ -182,24 +175,6 @@ body
     transition all 0.65s ease-in-out, width 0.2s ease-out
     padding 0
 
-
-    &.small
-      font-size 0.9em
-      width 920px
-      height 100px
-      margin-left auto
-      margin-right auto
-
-      #header-front
-        background-color rgba(250,250,250,0.5)
-        transition all 0.3s ease-in
-
-      #header-front:hover
-        background-color rgba(250,250,250,0.9)
-
-      h1
-        margin-top 16px
-
     #header-front
       background-color rgba(255,255,255,1)
       width 100%
@@ -209,6 +184,16 @@ body
       transform rotateY( 0deg ) translateZ( 50px )
       padding 0
 
+      h1
+        padding 0
+        margin 0
+        margin-top 4px
+        line-height 1em
+
+      h4
+        font-size 16px
+        line-height 1em
+        margin 0
     #navigation
       background-color rgba(230,230,230,0.9)
       width 100%
@@ -228,6 +213,10 @@ body
         margin-top 10px
         margin-left 0.1em
         margin-right 0.1em
+        overflow hidden
+
+        &.titled
+          font-size 12px !important
 
         a:link,a:hover,a:visited
           color black
@@ -255,14 +244,51 @@ body
       -o-backface-visibility: hidden;
       backface-visibility: hidden;
 
+
+
+    &.small
+      //font-size 0.9em
+      //width 920px
+      min-width 600px
+      height 100px
+      margin-left auto
+      margin-right auto
+
+      #header-front
+        background-color rgba(250,250,250,0.5)
+        transition all 0.3s ease-in
+
+      #header-front:hover
+        background-color rgba(250,250,250,0.9)
+
+      h1
+        margin 0
+        line-height 1.2em
+        margin-top 24px
+
+      &.show-front
+        &:hover
+          transform: translateZ( 50px ) rotateX( 10deg )
+
+
+
     &.show-front
       transform: translateZ( 50px ) rotateY( 0deg )
+
 
     &.show-bottom
       transform: translateZ( 50px ) rotateX( 180deg )
 
+
+
       a
         display inline-block 
+
+@media only screen and (min-width: 992px)
+  #header-content.small
+      //font-size 0.9em
+      //width 920px
+      width 55% !important
 
 p
   margin 0.6em 0
@@ -362,19 +388,81 @@ section
 
 // Timeline
 .timelineVerite
+  min-height 0
   padding 0
+  margin 0
+
+  iframe
+    margin 0
+
 
   .timeline-container
     padding 0
     margin 0
 
 
+// Text
+.text
+  min-height 300px
+  padding 2em
+  border 4px solid white
+  background-color #f6f6f6
+  background-image url(../images/crossword.png)
+
+  p
+    max-width 65%
+
+
 
 /* Tablet Layout */
 
-@media only screen and (min-width: 768px) and (max-width: 991px)
+@media only screen and (min-width: 481px) and (max-width: 991px)
 	body
-		font-size: 1.1em
+		font-size: 1em
+
+  section:first-child
+    margin-top 50px
+
+  #header-bottom
+    transform rotateX( -90deg ) translateZ( 25px ) !important
+
+  #header-content
+    height 50px !important
+    #subtitle
+      display none
+
+    &.small
+      width 75% !important
+      min-width 0px !important
+      height 50px !important
+      
+
+
+  #header-front
+    transform rotateY( 0deg ) translateZ( 25px ) !important
+
+    h1
+      font-size 34px
+      padding 0
+      margin 0
+      line-height 1em
+
+    h4
+      display none
+
+  #navigation
+    background-color purple
+    transform rotateX( -180deg ) translateZ( 25px ) !important
+
+    li
+      line-height 1.1em
+      height 50px !important
+      width 40px
+      background-color white
+      display inline-block
+      margin 0 !important
+      margin-left 0.1em
+      margin-right 0.1em
 
 
 
@@ -386,7 +474,7 @@ section
 
 /*		Mobile Layout */
 
-@media only screen and (max-width: 767px)
+@media only screen and (max-width: 480px)
   body
 		padding: 8px
     margin 0

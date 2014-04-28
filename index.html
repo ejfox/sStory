@@ -44,6 +44,7 @@
   <div id="header-content" class="show-front">
     <div id="header-front">
       <h1 id="title">Title of this story</h1>
+      <h4 id="subtitle">Subtitle / Section title</h4>
     </div>
 
     <ul id="navigation">
@@ -55,8 +56,6 @@
 
 <div id="content">
 </div>
-
-<!-- <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script> -->
 
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function(){
@@ -89,10 +88,6 @@ $(document).ready(function(){
       ,embedCode: '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/125682501&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_artwork=true"></iframe>'
     }
     ,{
-      type: 'codeTributary'
-      ,url: 'http://tributary.io/tributary/2958568/'
-    }
-    ,{
       type: 'locationSinglePlace'
       ,address: "1600 Pennsylvania Ave NW  Washington, DC"
       ,caption: "An address!"
@@ -103,7 +98,7 @@ $(document).ready(function(){
     }
     ,{
       type: 'text'
-      ,html: '<p>This morning as I was browsing my Twitter feed, <a href="http://www.people-press.org/obama-romney-voter-preferences/">I found Pew had released an interesting set of data</a>. Of course my first instinct is to visualize it. However, their data was locked in a table on their website. It wasn’t available for download as a CSV, or through a JSON API. <strong>Oh well, let’s make our own.</strong></p>'
+      ,html: '<h2>Scraping your own data</h2><p>This morning as I was browsing my Twitter feed, <a href="http://www.people-press.org/obama-romney-voter-preferences/">I found Pew had released an interesting set of data</a>. Of course my first instinct is to visualize it. However, their data was locked in a table on their website. It wasn’t available for download as a CSV, or through a JSON API. <strong>Oh well, let’s make our own.</strong></p>'
     }
   ]
 
@@ -124,6 +119,8 @@ $(document).ready(function(){
 
 })
 </script>
+
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
 </body>
 </html>

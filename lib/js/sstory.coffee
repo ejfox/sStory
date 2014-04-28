@@ -20,6 +20,7 @@ class sStory
       .data(@story_list)
     .enter().append("section")
       .attr('class', (d) -> d.type)
+      .attr('data-title', (d) -> d.title)
       .attr('id', (d,i) -> 'section'+(i+1))
 
     ## Photo Sections ##
@@ -145,15 +146,26 @@ class sStory
 
     _.each @story_list, (section, i) ->
       #console.log section
-      $link = $("<a></a>").attr("href", "#section"+(i+1)).html(i + 1)
-      $listItem = $("<li id='"+i+"'></li>").html($link)
+      listClass = ""
+      content = i+1
+      if section.title isnt undefined
+        content = section.title
+        listClass = 'titled'
+
+      $link = $("<a></a>").attr("href", "#section"+(i+1)).html(content)
+      $listItem = $("<li class='"+listClass+"' id='"+i+"'></li>")
+      .append('<div class="outerContainer"> </div>')
+      .append('<div class="innerContainer"> </div>')
+      .append('<div class="element"> </div>')
+      .html($link)
+
       $navlist.append($listItem)
 
-    $navlist.find('li').fitText(0.1)
+    $navlist.find('li:not(.titled)').fitText(0.1)
 
     $header = $('#header-content')
 
-    $('#header-front h1').click ->
+    $('#header-front').click ->
       $header.removeClass('show-front')
       $header.addClass('show-bottom')
 
@@ -177,12 +189,13 @@ class sStory
         $header.removeClass('show-bottom')
         $header.addClass('show-front')
 
-    $(window).on 'scroll', -> 
-      handleScroll()
+    $(window).on 'scroll', ->
+      $sections = $('section')
+      handleScroll($sections)
 
 
       
-  handleScroll = ->
+  handleScroll = (sections) ->
     $header = $('#header-content')
 
     scrollTop = $(window).scrollTop()
