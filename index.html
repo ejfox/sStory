@@ -66,6 +66,26 @@ $(document).ready(function(){
       ,title: 'Making beautiful stories easy'
     }
     ,{
+      type: 'locationTimeline'
+      ,list: [
+          {
+              address: "1600 Pennsylvania Ave NW  Washington, DC"
+              ,caption: "An address!"
+              ,time: "1-1-1792"
+        }
+        ,{
+              address: "2 15th St. NW Washington, D.C."
+              ,caption: "An address!"
+              ,time: "1-1-1848"
+        }
+        ,{
+              address: "2 Lincoln Memorial Cir NW, Washington, DC"
+              ,caption: "An address!"
+              ,time: "1-1-1868"
+        }
+      ]
+    }
+    ,{
       type: 'photoCaption'
       ,photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
       ,title: 'Making beautiful stories easy'
@@ -86,11 +106,6 @@ $(document).ready(function(){
     ,{
       type: 'soundSoundcloud'
       ,embedCode: '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/125682501&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_artwork=true"></iframe>'
-    }
-    ,{
-      type: 'locationSinglePlace'
-      ,address: "1600 Pennsylvania Ave NW  Washington, DC"
-      ,caption: "An address!"
     }
     ,{
       type: 'timelineVerite'

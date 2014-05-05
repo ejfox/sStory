@@ -94,6 +94,12 @@ class sStory
       d.zoom
     .style "height", @windowHeight
 
+    #locationTimeline
+    locationTimeline =  targetContainer.selectAll('locationTimeline')
+    .append("div")
+    .attr("class", "map multi-location")
+      
+
     ## Code Sections ##
 
     #codeGist
@@ -161,14 +167,18 @@ class sStory
 
       $navlist.append($listItem)
 
+    # Make the nav list titles fit their containers
     $navlist.find('li:not(.titled)').fitText(0.1)
 
+    # Manipulate the header to show different sides
     $header = $('#header-content')
 
     $('#header-front').click ->
       $header.removeClass('show-front')
       $header.addClass('show-bottom')
 
+    # Animate window scroll position to element
+    # when it's navigation item has been clicked
     $('#navigation').click (event) ->
       $evtTgt = $(event.target)
       if $evtTgt.prop('tagName') is 'A'
@@ -211,6 +221,9 @@ class sStory
 
     $('#progress').css('width', position+'%')
     
+
+    # Adjust size of header depending on whether
+    # we are at the top of the page or not
     if scrollTop >= 110 
       $header.addClass('small')
       $header.css('margin-top', '1em')
@@ -261,6 +274,10 @@ class sStory
     $(".map").each(->
       mapId = _.uniqueId("map_")
       $(this).attr("id", mapId)
+
+      # Grab the map information that's been added by D3
+      # to the data-* properties | address, caption, zoom
+
       address = $(this).attr("data-address")
       caption = $(this).attr("data-caption")
       zoom = $(this).attr("data-zoom")
@@ -270,6 +287,7 @@ class sStory
 
       latLon = []
 
+      # Geocode the address and map it
       geoCode = that.geocodeLocationRequest(address)
       geoCode.done( (result) ->
         #console.log("geoCode result", result)
@@ -283,7 +301,7 @@ class sStory
         layer = new L.StamenTileLayer("toner-lite");
         map.addLayer(layer);
 
-
+        # Create the circle that marks the point on the map
         circle = L.circle(latLon, 120, {
             color: 'red'
             fillColor: 'red'
