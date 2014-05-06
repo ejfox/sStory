@@ -355,6 +355,11 @@ body {
   margin-top: 24px;
 }
 #header #header-content.small.show-front:hover {
+  -webkit-transition: all 0.22s ease-in-out;
+  -moz-transition: all 0.22s ease-in-out;
+  -ms-transition: all 0.22s ease-in-out;
+  -o-transition: all 0.22s ease-in-out;
+  transition: all 0.22s ease-in-out;
   -webkit-transform: translateZ(50px) rotateX(10deg);
   -moz-transform: translateZ(50px) rotateX(10deg);
   -ms-transform: translateZ(50px) rotateX(10deg);

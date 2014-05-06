@@ -13,26 +13,19 @@ sStory is an open-source self-hosted solution so that creators, journalists, and
 ## Getting Started
 
 
-### Include dependencies and set up
-**template.html** in the main directory is an example of an HTML file with all of the dependencies if you are a beginner. 
+### Set up
+**index.html** in the main directory is an example of an HTML file with all of the dependencies. 
 
-If you are using sStory in it's own standalone website, you can rename and modify **template.html** and skip to [creating the story_list](#create-your-story-list).
+If aren't including sStory into a pre-existing site or CMS, you can rename and modify **index.html** and skip to [creating the story_list](#create-your-story-list).
 
 #### Custom Installation
 
-You will need to include jQuery, Underscore, D3, Handlebars, Sortable, and Leaflet which sStory depend on. After that, pull in sStory and it's stylesheet.
+You will need to include [LazyLoad](https://github.com/rgrove/lazyload) which handles loading sStory's dependencies, and sStory itself (both JS and CSS).
 
 ```
-<!-- External libraries for sStory -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="http://underscorejs.org/underscore.js"></script>
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="lib/leaflet.js" type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" href="leaflet.css" type="text/css" media="screen" charset="utf-8">
-
-<!-- sStory -->
-<script src="sstory.js"></script>
-<link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8">
+<script src="lib/js/lazyload.js" type="text/javascript" charset="utf-8"></script>
+<script src="lib/js/sstory.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="lib/styles/style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
 ```
 
 You will also need a DOM element with the id of **#content** which sStory will fill with the content of the story. 
@@ -48,21 +41,27 @@ The story_list is the heart of every sStory, and it is essentially an array of o
 Once the document has loaded, simply create a new sStory and feed it the story_list array, and then render.
 
 ```
-$(document).ready(function(){
+// Story list
+var story_list = [
+      {
+        type: 'locationSinglePlace'
+        ,address: "1600 Pennsylvania Ave NW  Washington, DC"
+        ,caption: "An address!"
+      }
+      ,{
+        photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
+        ,type: 'photoBigText'
+        ,title: 'Making beautiful stories easy'
+      }
+]
 
-  var story_list = [
-        {
-          type: 'locationSinglePlace'
-          ,address: "1600 Pennsylvania Ave NW  Washington, DC"
-          ,caption: "An address!"
-        }
-        ,{
-          photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
-          ,type: 'photoBigText'
-          ,title: 'Making beautiful stories easy'
-        }
-  ]
+// Path to JS files
+path = 'lib/js/';
+sStoryDependencies = [path+'jquery.js', path+'sstory.js', path+'d3.min.js', path+'jquery.fittext.js', path+'jquery.photoset-grid.min.js', path+'leaflet.js', path+'underscore-min.js', 'http://maps.stamen.com/js/tile.stamen.js?v1.2.4']
 
+// Load dependencies and render sStory
+LazyLoad.js(sStoryDependencies, function(){
+  
   var story = new sStory(story_list)
 
   story.render()
@@ -72,12 +71,28 @@ $(document).ready(function(){
 
 ![Here's what that example story looks like](https://github.com/ejfox/sStory/raw/tabula-rasa/documentation/basic_story.png)
 
+If you'd like to have a header with navigation / the title of your article, include the following HTML. Replace the content of the `<h1>` and `<h4>` tags with your own title / subtitle. 
+```
+<nav id="header">
+  <div id="header-content" class="show-front">
+    <div id="header-front">
+      <h1 id="title">Title of this story</h1>
+      <h4 id="subtitle">Subtitle / Section title</h4>
+    </div>
+
+    <ul id="navigation">
+    </ul>
+
+    <div id="header-bottom"><div id="progress" style="width: 0%;">&nbsp;</div></div>
+  </div>
+</nav>
+```
+
+
 
 ## Section Types
 ### Photo
 Photo sections stretch to fill the entire browser window (images will be cropped and display differently on devices with different aspect ratios). They **must have** a photo URL. They can **optionally** have a title or caption.
-
-There are two types of photo section.
 
 **photoBigText:** Which is for photos with no title, or photos with just a title.
 ```
@@ -101,10 +116,10 @@ There are two types of photo section.
 
 **photoMulti:** is for including multiple photos in a single section, and doesn't support captions or titles.
 ```
-  {
-    type: 'photoMulti'
-    ,photoUrlArray: ['http://37.media.tumblr.com/76cd2f0e146ac4d6251bd9ff28eb8307/tumblr_ms91cgSwmX1qcn8pro1_1280.jpg', 'http://24.media.tumblr.com/9a5c41e468022c91dfd201053d1a099b/tumblr_ms91cgSwmX1qcn8pro2_1280.jpg', 'http://24.media.tumblr.com/5aeb959fd9c416f18e80d27b84384f1b/tumblr_ms91cgSwmX1qcn8pro3_1280.jpg']
-  }
+{
+  type: 'photoMulti'
+  ,photoUrlArray: ['http://37.media.tumblr.com/76cd2f0e146ac4d6251bd9ff28eb8307/tumblr_ms91cgSwmX1qcn8pro1_1280.jpg', 'http://24.media.tumblr.com/9a5c41e468022c91dfd201053d1a099b/tumblr_ms91cgSwmX1qcn8pro2_1280.jpg', 'http://24.media.tumblr.com/5aeb959fd9c416f18e80d27b84384f1b/tumblr_ms91cgSwmX1qcn8pro3_1280.jpg']
+}
 ```    
 
 ### Video

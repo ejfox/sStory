@@ -1,5 +1,5 @@
 class sStory
-  constructor: (@story_list) ->
+  constructor: (@story_list, @options) ->
     # Make sure that sStory is being started
     # with a story_list, and that it is an array
     typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
@@ -10,9 +10,13 @@ class sStory
     if !typeIsArray(@story_list)
       throw "The story_list is not an array"
 
+    #if @options is undefined
+    @options = 
+      targetID: '#content'
+
   render: ->
     # Render the sStory
-    targetID = "#content"
+    targetID = @options.targetID
 
     targetContainer = d3.select(targetID)
 
@@ -138,8 +142,9 @@ class sStory
     $(window).on('resize', -> that.handleWindowResize() )
 
     @renderMaps()
-    @makeNavSectionList()
     @renderPhotosets()
+    @makeNavSectionList()
+
 
     @windowHeight = $(window).height()
     $('.photo').css('height', @windowHeight)
