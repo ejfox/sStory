@@ -163,31 +163,6 @@ You can add video sections with embedded videos from YouTube or Vimeo. You will 
 }
 ```
 
-**locationTimeline:** A list of locations with an address, a date/time, and a caption. A leaflet map is generated with a marker and pop-up for each item. An optional photoUrl can be provided to add an image to the popup. Navigation will be provided to move forward and backward between items.
-
-```
-{
-  type: 'locationTimeline'
-  list: [
-  	{
-  		address: "1600 Pennsylvania Ave NW  Washington, DC"
-  		,caption: "An address!"
-  		,time: "1-1-1792"
-	}
-	,{
-  		address: "2 15th St. NW Washington, D.C."
-  		,caption: "An address!"
-  		,time: "1-1-1848"
-	}
-	,{
-  		address: "2 Lincoln Memorial Cir NW, Washington, DC"
-  		,caption: "An address!"
-  		,time: "1-1-1868"
-	}
-  ]
-}
-```
-
 ### Code
 **codeGist:** Include a [Gist](http://gist.github.com), which can be multiple files and display their source code on the page.
 
