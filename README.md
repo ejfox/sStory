@@ -192,5 +192,3 @@ sStory itself is 34kb uncompressed. It's dependencies are around 388kb, but incl
 
 #### How do I adjust the size of photos?
 Short answer: you can't. Photos will stretch to fill the screen, and if the aspect ratio of the user's screen is different than the photo, the sides of the photo may be cropped out. Because of this, only content in the center of the photo can be guaranteed to be seen on all screens. 
-
-
