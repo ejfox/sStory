@@ -20,12 +20,13 @@ If aren't including sStory into a pre-existing site or CMS, you can rename and m
 
 #### Custom Installation
 
-You will need to include [LazyLoad](https://github.com/rgrove/lazyload) which handles loading sStory's dependencies, and sStory itself (both JS and CSS).
+You will need to sStory itself (both JS and CSS), as well as *3rdparty.min.js* which contains all of the 3rd party JS files combined and minified. The maps also default to using [Stamen map tiles](http://maps.stamen.com/#watercolor/12/37.7706/-122.3782), which you will need to include if you will be using any map sections. 
 
 ```
-<script src="lib/js/lazyload.js" type="text/javascript" charset="utf-8"></script>
+<script src="lib/js/3rdparty.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://maps.stamen.com/js/tile.stamen.js?v1.2.4" type="text/javascript"></script>  
 <script src="lib/js/sstory.js" type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" href="lib/styles/style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
+<link rel="stylesheet" href="lib/styles/style.css" type="text/css" media="screen" title="sStory Styles" charset="utf-8">
 ```
 
 You will also need a DOM element with the id of **#content** which sStory will fill with the content of the story. 
@@ -55,18 +56,8 @@ var story_list = [
       }
 ]
 
-// Path to JS files
-path = 'lib/js/';
-sStoryDependencies = [path+'jquery.js', path+'sstory.js', path+'d3.min.js', path+'jquery.fittext.js', path+'jquery.photoset-grid.min.js', path+'leaflet.js', path+'underscore-min.js', 'http://maps.stamen.com/js/tile.stamen.js?v1.2.4']
-
-// Load dependencies and render sStory
-LazyLoad.js(sStoryDependencies, function(){
-  
-  var story = new sStory(story_list)
-
-  story.render()
-
-})
+var story = new sStory(story_list)
+story.render()
 ```
 
 ![Here's what that example story looks like](https://github.com/ejfox/sStory/raw/tabula-rasa/documentation/basic_story.png)
@@ -88,9 +79,19 @@ If you'd like to have a header with navigation / the title of your article, incl
 </nav>
 ```
 
-
-
 ## Section Types
+All sections, even if they do not require it, can accept a 'title' parameter which will be displayed in the navigation menu. 
+
+### Text
+
+Text sections accept HTML and display it in an easy-to-read line width. Currently text sections are very basic, but will soon include the ability for asides with a variety of media.
+```
+{
+  type: 'text'
+  ,html: '<h2>Scraping your own data</h2><p>This morning as I was browsing my Twitter feed, <a href="http://www.people-press.org/obama-romney-voter-preferences/">I found Pew had released an interesting set of data</a>. Of course my first instinct is to visualize it. However, their data was locked in a table on their website. It wasn’t available for download as a CSV, or through a JSON API. <strong>Oh well, let’s make our own.</strong></p>'
+}
+```
+
 ### Photo
 Photo sections stretch to fill the entire browser window (images will be cropped and display differently on devices with different aspect ratios). They **must have** a photo URL. They can **optionally** have a title or caption.
 
@@ -164,14 +165,6 @@ You can add video sections with embedded videos from YouTube or Vimeo. You will 
 ```
 
 ### Code
-**codeGist:** Include a [Gist](http://gist.github.com), which can be multiple files and display their source code on the page.
-
-```
-{
-  type: 'codeGist'
-  ,url: 'http://gist.github.com/ejfox/4260347'
-}
-```
 
 **codeTributary:** Embed a live Tributary example.
 
@@ -190,15 +183,14 @@ You can add video sections with embedded videos from YouTube or Vimeo. You will 
   ,embedCode: "<iframe src='http://cdn.knightlab.com/libs/timeline/latest/embed/index.html?source=0ApAkxBfw1JT4dFVxOEk0aGRxbk9URE9yeDJKMXNIS3c&font=Bevan-PotanoSans&maptype=toner&lang=en&start_at_slide=1&height=650' width='100%' height='650' frameborder='0'></iframe>"
 }
 ```
-**timelineStorify:** Include an embedded storify by copying in the embed code from the *Distribute* tab at the top of a storify page.
-
-```
-{
-  type: 'timelineStorify'
-  embedCode: '<script src="//storify.com/ejfox/occupy-oakland-may-1st-general-strike.js" type="text/javascript" language="javascript"></script><noscript>[<a href="//storify.com/ejfox/occupy-oakland-may-1st-general-strike" target="_blank">View the story "Occupy Oakland - May 1st General Strike" on Storify</a>]</noscript>'
-}
-```
 
 
 ## FAQ
+
+#### How big is it?
+sStory itself is 34kb uncompressed. It's dependencies are around 388kb, but include things like jQuery and Underscore which you may already be serving. 
+
+#### How do I adjust the size of photos?
+Short answer: you can't. Photos will stretch to fill the screen, and if the aspect ratio of the user's screen is different than the photo, the sides of the photo may be cropped out. Because of this, only content in the center of the photo can be guaranteed to be seen on all screens. 
+
 

@@ -282,21 +282,33 @@ body {
   -o-transform: rotateX(-180deg) translateZ(50px);
   transform: rotateX(-180deg) translateZ(50px);
   padding: 0;
+  overflow-x: auto;
 }
 #header #header-content #navigation li {
-  line-height: 1.1em;
-  height: 80px;
-  width: 72px;
-  background-color: #fff;
+  line-height: 1.2em;
+  height: 80%;
+  width: 3.5rem;
+  padding: 0.1em;
   display: inline-block;
   margin: 0;
   margin-top: 10px;
   margin-left: 0.1em;
   margin-right: 0.1em;
   overflow: hidden;
+  background-color: #262626;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 3px;
+  color: #fff;
+}
+#header #header-content #navigation li a:link,
+#header #header-content #navigation li a:visited,
+#header #header-content #navigation li a:hover {
+  color: #fff !important;
+  text-shadow: 0px 1px 3px #000;
 }
 #header #header-content #navigation li.titled {
-  font-size: 12px !important;
+  font-size: 0.7rem !important;
 }
 #header #header-content #navigation li a:link,
 #header #header-content #navigation li a:hover,
@@ -505,12 +517,15 @@ section:last-child {
   max-width: 65%;
 }
 /* Tablet Layout */
-@media only screen and (min-width: 481px) and (max-width: 991px) {
+@media only screen and (max-width: 767px) {
   body {
     font-size: 1em;
   }
   body section:first-child {
-    margin-top: 50px;
+    margin-top: 0px;
+  }
+  body #header {
+    display: none;
   }
   body #header-bottom {
     -webkit-transform: rotateX(-90deg) translateZ(25px) !important;
@@ -521,6 +536,7 @@ section:last-child {
   }
   body #header-content {
     height: 50px !important;
+    min-width: 0;
   }
   body #header-content #subtitle {
     display: none;
@@ -553,29 +569,20 @@ section:last-child {
     -ms-transform: rotateX(-180deg) translateZ(25px) !important;
     -o-transform: rotateX(-180deg) translateZ(25px) !important;
     transform: rotateX(-180deg) translateZ(25px) !important;
+    width: 100%;
   }
   body #navigation li {
-    line-height: 1.1em;
-    height: 50px !important;
-    width: 40px;
-    background-color: #fff;
     display: inline-block;
     margin: 0 !important;
     margin-left: 0.1em;
     margin-right: 0.1em;
+    overflow: hidden;
+    font-size: 12px !important;
+    width: auto;
+    height: auto;
   }
-}
-/*		Mobile Layout */
-@media only screen and (max-width: 480px) {
-  & {
-    font-size: 0.9em;
-    line-height: 1.5em;
-  }
-  body,
-  padding: 8px {
-    margin: 0;
-    max-width: 100%;
-    width: 100%;
+  body #navigation li a {
+    padding: 0 !important;
   }
 }
 /*

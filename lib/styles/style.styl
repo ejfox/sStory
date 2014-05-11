@@ -195,6 +195,7 @@ body
         line-height 1em
         margin 0
         margin-top 6px
+
     #navigation
       background-color rgba(230,230,230,0.9)
       width 100%
@@ -203,21 +204,32 @@ body
       display block
       transform rotateX( -180deg ) translateZ( 50px )
       padding 0
+      overflow-x auto
 
       li
-        line-height 1.1em
-        height 80px
-        width 72px
-        background-color white
+        line-height 1.2em
+        height 80%//4rem
+        width 3.5rem
+        padding 0.1em
         display inline-block
         margin 0
         margin-top 10px
         margin-left 0.1em
         margin-right 0.1em
         overflow hidden
+        background-color #262626
+        background-size cover
+        background-position center center
+        border-radius 3px
+
+        color white
+
+        a:link,a:visited,a:hover
+          color white !important
+          text-shadow 0px 1px 3px black
 
         &.titled
-          font-size 12px !important
+          font-size 0.7rem !important
 
         a:link,a:hover,a:visited
           color black
@@ -418,18 +430,22 @@ section
 
 /* Tablet Layout */
 
-@media only screen and (min-width: 481px) and (max-width: 991px)
+@media only screen and (max-width: 767px)
 	body
 		font-size: 1em
 
   section:first-child
-    margin-top 50px
+    margin-top 0px
+
+  #header 
+    display none
 
   #header-bottom
     transform rotateX( -90deg ) translateZ( 25px ) !important
 
   #header-content
     height 50px !important
+    min-width 0
     #subtitle
       display none
 
@@ -455,37 +471,20 @@ section
   #navigation
     background-color purple
     transform rotateX( -180deg ) translateZ( 25px ) !important
+    width 100%
 
     li
-      line-height 1.1em
-      height 50px !important
-      width 40px
-      background-color white
       display inline-block
       margin 0 !important
       margin-left 0.1em
       margin-right 0.1em
+      overflow hidden
+      font-size 12px !important
+      width auto
+      height auto
 
-
-
-
-
-
-
-
-
-/*		Mobile Layout */
-
-@media only screen and (max-width: 480px)
-  body
-		padding: 8px
-    margin 0
-    max-width 100%
-    width 100%
-		font-size: 0.9em
-		line-height: 1.5em
-
-
+      a
+        padding 0 !important
 
 
 

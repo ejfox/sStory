@@ -84,26 +84,6 @@ class sStory
     soundSoundcloud = targetContainer.selectAll(".soundSoundcloud")
     .html (d) -> d.embedCode
 
-    ## Location Sections ##
-
-    #locationSinglePlace
-    locationSinglePlace = targetContainer.selectAll(".locationSinglePlace")
-    .append("div")
-    .attr("class", "map")
-    .attr "data-address", (d) ->
-      d.address
-    .attr "data-caption", (d) ->
-      d.caption
-    .attr "data-zoom", (d) ->
-      d.zoom
-    .style "height", @windowHeight
-
-    #locationTimeline
-    locationTimeline =  targetContainer.selectAll('locationTimeline')
-    .append("div")
-    .attr("class", "map multi-location")
-      
-
     ## Code Sections ##
 
     #codeGist
@@ -112,7 +92,6 @@ class sStory
       gistHtml = ""
       id = d.url.split('/')[4]
       $.get "https://api.github.com/gists/"+id, (d) ->
-        console.log "JSON", d
         _.each(d.files, (d) ->
             gistHtml += "<h3>"+d.filename+"</h3>"
             gistHtml += "<div class='content'>"+d.content+"</div>"
@@ -137,13 +116,38 @@ class sStory
     .attr("class", "timeline-container")
       .html (d) -> d.embedCode
 
-    @handleWindowResize()
+    timelineStorify = targetContainer.selectAll('.timelineStorify')
+    .append("div")
+    .attr("class", "timeline-container")
+      .html (d) -> d.embedCode
+
+    ## Location Sections ##
+
+    #locationSinglePlace
+    locationSinglePlace = targetContainer.selectAll(".locationSinglePlace")
+    .append("div")
+    .attr("class", "map")
+    .attr "data-address", (d) ->
+      d.address
+    .attr "data-caption", (d) ->
+      d.caption
+    .attr "data-zoom", (d) ->
+      d.zoom
+    .style "height", @windowHeight
+
+    #locationTimeline
+    locationTimeline =  targetContainer.selectAll('locationTimeline')
+    .append("div")
+    .attr("class", "map multi-location")  
+
     that = this
     $(window).on('resize', -> that.handleWindowResize() )
 
     @renderMaps()
     @renderPhotosets()
     @makeNavSectionList()
+    @handleWindowResize()
+
 
 
     @windowHeight = $(window).height()
@@ -156,7 +160,6 @@ class sStory
     $navlist.html("")
 
     _.each @story_list, (section, i) ->
-      #console.log section
       listClass = ""
       content = i+1
       if section.title isnt undefined
@@ -165,15 +168,23 @@ class sStory
 
       $link = $("<a></a>").attr("href", "#section"+(i+1)).html(content)
       $listItem = $("<li class='"+listClass+"' id='"+i+"'></li>")
-      .append('<div class="outerContainer"> </div>')
-      .append('<div class="innerContainer"> </div>')
-      .append('<div class="element"> </div>')
+      .attr('data-background-image', -> 
+        section.photoUrl
+      )
+      .css('background-image', ->
+        if section.photoUrl isnt undefined
+          "url("+section.photoUrl+")"
+      )    
+      .append($('<div class="outerContainer"> </div>'))
+      .append($('<div class="innerContainer"> </div>'))
+      .append($('<div class="element"> </div>'))
       .html($link)
 
       $navlist.append($listItem)
 
     # Make the nav list titles fit their containers
     $navlist.find('li:not(.titled)').fitText(0.1)
+
 
     # Manipulate the header to show different sides
     $header = $('#header-content')
@@ -187,10 +198,8 @@ class sStory
     $('#navigation').click (event) ->
       $evtTgt = $(event.target)
       if $evtTgt.prop('tagName') is 'A'
-        console.log 'link', event.target, $evtTgt.prop('tagName')
         targetID = $evtTgt.prop('hash')
         $target = $(targetID)
-        console.log '$target', $target, targetID, $evtTgt
 
         $('html,body').animate(
           {
@@ -208,7 +217,21 @@ class sStory
       $sections = $('section')
       handleScroll($sections)
 
+  handleWindowResize: ->
+    @verticalCenterPhotoTitles()
 
+    that = this
+    $('#navigation li.titled a').each( (i, el) ->
+      that.verticalCenterElement( $(el), $(el).parent() )
+    )
+
+    windowHeight = $(window).height()
+    $(".photoBigText .photo-background").css({
+        minHeight: windowHeight
+    })
+    $(".photoCaption .photo-background").css({
+        minHeight: windowHeight
+    })      
       
   handleScroll = (sections) ->
     $header = $('#header-content')
@@ -255,17 +278,6 @@ class sStory
     $(".photoCaption h2").each(->
       that.verticalCenterElement( $(this), $(this).parent() )
     )
-
-  handleWindowResize: ->
-    @verticalCenterPhotoTitles()
-
-    windowHeight = $(window).height()
-    $(".photoBigText .photo-background").css({
-        minHeight: windowHeight
-    })
-    $(".photoCaption .photo-background").css({
-        minHeight: windowHeight
-    })
 
   renderPhotosets: ->
     multiPhotoPadding = $('.photoMulti').first().css('padding')

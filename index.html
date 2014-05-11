@@ -4,23 +4,15 @@
 	<meta charset="utf-8"/>
 	<title>sStory</title>
 
-	<link rel="shortcut icon" href="/favicon.ico">
-
-	<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
-
-  <script src="lib/js/lazyload.js" type="text/javascript" charset="utf-8"></script>
+  <script src="lib/js/3rdparty.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="http://maps.stamen.com/js/tile.stamen.js?v1.2.4" type="text/javascript"></script>  
+  
   <script src="lib/js/sstory.js" type="text/javascript" charset="utf-8"></script>
+
   <link rel="stylesheet" href="lib/styles/style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
-
-
 </head>
 
 <body>
-
 <nav id="header">
   <div id="header-content" class="show-front">
     <div id="header-front">
@@ -41,19 +33,20 @@
 <script type="text/javascript" charset="utf-8">
 var story_list = [
   {
-    photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
+    photoUrl: 'https://farm8.staticflickr.com/7028/6494490891_e1d2de1149_b.jpg'
     ,type: 'photoBigText'
     ,title: 'Making beautiful stories easy'
   }
   ,{
     type: 'locationSinglePlace'
     ,address: "1600 Pennsylvania Ave NW  Washington, DC"
-    ,caption: "An address!"
+    ,caption: "Easily make maps- just provide an address!"
+    ,title: 'A map of the White House'
   }
   ,{
     type: 'photoCaption'
-    ,photoUrl: 'http://farm9.staticflickr.com/8315/8018537908_eb5ac81027_b.jpg'
-    ,title: 'Making beautiful stories easy'
+    ,photoUrl: 'https://farm8.staticflickr.com/7030/6751144021_d9b328e737_b.jpg'
+    ,title: 'Full-screen media automatically'
     ,caption: '<h3>Captions too!</h3><p>Lorem ipsum <em>dolor sit</em> amet. Include styled <span style="color: red">HTML</span>!'
   }
   ,{
@@ -78,21 +71,13 @@ var story_list = [
   }
   ,{
     type: 'text'
-    ,html: '<h2>Scraping your own data</h2><p>This morning as I was browsing my Twitter feed, <a href="http://www.people-press.org/obama-romney-voter-preferences/">I found Pew had released an interesting set of data</a>. Of course my first instinct is to visualize it. However, their data was locked in a table on their website. It wasn’t available for download as a CSV, or through a JSON API. <strong>Oh well, let’s make our own.</strong></p>'
+    ,html: '<h2>sStory</h2><p>sStory is being continually developed by me, <a href="http://ejfox.com">EJ Fox</a>. If you have any suggestions, comments, or Pull Requests, please let me know <a href="https://github.com/ejfox/sStory/issues?state=open">on GitHub</a>. I hope you find sStory useful!</p>'
   }
 ]
 
-path = 'lib/js/';
-sStoryDependencies = [path+'jquery.js', path+'sstory.js', path+'d3.min.js', path+'jquery.fittext.js', path+'jquery.photoset-grid.min.js', path+'leaflet.js', path+'underscore-min.js', 'http://maps.stamen.com/js/tile.stamen.js?v1.2.4']
-
-LazyLoad.js(sStoryDependencies, function(){
-  var story = new sStory(story_list)
-  story.render()
-})
+var story = new sStory(story_list)
+story.render()
 
 </script>
-
-<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-
 </body>
 </html>
