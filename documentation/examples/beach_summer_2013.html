@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>NC - Summer 2013</title>
+
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
+
+  <script src="../../lib/js/3rdparty.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="http://maps.stamen.com/js/tile.stamen.js?v1.2.4" type="text/javascript"></script>  
+  
+  <script src="../../lib/js/sstory.js" type="text/javascript" charset="utf-8"></script>
+  
+  <link rel="stylesheet" href="../../lib/styles/style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
+
+
+</head>
+
+<body>
+
+<nav id="header">
+  <div id="header-content" class="show-front">
+    <div id="header-front">
+      <h1 id="title">North Carolina</h1>
+      <h4 id="subtitle">Summer 2013</h4>
+    </div>
+
+    <ul id="navigation">
+    </ul>
+
+    <div id="header-bottom"><div id="progress" style="width: 0%;">&nbsp;</div></div>
+  </div>
+</nav>
+
+<div id="content">
+</div>
+
+<script type="text/javascript" charset="utf-8">
+var story_list = [
+  {
+    photoUrl: 'https://scontent-b.xx.fbcdn.net/hphotos-ash4/t31.0-8/1149230_10151871087737433_2066070807_o.jpg'
+    ,type: 'photoBigText'
+    ,title: 'North Carolina - Summer 2013'
+  }
+  ,{
+    type: 'locationSinglePlace'
+    ,address: "Holden Beach, North Carolina"
+    ,caption: "Holden Beach"
+    ,zoom: "7"
+  }
+  ,{
+    type: 'photoCaption'
+    ,photoUrl: 'http://24.media.tumblr.com/005552e9d035c94d8167741db6d07fa3/tumblr_ms91axvoXF1qcn8pro1_1280.jpg'
+    ,caption: "Adrienne had invited us down to North Carolina to stay at her parent's house, a short drive from Holden Beach. Seven of us drove down from New York for a week of relaxation, and we most certainly got it!"
+  }
+  ,{
+    photoUrl: 'beach_summer_2013/samarawaves1.tumblr.gif'
+    ,type: 'photoBigText'
+  }
+  ,{
+    type: 'photoMulti'
+    ,photoUrlArray: ['http://37.media.tumblr.com/76cd2f0e146ac4d6251bd9ff28eb8307/tumblr_ms91cgSwmX1qcn8pro1_1280.jpg', 'http://24.media.tumblr.com/9a5c41e468022c91dfd201053d1a099b/tumblr_ms91cgSwmX1qcn8pro2_1280.jpg', 'http://24.media.tumblr.com/5aeb959fd9c416f18e80d27b84384f1b/tumblr_ms91cgSwmX1qcn8pro3_1280.jpg']
+  }    
+  ,{
+    type: 'videoYoutube'
+    ,embedCode: '<iframe width="853" height="480" src="//www.youtube.com/embed/8GGQ3SmvmT0?rel=0" frameborder="0" allowfullscreen></iframe>'
+  }    
+]
+
+var story = new sStory(story_list)
+story.render()
+
+</script>
+
+</body>
+</html>

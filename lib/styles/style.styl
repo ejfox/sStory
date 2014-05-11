@@ -1,0 +1,1018 @@
+transition()
+  -webkit-transition arguments
+  -moz-transition arguments
+  -ms-transition arguments
+  -o-transition arguments
+  transition arguments
+ 
+transform()
+  -webkit-transform arguments
+  -moz-transform arguments
+  -ms-transform arguments
+  -o-transform arguments
+  transform arguments
+
+
+/*	Resets   */
+/* apply a natural box layout model to all elements */
+/* from http://paulirish.com/2012/box-sizing-border-box-ftw/ */
+*
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+  box-sizing: border-box
+
+/* maxvoltar.com/archive/-webkit-font-smoothing */
+html
+  -webkit-font-smoothing: antialiased
+
+
+/* basic fluidity http://fluidity.sexy/ */
+img,canvas,iframe,video,svg
+  max-width: 100%
+
+pre
+	padding: 15px
+	white-space: pre
+	word-wrap: break-word
+
+/* hand cursor on clickable input elements */
+label, input[type=button], input[type=submit], button { cursor: pointer }
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em,
+img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, hgroup,
+menu, footer, header, nav, section, summary, time, mark, audio, video
+	margin: 0
+	padding: 0
+	border: 0
+
+a img
+  border: 0
+
+/*	Color variables
+	------------------	*/
+
+$fontcolor = #333333
+$bgcolor = #e6e6e6
+
+/* Highlight color, when user selects text */
+$highlight = #FFF9A2
+
+/* Link color, hover/visited will be generated from this */
+$linkcolor = #112582
+
+/* Selection colours (easy to forget) */
+
+::selection 	 	{background: $highlight}
+::-moz-selection 	{background: $highlight}
+img::selection 		{background: transparent}
+img::-moz-selection	{background: transparent}
+body {-webkit-tap-highlight-color: $highlight}
+
+em { background: rgba($highlight, 0.5) }
+
+
+/*	Typography presets
+	------------------	*/
+body
+  font-size 100%
+  font-size 1.2em
+  line-height 1.3em
+
+.huge, h1
+	font-size: 3.2em
+	line-height: 1.1em
+	letter-spacing: 1px
+	margin-bottom: 18px
+
+.large, h2
+	font-size: 2.75em
+	line-height: 2em
+	line-height: 1.5em
+	margin-bottom: 8px
+
+.bigger, h3
+  font-size: 1.75em
+  line-height: 1.5em
+  margin: 8px 0
+
+.big, h4
+  font-size: 1.5em
+  line-height: 1.5em
+  margin: 8px 0
+
+// Font sizes for mobile
+@media only screen and (max-width: 767px)
+	.huge, h1
+    	font-size: 2.5em
+    	line-height: 1.1em
+    	margin-bottom: 12px
+
+    .large, h2
+    	font-size: 2em
+    	line-height: 1.3em
+    	font-weight: 800
+    	line-height: 1.4em
+    	margin-bottom: 6px
+
+    .bigger, h3
+    	font-size: 1.75em
+    	line-height: 1.2em
+    	font-weight: 800
+      margin: 6px 0
+
+    .big, h4
+    	font-size: 1.4em
+    	line-height: 1.5em
+    	font-weight: 700
+      margin: 8px 0
+
+body
+  font normal 100% 'Helvetica Neue', Helvetica, Arial, sans-serif
+  line-height 1.45em
+  font-size 1.3em
+  width 100%
+  background $bgcolor
+  color $fontcolor
+  -webkit-text-size-adjust 100% /* Stops Mobile Safari from auto-adjusting font-sizes */
+  margin-left auto
+  margin-right auto
+
+#header
+  $navMargin = 2em
+  z-index 100
+  position fixed
+  height auto
+  text-align center
+  width 100%
+  //padding 1.2em
+  //top $navMargin
+  //left $navMargin
+  //right $navMargin
+  top 0
+  -webkit-perspective 900px
+  -moz-perspective    900px
+  perspective         900px
+  -webkit-perspective-origin 50% 0
+  -moz-perspective-origin 50% 0
+  perspective-origin 50% 0
+  transition all 0.5s ease-in
+
+  #header-content
+    //width 920px
+    width 100%
+    height 100px
+    margin-left auto
+    margin-right auto
+    //position absolute
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transition all 0.65s ease-in-out, width 0.2s ease-out
+    padding 0
+
+    #header-front
+      background-color rgba(255,255,255,1)
+      width 100%
+      height 100%
+      position absolute
+      display block
+      transform rotateY( 0deg ) translateZ( 50px )
+      padding 0
+
+      h1
+        padding 0
+        margin 0
+        margin-top 4px
+        line-height 1em
+
+      h4
+        font-size 16px
+        line-height 1em
+        margin 0
+        margin-top 6px
+
+    #navigation
+      background-color rgba(230,230,230,0.9)
+      width 100%
+      height 100%
+      position absolute
+      display block
+      transform rotateX( -180deg ) translateZ( 50px )
+      padding 0
+      overflow-x auto
+
+      li
+        line-height 1.2em
+        height 80%//4rem
+        width 3.5rem
+        padding 0.1em
+        display inline-block
+        margin 0
+        margin-top 10px
+        margin-left 0.1em
+        margin-right 0.1em
+        overflow hidden
+        background-color #262626
+        background-size cover
+        background-position center center
+        border-radius 3px
+
+        color white
+
+        a:link,a:visited,a:hover
+          color white !important
+          text-shadow 0px 1px 3px black
+
+        &.titled
+          font-size 0.7rem !important
+
+        a:link,a:hover,a:visited
+          color black
+          text-decoration none
+
+
+    #header-bottom
+      background-color rgba(25,25,25,1)
+      width 100%
+      height 100%
+      position absolute
+      display block
+      transform rotateX( -90deg ) translateZ( 50px )
+      padding 0
+
+      #progress
+        margin 0
+        background-color red
+        height 100%
+
+    #header-front, #navigation, #header, #header-content, #header-bottom
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden;
+
+
+
+    &.small
+      //font-size 0.9em
+      //width 920px
+      min-width 600px
+      height 100px
+      margin-left auto
+      margin-right auto
+
+      #header-front
+        background-color rgba(250,250,250,0.5)
+        transition all 0.3s ease-in
+
+      #header-front:hover
+        background-color rgba(250,250,250,0.9)
+
+      h1
+        margin 0
+        line-height 1.2em
+        margin-top 24px
+
+      &.show-front
+        &:hover
+          transition: all 0.22s ease-in-out
+          transform: translateZ( 50px ) rotateX( 10deg )
+
+
+
+    &.show-front
+      transform: translateZ( 50px ) rotateY( 0deg )
+
+
+    &.show-bottom
+      transform: translateZ( 50px ) rotateX( 180deg )
+
+
+
+      a
+        display inline-block 
+
+@media only screen and (min-width: 992px)
+  #header-content.small
+      //font-size 0.9em
+      //width 920px
+      width 55% !important
+
+p
+  margin 0.6em 0
+
+a
+	&:link
+		color: $linkcolor
+
+	&:hover
+    color: $linkcolor
+
+	&:visited
+    color: $linkcolor
+
+section
+  min-height 768px
+  padding 0.8em
+
+  &:first-child
+    margin-top: 110px
+
+  &:last-child
+    margin-bottom: 0
+
+// Photo
+
+.photoBigText, .photoCaption
+  background-size cover
+  background-position center center
+  position relative
+
+  h2
+    text-align center
+    color white
+    text-shadow 0 2px 4px rgba(5,5,5,0.8)
+
+  .caption
+    font-size 0.9em
+    line-height 1.2em
+    padding 0.5em
+    width 52%
+    min-width 260px
+    min-height 3em
+    overflow-y auto
+    overflow-x hidden
+    position absolute
+    bottom 1em
+    right 1em
+    background-color rgba(250,250,250,0.85)
+
+
+.photoMulti
+  padding 12px
+  background-color white    
+
+// Video
+
+.videoYoutube, .videoVimeo
+  min-height 0
+  padding 0
+
+.video-container
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px; height: 0; overflow: hidden;
+
+
+.video-container iframe,
+.video-container object,
+.video-container embed
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+// Sound
+.soundSoundcloud
+  padding 0
+  min-height 0
+  max-height 150px !important
+
+// Location
+.locationSinglePlace
+  padding 0
+.map
+  height 768px
+
+// Code
+.codeTributary
+  padding 0
+  min-height 0
+  iframe
+    width 100%
+    min-height 768px
+
+
+// Timeline
+.timelineVerite
+  min-height 0
+  padding 0
+  margin 0
+
+  iframe
+    margin 0
+
+
+  .timeline-container
+    padding 0
+    margin 0
+
+
+// Text
+.text
+  min-height 300px
+  padding 2em
+  border 4px solid white
+  background-color #f6f6f6
+  background-image url(../images/crossword.png)
+
+  p
+    max-width 65%
+
+
+
+/* Tablet Layout */
+
+@media only screen and (max-width: 767px)
+	body
+		font-size: 1em
+
+  section:first-child
+    margin-top 0px
+
+  #header 
+    display none
+
+  #header-bottom
+    transform rotateX( -90deg ) translateZ( 25px ) !important
+
+  #header-content
+    height 50px !important
+    min-width 0
+    #subtitle
+      display none
+
+    &.small
+      width 75% !important
+      min-width 0px !important
+      height 50px !important
+      
+
+
+  #header-front
+    transform rotateY( 0deg ) translateZ( 25px ) !important
+
+    h1
+      font-size 34px
+      padding 0
+      margin 0
+      line-height 1em
+
+    h4
+      display none
+
+  #navigation
+    background-color purple
+    transform rotateX( -180deg ) translateZ( 25px ) !important
+    width 100%
+
+    li
+      display inline-block
+      margin 0 !important
+      margin-left 0.1em
+      margin-right 0.1em
+      overflow hidden
+      font-size 12px !important
+      width auto
+      height auto
+
+      a
+        padding 0 !important
+
+
+
+
+
+
+
+/*
+        Styling forms / inputs
+
+------------------------------------------------------------ */
+label
+    color: black
+
+input, textarea, select
+   -webkit-appearance: none
+
+th
+    text-align: right
+
+button
+    border: 1px solid rgba(0,0,0,0.6)
+    padding: 0.5em 0.8em
+    margin: 4px 8px
+    font-size: 15px
+    font-weight: bold
+    line-height: 1.2em
+    -webkit-appearance: none
+    -webkit-box-shadow: 1px 1px 1px #fff
+    -webkit-border-radius: 0.5em
+    outline: none
+
+    &:hover
+        transition: all 0.3s ease-out
+        opacity: 1
+        border: 1px solid rgba(0,0,0,0.8)
+
+    &:active
+        opacity: 0.9
+        border: 1px solid black
+
+.small-button
+    padding: 2px 4px
+    font-size: 10px
+
+input, textarea, select
+    border: 2px solid rgba(0,0,0,0.2)
+    padding: 0.5em
+    margin: 4px 8px
+    font-size: 15px
+    line-height: 1.2em
+    width: 13em
+    -webkit-appearance: none
+    -webkit-box-shadow: 1px 1px 1px #fff
+    -webkit-border-radius: 0.5em
+    outline: none
+
+    &:hover
+        border: 2px solid rgba(0,0,0,0.4)
+
+    &:active, &:focus
+        border: 2px solid rgba(0,0,0,0.5)
+
+
+
+@media only screen and (max-width: 767px)
+  input, textarea, select
+    width: 8em
+
+
+
+input[type=text]
+    color: #5A5A5A
+
+    &:active, &:focus
+        color: black
+        background-image: none !important
+        background-color: white
+
+
+input[type=checkbox], input[type=radio]
+   display: inline-block
+   font-size: 15px
+   line-height: 1em
+   margin: 0 0.25em 0 0
+   padding: 0
+   width: 1.25em
+   height: 1.25em
+   -webkit-border-radius: 0.25em
+   vertical-align: text-top
+
+input[type=radio]
+    -webkit-border-radius: 2em /* Make radios round */
+
+input[type=submit]
+    opacity: 0.95
+    border: 3px solid rgba(0,0,0,0.55)
+    padding: 0.5em
+    margin: 4px 8px
+    font-size: 15px
+    font-weight: bold
+    line-height: 1.2em
+    -webkit-appearance: none
+    -webkit-box-shadow: 1px 1px 1px #fff
+    -webkit-border-radius: 0.5em
+    outline: none
+
+    &:hover
+      opacity: 1
+      border: 3px solid rgba(0,0,0,0.8)
+
+    &:active
+      opacity: 0.9
+      border: 3px solid black
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Leaflet
+
+.leaflet-map-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-pane,
+.leaflet-tile-container,
+.leaflet-overlay-pane,
+.leaflet-shadow-pane,
+.leaflet-marker-pane,
+.leaflet-popup-pane,
+.leaflet-overlay-pane svg,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer
+  position absolute
+  left 0
+  top 0
+
+.leaflet-container
+  overflow hidden
+  -ms-touch-action none
+  cursor -webkit-grab
+  cursor -moz-grab
+  background #ddd
+  outline 0
+  font 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif
+  img
+    max-width none !important
+    &.leaflet-image-layer
+      max-width 15000px !important
+  a
+    color #0078A8
+    &.leaflet-active
+      outline 2px solid orange
+    &.leaflet-popup-close-button
+      position absolute
+      top 0
+      right 0
+      padding 4px 4px 0 0
+      text-align center
+      width 18px
+      height 14px
+      font 16px/14px Tahoma, Verdana, sans-serif
+      color #c3c3c3
+      text-decoration none
+      font-weight bold
+      background transparent
+      &:hover
+        color #999
+  .leaflet-control-attribution
+    background #fff
+    background rgba(255, 255, 255, 0.7)
+    margin 0
+
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow
+  -webkit-user-select none
+  -moz-user-select none
+  user-select none
+  -webkit-user-drag none
+
+.leaflet-marker-icon,
+.leaflet-marker-shadow
+  display block
+
+.leaflet-tile
+  filter inherit
+  visibility hidden
+
+.leaflet-tile-loaded
+  visibility inherit
+
+.leaflet-zoom-box
+  width 0
+  height 0
+  border 2px dotted #38f
+  background rgba(255,255,255,0.5)
+
+.leaflet-overlay-pane
+  z-index 4
+  svg
+    -moz-user-select none
+
+.leaflet-tile-pane
+  z-index 2
+
+.leaflet-objects-pane
+  z-index 3
+
+.leaflet-shadow-pane
+  z-index 5
+
+.leaflet-marker-pane
+  z-index 6
+
+.leaflet-popup-pane
+  z-index 7
+
+.leaflet-vml-shape
+  width 1px
+  height 1px
+
+.lvml
+  behavior url(#default#VML)
+  display inline-block
+  position absolute
+
+.leaflet-control
+  position relative
+  z-index 7
+  pointer-events auto
+  float left
+  clear both
+
+.leaflet-top,
+.leaflet-bottom
+  position absolute
+  z-index 1000
+  pointer-events none
+
+.leaflet-top
+  top 0
+  .leaflet-control
+    margin-top 10px
+
+.leaflet-right
+  right 0
+  .leaflet-control
+    float right
+    margin-right 10px
+
+.leaflet-bottom
+  bottom 0
+  .leaflet-control
+    margin-bottom 10px
+  .leaflet-control-scale
+    margin-bottom 5px
+
+.leaflet-left
+  left 0
+  .leaflet-control
+    margin-left 10px
+  .leaflet-control-scale
+    margin-left 5px
+
+.leaflet-fade-anim .leaflet-tile,
+.leaflet-fade-anim .leaflet-popup
+  opacity 0
+  -webkit-transition opacity 0.2s linear
+  -moz-transition opacity 0.2s linear
+  -o-transition opacity 0.2s linear
+  transition opacity 0.2s linear
+
+.leaflet-fade-anim .leaflet-tile-loaded,
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup
+  opacity 1
+
+.leaflet-zoom-anim
+  .leaflet-zoom-animated
+    -webkit-transition -webkit-transform 0.25s cubic-bezier(0,0,0.25,1)
+    -moz-transition -moz-transform 0.25s cubic-bezier(0,0,0.25,1)
+    -o-transition -o-transform 0.25s cubic-bezier(0,0,0.25,1)
+    transition transform 0.25s cubic-bezier(0,0,0.25,1)
+  .leaflet-zoom-hide
+    visibility hidden
+
+.leaflet-zoom-anim .leaflet-tile,
+.leaflet-pan-anim .leaflet-tile,
+.leaflet-touching .leaflet-zoom-animated
+  -webkit-transition none
+  -moz-transition none
+  -o-transition none
+  transition none
+
+.leaflet-clickable
+  cursor pointer
+
+.leaflet-popup-pane,
+.leaflet-control
+  cursor auto
+
+.leaflet-dragging .leaflet-container,
+.leaflet-dragging .leaflet-clickable
+  cursor move
+  cursor -webkit-grabbing
+  cursor -moz-grabbing
+
+.leaflet-bar
+  box-shadow 0 1px 5px rgba(0,0,0,0.65)
+  border-radius 4px
+  a
+    &:hover
+      background-color #f4f4f4
+    &:first-child
+      border-top-left-radius 4px
+      border-top-right-radius 4px
+    &:last-child
+      border-bottom-left-radius 4px
+      border-bottom-right-radius 4px
+      border-bottom none
+    &.leaflet-disabled
+      cursor default
+      background-color #f4f4f4
+      color #bbb
+
+.leaflet-bar a,
+.leaflet-bar a:hover
+  background-color #fff
+  border-bottom 1px solid #ccc
+  width 26px
+  height 26px
+  line-height 26px
+  display block
+  text-align center
+  text-decoration none
+  color black
+
+.leaflet-bar a,
+.leaflet-control-layers-toggle
+  background-position 50% 50%
+  background-repeat no-repeat
+  display block
+
+.leaflet-touch
+  .leaflet-bar
+    a
+      width 30px
+      height 30px
+      line-height 30px
+  .leaflet-control-zoom-in
+    font-size 22px
+  .leaflet-control-zoom-out
+    font-size 24px
+  .leaflet-control-layers-toggle
+    width 44px
+    height 44px
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out
+  font bold 18px 'Lucida Console', Monaco, monospace
+  text-indent 1px
+
+.leaflet-control-zoom-out
+  font-size 20px
+
+.leaflet-control-layers
+  box-shadow 0 1px 5px rgba(0,0,0,0.4)
+  background #fff
+  border-radius 5px
+  label
+    display block
+
+.leaflet-control-layers-toggle
+  background-image url(images/layers.png)
+  width 36px
+  height 36px
+
+.leaflet-retina
+  .leaflet-control-layers-toggle
+    background-image url(images/layers-2x.png)
+    background-size 26px 26px
+
+.leaflet-control-layers .leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle
+  display none
+
+.leaflet-control-layers-expanded
+  padding 6px 10px 6px 6px
+  color #333
+  background #fff
+  .leaflet-control-layers-list
+    display block
+    position relative
+
+.leaflet-control-layers-selector
+  margin-top 2px
+  position relative
+  top 1px
+
+.leaflet-control-layers-separator
+  height 0
+  border-top 1px solid #ddd
+  margin 5px -10px 5px -6px
+
+.leaflet-control-attribution,
+.leaflet-control-scale-line
+  padding 0 5px
+  color #333
+
+.leaflet-control-attribution
+  a
+    text-decoration none
+    &:hover
+      text-decoration underline
+
+.leaflet-container .leaflet-control-attribution,
+.leaflet-container .leaflet-control-scale
+  font-size 11px
+
+.leaflet-control-scale-line
+  border 2px solid #777
+  border-top none
+  line-height 1.1
+  padding 2px 5px 1px
+  font-size 11px
+  white-space nowrap
+  overflow hidden
+  -moz-box-sizing content-box
+  box-sizing content-box
+  background #fff
+  background rgba(255, 255, 255, 0.5)
+  &:not(:first-child)
+    border-top 2px solid #777
+    border-bottom none
+    margin-top -2px
+  &:not(:first-child):not(:last-child)
+    border-bottom 2px solid #777
+
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar
+  box-shadow none
+
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar
+  border 2px solid rgba(0,0,0,0.2)
+  background-clip padding-box
+
+.leaflet-popup
+  position absolute
+  text-align center
+
+.leaflet-popup-content-wrapper
+  padding 1px
+  text-align left
+  border-radius 12px
+
+.leaflet-popup-content
+  margin 13px 19px
+  line-height 1.4
+  p
+    margin 18px 0
+
+.leaflet-popup-tip-container
+  margin 0 auto
+  width 40px
+  height 20px
+  position relative
+  overflow hidden
+
+.leaflet-popup-tip
+  width 17px
+  height 17px
+  padding 1px
+  margin -10px auto 0
+  -webkit-transform rotate(45deg)
+  -moz-transform rotate(45deg)
+  -ms-transform rotate(45deg)
+  -o-transform rotate(45deg)
+  transform rotate(45deg)
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip
+  background white
+  box-shadow 0 3px 14px rgba(0,0,0,0.4)
+
+.leaflet-popup-scrolled
+  overflow auto
+  border-bottom 1px solid #ddd
+  border-top 1px solid #ddd
+
+.leaflet-oldie
+  .leaflet-popup-content-wrapper
+    zoom 1
+  .leaflet-popup-tip
+    width 24px
+    margin 0 auto
+    //-ms-filter "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)"
+    //filter progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)
+  .leaflet-popup-tip-container
+    margin-top -1px
+
+.leaflet-oldie .leaflet-control-zoom,
+.leaflet-oldie .leaflet-control-layers,
+.leaflet-oldie .leaflet-popup-content-wrapper,
+.leaflet-oldie .leaflet-popup-tip
+  border 1px solid #999
+
+.leaflet-div-icon
+  background #fff
+  border 1px solid #666
+
